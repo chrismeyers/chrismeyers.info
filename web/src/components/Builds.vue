@@ -32,7 +32,7 @@
             <div class='build-pic'>
               <img :src="build.image.path"
                   :class="'build-pic-img-' + build.image.orient"
-                  :id="build.image.title"
+                  v-bind:alt="build.image.title"
                   title="Click to enlarge">
             </div>
           </div>
