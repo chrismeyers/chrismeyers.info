@@ -23,6 +23,10 @@ class BuildsPublicController extends ResourceController {
       ..join(object: (b) => b.image);
     final Build build = await query.fetchOne();
 
+    if(build == null) {
+      return Response.notFound(body: {"message": "build id $id does not exist"});
+    }
+
     return Response.ok(build);
   }
 }

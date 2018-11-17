@@ -79,6 +79,15 @@ class ApiChannel extends ApplicationChannel {
       .route("/public/builds/[:id]")
       .link(() => BuildsPublicController(context));
 
+    router
+      .route("/admin/projects/[:id]")
+      .link(() => Authorizer.bearer(authServer))
+      .link(() => ProjectsAdminController(context));
+
+    router
+      .route("/public/projects/[:id]")
+      .link(() => ProjectsPublicController(context));
+
     return router;
   }
 }
