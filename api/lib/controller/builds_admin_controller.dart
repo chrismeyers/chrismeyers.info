@@ -16,6 +16,7 @@ class BuildsAdminController extends ResourceController {
     final Build build = await context.transaction((transaction) async {
       final Query<Build> queryAddData = Query<Build>(transaction)
         ..values.date = body["date"] as String
+        ..values.started = body["started"] as int
         ..values.cpu = body["cpu"] as String
         ..values.cool = body["cool"] as String
         ..values.mobo = body["mobo"] as String
@@ -48,6 +49,7 @@ class BuildsAdminController extends ResourceController {
     final build = await context.transaction((transaction) async {
       final Query<Build> queryUpdateData = Query<Build>(transaction)
         ..values.date = body["date"] as String
+        ..values.started = body["started"] as int
         ..values.cpu = body["cpu"] as String
         ..values.cool = body["cool"] as String
         ..values.mobo = body["mobo"] as String

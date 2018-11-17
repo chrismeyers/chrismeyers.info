@@ -10,7 +10,8 @@ class BuildsPublicController extends ResourceController {
   @Operation.get()
   Future<Response> getBuilds() async {
     final Query<Build> query = Query<Build>(context)
-      ..join(object: (b) => b.image);
+      ..join(object: (b) => b.image)
+      ..sortBy((b) => b.started, QuerySortOrder.ascending);
     final List<Build> allBuilds = await query.fetch();
 
     return Response.ok(allBuilds);

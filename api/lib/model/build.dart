@@ -8,6 +8,12 @@ class _Build {
   int id;
 
   String date;
+
+  // An integer representation (YYYYMD) of when the project was started that
+  // can be used for sorting.
+  //   Ex: February 2018 -> 201821, Summer 2018 -> 201861
+  int started;
+
   String cpu;
 
   @Column(nullable: true)

@@ -10,7 +10,8 @@ class ProjectsPublicController extends ResourceController {
   @Operation.get()
   Future<Response> getProjects() async {
     final Query<Project> query = Query<Project>(context)
-      ..join(set: (p) => p.images);
+      ..join(set: (p) => p.images)
+      ..sortBy((p) => p.started, QuerySortOrder.ascending);
     final List<Project> allProjects = await query.fetch();
 
     return Response.ok(allProjects);
