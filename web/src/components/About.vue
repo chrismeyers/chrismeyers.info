@@ -26,12 +26,12 @@
       <ul>
         <li>Desktop and CLI applications:
           <ul>
-            <li>C++, Python, Java, C#</li>
+            <li>{{ langMap ? langMap["desktop"] : "" }}</li>
           </ul>
         </li>
         <li>Websites, Web Apps, and APIs:
           <ul>
-            <li>LAMP stack (Linux, Apache, MySQL, PHP), Flask (Python web framework), JavaScript (jQuery, AngularJS, Node.js, React)</li>
+            <li>{{ langMap ? langMap["web"] : "" }}</li>
           </ul>
         </li>
       </ul>
@@ -46,8 +46,22 @@
 </template>
 
 <script>
+import ResumeApi from "@/utils/api/resume";
+
 export default {
-  name: 'About'
+  name: 'About',
+  data() {
+    return {
+      langMap: null
+    }
+  },
+  mounted() {
+    ResumeApi.getLanguageExperience().then(
+      langMap => {
+        this.langMap = langMap
+      }
+    )
+  }
 }
 </script>
 
