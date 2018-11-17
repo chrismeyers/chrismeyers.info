@@ -5,10 +5,10 @@
         <router-link class="nav-link" to="/"><a id="banner-small"><img src="@/assets/images/logos/meyers-logo-green.svg" alt="Chris Meyers. Developer, Tech enthusiast." class="banner-img" title="Home"></a></router-link>
       </div>
       <ul class="side-nav-items">
-        <li><router-link class="nav-link" :class="{ 'nav-selected': path == '/' }" to="/">About</router-link></li>
-        <li><router-link class="nav-link" :class="{ 'nav-selected': path == '/resume' }" to="/resume">Résumé</router-link></li>
-        <li><router-link class="nav-link" :class="{ 'nav-selected': path == '/builds' }" to="/builds">Builds</router-link></li>
-        <li><router-link class="nav-link" :class="{ 'nav-selected': path == '/projects' }" to="/projects">Projects</router-link></li>
+        <li><router-link class="nav-link" :class="{ 'nav-selected': path == '' }" to="/">About</router-link></li>
+        <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'resume' }" to="/resume">Résumé</router-link></li>
+        <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'builds' }" to="/builds">Builds</router-link></li>
+        <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'projects' }" to="/projects">Projects</router-link></li>
       </ul>
 
       <div>
@@ -33,11 +33,17 @@ export default {
     }
   },
   mounted() {
-    this.path = this.$route.path
+    let rawPath = this.$route.path
+    this.path = this.cleanPath(rawPath)
   },
   watch: {
-    '$route.path' (path) {
-      this.path = path
+    '$route.path' (rawPath) {
+      this.path = this.cleanPath(rawPath)
+    }
+  },
+  methods: {
+    cleanPath: function(rawPath) {
+      return rawPath.replace(/\//g, "")
     }
   }
 }
