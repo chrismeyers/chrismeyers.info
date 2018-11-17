@@ -7,3 +7,4 @@
 # Whitelist some files
 !.gitignore
 !*.tex
+!*.pdf
