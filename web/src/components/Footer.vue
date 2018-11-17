@@ -88,11 +88,6 @@ export default {
   padding-bottom: 10px;
 }
 
-.link-image-small {
-  height: 16px;
-  width: 16px;
-}
-
 .footer-social, .footer-bullets, .footer-resume {
   display: inline-block;
   vertical-align: middle;

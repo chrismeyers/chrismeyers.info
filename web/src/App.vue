@@ -90,6 +90,11 @@ h2.top {
   color: #A9A9A9;
 }
 
+.link-image-small {
+    height: 16px;
+    width: 16px;
+}
+
 /********************* CONTENT *********************/
 .section-header {
   text-align: center;
