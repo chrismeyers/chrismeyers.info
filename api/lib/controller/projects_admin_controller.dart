@@ -64,10 +64,10 @@ class ProjectsAdminController extends ResourceController {
 
       final Query<Image> queryCurrentImages = Query<Image>(transaction)
         ..where((i) => i.project.id).equalTo(id);
-      List<Image> currentImages= await queryCurrentImages.fetch();
+      List<Image> currentImages = await queryCurrentImages.fetch();
       for(final Image currentImage in currentImages) {
         if(!imageIds.contains(currentImage.id)) {
-          // Image needs to be un-related.
+          // Un-relate any images that were removed by this request.
           final Query<Image> queryClearImages = Query<Image>(transaction)
             ..where((i) => i.id).equalTo(currentImage.id)
             ..values.project.id = null;
@@ -75,17 +75,11 @@ class ProjectsAdminController extends ResourceController {
         }
       }
 
-      currentImages = await queryCurrentImages.fetch();
-      final List<int> currentImageIds = [];
-      currentImages.forEach((i) => currentImageIds.add(i.id));
       for(final int imageId in imageIds) {
-        if(!currentImageIds.contains(currentImages)) {
-          // Image needs to be related.
-          final Query<Image> queryRelateImage = Query<Image>(transaction)
-            ..where((i) => i.id).equalTo(imageId)
-            ..values.project.id = project.id;
-          await queryRelateImage.updateOne();
-        }
+        final Query<Image> queryRelateImage = Query<Image>(transaction)
+          ..where((i) => i.id).equalTo(imageId)
+          ..values.project.id = project.id;
+        await queryRelateImage.updateOne();
       }
 
       final Query<Project> complete = Query<Project>(transaction)
