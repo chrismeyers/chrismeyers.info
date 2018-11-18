@@ -10,6 +10,7 @@ class _Image {
 
   String path;
   String title;
+  int pos;
   String orient;
 
   @Relate(#image)

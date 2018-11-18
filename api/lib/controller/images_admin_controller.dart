@@ -13,6 +13,7 @@ class ImagesAdminController extends ResourceController {
     final Query<Image> query = Query<Image>(context)
       ..values.path = body["path"] as String
       ..values.title = body["title"] as String
+      ..values.pos = body["pos"] as int
       ..values.orient = body["orient"] as String;
     final Image image = await query.insert();
 
@@ -25,6 +26,7 @@ class ImagesAdminController extends ResourceController {
     final Query<Image> query = Query<Image>(context)
       ..values.path = body["path"] as String
       ..values.title = body["title"] as String
+      ..values.pos = body["pos"] as int
       ..values.orient = body["orient"] as String
       ..where((i) => i.id).equalTo(id);
     final Image image = await query.updateOne();

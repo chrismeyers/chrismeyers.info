@@ -14,6 +14,10 @@ class ProjectsPublicController extends ResourceController {
       ..sortBy((p) => p.started, QuerySortOrder.ascending);
     final List<Project> allProjects = await query.fetch();
 
+    for(final Project project in allProjects) {
+      project.images.sort((a, b) => a.pos.compareTo(b.pos));
+    }
+
     return Response.ok(allProjects);
   }
 
