@@ -60,6 +60,17 @@ class BuildsAdminController extends ResourceController {
         ..where((b) => b.id).equalTo(id);
       final Build build = await queryUpdateData.updateOne();
 
+      final Query<Image> queryCurrentImage = Query<Image>(transaction)
+        ..where((i) => i.build.id).equalTo(id);
+      final Image currentImage = await queryCurrentImage.fetchOne();
+      if(currentImage != null && currentImage.id != imageId) {
+        // Un-relate the image to prepare for update.
+        final Query<Image> queryClearImage = Query<Image>(transaction)
+          ..where((i) => i.id).equalTo(currentImage.id)
+          ..values.build.id = null;
+        await queryClearImage.updateOne();
+      }
+
       final Query<Image> queryRelateImage = Query<Image>(transaction)
         ..where((i) => i.id).equalTo(imageId)
         ..values.build.id = build.id;
