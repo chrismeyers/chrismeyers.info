@@ -60,12 +60,13 @@ export default {
 <style scoped>
 #footer {
   font-size: 13px;
-  font-family: "Open Sans", sans-serif;
   bottom: 0;
   height: auto;
   left: 0;
   right: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  width: 300px;
+  position: fixed;
 }
 
 .footer-size {
@@ -77,7 +78,7 @@ export default {
 .footer-links {
   display: block;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
   padding-top: 10px;

@@ -10,23 +10,13 @@
         <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'builds' }" to="/builds">Builds</router-link></li>
         <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'projects' }" to="/projects">Projects</router-link></li>
       </ul>
-
-      <div>
-        <Footer/>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Footer from '@/components/Footer'
-
 export default {
   name: "Navigation",
-  components: {
-    /* eslint-disable vue/no-unused-components */
-    Footer
-  },
   data() {
     return {
       path: null
