@@ -19,7 +19,6 @@ class ImagesPublicController extends ResourceController {
   Future<Response> getImage(@Bind.path("id") int id) async {
     final Query<Image> query = Query<Image>(context)
       ..where((i) => i.id).equalTo(id);
-
     final Image image = await query.fetchOne();
 
     return Response.ok(image);

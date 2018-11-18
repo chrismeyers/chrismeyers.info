@@ -62,9 +62,13 @@ class ProjectsAdminController extends ResourceController {
         ..where((p) => p.id).equalTo(id);
       final Project project = await queryAddData.updateOne();
 
+      if(project == null) {
+        return null;
+      }
+
       final Query<Image> queryCurrentImages = Query<Image>(transaction)
         ..where((i) => i.project.id).equalTo(id);
-      List<Image> currentImages = await queryCurrentImages.fetch();
+      final List<Image> currentImages = await queryCurrentImages.fetch();
       for(final Image currentImage in currentImages) {
         if(!imageIds.contains(currentImage.id)) {
           // Un-relate any images that were removed by this request.
@@ -89,6 +93,10 @@ class ProjectsAdminController extends ResourceController {
       return await complete.fetchOne();
     });
 
+    if(project == null) {
+      return Response.notFound(body: {"message": "project id $id does not exist"});
+    }
+
     return Response.ok(project);
   }
 
@@ -96,7 +104,6 @@ class ProjectsAdminController extends ResourceController {
   Future<Response> deleteProject(@Bind.path("id") int id) async {
     final Query<Project> query = Query<Project>(context)
       ..where((p) => p.id).equalTo(id);
-
     final int numDeleted = await query.delete();
 
     if(numDeleted == 0) {

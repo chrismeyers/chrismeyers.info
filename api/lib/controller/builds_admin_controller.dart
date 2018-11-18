@@ -60,6 +60,10 @@ class BuildsAdminController extends ResourceController {
         ..where((b) => b.id).equalTo(id);
       final Build build = await queryUpdateData.updateOne();
 
+      if(build == null) {
+        return null;
+      }
+
       final Query<Image> queryCurrentImage = Query<Image>(transaction)
         ..where((i) => i.build.id).equalTo(id);
       final Image currentImage = await queryCurrentImage.fetchOne();
@@ -82,6 +86,10 @@ class BuildsAdminController extends ResourceController {
 
       return await complete.fetchOne();
     });
+
+    if(build == null) {
+      return Response.notFound(body: {"message": "build id $id does not exist"});
+    }
 
     return Response.ok(build);
   }
