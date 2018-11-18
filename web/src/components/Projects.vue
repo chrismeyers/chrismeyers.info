@@ -35,14 +35,16 @@
                          :class="'projImages-full-img-' + image.orient"
                          v-bind:alt="image.title"
                          title='Click to enlarge'
-                         :key="image.id + '-full'">
+                         :key="image.id + '-full'"
+                         @click="openGallery(project.id, index)">
                     <br :key="image.id + '-br'" />
                   </template>
                   <div v-else class="projImages-small" :key="image.id + '-small'">
                     <img :src="image.path"
                          :class="'projImages-small-img-' + image.orient"
                          v-bind:alt="image.title"
-                         title='Click to enlarge'>
+                         title='Click to enlarge'
+                         @click="openGallery(project.id, index)">
                   </div>
               </template>
             </div>
@@ -52,16 +54,26 @@
         <template v-if="index < projects.length - 1">
           <br :key="project.id + '-br'"><hr :key="project.id + '-hr'"/>
         </template>
+        <LightBox
+          :images="getImageArray(project)"
+          v-bind:ref="'lightbox-' + project.id"
+          :show-caption="true"
+          :show-light-box="false"
+          :key="'lightbox-' + project.id"/>
       </template>
     </div>
   </div>
 </template>
 
 <script>
-import ProjectssApi from "@/utils/api/projects";
+import ProjectssApi from "@/utils/api/projects"
+import LightBox from 'vue-image-lightbox'
 
 export default {
   name: 'Projects',
+  components: {
+    LightBox
+  },
   data() {
     return {
       projects: null
@@ -73,6 +85,25 @@ export default {
         this.projects = projects.data
       }
     )
+  },
+  methods: {
+    openGallery(id, index) {
+      let lightbox = "lightbox-" + id
+      this.$refs[lightbox][0].showImage(index)
+    },
+    getImageArray(project) {
+      let imageData = []
+
+      for(const image of project.images) {
+        imageData.push({
+          "thumb": image.path,
+          "src": image.path,
+          "caption": image.title
+        })
+      }
+
+      return imageData
+    }
   }
 }
 </script>

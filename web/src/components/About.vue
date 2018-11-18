@@ -18,7 +18,12 @@
               <li>Photography, reading, <a href="/builds" class="fancytxt">building custom computers</a>, playing video games</li>
           </ul>
         </li>
-        <li>I am the owner of this <a data-fancybox="gallery_clark" href="images/v6/clark/DSC_1564-6.jpg" title="Clark the Corgi" class="fancytxt no-outline">majestic beast</a>.</li>
+        <li>I am the owner of this <a @click="openGallery(0)" class="fancytxt">majestic beast</a>.</li>
+        <LightBox
+          :images='[{"thumb": "/clark/DSC_1564-6.jpg", "src": "/clark/DSC_1564-6.jpg", "caption": "Clark the Corgi"}]'
+          v-bind:ref="'lightbox-0'"
+          :show-caption="true"
+          :show-light-box="false"/>
       </ul>
 
       <p>Over the years, I've gained experience with the following programming languages and frameworks:</p>
@@ -41,15 +46,20 @@
       breaking away from my comfort zones to explore new options. My primary goal is to create innovative and usable applications that solve problems.</span>
 
       <p><a href="#contact" class="fancytxt">Send me a message</a> if you have any questions, comments, or would like to work together on a project.</p>
+
     </div>
   </div>
 </template>
 
 <script>
 import ResumeApi from "@/utils/api/resume";
+import LightBox from 'vue-image-lightbox'
 
 export default {
   name: 'About',
+  components: {
+    LightBox
+  },
   data() {
     return {
       langMap: null
@@ -61,10 +71,12 @@ export default {
         this.langMap = langMap
       }
     )
+  },
+  methods: {
+    openGallery(id) {
+      let lightbox = "lightbox-" + id
+      this.$refs[lightbox].showImage(0)
+    }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
