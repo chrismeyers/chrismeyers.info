@@ -14,7 +14,7 @@
                   <dd>{{ project.lang }}</dd>
 
                 <dt class="dt-mod"><b>Description:</b></dt>
-                  <dd>{{ project.info }}</dd>
+                  <dd v-html="project.info"></dd>
 
                 <dt class="dt-mod"><b>My Role:</b></dt>
                   <dd>{{ project.role }}</dd>
@@ -36,6 +36,7 @@
                          v-bind:alt="image.title"
                          title='Click to enlarge'
                          :key="image.id + '-full'">
+                    <br :key="image.id + '-br'" />
                   </template>
                   <div v-else class="projImages-small" :key="image.id + '-small'">
                     <img :src="image.path"
@@ -88,6 +89,11 @@ export default {
 .projWrapper {
   margin: 10px;
   padding: 0;
+}
+
+.projImages-small {
+  display: inline-block;
+  margin-right: 4px;
 }
 
 .projImages-small-img-square {
