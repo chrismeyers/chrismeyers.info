@@ -15,9 +15,9 @@ class _Project {
   String codeUrl;
   String date;
 
-  // An integer representation (YYYYMD) of when the project was started that
+  // An integer representation (YYYYMMDD) of when the project was started that
   // can be used for sorting.
-  //   Ex: February 2018 -> 201821, Summer 2018 -> 201861
+  //   Ex: February 2018 -> 20180201, Summer 2018 -> 20180601
   int started;
 
   String lang;

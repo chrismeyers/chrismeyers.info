@@ -19,3 +19,10 @@ The default configuration file used when testing is `config.src.yaml`. This file
 ## Deploying an Application
 
 See the documentation for [Deployment](https://aqueduct.io/docs/deploy/).
+
+## Initial Setup
+1) Create a database, add a database user, then grant database permissions to this user.
+2) Initialize the database tables by running `aqueduct db upgrade`.
+3) Register a user using the `/auth/register` endpoint.
+4) Add an OAuth 2.0 client by running `aqueduct auth add-client --id ...`.
+5) Import the initial data by running `dart bin/bootstrap.dart`.
