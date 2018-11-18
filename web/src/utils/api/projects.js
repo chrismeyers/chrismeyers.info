@@ -6,10 +6,10 @@ export default {
     return axios
       .get("/public/projects")
       .then(response => {
-        return response;
+        return response
       })
       .catch(err => {
-        return err.response;
+        return err.response
       })
   }
 }

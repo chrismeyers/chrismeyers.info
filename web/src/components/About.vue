@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import ResumeApi from "@/utils/api/resume";
+import ResumeApi from "@/utils/api/resume"
 import LightBox from 'vue-image-lightbox'
 
 export default {

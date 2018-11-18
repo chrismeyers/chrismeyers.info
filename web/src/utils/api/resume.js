@@ -6,10 +6,10 @@ export default {
     return axios
       .get("/public/resume")
       .then(response => {
-        return response;
+        return response
       })
       .catch(err => {
-        return err.response;
+        return err.response
       })
   },
   getLanguageExperience() {
@@ -21,7 +21,7 @@ export default {
 
         for(const skill of skills) {
           if(Object.keys(langMap).length == 2) {
-            break;
+            break
           }
           else if(skill.includes("Desktop and CLI")) {
             langMap["desktop"] = skill.split(":")[1].split(".")[0]
@@ -31,10 +31,10 @@ export default {
           }
         }
 
-        return langMap;
+        return langMap
       })
       .catch(err => {
-        return err.response;
+        return err.response
       })
   },
   getCurrentJob() {
@@ -50,7 +50,7 @@ export default {
         }
       })
       .catch(err => {
-        return err.response;
+        return err.response
       })
   }
 }
