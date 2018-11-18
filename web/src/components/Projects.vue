@@ -122,6 +122,11 @@ export default {
   padding: 0;
 }
 
+.projImages > img,
+.projImages-small > img {
+  cursor: pointer;
+}
+
 .projImages-small {
   display: inline-block;
   margin-right: 4px;
