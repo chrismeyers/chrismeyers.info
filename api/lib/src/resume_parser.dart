@@ -38,14 +38,16 @@ class ResumeParser {
   }
 
   List<Map<String, dynamic>> parseComplexSection(String section) {
-    const String firstLinePattern = '{\\textbf{';
-    const String secondLinePattern = '{\\emph{';
-    const String endPattern = '}}';
-    const String infoPattern = '\\item';
-    const String sameCompanyPattern = '% Same Company';
+    const String urlPattern = "% URL";
+    const String firstLinePattern = "{\\textbf{";
+    const String secondLinePattern = "{\\emph{";
+    const String endPattern = "}}";
+    const String infoPattern = "\\item";
+    const String sameCompanyPattern = "% Same Company";
 
     final List<Map<String, dynamic>> items = [];
 
+    String url;
     List<String> firstLine = [];
     List<List<String>> secondLine = [];
     List<List<String>> info = [];
@@ -56,7 +58,12 @@ class ResumeParser {
     for(int i = 0; i < _rawSections[section].length; i++) {
       final String line = _rawSections[section][i].trim();
 
-      if(line.startsWith(firstLinePattern)) {
+      if(line.startsWith(urlPattern)) {
+        final int beginPatternIndex = line.indexOf(urlPattern) + urlPattern.length + 1;
+
+        url = line.substring(beginPatternIndex);
+      }
+      else if(line.startsWith(firstLinePattern)) {
         final int beginPatternIndex = line.indexOf(firstLinePattern) + firstLinePattern.length;
         final int endPatternIndex = line.indexOf(endPattern);
         final String cleaned = _cleanString(line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""));
@@ -86,11 +93,13 @@ class ResumeParser {
           info.add(List<String>.from(currentInfo));
 
           items.add({
+            "url": url,
             "firstLine": List<String>.from(firstLine),
             "secondLine": List<List<String>>.from(secondLine),
             "info": List<List<String>>.from(info)
           });
 
+          url = null;
           firstLine = [];
           secondLine = [];
           info = [];
@@ -108,6 +117,7 @@ class ResumeParser {
     secondLine.add(List<String>.from(currentSecondLine));
     info.add(List<String>.from(currentInfo));
     items.add({
+      "url": url,
       "firstLine": List<String>.from(firstLine),
       "secondLine": List<List<String>>.from(secondLine),
       "info": List<List<String>>.from(info)

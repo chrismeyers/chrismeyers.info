@@ -36,5 +36,21 @@ export default {
       .catch(err => {
         return err.response;
       })
+  },
+  getCurrentJob() {
+    return axios
+      .get("/public/resume")
+      .then(response => {
+        const currentJob = response.data.experience[0]
+
+        return {
+          "company": currentJob.firstLine[0],
+          "url": currentJob.url,
+          "title": currentJob.secondLine[0][0].split(",")[0]
+        }
+      })
+      .catch(err => {
+        return err.response;
+      })
   }
 }
