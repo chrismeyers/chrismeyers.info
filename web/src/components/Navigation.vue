@@ -23,7 +23,7 @@
           </span>
         </button>
 
-        <div class="section-title-menu">
+        <div v-if="menuDisplayed" class="section-title-menu">
           <ul class="menu-dropdown">
             <li>
               <ul class="menu-items">
