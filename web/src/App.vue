@@ -145,4 +145,20 @@ h2.top {
   font-size: 40px;
   text-align: center;
 }
+
+@media screen and (max-width: 969px) {
+  .content {
+    margin: 60px 0px;
+  }
+
+  .content-text {
+    padding: 10px;
+  }
+
+  .section-header-size {
+    height: 60px;
+    line-height: 60px;
+    font-size: 35px;
+  }
+}
 </style>

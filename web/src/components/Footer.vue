@@ -95,4 +95,11 @@ footer {
   display: inline-block;
   vertical-align: middle;
 }
+
+@media screen and (max-width: 969px) {
+  footer {
+    width: 100%;
+    position: absolute;
+  }
+}
 </style>
