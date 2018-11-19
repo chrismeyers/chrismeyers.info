@@ -160,6 +160,7 @@ nav {
 
 .section-title-small-txt {
   border-bottom: 1px solid #DCDCDC;
+  background-color: #FFFFFF;
   line-height: 50px;
   text-align: center;
   vertical-align: middle;
@@ -179,13 +180,10 @@ nav {
   clear: right;
   left: 0;
   right: 0;
-  background: #FFF;
-  border-top: 1px solid rgba(0,0,0,.1);
   z-index: 1;
-  margin-top: 1px;
-}
-.overlay {
-  display: none;
+  margin-top: 2px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 @media screen and (min-width: 970px){
