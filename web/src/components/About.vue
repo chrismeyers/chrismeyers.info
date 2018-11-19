@@ -15,7 +15,7 @@
         </li>
         <li>My hobbies include:
           <ul>
-              <li>Photography, reading, <a href="/builds" class="fancytxt">building custom computers</a>, playing video games</li>
+            <li>Photography, reading, <router-link class="fancytxt" to="/builds">building custom computers</router-link>, playing video games</li>
           </ul>
         </li>
         <li>I am the owner of this <a @click="openGallery(0)" class="fancytxt">majestic beast</a>.</li>
