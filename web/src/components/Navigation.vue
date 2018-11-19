@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <nav>
     <div id="full-menu">
       <div class="side-nav-logo">
         <router-link class="nav-link banner" to="/"><img src="@/assets/images/logos/meyers-logo-green.svg" alt="Chris Meyers. Developer, Tech enthusiast." class="banner-img" title="Home"></router-link>
@@ -11,7 +11,7 @@
         <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'projects' }" to="/projects">Projects</router-link></li>
       </ul>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -40,6 +40,10 @@ export default {
 </script>
 
 <style scoped>
+nav {
+  width: 300px;
+}
+
 .nav-link {
   color: #000000;
   text-decoration: none;
@@ -53,10 +57,6 @@ export default {
   width:100%;
   display: inline-block;
   padding-top: 10px;
-}
-
-.nav {
-  width: 300px;
 }
 
 #full-menu {

@@ -1,5 +1,5 @@
 <template>
-  <div id="footer" class="footer-size">
+  <footer>
     <div class="footer-links">
       <div class="footer-social">
         <a href="https://github.com/chrismeyers"
@@ -48,7 +48,7 @@
     </div>
 
     <span class="footer-years">Designed and Developed by Chris Meyers, 2013-{{ new Date().getFullYear() }}</span>
-  </div>
+  </footer>
 </template>
 
 <script>
@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style scoped>
-#footer {
+footer {
   font-size: 13px;
   bottom: 0;
   height: auto;
@@ -67,11 +67,6 @@ export default {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   width: 300px;
   position: fixed;
-}
-
-.footer-size {
-  width: auto;
-  position: absolute;
   text-align: center;
 }
 
