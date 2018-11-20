@@ -53,7 +53,7 @@
 
 <script>
 import ResumeApi from "@/utils/api/resume"
-import LightBox from 'vue-image-lightbox'
+import LightBox from '@/components/LightBox/LightBox'
 
 export default {
   name: 'About',

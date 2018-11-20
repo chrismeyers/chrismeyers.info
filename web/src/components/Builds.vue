@@ -54,7 +54,7 @@
 
 <script>
 import BuildsApi from "@/utils/api/builds"
-import LightBox from 'vue-image-lightbox'
+import LightBox from '@/components/LightBox/LightBox'
 
 export default {
   name: 'Builds',

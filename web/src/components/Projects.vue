@@ -67,7 +67,7 @@
 
 <script>
 import ProjectssApi from "@/utils/api/projects"
-import LightBox from 'vue-image-lightbox'
+import LightBox from '@/components/LightBox/LightBox'
 
 export default {
   name: 'Projects',
