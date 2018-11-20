@@ -1,0 +1,28 @@
+#!/bin/bash
+# https://gist.github.com/noelboss/3fe13927025b89757f8fb12e9066f2fa
+#
+# 1. Make /path/to/repo/*.git
+# 2. git init --bare /path/to/repo/*.git
+# 3. Create /path/to/repo/*.git/hooks/post-receive
+# 4. Create all directories in --work-tree path.
+# 5. Add new git remote: ssh://user@ip/path/to/repo/*.git
+# 6. Push to the new git remote.
+
+while read oldrev newrev ref
+do
+  if [[ $ref =~ .*/master$ ]];
+  then
+    echo "Deploying $ref branch to production..."
+    git --work-tree=/home/chris/www/chrismeyers.info --git-dir=/home/chris/repo/chrismeyers.info.git checkout -f
+
+    cd /home/chris/www/chrismeyers.info/web
+    /usr/bin/npm install
+    /usr/bin/npm run build
+
+    cd /home/chris/www/chrismeyers.info/api
+    /usr/bin/pub get
+    /bin/systemctl restart chrismeyers-info-api
+  else
+    echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server."
+  fi
+done
