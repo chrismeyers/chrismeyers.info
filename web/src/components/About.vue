@@ -67,15 +67,10 @@ export default {
     }
   },
   mounted() {
-    ResumeApi.getLanguageExperience().then(
-      langMap => {
-        this.langMap = langMap
-      }
-    )
-
-    ResumeApi.getCurrentJob().then(
-      job => {
-        this.currentJob = job
+    ResumeApi.getInfoForAboutPage().then(
+      info => {
+        this.langMap = info.langMap
+        this.currentJob = info.currentJob
       }
     )
   },
