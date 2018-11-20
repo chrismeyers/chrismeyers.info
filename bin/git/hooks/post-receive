@@ -20,8 +20,8 @@ do
     /usr/bin/npm run build
 
     cd /home/chris/www/chrismeyers.info/api
-    /usr/lib/dart/bin/pub get
-    sudo /bin/systemctl restart chrismeyers-info-api
+    /usr/lib/dart/bin/pub get --no-precompile
+    sudo /bin/systemctl restart chrismeyers-info-api.service
   else
     echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server."
   fi
