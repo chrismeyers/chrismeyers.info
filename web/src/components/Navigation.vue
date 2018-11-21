@@ -18,7 +18,7 @@
         </router-link>
 
         <button style="outline: none;" class="hamburger hamburger--collapse" :class="{ 'is-active': menuDisplayed }" type="button" @click="toggleMenu()">
-          <span class="hamburger-box">
+          <span class="hamburger-box" style="height: 26px;">
             <span class="hamburger-inner"></span>
           </span>
         </button>
