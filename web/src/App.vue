@@ -1,14 +1,15 @@
 <template>
   <div id="app">
     <Navigation/>
+    <v-dialog/>
     <router-view/>
     <Footer/>
   </div>
 </template>
 
 <script>
-import Navigation from '@/components/Navigation'
-import Footer from '@/components/Footer'
+import Navigation from "@/components/Navigation"
+import Footer from "@/components/Footer"
 
 export default {
   name: "App",
@@ -16,6 +17,29 @@ export default {
     Navigation,
     // eslint-disable-next-line
     Footer
+  },
+  mounted() {
+    if(this.$isIE) {
+      this.showIEDialog()
+    }
+  },
+  methods: {
+    showIEDialog() {
+      this.$modal.show("dialog", {
+        title: "Internet Explorer Detected",
+        text: "For a better browsing experience, please visit this website " +
+              "on a different browser, if possible.<br/><br/><i>Some functionality may " +
+              "not work as expected on Internet Explorer.</i>",
+        buttons: [
+          {
+            title: "Proceed",
+            handler: () => {
+              this.$modal.hide("dialog")
+            }
+          }
+        ]
+      })
+    }
   }
 }
 </script>
