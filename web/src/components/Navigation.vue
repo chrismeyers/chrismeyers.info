@@ -181,7 +181,6 @@ nav {
   left: 0;
   right: 0;
   z-index: 1;
-  margin-top: 2px;
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
 }
