@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import Navigation from "@/components/Navigation"
-import Footer from "@/components/Footer"
+import Navigation from '@/components/Navigation'
+import Footer from '@/components/Footer'
 
 export default {
   name: "App",
@@ -47,7 +47,7 @@ export default {
 <style>
 /********************* GENERAL *********************/
 #app {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   display: -webkit-flex;
   display: flex;
 }
@@ -126,13 +126,13 @@ h2.top {
 /********************* CONTENT *********************/
 .section-header {
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .content {
   -webkit-margin-bottom-collapse: separate; /* Fixes margin-bottom for non-chrome browsers */
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
 }
 

@@ -52,11 +52,11 @@
 </template>
 
 <script>
-import ResumeApi from "@/utils/api/resume"
+import ResumeApi from '@/utils/api/resume'
 import LightBox from '@/components/LightBox/LightBox'
 
 export default {
-  name: 'About',
+  name: "About",
   components: {
     LightBox
   },

@@ -19,4 +19,4 @@ Vue.prototype.$isIE = /*@cc_on!@*/false || !!document.documentMode
 new Vue({
   router,
   render: create => create(App)
-}).$mount('#app')
+}).$mount("#app")

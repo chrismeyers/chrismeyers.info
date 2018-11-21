@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:args/args.dart';
 import 'package:http/http.dart' as http;
-import "package:path/path.dart" show dirname, join;
+import 'package:path/path.dart' show dirname, join;
 
 String apiBaseUrl;
 String accessToken;
@@ -32,7 +32,7 @@ void handleArgs(List<String> arguments) {
       help: "Specifies the admin password (required)")
     ..addOption("client", abbr: "c",
       help: "Specifies the OAuth 2.0 client (required)")
-    ..addFlag('help', abbr: 'h', negatable: false,
+    ..addFlag("help", abbr: "h", negatable: false,
       help: "Displays this help information.");
 
   try {

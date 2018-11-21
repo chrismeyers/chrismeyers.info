@@ -34,7 +34,7 @@
                     <img :src="image.path"
                          :class="'projImages-full-img-' + image.orient"
                          v-bind:alt="image.title"
-                         title='Click to enlarge'
+                         title="Click to enlarge"
                          :key="image.id + '-full'"
                          @click="openGallery(project.id, index)">
                     <br :key="image.id + '-br'" />
@@ -43,7 +43,7 @@
                     <img :src="image.path"
                          :class="'projImages-small-img-' + image.orient"
                          v-bind:alt="image.title"
-                         title='Click to enlarge'
+                         title="Click to enlarge"
                          @click="openGallery(project.id, index)">
                   </div>
               </template>
@@ -66,11 +66,11 @@
 </template>
 
 <script>
-import ProjectssApi from "@/utils/api/projects"
+import ProjectssApi from '@/utils/api/projects'
 import LightBox from '@/components/LightBox/LightBox'
 
 export default {
-  name: 'Projects',
+  name: "Projects",
   components: {
     LightBox
   },

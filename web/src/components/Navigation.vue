@@ -54,7 +54,7 @@ export default {
     this.path = this.cleanPath(rawPath)
   },
   watch: {
-    '$route.path' (rawPath) {
+    "$route.path" (rawPath) {
       this.path = this.cleanPath(rawPath)
       this.menuDisplayed = false
     }
@@ -151,7 +151,7 @@ nav {
   display: table-cell;
   color: white;
   font-size: x-large;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-align: center;
 }
 .section-title-menu:hover {

@@ -6,30 +6,30 @@
       <template v-for="(build, index) in builds">
         <div class="build" :key="build.id">
           <h2 :class="{ 'first-header': (index == 0) }">{{ build.date }}</h2>
-          <div class='build-info'>
-            <div class='build-specs'>
+          <div class="build-info">
+            <div class="build-specs">
               <dl>
-                <dt class='dt-mod'><b>Processor:</b></dt>
+                <dt class="dt-mod"><b>Processor:</b></dt>
                   <dd>{{ build.cpu }}</dd>
                 <template v-if="build.cool !== null">
-                  <dt class='dt-mod'><b>Cooling:</b></dt>
+                  <dt class="dt-mod"><b>Cooling:</b></dt>
                     <dd>{{ build.cool }}</dd>
                 </template>
-                <dt class='dt-mod'><b>Mobo:</b></dt>
+                <dt class="dt-mod"><b>Mobo:</b></dt>
                   <dd>{{ build.mobo }}</dd>
-                <dt class='dt-mod'><b>Memory:</b></dt>
+                <dt class="dt-mod"><b>Memory:</b></dt>
                   <dd>{{ build.ram }}</dd>
-                <dt class='dt-mod'><b>HDD:</b></dt>
+                <dt class="dt-mod"><b>HDD:</b></dt>
                   <dd>{{ build.hdd }}</dd>
                 <template v-if="build.ssd !== null">
-                  <dt class='dt-mod'><b>SSD:</b></dt>
+                  <dt class="dt-mod"><b>SSD:</b></dt>
                     <dd>{{ build.ssd }}</dd>
                 </template>
-                <dt class='dt-mod'><b>Video Card:</b></dt>
+                <dt class="dt-mod"><b>Video Card:</b></dt>
                   <dd>{{ build.gpu }}</dd>
               </dl>
             </div>
-            <div class='build-pic'>
+            <div class="build-pic">
               <img :src="build.image.path"
                    :class="'build-pic-img-' + build.image.orient"
                    v-bind:alt="build.image.title"
@@ -53,11 +53,11 @@
 </template>
 
 <script>
-import BuildsApi from "@/utils/api/builds"
+import BuildsApi from '@/utils/api/builds'
 import LightBox from '@/components/LightBox/LightBox'
 
 export default {
-  name: 'Builds',
+  name: "Builds",
   components: {
     LightBox
   },

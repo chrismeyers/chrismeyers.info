@@ -8,29 +8,29 @@ import Projects from '@/components/Projects'
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  mode: 'history',
+  mode: "history",
   scrollBehavior() {
     return { x: 0, y: 0 }
   },
   routes: [
     {
-      path: '/',
-      name: 'About',
+      path: "/",
+      name: "About",
       component: About
     },
     {
-      path: '/resume',
-      name: 'Resume',
+      path: "/resume",
+      name: "Resume",
       component: Resume
     },
     {
-      path: '/builds',
-      name: 'Builds',
+      path: "/builds",
+      name: "Builds",
       component: Builds
     },
     {
-      path: '/projects',
-      name: 'Projects',
+      path: "/projects",
+      name: "Projects",
       component: Projects
     },
   ]

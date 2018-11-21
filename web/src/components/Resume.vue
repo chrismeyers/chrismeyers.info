@@ -51,10 +51,10 @@
 </template>
 
 <script>
-import ResumeApi from "@/utils/api/resume"
+import ResumeApi from '@/utils/api/resume'
 
 export default {
-  name: 'Resume',
+  name: "Resume",
   data() {
     return {
       experience: null,
