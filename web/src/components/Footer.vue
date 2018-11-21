@@ -39,7 +39,6 @@
 
       <div class="footer-social">
         <a href="mailto:chris@chrismeyers.info"
-           target="_blank"
            alt="Send Message"
            title="Send Message">
         <img src="@/assets/images/social/mail-logo.svg">
