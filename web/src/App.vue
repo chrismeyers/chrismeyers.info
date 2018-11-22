@@ -185,4 +185,24 @@ h2.top {
     font-size: 35px;
   }
 }
+
+@media print {
+  html {
+    font-family: "Open Sans", sans-serif;
+  }
+
+  nav,
+  footer {
+    display: none;
+  }
+
+  .content {
+    font-size: 12px;
+  }
+
+  .content-text > hr {
+    /* Use this when using page-break-after's */
+    display: none;
+  }
+}
 </style>

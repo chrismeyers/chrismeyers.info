@@ -154,4 +154,22 @@ export default {
     max-width: 406px;
   }
 }
+
+@media print {
+  .build {
+    page-break-after: always;
+  }
+  .build > h2 {
+    margin-top: 50px;
+  }
+
+  .build-pic-img-land {
+    height: 100%;
+    width: 100%;
+  }
+  .build-pic-img-port {
+    height: 60%;
+    width: 60%;
+  }
+}
 </style>

@@ -210,11 +210,53 @@ export default {
   .projImages-full-img-square {
     max-width: 415px;
     max-width: 415px;
-
   }
 
   .projImages-small {
     text-decoration: none;
+  }
+}
+
+@media print {
+  .proj,
+  .projImages {
+    page-break-after: always;
+  }
+  .proj > h2 {
+    margin-top: 50px;
+  }
+
+  .projImages-full-img-square,
+  .projImages-full-img-land,
+  .projImages-full-img-port {
+    margin-top: 0;
+    height: 80%;
+    width: 80%;
+  }
+
+  .projImages-small {
+    display: inline;
+  }
+
+  .projImages-small-img-square {
+    height: 200px;
+    width: 200px;
+    margin-right: 20px;
+  }
+  .projImages-small-img-land {
+    height: 40%;
+    width: 40%;
+    margin-right: 20px;
+  }
+  .projImages-small-img-port {
+    height: 25%;
+    width: 25%;
+    margin-right: 20px;
+  }
+
+  .proj-link {
+    width: 16px;
+    height: 16px;
   }
 }
 </style>
