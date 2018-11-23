@@ -66,10 +66,10 @@ export default {
       builds: null
     }
   },
-  mounted() {
+  beforeRouteEnter(to, from, next) {
     BuildsApi.getBuilds().then(
       builds => {
-        this.builds = builds.data
+        next(vm => vm.setData(builds))
       }
     )
   },
@@ -84,6 +84,9 @@ export default {
         "src": build.image.path,
         "caption": build.image.title
       }]
+    },
+    setData(builds) {
+      this.builds = builds.data
     }
   }
 }

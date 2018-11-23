@@ -63,15 +63,20 @@ export default {
       lastModified: null
     }
   },
-  mounted() {
+  beforeRouteEnter(to, from, next) {
     ResumeApi.getResume().then(
       resume => {
-        this.experience = resume.data.experience
-        this.education = resume.data.education
-        this.skills = resume.data.skills
-        this.lastModified = new Date(resume.data.lastModified).toString()
+        next(vm => vm.setData(resume))
       }
     )
+  },
+  methods: {
+    setData(resume) {
+      this.experience = resume.data.experience
+      this.education = resume.data.education
+      this.skills = resume.data.skills
+      this.lastModified = new Date(resume.data.lastModified).toString()
+    }
   }
 }
 </script>

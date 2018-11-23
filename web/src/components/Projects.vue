@@ -79,10 +79,10 @@ export default {
       projects: null
     }
   },
-  mounted() {
+  beforeRouteEnter(to, from, next) {
     ProjectssApi.getProjects().then(
       projects => {
-        this.projects = projects.data
+        next(vm => vm.setData(projects))
       }
     )
   },
@@ -103,6 +103,9 @@ export default {
       }
 
       return imageData
+    },
+    setData(projects) {
+      this.projects = projects.data
     }
   }
 }

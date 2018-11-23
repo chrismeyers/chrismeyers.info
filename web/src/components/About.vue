@@ -66,11 +66,10 @@ export default {
       currentJob: null
     }
   },
-  mounted() {
+  beforeRouteEnter(to, from, next) {
     ResumeApi.getInfoForAboutPage().then(
       info => {
-        this.langMap = info.langMap
-        this.currentJob = info.currentJob
+        next(vm => vm.setData(info))
       }
     )
   },
@@ -78,6 +77,10 @@ export default {
     openGallery(id) {
       let lightbox = "lightbox-" + id
       this.$refs[lightbox].showImage(0)
+    },
+    setData(info) {
+      this.langMap = info.langMap
+      this.currentJob = info.currentJob
     }
   }
 }
