@@ -1,27 +1,11 @@
 import 'package:api/model/image.dart';
-import 'package:api/model/user.dart';
 
+import './queries.dart';
 import 'harness/app.dart';
 
 Future main() async {
   final Harness harness = Harness()..install();
-
-  Future<Null> insertImage() async {
-    final Query<Image> insertQuery = Query<Image>(harness.application.channel.context)
-      ..values.path = "/path/to/image.jpg"
-      ..values.title = "A cool image"
-      ..values.pos = 1
-      ..values.orient = "port";
-
-    await insertQuery.insert();
-  }
-
-  Future<Null> loginUser() async {
-    final User user = User()
-      ..username = "test"
-      ..password = "password";
-    harness.publicAgent = await harness.registerUser(user, withClient: harness.publicAgent);
-  }
+  final Queries queries = Queries(harness);
 
   test("GET /public/images returns 200 - empty list", () async {
     final TestResponse response = await harness.publicAgent.get("/public/images");
@@ -30,7 +14,7 @@ Future main() async {
   });
 
   test("GET /public/images returns 200 - one image", () async {
-    await insertImage();
+    await queries.insertImage();
 
     final TestResponse response = await harness.publicAgent.get("/public/images");
     expectResponse(response, 200, body: [{
@@ -45,7 +29,7 @@ Future main() async {
   });
 
   test("GET /public/images/:id returns 200 - matching ID", () async {
-    await insertImage();
+    await queries.insertImage();
 
     final TestResponse response = await harness.publicAgent.get("/public/images/1");
     expectResponse(response, 200, body: {
@@ -70,7 +54,7 @@ Future main() async {
   });
 
   test("POST /admin/images returns 200 - image added", () async {
-    await loginUser();
+    await queries.loginUser();
 
     final TestResponse response = await harness.publicAgent.post("/admin/images", body: {
       "path": "/path/to/image.jpg",
@@ -94,8 +78,8 @@ Future main() async {
   });
 
   test("PUT /admin/images/:id returns 200 - image updated", () async {
-    await insertImage();
-    await loginUser();
+    await queries.insertImage();
+    await queries.loginUser();
 
     final TestResponse response = await harness.publicAgent.put("/admin/images/1", body: {
       "path": "/path/to/another/image.jpg",
@@ -119,8 +103,8 @@ Future main() async {
   });
 
   test("DELETE /admin/images/:id returns 200 - image deleted", () async {
-    await insertImage();
-    await loginUser();
+    await queries.insertImage();
+    await queries.loginUser();
 
     final Query<Image> fetchQuery = Query<Image>(harness.application.channel.context);
     List<Image> builds = await fetchQuery.fetch();
