@@ -1,4 +1,5 @@
 import 'package:api/model/build.dart';
+import 'package:api/model/image.dart';
 
 import './queries.dart';
 import 'harness/app.dart';
@@ -138,6 +139,54 @@ Future main() async {
     final Query<Build> fetchQuery = Query<Build>(harness.application.channel.context);
     final List<Build> builds = await fetchQuery.fetch();
     expect(builds.length, equals(1));
+  });
+
+  test("PUT /admin/builds/:id returns 200 - nullify image", () async {
+    await queries.insertBuild();
+    await queries.insertImage();
+    await queries.loginUser();
+
+    await harness.publicAgent.put("/admin/builds/1", body: {
+      "date": "Sometime very long ago",
+      "started": 20120202,
+      "cpu": "Very very Fast 9000",
+      "cool": "Very very Cold",
+      "mobo": "Lots and lots of LEDs",
+      "ram": "Lots and lots of memory",
+      "hdd": "Very much storage",
+      "ssd": "Very much fast storage",
+      "gpu": "VeryNice graphics",
+      "image": 1
+    });
+
+    final Query<Build> fetchBuildsQuery = Query<Build>(harness.application.channel.context)
+      ..join(object: (b) => b.image);
+    final fetchImagesQuery = Query<Image>(harness.application.channel.context);
+
+    List<Build> builds = await fetchBuildsQuery.fetch();
+    expect(builds[0].image.id, 1);
+
+    List<Image> images = await fetchImagesQuery.fetch();
+    expect(images[0].build.id, 1);
+
+    await harness.publicAgent.put("/admin/builds/1", body: {
+      "date": "Sometime very long ago",
+      "started": 20120202,
+      "cpu": "Very very Fast 9000",
+      "cool": "Very very Cold",
+      "mobo": "Lots and lots of LEDs",
+      "ram": "Lots and lots of memory",
+      "hdd": "Very much storage",
+      "ssd": "Very much fast storage",
+      "gpu": "VeryNice graphics",
+      "image": null
+    });
+
+    builds = await fetchBuildsQuery.fetch();
+    expect(builds[0].image, null);
+
+    images = await fetchImagesQuery.fetch();
+    expect(images[0].build, null);
   });
 
   test("DELETE /admin/builds/:id returns 200 - build deleted", () async {

@@ -1,3 +1,4 @@
+import 'package:api/model/image.dart';
 import 'package:api/model/project.dart';
 
 import './queries.dart';
@@ -138,6 +139,58 @@ Future main() async {
     final Query<Project> fetchQuery = Query<Project>(harness.application.channel.context);
     final List<Project> projects = await fetchQuery.fetch();
     expect(projects.length, equals(1));
+  });
+
+  test("PUT /admin/projects/:id returns 200 - nullify project", () async {
+    await queries.insertProject();
+    await queries.insertImage();
+    await queries.insertImage();
+    await queries.loginUser();
+
+    await harness.publicAgent.put("/admin/projects/1", body: {
+      "title": "Another cool project",
+      "webUrl": "https://project2.website",
+      "codeUrl": "https://project2.code",
+      "date": "A very very long time ago",
+      "started": 20120101,
+      "lang": "101010110110011",
+      "info": "Yup",
+      "role": "Solo Project",
+      "stat": "Complete",
+      "images": [1,2]
+    });
+
+    final Query<Project> fetchProjectsQuery = Query<Project>(harness.application.channel.context)
+      ..join(set: (p) => p.images);
+    final fetchImagesQuery = Query<Image>(harness.application.channel.context);
+
+    List<Project> projects = await fetchProjectsQuery.fetch();
+    expect(projects[0].images[0].id, 1);
+    expect(projects[0].images[1].id, 2);
+
+    List<Image> images = await fetchImagesQuery.fetch();
+    expect(images[0].project.id, 1);
+    expect(images[1].project.id, 1);
+
+    await harness.publicAgent.put("/admin/projects/1", body: {
+      "title": "Another cool project",
+      "webUrl": "https://project2.website",
+      "codeUrl": "https://project2.code",
+      "date": "A very very long time ago",
+      "started": 20120101,
+      "lang": "101010110110011",
+      "info": "Yup",
+      "role": "Solo Project",
+      "stat": "Complete",
+      "images": []
+    });
+
+    projects = await fetchProjectsQuery.fetch();
+    expect(projects[0].images, []);
+
+    images = await fetchImagesQuery.fetch();
+    expect(images[0].project, null);
+    expect(images[1].project, null);
   });
 
   test("DELETE /admin/projects/:id returns 200 - project deleted", () async {
