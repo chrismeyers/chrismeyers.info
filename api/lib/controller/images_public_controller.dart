@@ -21,6 +21,10 @@ class ImagesPublicController extends ResourceController {
       ..where((i) => i.id).equalTo(id);
     final Image image = await query.fetchOne();
 
+    if(image == null) {
+      return Response.notFound(body: {"message": "image id $id does not exist"});
+    }
+
     return Response.ok(image);
   }
 }

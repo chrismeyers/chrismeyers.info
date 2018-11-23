@@ -155,15 +155,15 @@ Future main() async {
       "ssd": "Very much fast storage",
       "gpu": "VeryNice graphics",
       "image":  {
-        'id': 1,
-        'path': '/path/to/image.jpg',
-        'title': 'A cool image',
-        'pos': 1,
-        'orient': 'port',
-        'build': {
-          'id': 1
+        "id": 1,
+        "path": "/path/to/image.jpg",
+        "title": "A cool image",
+        "pos": 1,
+        "orient": "port",
+        "build": {
+          "id": 1
         },
-        'project': null
+        "project": null
       }
     });
 
