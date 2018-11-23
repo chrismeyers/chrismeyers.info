@@ -11,7 +11,7 @@ class BuildsAdminController extends ResourceController {
   @Operation.post()
   Future<Response> addBuild() async {
     final Map<String, dynamic> body = await request.body.decode();
-    final int imageId = body["image"]["id"] as int;
+    final int imageId = body["image"] as int;
 
     final Build build = await context.transaction((transaction) async {
       final Query<Build> queryAddData = Query<Build>(transaction)
@@ -44,7 +44,7 @@ class BuildsAdminController extends ResourceController {
   @Operation.put("id")
   Future<Response> updateBuild(@Bind.path("id") int id) async {
     final Map<String, dynamic> body = await request.body.decode();
-    final int imageId = body["image"]["id"] as int;
+    final int imageId = body["image"] as int;
 
     final build = await context.transaction((transaction) async {
       final Query<Build> queryUpdateData = Query<Build>(transaction)

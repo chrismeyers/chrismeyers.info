@@ -204,9 +204,7 @@
       "hdd": "WD5000AAKX 500GB @ 7200rpm",
       "ssd": null,
       "gpu": "XFX Radeon 6870 1GB",
-      "image": {
-          "id": 1
-      }
+      "image": 1
     },
     {
       "date": "February 2013 - Built for myself",
@@ -218,9 +216,7 @@
       "hdd": "WD6400AAKS 640GB @ 7200rpm, ST31000524AS 1TB @ 7200rpm",
       "ssd": "Samsung 850 Pro 256GB",
       "gpu": "EVGA GeForce GTX 670 FTW 2GB",
-      "image": {
-          "id": 2
-      }
+      "image": 2
     },
     {
       "date": "September 2013 - Built for my Neighbor, Mark",
@@ -232,9 +228,7 @@
       "hdd": "ST1000DM003 1TB @ 7200rpm",
       "ssd": "Kingston HyperX 3K 120GB",
       "gpu": "EVGA GeForce GTX 770 SuperClocked 2GB",
-      "image": {
-          "id": 3
-      }
+      "image": 3
     },
     {
       "date": "February 2016 - Built for myself",
@@ -246,9 +240,7 @@
       "hdd": "Western Digital Blue 1TB @ 7200rpm",
       "ssd": "Samsung 850 EVO 500GB",
       "gpu": "EVGA GeForce GTX 980 Ti 6GB",
-      "image": {
-          "id": 4
-      }
+      "image": 4
     },
     {
       "date": "September 2017 - Built for my friend, James",
@@ -260,9 +252,7 @@
       "hdd": "Western Digital Blue 1TB @ 7200rpm",
       "ssd": "SAMSUNG 960 EVO M.2 500GB",
       "gpu": "EVGA GeForce GTX 1080 Ti FTW3 11GB",
-      "image": {
-          "id": 5
-      }
+      "image": 5
     }
   ],
   "projects": [

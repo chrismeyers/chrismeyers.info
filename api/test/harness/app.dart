@@ -1,4 +1,5 @@
 import 'package:api/api.dart';
+import 'package:api/model/user.dart';
 import 'package:aqueduct_test/aqueduct_test.dart';
 
 export 'package:api/api.dart';
@@ -19,14 +20,32 @@ export 'package:aqueduct/aqueduct.dart';
 ///           });
 ///         }
 ///
-class Harness extends TestHarness<ApiChannel> {
+class Harness extends TestHarness<ApiChannel> with TestHarnessAuthMixin<ApiChannel>, TestHarnessORMMixin {
+  @override
+  ManagedContext get context => channel.context;
+
+  @override
+  AuthServer get authServer => channel.authServer;
+
+  Agent publicAgent;
+
   @override
   Future onSetUp() async {
-
+    await resetData();
   }
 
   @override
-  Future onTearDown() async {
+  Future seed() async {
+    publicAgent = await addClient("com.aqueduct.public");
+  }
 
+  Future<Agent> registerUser(User user, {Agent withClient}) async {
+    withClient ??= publicAgent;
+
+    final TestRequest req = withClient.request("/auth/register")
+      ..body = {"username": user.username, "password": user.password, "secret": "secret"};
+    await req.post();
+
+    return loginUser(withClient, user.username, user.password);
   }
 }
