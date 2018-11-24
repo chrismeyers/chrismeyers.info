@@ -22,8 +22,6 @@ Vue.use(VueImg, {
   thumbnails: true
 })
 
-require('vue-image-lightbox/dist/vue-image-lightbox.min.css')
-
 // See: https://stackoverflow.com/a/9851769/7159369
 Vue.prototype.$isIE = /*@cc_on!@*/false || !!document.documentMode
 
