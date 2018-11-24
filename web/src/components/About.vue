@@ -18,12 +18,12 @@
             <li>Photography, reading, <router-link class="fancytxt" to="/builds">building custom computers</router-link>, playing video games</li>
           </ul>
         </li>
-        <li>I am the owner of this <a @click="openGallery(0)" class="fancytxt">majestic beast</a>.</li>
-        <LightBox
-          :images='[{"thumb": "/clark/DSC_1564-6.jpg", "src": "/clark/DSC_1564-6.jpg", "caption": "Clark the Corgi"}]'
-          v-bind:ref="'lightbox-0'"
-          :show-caption="true"
-          :show-light-box="false"/>
+        <li>I am the owner of this <a class="fancytxt" @click="showClarkImage()">majestic beast</a>.</li>
+        <img v-img
+             ref="clarkImg"
+             alt="Clark the Corgi"
+             src="/clark/DSC_1564-6.jpg"
+             style="display:none;">
       </ul>
 
       <p>Over the years, I've gained experience with the following programming languages and frameworks:</p>
@@ -53,13 +53,9 @@
 
 <script>
 import ResumeApi from '@/utils/api/resume'
-import LightBox from '@/components/LightBox/LightBox'
 
 export default {
   name: "About",
-  components: {
-    LightBox
-  },
   data() {
     return {
       langMap: null,
@@ -74,9 +70,8 @@ export default {
     )
   },
   methods: {
-    openGallery(id) {
-      let lightbox = "lightbox-" + id
-      this.$refs[lightbox].showImage(0)
+    showClarkImage() {
+      this.$refs.clarkImg.click()
     },
     setData(info) {
       this.langMap = info.langMap

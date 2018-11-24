@@ -30,23 +30,17 @@
               </dl>
             </div>
             <div class="build-pic">
-              <img :src="build.image.path"
+              <img v-img
+                   :src="build.image.path"
                    :class="'build-pic-img-' + build.image.orient"
                    v-bind:alt="build.image.title"
-                   title="Click to enlarge"
-                   @click="openGallery(build.id)">
+                   title="Click to enlarge">
             </div>
           </div>
         </div>
         <template v-if="index < builds.length - 1">
           <br :key="build.id + '-br'"><hr :key="build.id + '-hr'"/>
         </template>
-        <LightBox
-          :images="getImageArray(build)"
-          v-bind:ref="'lightbox-' + build.id"
-          :show-caption="true"
-          :show-light-box="false"
-          :key="'lightbox-' + build.id"/>
       </template>
     </div>
   </div>
@@ -54,13 +48,9 @@
 
 <script>
 import BuildsApi from '@/utils/api/builds'
-import LightBox from '@/components/LightBox/LightBox'
 
 export default {
   name: "Builds",
-  components: {
-    LightBox
-  },
   data() {
     return {
       builds: null
@@ -74,10 +64,6 @@ export default {
     )
   },
   methods: {
-    openGallery(id) {
-      let lightbox = "lightbox-" + id
-      this.$refs[lightbox][0].showImage(0)
-    },
     getImageArray(build) {
       return [{
         "thumb": build.image.path,

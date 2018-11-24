@@ -31,20 +31,20 @@
             <div class="projImages">
               <template v-for="(image, index) in project.images">
                   <template v-if="index == 0">
-                    <img :src="image.path"
+                    <img v-img="{'group': project.id}"
+                         :src="image.path"
                          :class="'projImages-full-img-' + image.orient"
                          v-bind:alt="image.title"
                          title="Click to enlarge"
-                         :key="image.id + '-full'"
-                         @click="openGallery(project.id, index)">
+                         :key="image.id + '-full'">
                     <br :key="image.id + '-br'" />
                   </template>
                   <div v-else class="projImages-small" :key="image.id + '-small'">
-                    <img :src="image.path"
+                    <img v-img="{'group': project.id}"
+                         :src="image.path"
                          :class="'projImages-small-img-' + image.orient"
                          v-bind:alt="image.title"
-                         title="Click to enlarge"
-                         @click="openGallery(project.id, index)">
+                         title="Click to enlarge">
                   </div>
               </template>
             </div>
@@ -54,12 +54,6 @@
         <template v-if="index < projects.length - 1">
           <br :key="project.id + '-br'"><hr :key="project.id + '-hr'"/>
         </template>
-        <LightBox
-          :images="getImageArray(project)"
-          v-bind:ref="'lightbox-' + project.id"
-          :show-caption="true"
-          :show-light-box="false"
-          :key="'lightbox-' + project.id"/>
       </template>
     </div>
   </div>
@@ -67,13 +61,9 @@
 
 <script>
 import ProjectssApi from '@/utils/api/projects'
-import LightBox from '@/components/LightBox/LightBox'
 
 export default {
   name: "Projects",
-  components: {
-    LightBox
-  },
   data() {
     return {
       projects: null
@@ -87,10 +77,6 @@ export default {
     )
   },
   methods: {
-    openGallery(id, index) {
-      let lightbox = "lightbox-" + id
-      this.$refs[lightbox][0].showImage(index)
-    },
     getImageArray(project) {
       let imageData = []
 

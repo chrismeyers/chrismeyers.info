@@ -196,6 +196,15 @@ h2.top {
   text-align: center;
 }
 
+/********************* v-img overrides *********************/
+.title-v-img,
+.count-v-img,
+.buttons-v-img,
+.prev-v-img,
+.next-v-img {
+  font-family: "Open Sans", sans-serif !important;
+}
+
 @media screen and (max-width: 969px) {
   .content {
     margin: 60px 0px 80px 0px;
@@ -209,6 +218,16 @@ h2.top {
     height: 60px;
     line-height: 60px;
     font-size: 35px;
+  }
+
+  /******************** v-img overrides ********************/
+  .title-v-img {
+    font-size: 14px !important;
+  }
+
+  .header-v-img {
+    height: auto !important;
+    padding: 5px !important;
   }
 }
 

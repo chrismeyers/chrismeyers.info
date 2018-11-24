@@ -1,18 +1,25 @@
+import 'babel-polyfill'
 import Vue from 'vue'
 import router from './router'
 import App from './App'
 import axios from 'axios'
-import VueLazyLoad from 'vue-lazyload'
 import VModal from 'vue-js-modal'
 import VueProgressBar from 'vue-progressbar'
+import VueImg from 'v-img'
 
 axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
 
 Vue.config.productionTip = false
-Vue.use(VueLazyLoad)
-Vue.use(VModal, { dialog: true })
+Vue.use(VModal, {
+  dialog: true
+})
 Vue.use(VueProgressBar, {
   color: "rgb(91, 183, 91)"
+})
+Vue.use(VueImg, {
+  altAsTitle: true,
+  openOn: "click",
+  thumbnails: true
 })
 
 require('vue-image-lightbox/dist/vue-image-lightbox.min.css')
