@@ -7,7 +7,7 @@ ExecStart=/usr/bin/dart /home/chris/www/chrismeyers.info/api/bin/main.dart
 WorkingDirectory=/home/chris/www/chrismeyers.info/api
 Restart=always
 RestartSec=10
-StandardOutput=syslog
+StandardOutput=null
 StandardError=syslog
 SyslogIdentifier=chrismeyers-info-api
 
