@@ -64,13 +64,6 @@ export default {
     )
   },
   methods: {
-    getImageArray(build) {
-      return [{
-        "thumb": build.image.path,
-        "src": build.image.path,
-        "caption": build.image.title
-      }]
-    },
     setData(builds) {
       this.builds = builds.data
     }

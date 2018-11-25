@@ -77,19 +77,6 @@ export default {
     )
   },
   methods: {
-    getImageArray(project) {
-      let imageData = []
-
-      for(const image of project.images) {
-        imageData.push({
-          "thumb": image.path,
-          "src": image.path,
-          "caption": image.title
-        })
-      }
-
-      return imageData
-    },
     setData(projects) {
       this.projects = projects.data
     }
