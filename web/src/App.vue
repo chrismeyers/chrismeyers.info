@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <Navigation/>
+    <Navigation v-if="showNavAndFooter()"/>
     <v-dialog/>
     <vue-progress-bar></vue-progress-bar>
     <router-view/>
-    <Footer/>
+    <Footer v-if="showNavAndFooter()"/>
   </div>
 </template>
 
@@ -65,6 +65,14 @@ export default {
           }
         ]
       })
+    },
+    showNavAndFooter() {
+      if(this.$route.path.includes("dashboard") ||
+         this.$route.path.includes("login")) {
+        return false
+      }
+
+      return true
     }
   }
 }

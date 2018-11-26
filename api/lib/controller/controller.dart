@@ -1,3 +1,4 @@
+export "./auth_authorized_controller.dart";
 export "./builds_admin_controller.dart";
 export "./builds_public_controller.dart";
 export "./images_admin_controller.dart";

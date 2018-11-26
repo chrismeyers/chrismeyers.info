@@ -7,9 +7,12 @@ import VModal from "vue-js-modal"
 import VueProgressBar from "vue-progressbar"
 import VueImg from "v-img"
 
+var VueCookie = require('vue-cookie')
+
 axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
 
 Vue.config.productionTip = false
+
 Vue.use(VModal, {
   dialog: true
 })
@@ -21,6 +24,7 @@ Vue.use(VueImg, {
   openOn: "click",
   thumbnails: true
 })
+Vue.use(VueCookie);
 
 // See: https://stackoverflow.com/a/9851769/7159369
 Vue.prototype.$isIE = /*@cc_on!@*/false || !!document.documentMode
