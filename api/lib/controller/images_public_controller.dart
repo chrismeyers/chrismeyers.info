@@ -9,7 +9,8 @@ class ImagesPublicController extends ResourceController {
 
   @Operation.get()
   Future<Response> getImages() async {
-    final Query<Image> query = Query<Image>(context);
+    final Query<Image> query = Query<Image>(context)
+      ..sortBy((i) => i.id, QuerySortOrder.ascending);
     final List<Image> allImages = await query.fetch();
 
     return Response.ok(allImages);
