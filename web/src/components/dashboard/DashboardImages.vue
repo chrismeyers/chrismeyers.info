@@ -14,15 +14,16 @@
     </template>
 
     <br />
+    <form @submit.prevent="routeFormSubmission">
+      <template v-for="(field, index) in fields">
+        <span :key="index + '-span'">{{ field }}: </span>
+        <input v-model="selected[field]" :placeholder="field" :key="index + '-input'" required>
+        <br :key="index + '-br'"/>
+      </template>
 
-    <template v-for="(field, index) in fields">
-      <span :key="index + '-span'">{{ field }}: </span>
-      <input v-model="selected[field]" :placeholder="field" :key="index + '-input'">
-      <br :key="index + '-br'"/>
-    </template>
-
-    <button @click="submitForm()">{{ selected.id ? 'Update' : 'Add' }}</button>
-    <button v-if="selected.id" @click="deleteEntry()">Delete</button>
+      <input type="submit" @click="whichButton = 'addUpdate'" :value="selected.id ? 'Update' : 'Add'">
+      <input type="submit" @click="whichButton = 'delete'" v-if="selected.id" value="Delete">
+    </form>
   </div>
 </template>
 
@@ -33,10 +34,11 @@ export default {
   name: "DashboardImages",
   data() {
     return {
+      whichButton: "",
       images: [],
       fields: [],
       selected: {},
-      current: {}
+      lastResponse: {}
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -61,35 +63,45 @@ export default {
         }
       }
     },
-    async submitForm() {
+    routeFormSubmission() {
+      if(this.whichButton === "addUpdate") {
+        this.addUpdateEntry()
+      }
+      else if(this.whichButton === "delete") {
+        this.deleteEntry()
+      }
+    },
+    async addUpdateEntry() {
       if(this.selected.id) {
         // Update existing (PUT)
-        this.current = await ImagesApi.updateImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await ImagesApi.updateImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
       }
       else {
         // Add new (POST)
-        this.current = await ImagesApi.addImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await ImagesApi.addImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
       }
 
-      if(this.current.status === 200) {
+      if(this.lastResponse.status === 200) {
         const updatedImages = await ImagesApi.getImages()
         if(updatedImages.status === 200) {
           this.images = updatedImages.data
-          let action = (this.current.config.method === "post") ? "Added" : "Updated"
-          alert(action + " image " + this.current.data.id)
+          let action = (this.lastResponse.config.method === "post") ? "Added" : "Updated"
+          alert(action + " image " + this.lastResponse.data.id)
         }
       }
     },
     async deleteEntry() {
-      if(this.selected.id) {
-        this.current = await ImagesApi.deleteImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+      let shouldDelete = confirm("Are you sure you want to delete image " + this.selected.id + "?")
 
-        if(this.current.status === 200) {
+      if(shouldDelete && this.selected.id) {
+        this.lastResponse = await ImagesApi.deleteImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+
+        if(this.lastResponse.status === 200) {
           const updatedImages = await ImagesApi.getImages()
           if(updatedImages.status === 200) {
             this.images = updatedImages.data
             this.selected = {}
-            alert("Deleted image " + this.current.data.id)
+            alert("Deleted image " + this.lastResponse.data.id)
           }
         }
       }

@@ -1,11 +1,13 @@
 <template>
   <div>
     <p v-if="error">Invalid Username or Password</p>
-    <input v-model="username" placeholder="Username">
-    <br />
-    <input v-model="password" placeholder="Password" type="password">
-    <br />
-    <button @click="login()">Login</button>
+    <form @submit.prevent="login">
+      <input required v-model="username" placeholder="Username">
+      <br />
+      <input required v-model="password" placeholder="Password" type="password">
+      <br />
+      <input type="submit" value="Login">
+    </form>
   </div>
 </template>
 
