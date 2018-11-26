@@ -1,8 +1,8 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:aqueduct/aqueduct.dart';
-import 'package:api/model/user.dart';
-import 'package:api/src/api_config.dart';
+import "package:aqueduct/aqueduct.dart";
+import "package:api/model/user.dart";
+import "package:api/src/api_config.dart";
 
 class RegisterController extends ResourceController {
   final ManagedContext context;

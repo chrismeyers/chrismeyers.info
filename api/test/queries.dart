@@ -1,9 +1,9 @@
-import 'package:api/model/build.dart';
-import 'package:api/model/image.dart';
-import 'package:api/model/project.dart';
-import 'package:api/model/user.dart';
+import "package:api/model/build.dart";
+import "package:api/model/image.dart";
+import "package:api/model/project.dart";
+import "package:api/model/user.dart";
 
-import 'harness/app.dart';
+import "harness/app.dart";
 
 class Queries {
   Harness _harness;

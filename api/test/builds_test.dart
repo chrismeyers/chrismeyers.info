@@ -1,8 +1,8 @@
-import 'package:api/model/build.dart';
-import 'package:api/model/image.dart';
+import "package:api/model/build.dart";
+import "package:api/model/image.dart";
 
-import './queries.dart';
-import 'harness/app.dart';
+import "./queries.dart";
+import "harness/app.dart";
 
 Future main() async {
   final Harness harness = Harness()..install();

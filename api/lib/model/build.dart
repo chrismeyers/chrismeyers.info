@@ -1,5 +1,5 @@
-import 'package:api/api.dart';
-import 'image.dart';
+import "package:api/api.dart";
+import "image.dart";
 
 class Build extends ManagedObject<_Build> implements _Build {}
 

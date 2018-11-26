@@ -1,6 +1,6 @@
-import 'package:aqueduct/aqueduct.dart';
-import 'package:api/api.dart';
-import 'package:api/model/project.dart';
+import "package:aqueduct/aqueduct.dart";
+import "package:api/api.dart";
+import "package:api/model/project.dart";
 
 class ProjectsPublicController extends ResourceController {
   ManagedContext context;

@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import ProjectssApi from '@/utils/api/projects'
+import ProjectssApi from "@/utils/api/projects"
 
 export default {
   name: "Projects",

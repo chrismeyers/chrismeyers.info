@@ -1,6 +1,6 @@
-import 'package:api/api.dart';
-import 'build.dart';
-import 'project.dart';
+import "package:api/api.dart";
+import "build.dart";
+import "project.dart";
 
 class Image extends ManagedObject<_Image> implements _Image {}
 

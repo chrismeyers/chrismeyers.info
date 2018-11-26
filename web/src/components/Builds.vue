@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import BuildsApi from '@/utils/api/builds'
+import BuildsApi from "@/utils/api/builds"
 
 export default {
   name: "Builds",

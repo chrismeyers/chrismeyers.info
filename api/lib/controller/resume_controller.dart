@@ -1,6 +1,6 @@
-import 'package:aqueduct/aqueduct.dart';
-import 'package:api/api.dart';
-import 'package:api/src/resume_parser.dart';
+import "package:aqueduct/aqueduct.dart";
+import "package:api/api.dart";
+import "package:api/src/resume_parser.dart";
 
 class ResumeController extends ResourceController {
   @Operation.get()

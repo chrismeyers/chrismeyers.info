@@ -1,8 +1,8 @@
-import 'package:aqueduct/managed_auth.dart';
-import 'package:api/model/user.dart';
-import './controller/controller.dart';
-import './src/api_config.dart';
-import 'api.dart';
+import "package:aqueduct/managed_auth.dart";
+import "package:api/model/user.dart";
+import "./controller/controller.dart";
+import "./src/api_config.dart";
+import "api.dart";
 
 /// This type initializes an application.
 ///

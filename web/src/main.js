@@ -1,11 +1,11 @@
-import 'babel-polyfill'
-import Vue from 'vue'
-import router from './router'
-import App from './App'
-import axios from 'axios'
-import VModal from 'vue-js-modal'
-import VueProgressBar from 'vue-progressbar'
-import VueImg from 'v-img'
+import "babel-polyfill"
+import Vue from "vue"
+import router from "./router"
+import App from "./App"
+import axios from "axios"
+import VModal from "vue-js-modal"
+import VueProgressBar from "vue-progressbar"
+import VueImg from "v-img"
 
 axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
 

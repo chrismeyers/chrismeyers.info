@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import About from '@/components/About'
-import Resume from '@/components/Resume'
-import Builds from '@/components/Builds'
-import Projects from '@/components/Projects'
+import Vue from "vue"
+import VueRouter from "vue-router"
+import About from "@/components/About"
+import Resume from "@/components/Resume"
+import Builds from "@/components/Builds"
+import Projects from "@/components/Projects"
 
 Vue.use(VueRouter)
 
