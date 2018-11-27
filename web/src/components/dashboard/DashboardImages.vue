@@ -48,11 +48,6 @@ export default {
       }
     )
   },
-  watch: {
-    months: function (newVal) {
-      this.gotoMonth(newVal);
-    }
-  },
   methods: {
     setData(images) {
       this.images = images.data
@@ -110,7 +105,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .img-preview {
   width: 20%;
   height: 20%;
