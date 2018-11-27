@@ -31,6 +31,7 @@
             </div>
             <div class="build-pic">
               <img v-img
+                   v-if="build.image"
                    :src="build.image.path"
                    :class="'build-pic-img-' + build.image.orient"
                    v-bind:alt="build.image.title"
