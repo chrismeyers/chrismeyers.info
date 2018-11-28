@@ -35,7 +35,7 @@ class ApiChannel extends ApplicationChannel {
 
     context = ManagedContext(dataModel, psc);
 
-    final AuthServerDelegate authStorage = ManagedAuthDelegate<User>(context);
+    final AuthServerDelegate authStorage = ManagedAuthDelegate<User>(context, tokenLimit: 1);
     authServer = AuthServer(authStorage);
   }
 
@@ -56,6 +56,11 @@ class ApiChannel extends ApplicationChannel {
     router
       .route("/auth/token")
       .link(() => AuthController(authServer));
+
+    router
+      .route("/auth/authorize")
+      .link(() => Authorizer.bearer(authServer))
+      .link(() => AuthAuthorizedController());
 
     router
       .route("/public/resume")
