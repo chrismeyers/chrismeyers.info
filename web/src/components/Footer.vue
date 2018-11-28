@@ -4,10 +4,8 @@
       <div class="footer-social">
         <a href="https://github.com/chrismeyers"
            target="_blank"
-           style="text-decoration: none;"
-           alt="GitHub"
-           title="GitHub">
-        <img src="@/assets/images/social/github-logo.svg">
+           style="text-decoration: none;">
+          <img alt="Find me on GitHub" title="GitHub" src="@/assets/images/social/github-logo.svg">
         </a>
       </div>
 
@@ -16,10 +14,8 @@
      <div class="footer-social">
         <a href="https://www.linkedin.com/in/chris-meyers"
            target="_blank"
-           style="text-decoration: none;"
-           alt="LinkedIn"
-           title="LinkedIn">
-        <img src="@/assets/images/social/linkedin-logo.svg">
+           style="text-decoration: none;">
+          <img alt="Connect with me on LinkedIn" title="LinkedIn" src="@/assets/images/social/linkedin-logo.svg">
         </a>
       </div>
 
@@ -28,20 +24,21 @@
       <div class="footer-social">
         <a href="https://www.facebook.com/meyers42"
            target="_blank"
-           style="text-decoration: none;"
-           alt="Facebook"
-           title="Facebook">
-        <img src="@/assets/images/social/facebook-logo.svg">
+           style="text-decoration: none;">
+          <img alt="Find me on Facebook" title="Facebook" src="@/assets/images/social/facebook-logo.svg">
         </a>
       </div>
 
       <div class="footer-bullets">&bull;</div>
 
       <div class="footer-social">
-        <a href="mailto:chris@chrismeyers.info"
-           alt="Send Message"
-           title="Send Message">
-        <img src="@/assets/images/social/mail-logo.svg">
+        <a v-tooltip="copyMessageOptions">
+          <img alt="Send Message"
+               src="@/assets/images/social/mail-logo.svg"
+               style="cursor: pointer;"
+               v-clipboard:copy="email"
+               v-clipboard:success="onCopyEmail"
+               @mouseleave="resetCopyMessage">
         </a>
       </div>
     </div>
@@ -51,8 +48,11 @@
 </template>
 
 <script>
+import EmailTooltipMixin from "@/mixins/EmailTooltip"
+
 export default {
-  name: "Footer"
+  name: "Footer",
+  mixins: [EmailTooltipMixin]
 }
 </script>
 

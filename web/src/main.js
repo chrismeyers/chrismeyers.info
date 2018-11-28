@@ -6,6 +6,8 @@ import axios from "axios"
 import VModal from "vue-js-modal"
 import VueProgressBar from "vue-progressbar"
 import VueImg from "v-img"
+import VTooltip from 'v-tooltip'
+import VueClipboard from 'vue-clipboard2'
 
 axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
 
@@ -21,6 +23,8 @@ Vue.use(VueImg, {
   openOn: "click",
   thumbnails: true
 })
+Vue.use(VTooltip)
+Vue.use(VueClipboard)
 
 // See: https://stackoverflow.com/a/9851769/7159369
 Vue.prototype.$isIE = /*@cc_on!@*/false || !!document.documentMode
