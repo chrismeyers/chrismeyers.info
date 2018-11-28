@@ -45,7 +45,13 @@
       learning new languages and frameworks. If a language or framework that I'm unfamiliar with is the best choice for a project, I have no hesitation in
       breaking away from my comfort zones to explore new options. My primary goal is to create innovative and usable applications that solve problems.</span>
 
-      <p><a href="mailto:chris@chrismeyers.info" class="fancytxt">Send me a message</a> if you have any questions, comments, or would like to work together on a project.</p>
+      <p>
+        <a class="fancytxt"
+           v-tooltip.bottom="copyMessageOptions"
+           v-clipboard:copy="email"
+           v-clipboard:success="onCopyEmail"
+           @mouseleave="resetCopyMessage" >Send me a message</a> if you have any questions, comments, or would like to work together on a project.
+      </p>
 
     </div>
   </div>
@@ -53,9 +59,11 @@
 
 <script>
 import ResumeApi from "@/utils/api/resume"
+import EmailTooltipMixin from "@/mixins/EmailTooltip"
 
 export default {
   name: "About",
+  mixins: [EmailTooltipMixin],
   data() {
     return {
       langMap: null,

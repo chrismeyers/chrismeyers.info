@@ -6,6 +6,8 @@ import axios from "axios"
 import VModal from "vue-js-modal"
 import VueProgressBar from "vue-progressbar"
 import VueImg from "v-img"
+import VTooltip from 'v-tooltip'
+import VueClipboard from 'vue-clipboard2'
 
 var VueCookie = require('vue-cookie')
 
@@ -25,6 +27,8 @@ Vue.use(VueImg, {
   thumbnails: true
 })
 Vue.use(VueCookie);
+Vue.use(VTooltip)
+Vue.use(VueClipboard)
 
 // See: https://stackoverflow.com/a/9851769/7159369
 Vue.prototype.$isIE = /*@cc_on!@*/false || !!document.documentMode
