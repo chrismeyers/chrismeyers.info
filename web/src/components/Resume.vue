@@ -5,7 +5,7 @@
     <div class="content-text">
       <h2 class="top">Experience</h2>
       <template v-for="job in experience">
-        <ul :key="job.id">
+        <ul :key="job.id" class="italic-spacer">
           <li class="left-column company" v-html="job.firstLine[0]"></li>
           <li class="right-column location" v-html="job.firstLine[1]"></li>
           <template v-for="(secondLine, i) in job.secondLine">
@@ -26,7 +26,7 @@
 
       <h2>Education</h2>
       <template v-for="school in education">
-        <ul :key="school.id">
+        <ul :key="school.id" class="italic-spacer">
             <li class="left-column school" v-html="school.firstLine[0]"></li>
             <li class="right-column location" v-html="school.firstLine[1]"></li>
             <template v-for="secondLine in school.secondLine">
@@ -89,6 +89,9 @@ export default {
 @media screen and (min-width: 912px) {
   ul {
     overflow: hidden;
+  }
+  ul.italic-spacer {
+    padding-right: 5px;
   }
   ul.more-info {
     padding-top: 10px;
