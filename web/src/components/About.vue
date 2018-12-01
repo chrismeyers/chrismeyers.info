@@ -7,7 +7,7 @@
 
       <ul>
         <li>I studied Computer Science at <a class="fancytxt" href="https://www.rowan.edu/" target="_blank">Rowan University</a> in Glassboro, NJ and earned a Bachelor of Science in Computer Science.</li>
-        <li>Currently, I am employed as a {{ currentJob ? currentJob.title : "" }} at <a class="fancytxt" :href="currentJob ? currentJob.url : ''" target="_blank">{{ currentJob ? currentJob.company : "" }}</a>.</li>
+        <li v-if="employed">Currently, I am employed as a {{ currentJob ? currentJob.title : "" }} at <a class="fancytxt" :href="currentJob ? currentJob.url : ''" target="_blank">{{ currentJob ? currentJob.company : "" }}</a>.</li>
         <li>Some of my professional interests include:
           <ul>
             <li>Software Development, Web Development, Computer Networking</li>
@@ -67,7 +67,8 @@ export default {
   data() {
     return {
       langMap: null,
-      currentJob: null
+      currentJob: null,
+      employed: false
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -84,6 +85,7 @@ export default {
     setData(info) {
       this.langMap = info.langMap
       this.currentJob = info.currentJob
+      this.employed = (this.currentJob.dates[1] === "Present")
     }
   }
 }

@@ -31,7 +31,8 @@ function getCurrentJob(currentJob) {
   return {
     "company": currentJob.firstLine[0],
     "url": currentJob.url,
-    "title": currentJob.secondLine[0][0].split(",")[0]
+    "title": currentJob.secondLine[0][0].split(",")[0],
+    "dates": currentJob.secondLine[0][1].split("&ndash;").map(d => d.trim())
   }
 }
 
