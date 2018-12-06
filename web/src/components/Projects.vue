@@ -11,7 +11,7 @@
             <div class="projDesc">
               <dl>
                 <dt class="dt-mod"><b>Language(s):</b></dt>
-                  <dd>{{ project.lang }}</dd>
+                  <dd v-html="project.lang"></dd>
 
                 <dt class="dt-mod"><b>Description:</b></dt>
                   <dd v-html="project.info"></dd>
