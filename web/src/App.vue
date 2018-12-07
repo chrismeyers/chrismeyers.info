@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <Navigation v-if="showNavAndFooter()"/>
+    <Navigation/>
     <v-dialog/>
     <vue-progress-bar></vue-progress-bar>
     <router-view/>
-    <Footer v-if="showNavAndFooter()"/>
+    <Footer/>
   </div>
 </template>
 
@@ -65,14 +65,6 @@ export default {
           }
         ]
       })
-    },
-    showNavAndFooter() {
-      if(this.$route.path.includes("dashboard") ||
-         this.$route.path.includes("login")) {
-        return false
-      }
-
-      return true
     }
   }
 }
@@ -202,6 +194,66 @@ h2.top {
   line-height: 90px;
   font-size: 40px;
   text-align: center;
+}
+
+.dropdown-mod {
+  height: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 13px;
+  border: 1px solid #000000;
+  font-family: "Open Sans", sans-serif;
+  background-color: #FFFFFF;
+  border-radius: 0;
+}
+.dropdown-mod:focus {
+  outline: none;
+  border-color: #5bb75b;
+}
+
+.inputbox-mod {
+  height: 25px;
+  width: calc(100% - 5px - 5px - 2px); /* 100% - padding-left - padding-right - (2 * border size) */
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 13px;
+  border: 1px solid #000000;
+  font-family: "Open Sans", sans-serif;
+}
+.inputbox-mod:focus {
+  outline: none;
+  border-color: #5bb75b;
+}
+
+/* This button was generated using CSSButtonGenerator.com */
+.submit-button {
+  background-color: #FFFFFF;
+  color: #000000;
+  text-indent:0;
+  border:1px solid #000000;
+  display:inline-block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  height:40px;
+  line-height:30px;
+  width:100px;
+  text-decoration:none;
+  text-align:center;
+}
+.submit-button:hover {
+  background-color:#5bb75b;
+  color: #FFFFFF;
+  cursor: pointer;
+}.submit-button:active {
+  position:relative;
+  top:1px;
+}
+.submit-button:focus {
+  outline: 0;
+}
+.delete-button:hover,
+.reset-button:hover {
+  background-color: #d9534f;
 }
 
 /********************* v-img overrides *********************/

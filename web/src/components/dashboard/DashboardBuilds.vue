@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select v-model="selected">
+    <select class="dropdown-mod dashboard-dropdown" v-model="selected">
       <option :value="{}">Add new build</option>
       <option v-for="build in builds" :key="build.id" :value="build">Edit {{ build.id }}: {{ build.date }}</option>
     </select>
@@ -9,13 +9,14 @@
 
     <form @submit.prevent="routeFormSubmission">
       <template v-for="(field, index) in fields">
-        <span :key="index + '-span'">{{ field }}: </span>
-        <input v-model="selected[field]" :placeholder="field" :key="index + '-input'" :required="requiredField(field)">
-        <br :key="index + '-br'"/>
+        <span :key="index + '-span'"><b>{{ field }}:</b></span>
+        <input class="inputbox-mod dashboard-text" type="text" v-model="selected[field]" :placeholder="field" :key="index + '-input'" :required="requiredField(field)">
       </template>
 
-      <input type="submit" @click="whichButton = 'addUpdate'" :value="selected.id ? 'Update' : 'Add'">
-      <input type="submit" @click="whichButton = 'delete'" v-if="selected.id" value="Delete">
+      <div class="dashboard-buttons">
+        <input class="submit-button dashboard-button" type="submit" @click="whichButton = 'addUpdate'" :value="selected.id ? 'Update' : 'Add'">
+        <input class="submit-button delete-button" type="submit" @click="whichButton = 'delete'" v-if="selected.id" value="Delete">
+      </div>
     </form>
   </div>
 </template>

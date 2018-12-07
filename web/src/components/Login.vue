@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <p v-if="error">Invalid Username or Password</p>
-    <form @submit.prevent="login">
-      <input required v-model="username" placeholder="Username">
-      <br />
-      <input required v-model="password" placeholder="Password" type="password">
-      <br />
-      <input type="submit" value="Login">
-    </form>
+  <div class="content">
+    <div class="section-header section-header-size">Login</div>
+
+    <div class="content-text">
+      <p v-if="error">Invalid Username or Password</p>
+      <form @submit.prevent="login">
+        <input class="inputbox-mod login-text" v-model="username" placeholder="Username" required>
+        <input class="inputbox-mod login-text" v-model="password" placeholder="Password" type="password" required>
+        <input class="submit-button" type="submit" value="Login">
+      </form>
+    </div>
   </div>
 </template>
 
@@ -43,3 +45,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.login-text {
+  width: 200px;
+  margin-bottom: 10px;
+  display: block;
+}
+</style>
