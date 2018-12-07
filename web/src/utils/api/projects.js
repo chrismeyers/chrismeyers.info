@@ -97,13 +97,10 @@ export default {
 }
 
 function imagesStringToArray(imagesStr) {
-  let imagesArr = []
-
-  if(imagesStr && (imagesStr !== "")) {
-    for(let i of imagesStr.split(",")) {
-      imagesArr.push(parseInt(i))
+  return imagesStr.split(",").filter(i => {
+    if(i === "") {
+      return false
     }
-  }
-
-  return imagesArr
+    return true
+  }).map(i => parseInt(i.trim()))
 }
