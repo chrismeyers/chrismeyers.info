@@ -13,7 +13,11 @@ import DashboardProjects from "@/components/dashboard/DashboardProjects"
 
 Vue.use(VueRouter)
 
-var router = new VueRouter({
+let defaultTitle = "Chris Meyers - Developer, Tech Enthusiast"
+let loginTitle = "Login"
+let dashboardTitle = "Dashboard"
+
+let router = new VueRouter({
   mode: "history",
   scrollBehavior() {
     return { x: 0, y: 0 }
@@ -24,7 +28,8 @@ var router = new VueRouter({
       name: "About",
       component: About,
       meta: {
-        secure: false
+        secure: false,
+        title: defaultTitle
       }
     },
     {
@@ -32,7 +37,8 @@ var router = new VueRouter({
       name: "Resume",
       component: Resume,
       meta: {
-        secure: false
+        secure: false,
+        title: defaultTitle
       }
     },
     {
@@ -40,7 +46,8 @@ var router = new VueRouter({
       name: "Builds",
       component: Builds,
       meta: {
-        secure: false
+        secure: false,
+        title: defaultTitle
       }
     },
     {
@@ -48,7 +55,8 @@ var router = new VueRouter({
       name: "Projects",
       component: Projects,
       meta: {
-        secure: false
+        secure: false,
+        title: defaultTitle
       }
     },
     {
@@ -56,7 +64,8 @@ var router = new VueRouter({
       name: "Login",
       component: Login,
       meta: {
-        secure: false
+        secure: false,
+        title: loginTitle
       }
     },
     {
@@ -64,20 +73,33 @@ var router = new VueRouter({
       name: "Dashboard",
       component: Dashboard,
       meta: {
-        secure: true
+        secure: true,
+        title: dashboardTitle
       },
       children: [
         {
           path: "images",
-          component: DashboardImages
+          component: DashboardImages,
+          meta: {
+            secure: true,
+            title: dashboardTitle + " - Images"
+          }
         },
         {
           path: "builds",
-          component: DashboardBuilds
+          component: DashboardBuilds,
+          meta: {
+            secure: true,
+            title: dashboardTitle + " - Builds"
+          }
         },
         {
           path: "projects",
-          component: DashboardProjects
+          component: DashboardProjects,
+          meta: {
+            secure: true,
+            title: dashboardTitle + " - Projects"
+          }
         }
       ]
     }
@@ -85,54 +107,57 @@ var router = new VueRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  var match, authorized;
+  let match, authorized
+
+  // Update the HTML title
+  document.title = to.meta.title
 
   // Checking if valid cookie exists, skips login if true
   if(to.fullPath === "/login") {
     match = document.cookie.match(
-      new RegExp("(^| )" + "chrismeyers_info_apiToken" + "=([^;]+)")
-    );
+      new RegExp("(^| )" + "chrismeyers_info_apiToken" + "=([^]+)")
+    )
 
     if(match === null) {
-      return next();
+      return next()
     }
 
     authorized = await AuthApi.checkLoggedIn(
       document.cookie.match(match[2])
-    );
+    )
 
     // Checking if valid cookie exists before going to secure page.
     // Redirects to login if false, continues if true.
     if(!authorized) {
-      next();
+      next()
     }
     else {
-      next("/dashboard");
+      next("/dashboard")
     }
   }
   else if(to.matched.some(record => record.meta.secure)) {
     match = document.cookie.match(
-      new RegExp("(^| )" + "chrismeyers_info_apiToken" + "=([^;]+)")
-    );
+      new RegExp("(^| )" + "chrismeyers_info_apiToken" + "=([^]+)")
+    )
 
     if(match === null) {
-      return next("/login");
+      return next("/login")
     }
 
     authorized = await AuthApi.checkLoggedIn(
       document.cookie.match(match[2])
-    );
+    )
 
     if(!authorized) {
-      next("/login");
+      next("/login")
     }
     else {
-      next();
+      next()
     }
   }
   else {
-    next();
+    next()
   }
-});
+})
 
 export default router
