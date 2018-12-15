@@ -88,8 +88,12 @@ export default {
       this.info = ""
     },
     run() {
-      // TODO: Remove extra spaces within and around command
-      const parts = this.command.toLowerCase().split(" ")
+      const parts = this.command.toLowerCase().split(" ").filter(p => {
+        if(p === "") {
+          return false
+        }
+        return true
+      }).map(p => p.trim())
       const cmd = parts[0].trim()
       const args = parts.slice(1)
 
