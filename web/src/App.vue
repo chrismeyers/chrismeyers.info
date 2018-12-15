@@ -5,19 +5,22 @@
     <vue-progress-bar></vue-progress-bar>
     <router-view/>
     <Footer/>
+    <Prompt/>
   </div>
 </template>
 
 <script>
 import Navigation from "@/components/Navigation"
 import Footer from "@/components/Footer"
+import Prompt from "@/components/Prompt"
 
 export default {
   name: "App",
   components: {
     Navigation,
     // eslint-disable-next-line
-    Footer
+    Footer,
+    Prompt
   },
   created() {
     // [App.vue specific] When App.vue is first loaded start the progress bar
