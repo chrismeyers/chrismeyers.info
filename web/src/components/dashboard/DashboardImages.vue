@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import ImagesApi from "@/utils/api/images"
+import ImagesAPI from "@/utils/api/images"
 
 export default {
   name: "DashboardImages",
@@ -40,7 +40,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    ImagesApi.getImages().then(
+    ImagesAPI.getImages().then(
       images => {
         next(vm => vm.setData(images))
       }
@@ -67,15 +67,15 @@ export default {
     async addUpdateEntry() {
       if(this.selected.id) {
         // Update existing (PUT)
-        this.lastResponse = await ImagesApi.updateImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await ImagesAPI.updateImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
       }
       else {
         // Add new (POST)
-        this.lastResponse = await ImagesApi.addImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await ImagesAPI.addImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
       }
 
       if(this.lastResponse.status === 200) {
-        const updatedImages = await ImagesApi.getImages()
+        const updatedImages = await ImagesAPI.getImages()
         if(updatedImages.status === 200) {
           this.images = updatedImages.data
           let action = (this.lastResponse.config.method === "post") ? "Added" : "Updated"
@@ -87,10 +87,10 @@ export default {
       let shouldDelete = confirm("Are you sure you want to delete image " + this.selected.id + "?")
 
       if(shouldDelete && this.selected.id) {
-        this.lastResponse = await ImagesApi.deleteImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await ImagesAPI.deleteImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
 
         if(this.lastResponse.status === 200) {
-          const updatedImages = await ImagesApi.getImages()
+          const updatedImages = await ImagesAPI.getImages()
           if(updatedImages.status === 200) {
             this.images = updatedImages.data
             this.selected = {}

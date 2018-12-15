@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import ResumeApi from "@/utils/api/resume"
+import ResumeAPI from "@/utils/api/resume"
 import EmailTooltipMixin from "@/mixins/EmailTooltip"
 
 export default {
@@ -72,7 +72,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    ResumeApi.getInfoForAboutPage().then(
+    ResumeAPI.getInfoForAboutPage().then(
       info => {
         next(vm => vm.setData(info))
       }

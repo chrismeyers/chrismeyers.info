@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import BuildsApi from "@/utils/api/builds"
+import BuildsAPI from "@/utils/api/builds"
 
 export default {
   name: "DashboardBuilds",
@@ -36,7 +36,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    BuildsApi.getBuilds().then(
+    BuildsAPI.getBuilds().then(
       builds => {
         next(vm => vm.setData(builds))
       }
@@ -86,15 +86,15 @@ export default {
     async addUpdateEntry() {
       if(this.selected.id) {
         // Update existing (PUT)
-        this.lastResponse = await BuildsApi.updateBuild(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await BuildsAPI.updateBuild(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
       }
       else {
         // Add new (POST)
-        this.lastResponse = await BuildsApi.addBuild(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await BuildsAPI.addBuild(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
       }
 
       if(this.lastResponse.status === 200) {
-        const updatedBuilds = await BuildsApi.getBuilds()
+        const updatedBuilds = await BuildsAPI.getBuilds()
         if(updatedBuilds.status === 200) {
           this.builds = this.flattenBuildData(updatedBuilds)
           let action = (this.lastResponse.config.method === "post") ? "Added" : "Updated"
@@ -106,10 +106,10 @@ export default {
       let shouldDelete = confirm("Are you sure you want to delete build " + this.selected.id + "?")
 
       if(shouldDelete && this.selected.id) {
-        this.lastResponse = await BuildsApi.deleteBuild(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await BuildsAPI.deleteBuild(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
 
         if(this.lastResponse.status === 200) {
-          const updatedBuilds = await BuildsApi.getBuilds()
+          const updatedBuilds = await BuildsAPI.getBuilds()
           if(updatedBuilds.status === 200) {
             this.builds = this.flattenBuildData(updatedBuilds)
             this.selected = {}

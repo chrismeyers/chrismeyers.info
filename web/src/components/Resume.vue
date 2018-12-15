@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import ResumeApi from "@/utils/api/resume"
+import ResumeAPI from "@/utils/api/resume"
 
 export default {
   name: "Resume",
@@ -64,7 +64,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    ResumeApi.getResume().then(
+    ResumeAPI.getResume().then(
       resume => {
         next(vm => vm.setData(resume))
       }

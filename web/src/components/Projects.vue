@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import ProjectssApi from "@/utils/api/projects"
+import ProjectsAPI from "@/utils/api/projects"
 
 export default {
   name: "Projects",
@@ -70,7 +70,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    ProjectssApi.getProjects().then(
+    ProjectsAPI.getProjects().then(
       projects => {
         next(vm => vm.setData(projects))
       }

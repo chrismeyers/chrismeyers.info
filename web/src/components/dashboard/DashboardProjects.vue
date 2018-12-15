@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import ProjectsApi from "@/utils/api/projects"
+import ProjectsAPI from "@/utils/api/projects"
 
 export default {
   name: "DashboardProjects",
@@ -36,7 +36,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    ProjectsApi.getProjects().then(
+    ProjectsAPI.getProjects().then(
       projects => {
         next(vm => vm.setData(projects))
       }
@@ -90,15 +90,15 @@ export default {
     async addUpdateEntry() {
       if(this.selected.id) {
         // Update existing (PUT)
-        this.lastResponse = await ProjectsApi.updateProject(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await ProjectsAPI.updateProject(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
       }
       else {
         // Add new (POST)
-        this.lastResponse = await ProjectsApi.addProject(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await ProjectsAPI.addProject(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
       }
 
       if(this.lastResponse.status === 200) {
-        const updatedProjects = await ProjectsApi.getProjects()
+        const updatedProjects = await ProjectsAPI.getProjects()
         if(updatedProjects.status === 200) {
           this.projects = this.flattenProjectData(updatedProjects)
           let action = (this.lastResponse.config.method === "post") ? "Added" : "Updated"
@@ -110,10 +110,10 @@ export default {
       let shouldDelete = confirm("Are you sure you want to delete project " + this.selected.id + "?")
 
       if(shouldDelete && this.selected.id) {
-        this.lastResponse = await ProjectsApi.deleteProject(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await ProjectsAPI.deleteProject(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
 
         if(this.lastResponse.status === 200) {
-          const updatedProjects = await ProjectsApi.getProjects()
+          const updatedProjects = await ProjectsAPI.getProjects()
           if(updatedProjects.status === 200) {
             this.projects = this.flattenProjectData(updatedProjects)
             this.selected = {}

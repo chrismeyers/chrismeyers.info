@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import AuthApi from "@/utils/api/auth"
+import AuthAPI from "@/utils/api/auth"
 
 export default {
   name: "Login",
@@ -27,11 +27,11 @@ export default {
   },
   methods: {
     login() {
-      AuthApi.login(this.username, this.password).then(
+      AuthAPI.login(this.username, this.password).then(
         auth => {
           if(auth.status === 200) {
             this.error = false
-            this.$cookie.set( "chrismeyers_info_apiToken", auth.data["access_token"], {expires: "1M"})
+            this.$cookie.set("chrismeyers_info_apiToken", auth.data["access_token"], {expires: "1M"})
             this.$router.push({
               path: "/dashboard",
             });

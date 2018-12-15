@@ -1,6 +1,6 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import AuthApi from "@/utils/api/auth"
+import AuthAPI from "@/utils/api/auth"
 import About from "@/components/About"
 import Resume from "@/components/Resume"
 import Builds from "@/components/Builds"
@@ -122,7 +122,7 @@ router.beforeEach(async (to, from, next) => {
       return next()
     }
 
-    authorized = await AuthApi.checkLoggedIn(
+    authorized = await AuthAPI.checkLoggedIn(
       document.cookie.match(match[2])
     )
 
@@ -144,7 +144,7 @@ router.beforeEach(async (to, from, next) => {
       return next("/login")
     }
 
-    authorized = await AuthApi.checkLoggedIn(
+    authorized = await AuthAPI.checkLoggedIn(
       document.cookie.match(match[2])
     )
 

@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import BuildsApi from "@/utils/api/builds"
+import BuildsAPI from "@/utils/api/builds"
 
 export default {
   name: "Builds",
@@ -58,7 +58,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    BuildsApi.getBuilds().then(
+    BuildsAPI.getBuilds().then(
       builds => {
         next(vm => vm.setData(builds))
       }
