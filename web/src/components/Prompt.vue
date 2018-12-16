@@ -214,4 +214,10 @@ Available commands:
 #prompt-textarea-btn:focus {
   outline: none;
 }
+
+@media screen and (max-width: 969px) {
+  #prompt-div {
+    display: none;
+  }
+}
 </style>
