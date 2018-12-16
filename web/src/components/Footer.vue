@@ -32,8 +32,9 @@
       <div class="footer-bullets">&bull;</div>
 
       <div class="footer-social">
-        <a v-tooltip="copyMessageOptions">
-          <img alt="Send Message"
+        <a>
+          <img v-tooltip="copyMessageOptions"
+               alt="Send Message"
                src="@/assets/images/social/mail-logo.svg"
                style="cursor: pointer;"
                v-clipboard:copy="email"

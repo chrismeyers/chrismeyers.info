@@ -293,7 +293,7 @@ h2.top {
 }
 
 .tooltip[x-placement^="top"] {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .tooltip[x-placement^="top"] .tooltip-arrow {
