@@ -53,8 +53,7 @@ export default {
   },
   methods: {
     // TODO:
-    //   - Running a command from history will cd to the About page
-    //   - Move cursor to end of command when prev() is called (ArrowUp)
+    //   - Handle textarea overflow.
     togglePrompt() {
       if(this.promptVisible) {
         this.hidePrompt()
@@ -75,9 +74,7 @@ export default {
     },
     focusPrompt() {
       this.$nextTick(() => {
-        if(this.$refs.prompt) {
-          this.$refs.prompt.focus()
-        }
+        this.$refs.prompt.focus()
       })
     },
     toggleTextarea() {
@@ -109,19 +106,22 @@ export default {
     clearTextarea() {
       this.info = ""
     },
+    moveCursorToEnd() {
+      const pos = this.command.length
+
+      // NOTE: this.$nextTick doesn't work here...
+      setTimeout(() => {
+        this.$refs.prompt.selectionStart = pos
+        this.$refs.prompt.selectionEnd = pos
+      }, 10)
+    },
     prev() {
       if(this.historyIndex < this.history.length - 1) {
         this.historyIndex++
         this.setCommand(this.history[this.historyIndex])
-        const pos = this.command.length
-        this.$nextTick(() => {
-          if(this.$refs.prompt) {
-            this.$refs.prompt.selectionStart = pos
-            this.$refs.prompt.selectionEnd = pos
-            this.$forceUpdate()
-          }
-        })
       }
+
+      this.moveCursorToEnd()
     },
     next() {
       if(this.historyIndex >= 0) {
