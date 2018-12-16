@@ -20,7 +20,9 @@ export default {
       },
       arrowDirection: "up",
       command: "",
-      info: ""
+      info: "",
+      history: [],
+      historyIndex: -1
     }
   },
   mounted() {
@@ -37,9 +39,22 @@ export default {
           this.run()
         }
       }
+      else if(e.code === "ArrowUp") {
+        if(this.promptVisible) {
+          this.prev()
+        }
+      }
+      else if(e.code === "ArrowDown") {
+        if(this.promptVisible) {
+          this.next()
+        }
+      }
     })
   },
   methods: {
+    // TODO:
+    //   - Running a command from history will cd to the About page
+    //   - Move cursor to end of command when prev() is called (ArrowUp)
     togglePrompt() {
       if(this.promptVisible) {
         this.hidePrompt()
@@ -54,6 +69,7 @@ export default {
     },
     hidePrompt() {
       this.promptVisible = false
+      this.historyIndex = -1
       this.hideTextarea()
       this.clearCommand()
     },
@@ -84,10 +100,43 @@ export default {
     clearCommand() {
       this.command = ""
     },
+    setCommand(cmd) {
+      this.command = cmd
+      // Force the model to update even if the adjacent command is the same
+      // as the current command.
+      this.$forceUpdate()
+    },
     clearTextarea() {
       this.info = ""
     },
+    prev() {
+      if(this.historyIndex < this.history.length - 1) {
+        this.historyIndex++
+        this.setCommand(this.history[this.historyIndex])
+        const pos = this.command.length
+        this.$nextTick(() => {
+          if(this.$refs.prompt) {
+            this.$refs.prompt.selectionStart = pos
+            this.$refs.prompt.selectionEnd = pos
+            this.$forceUpdate()
+          }
+        })
+      }
+    },
+    next() {
+      if(this.historyIndex >= 0) {
+        this.historyIndex--
+        if(this.historyIndex < 0) {
+          this.setCommand("")
+        }
+        else {
+          this.setCommand(this.history[this.historyIndex])
+        }
+      }
+    },
     run() {
+      this.history.unshift(this.command) // Push to top of history stack
+
       const parts = this.command.toLowerCase().split(" ").filter(p => {
         if(p === "") {
           return false
@@ -116,6 +165,7 @@ export default {
         this.help()
       }
 
+      this.historyIndex = -1
       this.clearCommand()
     },
     echo(args) {
