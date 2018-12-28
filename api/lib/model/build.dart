@@ -29,4 +29,7 @@ class _Build {
   String gpu;
 
   Image image;
+
+  // Controls if the entry should be displayed on the front-end.
+  bool active;
 }

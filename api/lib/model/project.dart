@@ -26,4 +26,7 @@ class _Project {
   String stat;
 
   ManagedSet<Image> images;
+
+  // Controls if the entry should be displayed on the front-end.
+  bool active;
 }

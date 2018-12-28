@@ -28,7 +28,8 @@ Future main() async {
       "info": "I don't know, something",
       "role": "Solo Project",
       "stat": "Complete",
-      "images": []
+      "images": [],
+      "active": true
     }]);
   });
 
@@ -47,7 +48,8 @@ Future main() async {
       "info": "I don't know, something",
       "role": "Solo Project",
       "stat": "Complete",
-      "images": []
+      "images": [],
+      "active": true
     });
   });
 
@@ -74,7 +76,8 @@ Future main() async {
       "info": "I don't know, something",
       "role": "Solo Project",
       "stat": "Complete",
-      "images": []
+      "images": [],
+      "active": false
     });
     expectResponse(response, 200, body: {
       "id": greaterThan(0),
@@ -87,7 +90,8 @@ Future main() async {
       "info": "I don't know, something",
       "role": "Solo Project",
       "stat": "Complete",
-      "images": []
+      "images": [],
+      "active": false
     });
 
     final Query<Project> fetchQuery = Query<Project>(harness.application.channel.context);
@@ -110,7 +114,8 @@ Future main() async {
       "info": "Yup",
       "role": "Solo Project",
       "stat": "Complete",
-      "images": [1]
+      "images": [1],
+      "active": false
     });
     expectResponse(response, 200, body: {
       "id": 1,
@@ -133,7 +138,8 @@ Future main() async {
         "project": {
           "id": 1
         }
-      }]
+      }],
+      "active": false
     });
 
     final Query<Project> fetchQuery = Query<Project>(harness.application.channel.context);
@@ -157,7 +163,8 @@ Future main() async {
       "info": "Yup",
       "role": "Solo Project",
       "stat": "Complete",
-      "images": [1,2]
+      "images": [1,2],
+      "active": true
     });
 
     final Query<Project> fetchProjectsQuery = Query<Project>(harness.application.channel.context)
@@ -182,7 +189,8 @@ Future main() async {
       "info": "Yup",
       "role": "Solo Project",
       "stat": "Complete",
-      "images": []
+      "images": [],
+      "active": true
     });
 
     projects = await fetchProjectsQuery.fetch();

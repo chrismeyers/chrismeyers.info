@@ -23,7 +23,8 @@ class BuildsAdminController extends ResourceController {
         ..values.ram = body["ram"] as String
         ..values.hdd = body["hdd"] as String
         ..values.ssd = body["ssd"] as String
-        ..values.gpu = body["gpu"] as String;
+        ..values.gpu = body["gpu"] as String
+        ..values.active = body["active"] as bool;
       final Build build = await queryAddData.insert();
 
       final Query<Image> queryRelateImage = Query<Image>(transaction)
@@ -57,6 +58,7 @@ class BuildsAdminController extends ResourceController {
         ..values.hdd = body["hdd"] as String
         ..values.ssd = body["ssd"] as String
         ..values.gpu = body["gpu"] as String
+        ..values.active = body["active"] as bool
         ..where((b) => b.id).equalTo(id);
       final Build build = await queryUpdateData.updateOne();
 

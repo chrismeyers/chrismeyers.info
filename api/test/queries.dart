@@ -38,7 +38,8 @@ class Queries {
       ..values.ram = "Lots of memory"
       ..values.hdd = "Much storage"
       ..values.ssd = "Much fast storage"
-      ..values.gpu = "Nice graphics";
+      ..values.gpu = "Nice graphics"
+      ..values.active = true;
 
     await insertQuery.insert();
   }
@@ -53,7 +54,8 @@ class Queries {
       ..values.lang = "Machine Code"
       ..values.info = "I don't know, something"
       ..values.role = "Solo Project"
-      ..values.stat = "Complete";
+      ..values.stat = "Complete"
+      ..values.active = true;
 
     await insertQuery.insert();
   }

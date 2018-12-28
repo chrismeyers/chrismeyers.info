@@ -28,7 +28,8 @@ Future main() async {
       "hdd": "Much storage",
       "ssd": "Much fast storage",
       "gpu": "Nice graphics",
-      "image": null
+      "image": null,
+      "active": true
     }]);
   });
 
@@ -47,7 +48,8 @@ Future main() async {
       "hdd": "Much storage",
       "ssd": "Much fast storage",
       "gpu": "Nice graphics",
-      "image": null
+      "image": null,
+      "active": true
     });
   });
 
@@ -74,7 +76,8 @@ Future main() async {
       "hdd": "Much storage",
       "ssd": "Much fast storage",
       "gpu": "Nice graphics",
-      "image": null
+      "image": null,
+      "active": false
     });
     expectResponse(response, 200, body: {
       "id": greaterThan(0),
@@ -87,7 +90,8 @@ Future main() async {
       "hdd": "Much storage",
       "ssd": "Much fast storage",
       "gpu": "Nice graphics",
-      "image": null
+      "image": null,
+      "active": false
     });
 
     final Query<Build> fetchQuery = Query<Build>(harness.application.channel.context);
@@ -110,7 +114,8 @@ Future main() async {
       "hdd": "Very much storage",
       "ssd": "Very much fast storage",
       "gpu": "VeryNice graphics",
-      "image": 1
+      "image": 1,
+      "active": false
     });
     expectResponse(response, 200, body: {
       "id": 1,
@@ -133,7 +138,8 @@ Future main() async {
           "id": 1
         },
         "project": null
-      }
+      },
+      "active": false
     });
 
     final Query<Build> fetchQuery = Query<Build>(harness.application.channel.context);
@@ -156,7 +162,8 @@ Future main() async {
       "hdd": "Very much storage",
       "ssd": "Very much fast storage",
       "gpu": "VeryNice graphics",
-      "image": 1
+      "image": 1,
+      "active": true
     });
 
     final Query<Build> fetchBuildsQuery = Query<Build>(harness.application.channel.context)
@@ -179,7 +186,8 @@ Future main() async {
       "hdd": "Very much storage",
       "ssd": "Very much fast storage",
       "gpu": "VeryNice graphics",
-      "image": null
+      "image": null,
+      "active": true
     });
 
     builds = await fetchBuildsQuery.fetch();

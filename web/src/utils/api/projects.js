@@ -33,7 +33,8 @@ export default {
         "info": project.info,
         "role": project.role,
         "stat": project.stat,
-        "images": images
+        "images": images,
+        "active": ("active" in project && project.active) ? true : false
       }
     })
     .then(response => {
@@ -65,7 +66,8 @@ export default {
         "info": project.info,
         "role": project.role,
         "stat": project.stat,
-        "images": images
+        "images": images,
+        "active": ("active" in project && project.active) ? true : false
       }
     })
     .then(response => {
@@ -97,6 +99,10 @@ export default {
 }
 
 function imagesStringToArray(imagesStr) {
+  if(typeof imagesStr == 'undefined') {
+    return []
+  }
+
   return imagesStr.split(",").filter(i => {
     if(i === "") {
       return false

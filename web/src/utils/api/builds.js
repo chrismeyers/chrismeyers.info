@@ -31,7 +31,8 @@ export default {
         "hdd": build.hdd,
         "ssd": (build.ssd === "") ? null : build.ssd,
         "gpu": build.gpu,
-        "image": (build.image === "") ? null : parseInt(build.image)
+        "image": (build.image === "") ? null : parseInt(build.image),
+        "active": ("active" in build && build.active) ? true : false
       }
     })
     .then(response => {
@@ -62,7 +63,8 @@ export default {
         "hdd": build.hdd,
         "ssd": (build.ssd === "") ? null : build.ssd,
         "gpu": build.gpu,
-        "image": (build.image === "") ? null : parseInt(build.image)
+        "image": (build.image === "") ? null : parseInt(build.image),
+        "active": ("active" in build && build.active) ? true : false
       }
     })
     .then(response => {

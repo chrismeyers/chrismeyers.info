@@ -66,7 +66,13 @@ export default {
   },
   methods: {
     setData(builds) {
-      this.builds = builds.data
+      // Only display builds that are set to active.
+      this.builds = builds.data.filter(b => {
+        if(b.active) {
+          return true
+        }
+        return false
+      })
     }
   }
 }

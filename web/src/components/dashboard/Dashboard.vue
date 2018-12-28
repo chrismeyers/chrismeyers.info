@@ -41,4 +41,8 @@ export default {
 .dashboard-dropdown {
   margin-bottom: 20px;
 }
+
+input[type=checkbox] {
+  -webkit-appearance:checkbox;
+}
 </style>

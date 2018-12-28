@@ -2,12 +2,14 @@
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
       <option :value="{}">Add new project</option>
-      <option v-for="project in projects" :key="project.id" :value="project">Edit {{ project.id }}: {{ project.title }}</option>
+      <option v-for="project in projects" :key="project.id" :value="project">[{{ project.active ? "A" : "I" }}] Edit {{ project.id }}: {{ project.title }}</option>
     </select>
 
     <br />
 
     <form @submit.prevent="routeFormSubmission">
+      <span><b>active:</b></span><br />
+      <input type="checkbox" v-model="selected['active']"><br />
       <template v-for="(field, index) in fields">
         <span :key="index + '-span'"><b>{{ field }}:</b></span>
         <input class="inputbox-mod dashboard-text" type="text" v-model="selected[field]" :placeholder="field" :key="index + '-input'" :required="requiredField(field)">
@@ -47,7 +49,7 @@ export default {
       this.projects = this.flattenProjectData(projects)
 
       for(const field of Object.keys(this.projects[0])) {
-        if(field !== "id") {
+        if(field !== "id" && field !== "active") {
           this.fields.push(field)
         }
       }

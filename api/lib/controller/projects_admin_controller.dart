@@ -22,7 +22,8 @@ class ProjectsAdminController extends ResourceController {
         ..values.lang = body["lang"] as String
         ..values.info = body["info"] as String
         ..values.role = body["role"] as String
-        ..values.stat = body["stat"] as String;
+        ..values.stat = body["stat"] as String
+        ..values.active = body["active"] as bool;
       final Project project = await queryAddData.insert();
 
       final List imageIds = body["images"] as List;
@@ -59,6 +60,7 @@ class ProjectsAdminController extends ResourceController {
         ..values.info = body["info"] as String
         ..values.role = body["role"] as String
         ..values.stat = body["stat"] as String
+        ..values.active = body["active"] as bool
         ..where((p) => p.id).equalTo(id);
       final Project project = await queryAddData.updateOne();
 
