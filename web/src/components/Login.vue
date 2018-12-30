@@ -31,7 +31,7 @@ export default {
         auth => {
           if(auth.status === 200) {
             this.error = false
-            this.$cookie.set("chrismeyers_info_apiToken", auth.data["access_token"], {expires: "1M"})
+            this.$cookie.set("chrismeyers_info_apiToken", auth.data["access_token"], {expires: "1D"})
             this.$router.push({
               path: "/dashboard",
             });
