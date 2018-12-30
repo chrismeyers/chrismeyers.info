@@ -35,7 +35,7 @@ class ApiChannel extends ApplicationChannel {
 
     context = ManagedContext(dataModel, psc);
 
-    final AuthServerDelegate authStorage = ManagedAuthDelegate<User>(context, tokenLimit: 1);
+    final AuthServerDelegate authStorage = ManagedAuthDelegate<User>(context, tokenLimit: 10);
     authServer = AuthServer(authStorage);
   }
 
