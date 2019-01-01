@@ -22,7 +22,7 @@
         <img v-img
              ref="clarkImg"
              alt="Clark the Corgi"
-             src="/clark/DSC_1564-6.jpg"
+             src="/images/clark/DSC_1564-6.jpg"
              style="display:none;">
       </ul>
 

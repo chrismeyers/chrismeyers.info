@@ -1,193 +1,193 @@
 {
   "images": [
     {
-      "path": "/builds/mattBuild.jpg",
+      "path": "/images/builds/mattBuild.jpg",
       "title": "Matt's Computer",
       "pos": 1,
       "orient": "land"
     },
     {
-      "path": "/builds/myBuild2013.jpg",
+      "path": "/images/builds/myBuild2013.jpg",
       "title": "My Computer 2013",
       "pos": 1,
       "orient": "port"
     },
     {
-      "path": "/builds/markBuild.jpg",
+      "path": "/images/builds/markBuild.jpg",
       "title": "Mark's Computer",
       "pos": 1,
       "orient": "port"
     },
     {
-      "path": "/builds/myBuild2016_liquid.jpg",
+      "path": "/images/builds/myBuild2016_liquid.jpg",
       "title": "My Computer 2016",
       "pos": 1,
       "orient": "port"
     },
     {
-      "path": "/builds/jamesBuild.jpg",
+      "path": "/images/builds/jamesBuild.jpg",
       "title": "James's computer",
       "pos": 1,
       "orient": "port"
     },
     {
-      "path": "/projects/genomic/genomic.png",
+      "path": "/images/projects/genomic/genomic.png",
       "title": "Genomic Solutions Now! Software",
       "pos": 1,
       "orient": "land"
     },
     {
-      "path": "/projects/pinelands/pinelands_landing.jpg",
+      "path": "/images/projects/pinelands/pinelands_landing.jpg",
       "title": "Pinelands landing page",
       "pos": 1,
       "orient": "land"
     },
     {
-      "path": "/projects/pinelands/pinelands_tour.jpg",
+      "path": "/images/projects/pinelands/pinelands_tour.jpg",
       "title": "Pinelands tour page",
       "pos": 2,
       "orient": "square"
     },
     {
-      "path": "/projects/pinelands/pinelands_contact.jpg",
+      "path": "/images/projects/pinelands/pinelands_contact.jpg",
       "title": "Pinelands contact page",
       "pos": 3,
       "orient": "square"
     },
     {
-      "path": "/projects/ttt/ttt_land.png",
+      "path": "/images/projects/ttt/ttt_land.png",
       "title": "Tic Tac Toe Landscape",
       "pos": 1,
       "orient": "land"
     },
     {
-      "path": "/projects/ttt/ttt_port.png",
+      "path": "/images/projects/ttt/ttt_port.png",
       "title": "Tic Tac Toe Portrait",
       "pos": 2,
       "orient": "port"
     },
     {
-      "path": "/projects/lol_playerdata/loldata_landing.png",
+      "path": "/images/projects/lol_playerdata/loldata_landing.png",
       "title": "LoL player data landing page",
       "pos": 1,
       "orient": "land"
     },
     {
-      "path": "/projects/lol_playerdata/loldata.png",
+      "path": "/images/projects/lol_playerdata/loldata.png",
       "title": "LoL player data results",
       "pos": 2,
       "orient": "square"
     },
     {
-      "path": "/projects/lol_playerdata/loldata_small.png",
+      "path": "/images/projects/lol_playerdata/loldata_small.png",
       "title": "LoL player data results optimized for mobile",
       "pos": 3,
       "orient": "port"
     },
     {
-      "path": "/projects/pca/scoresPlot.png",
+      "path": "/images/projects/pca/scoresPlot.png",
       "title": "A scores plot generated from calculated principal components",
       "pos": 1,
       "orient": "land"
     },
     {
-      "path": "/projects/pca/scoresData.png",
+      "path": "/images/projects/pca/scoresData.png",
       "title": "The calculated principal component data",
       "pos": 2,
       "orient": "square"
     },
     {
-      "path": "/projects/pca/addinBar.PNG",
+      "path": "/images/projects/pca/addinBar.PNG",
       "title": "The Excel add-in bar used to add scores and loadings plots",
       "pos": 3,
       "orient": "land"
     },
     {
-      "path": "/projects/pca/scoresInput-full.png",
+      "path": "/images/projects/pca/scoresInput-full.png",
       "title": "Input form that is dynamically populated based on the number of principal components",
       "pos": 4,
       "orient": "port"
     },
     {
-      "path": "/projects/bms/bms_rawData.png",
+      "path": "/images/projects/bms/bms_rawData.png",
       "title": "The raw data taken from the lab to be processed",
       "pos": 1,
       "orient": "land"
     },
     {
-      "path": "/projects/bms/bms_formatForm.png",
+      "path": "/images/projects/bms/bms_formatForm.png",
       "title": "Input form used to select the worksheet to be processed",
       "pos": 2,
       "orient": "square"
     },
     {
-      "path": "/projects/bms/bms_formattedData.png",
+      "path": "/images/projects/bms/bms_formattedData.png",
       "title": "The entire formatted data set",
       "pos": 3,
       "orient": "square"
     },
     {
-      "path": "/projects/bms/bms_finalData.png",
+      "path": "/images/projects/bms/bms_finalData.png",
       "title": "A further refined formatted data set used for plotting",
       "pos": 4,
       "orient": "square"
     },
     {
-      "path": "/projects/bms/bms_graphForm.png",
+      "path": "/images/projects/bms/bms_graphForm.png",
       "title": "Input form used to select the variables to be plotted",
       "pos": 5,
       "orient": "square"
     },
     {
-      "path": "/projects/bms/bms_plot.png",
+      "path": "/images/projects/bms/bms_plot.png",
       "title": "The final plot",
       "pos": 6,
       "orient": "square"
     },
     {
-      "path": "/projects/lol_status/gui.png",
+      "path": "/images/projects/lol_status/gui.png",
       "title": "The Java GUI that displays the current status of services in a specified region",
       "pos": 1,
       "orient": "square"
     },
     {
-      "path": "/projects/lol_status/polling.png",
+      "path": "/images/projects/lol_status/polling.png",
       "title": "Input form that allows users to specify how often the GUI updates",
       "pos": 2,
       "orient": "square"
     },
     {
-      "path": "/projects/lol_status/tray.png",
+      "path": "/images/projects/lol_status/tray.png",
       "title": "Notification area functionality",
       "pos": 3,
       "orient": "square"
     },
     {
-      "path": "/projects/trumppet/trumppet_landing.jpg",
+      "path": "/images/projects/trumppet/trumppet_landing.jpg",
       "title": "Trumppet website landing page",
       "pos": 1,
       "orient": "land"
     },
     {
-      "path": "/projects/trumppet/trumppet_playback.jpg",
+      "path": "/images/projects/trumppet/trumppet_playback.jpg",
       "title": "Playback screen that displays a list of  previous tweets",
       "pos": 2,
       "orient": "square"
     },
     {
-      "path": "/projects/trumppet/trumppet_freq.jpg",
+      "path": "/images/projects/trumppet/trumppet_freq.jpg",
       "title": "Displays a list of unique words and the number of times they're used throughout the tweet database",
       "pos": 3,
       "orient": "square"
     },
     {
-      "path": "/projects/trumppet/trumppet_search.jpg",
+      "path": "/images/projects/trumppet/trumppet_search.jpg",
       "title": "Searches the tweet database for a specified word or phrase",
       "pos": 4,
       "orient": "square"
     },
     {
-      "path": "/projects/trumppet/trumppet_freestyle.jpg",
+      "path": "/images/projects/trumppet/trumppet_freestyle.jpg",
       "title": "Generates a Trumpian-style tweet: Sentance. Sentance. Exclamation! (NOTE: these tweets are not real)",
       "pos": 5,
       "orient": "square"
