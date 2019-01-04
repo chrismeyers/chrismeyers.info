@@ -32,7 +32,7 @@ export default {
     window.addEventListener("keydown", e => {
       if(e.code === "Backquote") {
         e.preventDefault() // Prevents adding ` when opening the prompt
-        this.showPrompt()
+        this.togglePrompt()
       }
       else if(e.code === "Escape") {
         this.hidePrompt()
