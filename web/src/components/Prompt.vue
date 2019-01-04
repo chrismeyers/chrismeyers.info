@@ -26,6 +26,9 @@ export default {
     }
   },
   mounted() {
+    // eslint-disable-next-line no-console
+    console.info("[INFO] Hey, prefer a CLI? Press the tilde (~) key and type `help` for options.")
+
     window.addEventListener("keydown", e => {
       if(e.code === "Backquote") {
         e.preventDefault() // Prevents adding ` when opening the prompt
@@ -52,8 +55,6 @@ export default {
     })
   },
   methods: {
-    // TODO:
-    //   - Handle textarea overflow.
     togglePrompt() {
       if(this.promptVisible) {
         this.hidePrompt()
