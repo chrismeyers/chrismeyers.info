@@ -18,7 +18,6 @@ export default {
   name: "App",
   components: {
     Navigation,
-    // eslint-disable-next-line
     Footer,
     Prompt
   },
