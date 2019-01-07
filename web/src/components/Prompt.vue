@@ -33,7 +33,7 @@ export default {
     window.addEventListener("keydown", e => {
       if(e.code === "Backquote") {
         e.preventDefault() // Prevents adding ` when opening the prompt
-        this.togglePrompt()
+        this.showPrompt()
       }
       else if(e.code === "Escape") {
         this.hidePrompt()
@@ -193,7 +193,6 @@ export default {
 Available commands:
   echo - prints args to alert() box
   cd - navigates to the given arg
-  login - alias for \`cd login\`
   toggle - toggles the info box
   exit - closes the command prompt
   help - prints this message
