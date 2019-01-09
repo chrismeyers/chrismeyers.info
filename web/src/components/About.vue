@@ -3,7 +3,7 @@
     <div class="section-header section-header-size">About</div>
 
     <div class="content-text">
-      <span>My name is Chris Meyers and I am a Software Engineer and technology enthusiast. Here's a quick list of things you should know about me:</span>
+      <span>My name is Chris Meyers and I am a Software Developer and technology enthusiast. Here's a quick list of things you should know about me:</span>
 
       <ul>
         <li>I studied Computer Science at <a class="fancytxt" href="https://www.rowan.edu/" target="_blank">Rowan University</a> in Glassboro, NJ and earned a Bachelor of Science in Computer Science.</li>
