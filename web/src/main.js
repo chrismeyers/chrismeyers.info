@@ -24,7 +24,8 @@ Vue.use(VueProgressBar, {
 Vue.use(VueImg, {
   altAsTitle: true,
   openOn: "click",
-  thumbnails: true
+  thumbnails: true,
+  closeOnScroll: false
 })
 Vue.use(VueCookie);
 Vue.use(VTooltip)

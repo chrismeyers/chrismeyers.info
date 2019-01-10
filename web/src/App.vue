@@ -267,6 +267,14 @@ h2.top {
   font-family: "Open Sans", sans-serif !important;
 }
 
+.fullscreen-v-img {
+  /* Allowing pan-y causes some trouble when mobile browsers hide the address
+    bar on scroll. If the user pans down, the address bar will hide and the
+    bottom of the screen will temporarily be missing the gray overlay. This
+    hide animation also causes the image to unexpectedly jump around at times. */
+  touch-action: pinch-zoom pan-x !important;
+}
+
 /********************* v-tooltip style *********************/
 .tooltip {
   font-family: "Open Sans", sans-serif !important;

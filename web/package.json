@@ -11,7 +11,7 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "qs": "^6.6.0",
-    "v-img": "^0.2.0",
+    "v-img": "chrismeyers/v-img#close_on_scroll",
     "v-tooltip": "^2.0.0-rc.33",
     "vue": "^2.5.17",
     "vue-clipboard2": "^0.2.1",
