@@ -22,8 +22,6 @@
         </ul>
       </template>
 
-      <br /> <hr>
-
       <h2>Education</h2>
       <template v-for="school in education">
         <ul :key="school.id" class="italic-spacer">
@@ -36,12 +34,16 @@
         </ul>
       </template>
 
-      <br /> <hr>
-
       <h2>Technical Skills</h2>
       <ul>
         <template v-for="skill in skills">
-          <li :key="skill.id">{{ skill }}</li>
+          <li :key="skill.id">{{ skill.mainItem }}
+            <template v-if="skill.subItems.length > 0">
+              <ul>
+                <li :key="subItem.id" v-for="subItem in skill.subItems">{{ subItem}}</li>
+              </ul>
+            </template>
+          </li>
         </template>
       </ul>
 
@@ -57,9 +59,9 @@ export default {
   name: "Resume",
   data() {
     return {
-      experience: null,
-      education: null,
-      skills: null,
+      experience: [],
+      education: [],
+      skills: [],
       lastModified: null
     }
   },

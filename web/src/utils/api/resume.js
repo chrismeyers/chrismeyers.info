@@ -43,11 +43,11 @@ function getLanguageExperience(skills) {
     if(Object.keys(langMap).length == 2) {
       break
     }
-    else if(skill.includes("Desktop and CLI")) {
-      langMap["desktop"] = skill.split(":")[1].split(".")[0]
+    else if(skill.mainItem.includes("Desktop and CLI")) {
+      langMap["desktop"] = skill.subItems[0]
     }
-    else if(skill.includes("Websites, Web Apps, and APIs")) {
-      langMap["web"] = skill.split(":")[1].split(".")[0]
+    else if(skill.mainItem.includes("Websites, Web Apps, and APIs")) {
+      langMap["web"] = skill.subItems[0]
     }
   }
 

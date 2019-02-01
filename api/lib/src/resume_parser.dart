@@ -1,5 +1,22 @@
 import "dart:io";
 
+class ListItem {
+  final String _mainItem;
+  final List<String> _subItems;
+
+  ListItem(this._mainItem) :
+    _subItems = [];
+
+  void add(String subItem) {
+    _subItems.add(subItem);
+  }
+
+  Map<String, dynamic> toJson() => {
+    "mainItem": _mainItem,
+    "subItems": _subItems
+  };
+}
+
 class ResumeParser {
   final List<String> _lines;
   final Map<String, List<String>> _rawSections;
@@ -126,15 +143,31 @@ class ResumeParser {
     return items;
   }
 
-  List<String> parseListSection(String section) {
+  List<ListItem> parseListSection(String section) {
     const String itemPattern = "\\item";
+    const String beginSubPattern = "\\begin{itemize*}";
+    const String endSubPattern = "\\end{itemize*}";
 
-    final List<String> items = [];
+    final List<ListItem> items = [];
+    bool subItem = false;
+    int count = 0;
 
     for(String line in _rawSections[section]) {
-      if(line.startsWith(itemPattern)) {
+      if(line.startsWith(beginSubPattern)) {
+        subItem = true;
+      }
+      else if(line.startsWith(endSubPattern)) {
+        subItem = false;
+      }
+      else if(line.startsWith(itemPattern)) {
         final String cleaned = _cleanString(line.substring(itemPattern.length + 1));
-        items.add(cleaned);
+        if(subItem) {
+          items[count - 1].add(cleaned);
+        }
+        else {
+          items.add(ListItem(cleaned));
+          count++;
+        }
       }
     }
 
