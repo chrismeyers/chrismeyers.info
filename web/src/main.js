@@ -27,7 +27,7 @@ Vue.use(VueImg, {
   thumbnails: true,
   closeOnScroll: false
 })
-Vue.use(VueCookie);
+Vue.use(VueCookie)
 Vue.use(VTooltip)
 Vue.use(VueClipboard)
 

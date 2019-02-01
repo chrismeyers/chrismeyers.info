@@ -37,10 +37,10 @@ export default {
     })
     .then(response => {
       if(response.status < 400) {
-        return true;
+        return true
       }
       else {
-        return false;
+        return false
       }
     })
     .catch(() => {

@@ -34,7 +34,7 @@ export default {
             this.$cookie.set("chrismeyers_info_apiToken", auth.data["access_token"], {expires: "1D"})
             this.$router.push({
               path: "/dashboard",
-            });
+            })
           }
           else {
             this.error = true
