@@ -191,6 +191,12 @@
       "title": "Generates a Trumpian-style tweet: Sentance. Sentance. Exclamation! (NOTE: these tweets are not real)",
       "pos": 5,
       "orient": "square"
+    },
+    {
+      "path": "https://raw.githubusercontent.com/chrismeyers/pleasehold/master/examples/pleasehold.gif",
+      "title": "Demo of pleasehold",
+      "pos": 1,
+      "orient": "land"
     }
   ],
   "builds": [
@@ -437,7 +443,9 @@
       "role": "Solo Project",
       "stat": "In Development",
       "active": true,
-      "images": []
+      "images": [
+        33
+      ]
     }
   ]
 }
