@@ -11,15 +11,33 @@ ArgResults args;
 main(List<String> arguments) async {
   handleArgs(arguments);
 
-  final String seedStr = File(join(dirname(Platform.script.path), "seed.json")).readAsStringSync();
-  final seed = jsonDecode(seedStr);
+  if(args["update"] == true) {
+    final String images = await getItems("images");
+    final String builds = await getItems("builds");
+    final String projects = await getItems("projects");
 
-  final http.Response tokenResponse = await getAccessToken();
-  accessToken = jsonDecode(tokenResponse.body)["access_token"] as String;
+    const JsonDecoder decoder = JsonDecoder();
+    const JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
-  await postImages(seed["images"] as List);
-  await postBuilds(seed["builds"] as List);
-  await postProjects(seed["projects"] as List);
+    final Map json = {
+      "images": cleanImagesJson(decoder.convert(images) as List),
+      "builds": cleanBuildsJson(decoder.convert(builds) as List),
+      "projects": cleanProjectsJson(decoder.convert(projects) as List)
+    };
+
+    await File(join(dirname(Platform.script.path), "seed.json")).writeAsString(encoder.convert(json));
+  }
+  else {
+    final String seedStr = File(join(dirname(Platform.script.path), "seed.json")).readAsStringSync();
+    final seed = jsonDecode(seedStr);
+
+    final http.Response tokenResponse = await getAccessToken();
+    accessToken = jsonDecode(tokenResponse.body)["access_token"] as String;
+
+    await postItems("images", seed["images"] as List);
+    await postItems("builds", seed["builds"] as List);
+    await postItems("projects", seed["projects"] as List);
+  }
 }
 
 void handleArgs(List<String> arguments) {
@@ -27,11 +45,13 @@ void handleArgs(List<String> arguments) {
     ..addOption("mode", abbr: "m", defaultsTo: "dev", allowed: ["dev", "prod"],
       help: "Specifies the API that should be bootstrapped")
     ..addOption("username", abbr: "u",
-      help: "Specifies the admin username (required)")
+      help: "Specifies the admin username (required for POST)")
     ..addOption("password", abbr: "p",
-      help: "Specifies the admin password (required)")
+      help: "Specifies the admin password (required for POST)")
     ..addOption("client", abbr: "c",
-      help: "Specifies the OAuth 2.0 client (required)")
+      help: "Specifies the OAuth 2.0 client (required for POST)")
+    ..addFlag("update", negatable: false,
+      help: "Updates seed.json with current data")
     ..addFlag("help", abbr: "h", negatable: false,
       help: "Displays this help information.");
 
@@ -49,7 +69,7 @@ void handleArgs(List<String> arguments) {
     exit(0);
   }
 
-  if(args["username"] == null || args["password"] == null || args["client"] == null) {
+  if(args["update"] == false && (args["username"] == null || args["password"] == null || args["client"] == null)) {
     print("Error: Missing auth credentials.");
     print(argParser.usage);
     exit(0);
@@ -76,38 +96,68 @@ Future<http.Response> getAccessToken() async {
     body: body);
 }
 
-void postImages(List images) async {
+void postItems(String which, List items) async {
+  for(final item in items) {
+    final resp = await http.post(
+      "$apiBaseUrl/admin/$which",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $accessToken"
+      },
+      body: jsonEncode(item));
+
+    print("POST /admin/$which ${resp.statusCode}");
+  }
+}
+
+Future<String> getItems(String which) async {
+  final items = await http.get(
+    "$apiBaseUrl/public/$which",
+    headers: {
+      "Content-Type": "application/json",
+    });
+
+  print("GET /public/$which ${items.statusCode}");
+  return items.body;
+}
+
+List cleanImagesJson(List images) {
+  final List cleaned = [];
+
   for(final image in images) {
-    await http.post(
-      "$apiBaseUrl/admin/images",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $accessToken"
-      },
-      body: jsonEncode(image));
+    image.remove("id");
+    image.remove("build");
+    image.remove("project");
+    cleaned.add(image);
   }
+
+  return cleaned;
 }
 
-void postBuilds(List builds) async {
+List cleanBuildsJson(List builds) {
+  final List cleaned = [];
+
   for(final build in builds) {
-    await http.post(
-      "$apiBaseUrl/admin/builds",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $accessToken"
-      },
-      body: jsonEncode(build));
+    build.remove("id");
+    build["image"] = build["image"]["id"];
+    cleaned.add(build);
   }
+
+  return cleaned;
 }
 
-void postProjects(List projects) async {
+List cleanProjectsJson(dynamic projects) {
+  final List cleaned = [];
+
   for(final project in projects) {
-    await http.post(
-      "$apiBaseUrl/admin/projects",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $accessToken"
-      },
-      body: jsonEncode(project));
+    project.remove("id");
+    final List imageIds = [];
+    for(final image in project["images"]) {
+      imageIds.add(image["id"]);
+    }
+    project["images"] = imageIds;
+    cleaned.add(project);
   }
+
+  return cleaned;
 }
