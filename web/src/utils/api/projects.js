@@ -99,7 +99,7 @@ export default {
 }
 
 function imagesStringToArray(imagesStr) {
-  if(typeof imagesStr == 'undefined') {
+  if(typeof imagesStr == "undefined") {
     return []
   }
 

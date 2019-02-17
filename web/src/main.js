@@ -6,10 +6,10 @@ import axios from "axios"
 import VModal from "vue-js-modal"
 import VueProgressBar from "vue-progressbar"
 import VueImg from "v-img"
-import VTooltip from 'v-tooltip'
-import VueClipboard from 'vue-clipboard2'
+import VTooltip from "v-tooltip"
+import VueClipboard from "vue-clipboard2"
 
-var VueCookie = require('vue-cookie')
+var VueCookie = require("vue-cookie")
 
 axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
 
