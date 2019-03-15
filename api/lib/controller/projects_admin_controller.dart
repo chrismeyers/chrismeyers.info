@@ -27,9 +27,9 @@ class ProjectsAdminController extends ResourceController {
       final Project project = await queryAddData.insert();
 
       final List imageIds = body["images"] as List;
-      for(final int imageId in imageIds) {
+      for(final imageId in imageIds) {
         final Query<Image> queryRelateImage = Query<Image>(transaction)
-          ..where((i) => i.id).equalTo(imageId)
+          ..where((i) => i.id).equalTo(imageId as int)
           ..values.project.id = project.id;
         await queryRelateImage.updateOne();
       }
@@ -81,9 +81,9 @@ class ProjectsAdminController extends ResourceController {
         }
       }
 
-      for(final int imageId in imageIds) {
+      for(final imageId in imageIds) {
         final Query<Image> queryRelateImage = Query<Image>(transaction)
-          ..where((i) => i.id).equalTo(imageId)
+          ..where((i) => i.id).equalTo(imageId as int)
           ..values.project.id = project.id;
         await queryRelateImage.updateOne();
       }
