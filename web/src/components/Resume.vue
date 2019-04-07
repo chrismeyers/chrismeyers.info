@@ -22,6 +22,8 @@
         </ul>
       </template>
 
+      <br /> <hr>
+
       <h2>Education</h2>
       <template v-for="school in education">
         <ul :key="school.id" class="italic-spacer">
@@ -33,6 +35,8 @@
             </template>
         </ul>
       </template>
+
+      <br /> <hr>
 
       <h2>Technical Skills</h2>
       <ul>

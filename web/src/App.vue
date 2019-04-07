@@ -159,13 +159,17 @@ h2.top {
 }
 
 .content {
+  -webkit-flex: 1;
+  flex: 1;
   -webkit-margin-bottom-collapse: separate; /* Fixes margin-bottom for non-chrome browsers */
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
 }
 
 .content-text {
-  padding: 10px 5px 10px 5px;
+  padding: 10px 15px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .dt-mod {
@@ -178,17 +182,6 @@ h2.top {
 
 .first-header {
   margin-top: 0px;
-}
-
-.content {
-  -webkit-flex: 1;
-  flex: 1;
-}
-
-.content-text {
-  padding: 10px 15px;
-  max-width: 1595px; /* Max width = 1920, adjusted for margins and nav. Does not account for scroll bars. */
-  margin: 0 auto; /* Centers content if width is greater than 1920px. */
 }
 
 .section-header-size {

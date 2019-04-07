@@ -91,6 +91,10 @@ export default {
 </script>
 
 <style scoped>
+.content-text {
+  max-width: 1000px;
+}
+
 .project-link-image {
   margin-bottom: 10px;
 }
@@ -153,7 +157,7 @@ export default {
   .projDesc {
     -webkit-flex: 1;
     flex: 1;
-    padding-right: 10px;
+    padding-right: 20px;
   }
 
   .projImages-full-img-square {
