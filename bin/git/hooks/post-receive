@@ -1,12 +1,17 @@
 #!/bin/bash
-# https://gist.github.com/noelboss/3fe13927025b89757f8fb12e9066f2fa
+
+# Setup:
+#   1. Make the directory /path/to/repo/*.git
+#   2. git init --bare /path/to/repo/*.git
+#   3. Create and edit /path/to/repo/*.git/hooks/post-receive
+#     3a. This needs to be updated manually when changes are made
+#   4. Create all directories in the --work-tree path
+#   5. Add new git remote: ssh://USER_NAME@IP/path/to/repo/*.git
+#   6. Push to the new git remote
 #
-# 1. Make /path/to/repo/*.git
-# 2. git init --bare /path/to/repo/*.git
-# 3. Create /path/to/repo/*.git/hooks/post-receive
-# 4. Create all directories in --work-tree path.
-# 5. Add new git remote: ssh://user@ip/path/to/repo/*.git
-# 6. Push to the new git remote.
+# Ensure the sudoers entry for the user pushing to production has NOPASSWD
+# setup for sudo commands used in this hook:
+#   USER_NAME   ALL=NOPASSWD: CMD1, CMD2, CMD3
 
 while read oldrev newrev ref
 do
