@@ -16,7 +16,7 @@ do
     git --work-tree=/home/chris/www/chrismeyers.info --git-dir=/home/chris/repo/chrismeyers.info.git checkout -f
 
     cd /home/chris/www/chrismeyers.info/web
-    /usr/bin/npm install
+    /usr/bin/npm install --only=production
     /usr/bin/npm run build
 
     cd /home/chris/www/chrismeyers.info/api
