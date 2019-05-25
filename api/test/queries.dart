@@ -6,10 +6,10 @@ import "package:api/model/user.dart";
 import "harness/app.dart";
 
 class Queries {
-  Harness _harness;
-
   Queries(Harness harness) :
     _harness = harness;
+
+  Harness _harness;
 
   Future<Null> loginUser({String username = "test", String password = "password"}) async {
     final User user = User()

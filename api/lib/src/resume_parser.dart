@@ -1,11 +1,11 @@
 import "dart:io";
 
 class ListItem {
-  final String _mainItem;
-  final List<String> _subItems;
-
   ListItem(this._mainItem) :
     _subItems = [];
+
+  final String _mainItem;
+  final List<String> _subItems;
 
   void add(String subItem) {
     _subItems.add(subItem);
@@ -18,14 +18,14 @@ class ListItem {
 }
 
 class ResumeParser {
-  final List<String> _lines;
-  final Map<String, List<String>> _rawSections;
-  final DateTime _lastModified;
-
   ResumeParser(String path) :
     _lines = File(path).readAsLinesSync(),
     _rawSections = {},
     _lastModified = File(path).lastModifiedSync();
+
+  final List<String> _lines;
+  final Map<String, List<String>> _rawSections;
+  final DateTime _lastModified;
 
   DateTime get lastModified => _lastModified;
 

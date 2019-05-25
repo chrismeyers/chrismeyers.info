@@ -4,10 +4,10 @@ import "package:aqueduct/aqueduct.dart";
 import "package:api/model/user.dart";
 
 class PasswordController extends ResourceController {
+  PasswordController(this.context, this.authServer);
+
   final ManagedContext context;
   final AuthServer authServer;
-
-  PasswordController(this.context, this.authServer);
 
   @Operation.put()
   Future<Response> updatePassword() async {
@@ -25,7 +25,7 @@ class PasswordController extends ResourceController {
     final String salt = AuthUtility.generateRandomSalt();
     final Query<User> query = Query<User>(context)
       ..values.salt = salt
-      ..values.hashedPassword = authServer.hashPassword(body["password"] as String, salt)
+      ..values.hashedPassword = authServer.hashPassword(body["password"], salt)
       ..where((u) => u.id).equalTo(userId);
 
     return Response.ok(await query.updateOne());
