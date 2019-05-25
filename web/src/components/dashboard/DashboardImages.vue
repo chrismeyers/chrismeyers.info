@@ -29,7 +29,7 @@
 import ImagesAPI from "@/utils/api/images"
 
 export default {
-  name: "DashboardImages",
+  name: "Dashboard - Images",
   data() {
     return {
       whichButton: "",
