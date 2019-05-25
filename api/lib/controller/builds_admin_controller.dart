@@ -4,9 +4,9 @@ import "package:api/model/build.dart";
 import "package:api/model/image.dart";
 
 class BuildsAdminController extends ResourceController {
-  ManagedContext context;
-
   BuildsAdminController(this.context);
+
+  ManagedContext context;
 
   @Operation.post()
   Future<Response> addBuild() async {

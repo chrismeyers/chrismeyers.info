@@ -3,9 +3,9 @@ import "package:api/api.dart";
 import "package:api/model/build.dart";
 
 class BuildsPublicController extends ResourceController {
-  ManagedContext context;
-
   BuildsPublicController(this.context);
+
+  ManagedContext context;
 
   @Operation.get()
   Future<Response> getBuilds() async {

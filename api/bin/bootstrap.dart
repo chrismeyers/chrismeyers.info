@@ -19,6 +19,7 @@
  *   ./bootstrap.dart --backup -m dev|prod
  */
 
+import "dart:async";
 import "dart:convert";
 import "dart:io";
 import "package:args/args.dart";
@@ -29,7 +30,7 @@ String apiBaseUrl;
 String accessToken;
 ArgResults args;
 
-main(List<String> arguments) async {
+void main(List<String> arguments) async {
   handleArgs(arguments);
 
   if(args["backup"] == true) {
@@ -117,7 +118,7 @@ Future<http.Response> getAccessToken() async {
     body: body);
 }
 
-void postItems(String which, List items) async {
+Future<void> postItems(String which, List items) async {
   for(final item in items) {
     final resp = await http.post(
       "$apiBaseUrl/admin/$which",

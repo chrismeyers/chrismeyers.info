@@ -3,9 +3,9 @@ import "package:api/api.dart";
 import "package:api/model/image.dart";
 
 class ImagesPublicController extends ResourceController {
-  ManagedContext context;
-
   ImagesPublicController(this.context);
+
+  ManagedContext context;
 
   @Operation.get()
   Future<Response> getImages() async {

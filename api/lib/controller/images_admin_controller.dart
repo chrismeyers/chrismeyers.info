@@ -3,9 +3,9 @@ import "package:api/api.dart";
 import "package:api/model/image.dart";
 
 class ImagesAdminController extends ResourceController {
-  ManagedContext context;
-
   ImagesAdminController(this.context);
+
+  ManagedContext context;
 
   @Operation.post()
   Future<Response> addImage() async {

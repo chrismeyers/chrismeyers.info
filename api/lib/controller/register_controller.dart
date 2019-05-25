@@ -5,11 +5,11 @@ import "package:api/model/user.dart";
 import "package:api/src/api_config.dart";
 
 class RegisterController extends ResourceController {
+  RegisterController(this.context, this.authServer, this.config);
+
   final ManagedContext context;
   final AuthServer authServer;
   final ApiConfig config;
-
-  RegisterController(this.context, this.authServer, this.config);
 
   @Operation.post()
   Future<Response> createUser() async {

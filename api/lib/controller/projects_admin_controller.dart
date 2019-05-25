@@ -4,9 +4,9 @@ import "package:api/model/project.dart";
 import "package:api/model/image.dart";
 
 class ProjectsAdminController extends ResourceController {
-  ManagedContext context;
-
   ProjectsAdminController(this.context);
+
+  ManagedContext context;
 
   @Operation.post()
   Future<Response> addProject() async {
