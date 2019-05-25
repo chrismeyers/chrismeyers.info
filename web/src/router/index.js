@@ -10,6 +10,7 @@ import Dashboard from "@/components/dashboard/Dashboard"
 import DashboardImages from "@/components/dashboard/DashboardImages"
 import DashboardBuilds from "@/components/dashboard/DashboardBuilds"
 import DashboardProjects from "@/components/dashboard/DashboardProjects"
+import DashboardAccount from "@/components/dashboard/DashboardAccount"
 
 Vue.use(VueRouter)
 
@@ -99,6 +100,14 @@ let router = new VueRouter({
           meta: {
             secure: true,
             title: dashboardTitle + " - Projects"
+          }
+        },
+        {
+          path: "account",
+          component: DashboardAccount,
+          meta: {
+            secure: true,
+            title: dashboardTitle + " - Account"
           }
         }
       ]
