@@ -27,7 +27,7 @@
 import BuildsAPI from "@/utils/api/builds"
 
 export default {
-  name: "Dashboard - Builds",
+  name: "Dashboard-Builds",
   data() {
     return {
       whichButton: "",
