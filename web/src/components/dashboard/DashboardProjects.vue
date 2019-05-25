@@ -27,7 +27,7 @@
 import ProjectsAPI from "@/utils/api/projects"
 
 export default {
-  name: "DashboardProjects",
+  name: "Dashboard - Projects",
   data() {
     return {
       whichButton: "",

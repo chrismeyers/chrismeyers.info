@@ -15,8 +15,6 @@ import DashboardAccount from "@/components/dashboard/DashboardAccount"
 Vue.use(VueRouter)
 
 let defaultTitle = "Chris Meyers - Developer, Tech Enthusiast"
-let loginTitle = "Login"
-let dashboardTitle = "Dashboard"
 
 let router = new VueRouter({
   mode: "history",
@@ -66,7 +64,7 @@ let router = new VueRouter({
       component: Login,
       meta: {
         secure: false,
-        title: loginTitle
+        title: Login.name
       }
     },
     {
@@ -75,7 +73,7 @@ let router = new VueRouter({
       component: Dashboard,
       meta: {
         secure: true,
-        title: dashboardTitle
+        title: Dashboard.name
       },
       children: [
         {
@@ -83,7 +81,7 @@ let router = new VueRouter({
           component: DashboardImages,
           meta: {
             secure: true,
-            title: dashboardTitle + " - Images"
+            title: DashboardImages.name
           }
         },
         {
@@ -91,7 +89,7 @@ let router = new VueRouter({
           component: DashboardBuilds,
           meta: {
             secure: true,
-            title: dashboardTitle + " - Builds"
+            title: DashboardBuilds.name
           }
         },
         {
@@ -99,7 +97,7 @@ let router = new VueRouter({
           component: DashboardProjects,
           meta: {
             secure: true,
-            title: dashboardTitle + " - Projects"
+            title: DashboardProjects.name
           }
         },
         {
@@ -107,7 +105,7 @@ let router = new VueRouter({
           component: DashboardAccount,
           meta: {
             secure: true,
-            title: dashboardTitle + " - Account"
+            title: DashboardAccount.name
           }
         }
       ]
