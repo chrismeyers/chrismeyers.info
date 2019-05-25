@@ -19,7 +19,7 @@
   import AccountAPI from "@/utils/api/account"
 
   export default {
-    name: "Dashboard - Account",
+    name: "Dashboard-Account",
     data() {
       return {
         passwords: {

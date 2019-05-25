@@ -16,6 +16,11 @@ Vue.use(VueRouter)
 
 let defaultTitle = "Chris Meyers - Developer, Tech Enthusiast"
 
+let formatTitle = (name) => {
+  // Surround hyphens with spaces
+  return name.replace(/([!?-])/g, ' $1 ')
+}
+
 let router = new VueRouter({
   mode: "history",
   scrollBehavior() {
@@ -64,7 +69,7 @@ let router = new VueRouter({
       component: Login,
       meta: {
         secure: false,
-        title: Login.name
+        title: formatTitle(Login.name)
       }
     },
     {
@@ -73,7 +78,7 @@ let router = new VueRouter({
       component: Dashboard,
       meta: {
         secure: true,
-        title: Dashboard.name
+        title: formatTitle(Dashboard.name)
       },
       children: [
         {
@@ -81,7 +86,7 @@ let router = new VueRouter({
           component: DashboardImages,
           meta: {
             secure: true,
-            title: DashboardImages.name
+            title: formatTitle(DashboardImages.name)
           }
         },
         {
@@ -89,7 +94,7 @@ let router = new VueRouter({
           component: DashboardBuilds,
           meta: {
             secure: true,
-            title: DashboardBuilds.name
+            title: formatTitle(DashboardBuilds.name)
           }
         },
         {
@@ -97,7 +102,7 @@ let router = new VueRouter({
           component: DashboardProjects,
           meta: {
             secure: true,
-            title: DashboardProjects.name
+            title: formatTitle(DashboardProjects.name)
           }
         },
         {
@@ -105,7 +110,7 @@ let router = new VueRouter({
           component: DashboardAccount,
           meta: {
             secure: true,
-            title: DashboardAccount.name
+            title: formatTitle(DashboardAccount.name)
           }
         }
       ]
