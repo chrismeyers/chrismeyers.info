@@ -27,6 +27,7 @@ class Harness extends TestHarness<ApiChannel> with TestHarnessAuthMixin<ApiChann
   @override
   AuthServer get authServer => channel.authServer;
 
+  String client = "com.aqueduct.public";
   Agent publicAgent;
 
   @override
@@ -36,7 +37,7 @@ class Harness extends TestHarness<ApiChannel> with TestHarnessAuthMixin<ApiChann
 
   @override
   Future seed() async {
-    publicAgent = await addClient("com.aqueduct.public");
+    publicAgent = await addClient(client);
   }
 
   Future<Agent> registerUser(User user, {Agent withClient}) async {

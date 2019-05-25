@@ -11,10 +11,10 @@ class Queries {
   Queries(Harness harness) :
     _harness = harness;
 
-  Future<Null> loginUser() async {
+  Future<Null> loginUser({String username = "test", String password = "password"}) async {
     final User user = User()
-      ..username = "test"
-      ..password = "password";
+      ..username = username
+      ..password = password;
     _harness.publicAgent = await _harness.registerUser(user, withClient: _harness.publicAgent);
   }
 
