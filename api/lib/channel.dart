@@ -63,6 +63,11 @@ class ApiChannel extends ApplicationChannel {
       .link(() => AuthAuthorizedController());
 
     router
+      .route("/account/password")
+      .link(() => Authorizer.bearer(authServer))
+      .link(() => PasswordController(context, authServer));
+
+    router
       .route("/public/resume")
       .link(() => ResumeController());
 
