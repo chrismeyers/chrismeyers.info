@@ -1,3 +1,24 @@
+#!/usr/bin/env dart
+/**
+ * bootstrap.dart
+ *   -m, --mode        Specifies the API that should be bootstrapped
+ *                     [dev (default), prod]
+ *
+ *   -u, --username    Specifies the admin username (required for POST)
+ *   -p, --password    Specifies the admin password (required for POST)
+ *   -c, --client      Specifies the OAuth 2.0 client (required for POST)
+ *   -b, --backup      Updates seed.json with current data
+ *   -h, --help        Displays this help information.
+ *
+ * Bootstraps a database with initial data or backs up the current state of a
+ * database.  The data is read from or written to seed.json, which should exist
+ * in the same directory as this script.
+ *
+ * Examples:
+ *   dart bootstrap.dart -u USER -p PASS -c SOME.CLIENT.NAME -m dev|prod
+ *   ./bootstrap.dart --backup -m dev|prod
+ */
+
 import "dart:convert";
 import "dart:io";
 import "package:args/args.dart";
@@ -11,7 +32,7 @@ ArgResults args;
 main(List<String> arguments) async {
   handleArgs(arguments);
 
-  if(args["update"] == true) {
+  if(args["backup"] == true) {
     final String images = await getItems("images");
     final String builds = await getItems("builds");
     final String projects = await getItems("projects");
@@ -50,7 +71,7 @@ void handleArgs(List<String> arguments) {
       help: "Specifies the admin password (required for POST)")
     ..addOption("client", abbr: "c",
       help: "Specifies the OAuth 2.0 client (required for POST)")
-    ..addFlag("update", negatable: false,
+    ..addFlag("backup", abbr: "b", negatable: false,
       help: "Updates seed.json with current data")
     ..addFlag("help", abbr: "h", negatable: false,
       help: "Displays this help information.");
@@ -69,7 +90,7 @@ void handleArgs(List<String> arguments) {
     exit(0);
   }
 
-  if(args["update"] == false && (args["username"] == null || args["password"] == null || args["client"] == null)) {
+  if(args["backup"] == false && (args["username"] == null || args["password"] == null || args["client"] == null)) {
     print("Error: Missing auth credentials.");
     print(argParser.usage);
     exit(0);
