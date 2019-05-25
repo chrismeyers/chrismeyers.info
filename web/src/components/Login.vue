@@ -3,7 +3,7 @@
     <div class="section-header section-header-size">Login</div>
 
     <div class="content-text">
-      <p v-if="error">Invalid Username or Password</p>
+      <p v-if="error" style="color: red">Invalid Username or Password</p>
       <form @submit.prevent="login">
         <input class="inputbox-mod login-text" v-model="username" placeholder="Username" required>
         <input class="inputbox-mod login-text" v-model="password" placeholder="Password" type="password" required>
