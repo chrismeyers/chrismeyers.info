@@ -27,9 +27,11 @@
 
 <script>
 import ImagesAPI from "@/utils/api/images"
+import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
 export default {
   name: "Dashboard-Images",
+  mixins: [DashboardAlertsMixin],
   data() {
     return {
       whichButton: "",
@@ -78,9 +80,14 @@ export default {
         const updatedImages = await ImagesAPI.getImages()
         if(updatedImages.status === 200) {
           this.images = updatedImages.data
-          let action = (this.lastResponse.config.method === "post") ? "Added" : "Updated"
-          alert(action + " image " + this.lastResponse.data.id)
+          this.success("image")
         }
+        else {
+          this.retrievalError("images")
+        }
+      }
+      else {
+        this.addUpdateError("image")
       }
     },
     async deleteEntry() {
@@ -94,8 +101,14 @@ export default {
           if(updatedImages.status === 200) {
             this.images = updatedImages.data
             this.selected = {}
-            alert("Deleted image " + this.lastResponse.data.id)
+            this.success("image")
           }
+          else {
+            this.retrieveError("images")
+          }
+        }
+        else {
+          this.deleteError("image")
         }
       }
     }

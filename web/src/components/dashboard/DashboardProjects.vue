@@ -25,9 +25,11 @@
 
 <script>
 import ProjectsAPI from "@/utils/api/projects"
+import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
 export default {
   name: "Dashboard-Projects",
+  mixins: [DashboardAlertsMixin],
   data() {
     return {
       whichButton: "",
@@ -103,9 +105,14 @@ export default {
         const updatedProjects = await ProjectsAPI.getProjects()
         if(updatedProjects.status === 200) {
           this.projects = this.flattenProjectData(updatedProjects)
-          let action = (this.lastResponse.config.method === "post") ? "Added" : "Updated"
-          alert(action + " project " + this.lastResponse.data.id)
+          this.success("project")
         }
+        else {
+          this.retrievalError("projects")
+        }
+      }
+      else {
+        this.addUpdateError("project")
       }
     },
     async deleteEntry() {
@@ -119,8 +126,14 @@ export default {
           if(updatedProjects.status === 200) {
             this.projects = this.flattenProjectData(updatedProjects)
             this.selected = {}
-            alert("Deleted project " + this.lastResponse.data.id)
+            this.success("project")
           }
+          else {
+            this.retrieveError("projects")
+          }
+        }
+        else {
+          this.deleteError("project")
         }
       }
     }
