@@ -25,9 +25,11 @@
 
 <script>
 import BuildsAPI from "@/utils/api/builds"
+import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
 export default {
   name: "Dashboard-Builds",
+  mixins: [DashboardAlertsMixin],
   data() {
     return {
       whichButton: "",
@@ -99,9 +101,14 @@ export default {
         const updatedBuilds = await BuildsAPI.getBuilds()
         if(updatedBuilds.status === 200) {
           this.builds = this.flattenBuildData(updatedBuilds)
-          let action = (this.lastResponse.config.method === "post") ? "Added" : "Updated"
-          alert(action + " build " + this.lastResponse.data.id)
+          this.success("build")
         }
+        else {
+          this.retrievalError("builds")
+        }
+      }
+      else {
+        this.addUpdateError("build")
       }
     },
     async deleteEntry() {
@@ -115,8 +122,14 @@ export default {
           if(updatedBuilds.status === 200) {
             this.builds = this.flattenBuildData(updatedBuilds)
             this.selected = {}
-            alert("Deleted build " + this.lastResponse.data.id)
+            this.success("build")
           }
+          else {
+            this.retrievalError("builds")
+          }
+        }
+        else {
+          this.deleteError("build")
         }
       }
     }

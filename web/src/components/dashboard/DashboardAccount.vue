@@ -17,16 +17,19 @@
 
 <script>
   import AccountAPI from "@/utils/api/account"
+  import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
   export default {
     name: "Dashboard-Account",
+    mixins: [DashboardAlertsMixin],
     data() {
       return {
         passwords: {
           "initial": "",
           "confirm": ""
         },
-        error: null
+        error: null,
+        lastResponse: {}
       }
     },
     methods: {
@@ -35,9 +38,12 @@
           this.error = "Passwords do not match"
         } else if(this.passwords["initial"] !== "" && this.passwords["confirm"] !== "") {
           this.error = null
-          let response = await AccountAPI.updatePassword(this.$cookie.get("chrismeyers_info_apiToken"), this.passwords["initial"])
-          if(response.status === 200) {
-            alert("Password successfully updated")
+          this.lastResponse = await AccountAPI.updatePassword(this.$cookie.get("chrismeyers_info_apiToken"), this.passwords["initial"])
+          if(this.lastResponse.status === 200) {
+            this.success('password', false)
+          }
+          else {
+            this.addUpdateError('password', false)
           }
         }
 
