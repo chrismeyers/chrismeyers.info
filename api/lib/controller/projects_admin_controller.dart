@@ -26,10 +26,10 @@ class ProjectsAdminController extends ResourceController {
         ..values.active = body["active"] as bool;
       final Project project = await queryAddData.insert();
 
-      final List imageIds = body["images"] as List;
-      for(final imageId in imageIds) {
+      final List<int> imageIds = (body["images"] as List)?.cast<int>();
+      for(final int imageId in imageIds) {
         final Query<Image> queryRelateImage = Query<Image>(transaction)
-          ..where((i) => i.id).equalTo(imageId as int)
+          ..where((i) => i.id).equalTo(imageId)
           ..values.project.id = project.id;
         await queryRelateImage.updateOne();
       }
@@ -47,7 +47,7 @@ class ProjectsAdminController extends ResourceController {
   @Operation.put("id")
   Future<Response> updateProject(@Bind.path("id") int id) async {
     final Map<String, dynamic> body = await request.body.decode();
-    final List imageIds = body["images"] as List;
+    final List<int> imageIds = (body["images"] as List)?.cast<int>();
 
     final Project project = await context.transaction((transaction) async {
       final Query<Project> queryAddData = Query<Project>(transaction)
@@ -81,9 +81,9 @@ class ProjectsAdminController extends ResourceController {
         }
       }
 
-      for(final imageId in imageIds) {
+      for(final int imageId in imageIds) {
         final Query<Image> queryRelateImage = Query<Image>(transaction)
-          ..where((i) => i.id).equalTo(imageId as int)
+          ..where((i) => i.id).equalTo(imageId)
           ..values.project.id = project.id;
         await queryRelateImage.updateOne();
       }
