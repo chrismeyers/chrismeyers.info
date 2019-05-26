@@ -20,9 +20,33 @@ The default configuration file used when testing is `config.src.yaml`. This file
 
 See the documentation for [Deployment](https://aqueduct.io/docs/deploy/).
 
+## Requirements
+1) Install the Dart SDK (see https://dart.dev/get-dart)
+    ```
+    sudo apt-get update
+    sudo apt-get install apt-transport-https
+    sudo sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+    sudo sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
+    ```
+    ```
+    sudo apt-get update
+    sudo apt-get install dart
+    ```
+2) Install Aqueduct (see https://aqueduct.io/docs/tut/getting-started/)
+    ```
+    pub global activate aqueduct
+    ```
+
 ## Initial Setup
-1) Create a database, add a database user, then grant database permissions to this user.
-2) Initialize the database tables by running `aqueduct db upgrade`.
-3) Register a user using the `/auth/register` endpoint.
-4) Add an OAuth 2.0 client by running `aqueduct auth add-client --id ...`.
-5) Import the initial data by running `dart bin/bootstrap.dart`.
+1) Create a database, add a database user, then grant database permissions to this user (see https://aqueduct.io/docs/db/connecting/).
+    ```
+    CREATE DATABASE my_app_name;
+    CREATE USER my_app_name_user WITH PASSWORD 'password';
+    GRANT ALL ON DATABASE my_app_name TO my_app_name_user;
+    ```
+2) Copy `config.src.yaml` to `config.yaml` and replace the values with the values from the previous step.
+3) Initialize the database tables by running `aqueduct db upgrade`.
+4) Register a user using the `/auth/register` endpoint.
+5) Add an OAuth 2.0 client by running `aqueduct auth add-client --id ...`.
+6) Import the initial data by running `dart bin/bootstrap.dart`.
+7) Copy `../bin/systemd/chrismeyers-info-api.service` to `/etc/systemd/system` and run `sudo systemctl daemon-reload`, `sudo systemctl enable chrismeyers-info-api.service`, and `sudo systemctl start chrismeyers-info-api.service`.
