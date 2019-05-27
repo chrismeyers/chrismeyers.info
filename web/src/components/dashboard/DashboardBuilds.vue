@@ -1,23 +1,22 @@
 <template>
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
-      <option :value="{}">Add new build</option>
-      <option v-for="build in items" :key="build.id" :value="build">[{{ build.active ? "A" : "I" }}] Edit {{ build.id }}: {{ build.date }}</option>
+      <option v-for="build in items" :key="build.id" :value="build">{{ (build.id > 0) ? ("Edit " + build.id + ": " + build.date) : "Add new build" }}</option>
     </select>
 
     <br />
 
     <form @submit.prevent="routeFormSubmission">
       <span><b>active:</b></span><br />
-      <input type="checkbox" v-model="selected['active']"><br />
+      <input type="checkbox" v-model="selected.active"><br />
       <template v-for="(field, index) in fields">
         <span :key="index + '-span'"><b>{{ field }}:</b></span><span :key="index + '-req'" v-if="requiredField(field)" class="required-star"></span>
         <input class="inputbox-mod dashboard-text" type="text" v-model="selected[field]" :placeholder="field" :key="index + '-input'" :required="requiredField(field)">
       </template>
 
       <div class="dashboard-buttons">
-        <input class="submit-button dashboard-button" type="submit" @click="whichButton = 'addUpdate'" :value="selected.id ? 'Update' : 'Add'">
-        <input class="submit-button delete-button" type="submit" @click="whichButton = 'delete'" v-if="selected.id" value="Delete">
+        <input class="submit-button dashboard-button" type="submit" @click="whichButton = 'addUpdate'" :value="(selected.id > 0) ? 'Update' : 'Add'">
+        <input class="submit-button delete-button" type="submit" @click="whichButton = 'delete'" v-if="selected.id > 0" value="Delete">
       </div>
     </form>
   </div>
@@ -60,7 +59,7 @@ export default {
         flatBuilds.push(build)
       }
 
-      return flatBuilds
+      return [this.createBlankEntry(builds.data[0]), ...flatBuilds]
     }
   }
 }
