@@ -4,24 +4,14 @@ export default {
       whichButton: "",
       items: [],
       schema: [],
-      fields: [],
       selected: {},
-      lastResponse: {},
-      ignoredFields: ["id", "active"]
+      lastResponse: {}
     }
   },
   methods: {
     setData(response) {
-      this.ignoredFields = [...this.ignoredFields, ...this.componentIgnoredFields]
       this.items = this.flattenData(response)
       this.schema = response.data.schema
-
-      for(const field of Object.keys(this.items[0])) {
-        if(!this.ignoredFields.includes(field)) {
-          this.fields.push(field)
-        }
-      }
-
       this.selected = this.items[0]
     },
     flattenData(response) {
@@ -31,20 +21,10 @@ export default {
       // Adds a blank entry as a placeholder for new items.
       let blank = {id: -1}
       for(const field of Object.keys(template)) {
-        if(!this.ignoredFields.includes(field)) {
-          blank[field] = null
-        }
+        blank[field] = null
       }
 
       return blank
-    },
-    requiredField(field) {
-      // These are the nullable fields.
-      if(this.optionalFields.includes(field)) {
-        return false
-      }
-
-      return true
     },
     routeFormSubmission() {
       if(this.whichButton === "addUpdate") {
