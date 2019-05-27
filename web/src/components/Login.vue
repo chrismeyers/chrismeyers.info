@@ -5,7 +5,7 @@
     <div class="content-text">
       <p v-if="error" style="color: red">Invalid Username or Password</p>
       <form @submit.prevent="login">
-        <input class="inputbox-mod login-text" v-model="username" placeholder="Username" required>
+        <input class="inputbox-mod login-text" v-model="username" placeholder="Username" type="text" required>
         <input class="inputbox-mod login-text" v-model="password" placeholder="Password" type="password" required>
         <input class="submit-button" type="submit" value="Login">
       </form>
@@ -47,7 +47,8 @@ export default {
 </script>
 
 <style scoped>
-.login-text {
+input.login-text[type="text"],
+input.login-text[type="password"] {
   width: 200px;
   margin-bottom: 10px;
   display: block;
