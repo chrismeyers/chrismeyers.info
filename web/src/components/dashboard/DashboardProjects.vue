@@ -52,7 +52,7 @@ export default {
       // project, we can modify the image field of the data we received from
       // the GET to only include an comma separated list of image IDs.
       let flatProjects = []
-      for(let project of projects.data) {
+      for(let project of projects.data.items) {
         if(project.images) {
           let imageIds = []
           for(let image of project.images) {
@@ -63,7 +63,7 @@ export default {
         flatProjects.push(project)
       }
 
-      return [this.createBlankEntry(projects.data[0]), ...flatProjects]
+      return [this.createBlankEntry(projects.data.items[0]), ...flatProjects]
     }
   }
 }

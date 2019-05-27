@@ -79,7 +79,7 @@ export default {
   methods: {
     setData(projects) {
       // Only display projects that are set to active.
-      this.projects = projects.data.filter(p => {
+      this.projects = projects.data.items.filter(p => {
         if(p.active) {
           return true
         }

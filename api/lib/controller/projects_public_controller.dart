@@ -6,6 +6,18 @@ class ProjectsPublicController extends ResourceController {
   ProjectsPublicController(this.context);
 
   ManagedContext context;
+  List<Map<String, dynamic>> schema = [
+    {"field": "title",   "tag": "input",    "type": "text",   "required": true},
+    {"field": "webUrl",  "tag": "input",    "type": "url",    "required": false},
+    {"field": "codeUrl", "tag": "input",    "type": "url",    "required": true},
+    {"field": "date",    "tag": "input",    "type": "text",   "required": true},
+    {"field": "started", "tag": "input",    "type": "number", "required": true},
+    {"field": "lang",    "tag": "input",    "type": "text",   "required": true},
+    {"field": "info",    "tag": "textarea", "type": "text",   "required": true},
+    {"field": "role",    "tag": "input",    "type": "text",   "required": true},
+    {"field": "stat",    "tag": "input",    "type": "text",   "required": true},
+    {"field": "images",  "tag": "input",    "type": "text",   "required": false}
+  ];
 
   @Operation.get()
   Future<Response> getProjects() async {
@@ -18,7 +30,7 @@ class ProjectsPublicController extends ResourceController {
       project.images.sort((a, b) => a.pos.compareTo(b.pos));
     }
 
-    return Response.ok(allProjects);
+    return Response.ok({"items": allProjects.map((value) => value.asMap()).toList(), "schema": schema});
   }
 
   @Operation.get("id")

@@ -6,6 +6,12 @@ class ImagesPublicController extends ResourceController {
   ImagesPublicController(this.context);
 
   ManagedContext context;
+  List<Map<String, dynamic>> schema = [
+    {"field": "path",   "tag": "input", "type": "text",   "required": true},
+    {"field": "title",  "tag": "input", "type": "text",   "required": true},
+    {"field": "pos",    "tag": "input", "type": "number", "required": true},
+    {"field": "orient", "tag": "input", "type": "text",   "required": true}
+  ];
 
   @Operation.get()
   Future<Response> getImages() async {
@@ -13,7 +19,7 @@ class ImagesPublicController extends ResourceController {
       ..sortBy((i) => i.id, QuerySortOrder.ascending);
     final List<Image> allImages = await query.fetch();
 
-    return Response.ok(allImages);
+    return Response.ok({"items": allImages.map((value) => value.asMap()).toList(), "schema": schema});
   }
 
   @Operation.get("id")
