@@ -206,8 +206,10 @@ h2.top {
   border-color: #5bb75b;
 }
 
-.inputbox-mod,
-.textarea-mod {
+input.inputbox-mod[type="text"],
+input.inputbox-mod[type="url"],
+input.inputbox-mod[type="number"],
+textarea.textarea-mod {
   height: 25px;
   width: calc(100% - 5px - 5px - 2px); /* 100% - padding-left - padding-right - (2 * border size) */
   padding-left: 5px;
@@ -216,13 +218,19 @@ h2.top {
   border: 1px solid #000000;
   font-family: "Open Sans", sans-serif;
 }
-.inputbox-mod:focus,
-.textarea-mod:focus {
+input.inputbox-mod:focus[type="text"],
+input.inputbox-mod:focus[type="url"],
+input.inputbox-mod:focus[type="number"],
+textarea.textarea-mod:focus {
   outline: none;
   border-color: #5bb75b;
 }
 
-.textarea-mod {
+input.inputbox-mod[type="checkbox"] {
+  display: block;
+}
+
+textarea.textarea-mod {
   resize: vertical;
   height: 100px;
 }
