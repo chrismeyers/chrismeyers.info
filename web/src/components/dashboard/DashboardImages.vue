@@ -59,6 +59,13 @@ export default {
       }
     },
     requiredField(field) {
+      // These are the nullable fields.
+      // Note: Currently all fields are required.  Update the conditional if
+      // this changes in the future.
+      if(field === "") {
+        return false
+      }
+
       return true
     },
     routeFormSubmission() {
