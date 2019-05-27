@@ -53,4 +53,9 @@ export default {
 input[type=checkbox] {
   -webkit-appearance:checkbox;
 }
+
+.required-star:after {
+  content: ' *';
+  color: red;
+}
 </style>
