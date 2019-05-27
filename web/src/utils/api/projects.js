@@ -2,7 +2,7 @@ import axios from "axios"
 
 export default {
   // GET Methods
-  getProjects() {
+  get() {
     return axios
       .get("/public/projects")
       .then(response => {
@@ -14,7 +14,7 @@ export default {
   },
 
   // POST Methods
-  addProject(token, project) {
+  add(token, project) {
     const images = imagesStringToArray(project.images)
 
     return axios({
@@ -46,7 +46,7 @@ export default {
   },
 
   // PUT Methods
-  updateProject(token, project) {
+  update(token, project) {
     const projectId = project.id
     const images = imagesStringToArray(project.images)
 
@@ -79,7 +79,7 @@ export default {
   },
 
   // DELETE Methods
-  deleteProject(token, project) {
+  delete(token, project) {
     const projectId = project.id
 
     return axios({

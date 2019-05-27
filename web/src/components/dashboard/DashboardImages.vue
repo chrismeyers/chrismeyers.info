@@ -2,7 +2,7 @@
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
       <option :value="{}">Add new image</option>
-      <option v-for="image in images" :key="image.id" :value="image">Edit {{ image.id }}: {{ image.path }}</option>
+      <option v-for="image in items" :key="image.id" :value="image">Edit {{ image.id }}: {{ image.path }}</option>
     </select>
 
     <br />
@@ -27,102 +27,28 @@
 
 <script>
 import ImagesAPI from "@/utils/api/images"
+import DashboardBaseMixin from "@/mixins/DashboardBase"
 import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
 export default {
   name: "Dashboard-Images",
-  mixins: [DashboardAlertsMixin],
+  mixins: [DashboardBaseMixin, DashboardAlertsMixin],
   data() {
     return {
-      whichButton: "",
-      images: [],
-      fields: [],
-      selected: {},
-      lastResponse: {}
+      componentIgnoredFields: ["build", "project"],
+      optionalFields: [],
+      type: {singular: "image", plural: "images"},
+      api: ImagesAPI
     }
   },
   beforeRouteEnter(to, from, next) {
-    ImagesAPI.getImages().then(
+    ImagesAPI.get().then(
       images => {
         next(vm => vm.setData(images))
       }
     )
   },
-  methods: {
-    setData(images) {
-      this.images = images.data
-
-      for(const field of Object.keys(this.images[0])) {
-        if(field !== "id" && field !== "build" && field !== "project") {
-          this.fields.push(field)
-        }
-      }
-    },
-    requiredField(field) {
-      // These are the nullable fields.
-      // Note: Currently all fields are required.  Update the conditional if
-      // this changes in the future.
-      if(field === "") {
-        return false
-      }
-
-      return true
-    },
-    routeFormSubmission() {
-      if(this.whichButton === "addUpdate") {
-        this.addUpdateEntry()
-      }
-      else if(this.whichButton === "delete") {
-        this.deleteEntry()
-      }
-    },
-    async addUpdateEntry() {
-      if(this.selected.id) {
-        // Update existing (PUT)
-        this.lastResponse = await ImagesAPI.updateImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
-      }
-      else {
-        // Add new (POST)
-        this.lastResponse = await ImagesAPI.addImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
-      }
-
-      if(this.lastResponse.status === 200) {
-        const updatedImages = await ImagesAPI.getImages()
-        if(updatedImages.status === 200) {
-          this.images = updatedImages.data
-          this.success("image")
-        }
-        else {
-          this.retrievalError("images")
-        }
-      }
-      else {
-        this.addUpdateError("image")
-      }
-    },
-    async deleteEntry() {
-      let shouldDelete = confirm("Are you sure you want to delete image " + this.selected.id + "?")
-
-      if(shouldDelete && this.selected.id) {
-        this.lastResponse = await ImagesAPI.deleteImage(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
-
-        if(this.lastResponse.status === 200) {
-          const updatedImages = await ImagesAPI.getImages()
-          if(updatedImages.status === 200) {
-            this.images = updatedImages.data
-            this.selected = {}
-            this.success("image")
-          }
-          else {
-            this.retrieveError("images")
-          }
-        }
-        else {
-          this.deleteError("image")
-        }
-      }
-    }
-  }
+  methods: {}
 }
 </script>
 

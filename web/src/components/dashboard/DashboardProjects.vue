@@ -2,7 +2,7 @@
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
       <option :value="{}">Add new project</option>
-      <option v-for="project in projects" :key="project.id" :value="project">[{{ project.active ? "A" : "I" }}] Edit {{ project.id }}: {{ project.title }}</option>
+      <option v-for="project in items" :key="project.id" :value="project">[{{ project.active ? "A" : "I" }}] Edit {{ project.id }}: {{ project.title }}</option>
     </select>
 
     <br />
@@ -25,38 +25,29 @@
 
 <script>
 import ProjectsAPI from "@/utils/api/projects"
+import DashboardBaseMixin from "@/mixins/DashboardBase"
 import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
 export default {
   name: "Dashboard-Projects",
-  mixins: [DashboardAlertsMixin],
+  mixins: [DashboardBaseMixin, DashboardAlertsMixin],
   data() {
     return {
-      whichButton: "",
-      projects: [],
-      fields: [],
-      selected: {},
-      lastResponse: {}
+      componentIgnoredFields: [],
+      optionalFields: ["webUrl", "images"],
+      type: {singular: "project", plural: "projects"},
+      api: ProjectsAPI
     }
   },
   beforeRouteEnter(to, from, next) {
-    ProjectsAPI.getProjects().then(
+    ProjectsAPI.get().then(
       projects => {
         next(vm => vm.setData(projects))
       }
     )
   },
   methods: {
-    setData(projects) {
-      this.projects = this.flattenProjectData(projects)
-
-      for(const field of Object.keys(this.projects[0])) {
-        if(field !== "id" && field !== "active") {
-          this.fields.push(field)
-        }
-      }
-    },
-    flattenProjectData(projects) {
+    flattenData(projects) {
       // The images for each project is an array of objects. Since the API only
       // takes an array of image IDs when creating/updating the images of a
       // project, we can modify the image field of the data we received from
@@ -74,68 +65,6 @@ export default {
       }
 
       return flatProjects
-    },
-    requiredField(field) {
-      // These are the nullable fields.
-      if(field === "webUrl" || field === "images") {
-        return false
-      }
-
-      return true
-    },
-    routeFormSubmission() {
-      if(this.whichButton === "addUpdate") {
-        this.addUpdateEntry()
-      }
-      else if(this.whichButton === "delete") {
-        this.deleteEntry()
-      }
-    },
-    async addUpdateEntry() {
-      if(this.selected.id) {
-        // Update existing (PUT)
-        this.lastResponse = await ProjectsAPI.updateProject(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
-      }
-      else {
-        // Add new (POST)
-        this.lastResponse = await ProjectsAPI.addProject(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
-      }
-
-      if(this.lastResponse.status === 200) {
-        const updatedProjects = await ProjectsAPI.getProjects()
-        if(updatedProjects.status === 200) {
-          this.projects = this.flattenProjectData(updatedProjects)
-          this.success("project")
-        }
-        else {
-          this.retrievalError("projects")
-        }
-      }
-      else {
-        this.addUpdateError("project")
-      }
-    },
-    async deleteEntry() {
-      let shouldDelete = confirm("Are you sure you want to delete project " + this.selected.id + "?")
-
-      if(shouldDelete && this.selected.id) {
-        this.lastResponse = await ProjectsAPI.deleteProject(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
-
-        if(this.lastResponse.status === 200) {
-          const updatedProjects = await ProjectsAPI.getProjects()
-          if(updatedProjects.status === 200) {
-            this.projects = this.flattenProjectData(updatedProjects)
-            this.selected = {}
-            this.success("project")
-          }
-          else {
-            this.retrieveError("projects")
-          }
-        }
-        else {
-          this.deleteError("project")
-        }
-      }
     }
   }
 }

@@ -70,7 +70,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    ProjectsAPI.getProjects().then(
+    ProjectsAPI.get().then(
       projects => {
         next(vm => vm.setData(projects))
       }
