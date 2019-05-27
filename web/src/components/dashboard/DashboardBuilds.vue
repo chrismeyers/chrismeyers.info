@@ -7,11 +7,11 @@
     <br />
 
     <form @submit.prevent="routeFormSubmission">
-      <span><b>active:</b></span><br />
-      <input type="checkbox" v-model="selected.active"><br />
-      <template v-for="(field, index) in fields">
-        <span :key="index + '-span'"><b>{{ field }}:</b></span><span :key="index + '-req'" v-if="requiredField(field)" class="required-star"></span>
-        <input class="inputbox-mod dashboard-text" type="text" v-model="selected[field]" :placeholder="field" :key="index + '-input'" :required="requiredField(field)">
+      <template v-for="(field, index) in schema">
+        <span :key="index + '-span'"><b>{{ field.field }}:</b></span><span :key="index + '-req'" v-if="field.required" class="required-star"></span>
+        <template v-if="field.tag === 'input'">
+          <input class="inputbox-mod dashboard-text" :type="field.type" v-model="selected[field.field]" :placeholder="field.field" :key="index + '-input'" :required="field.required">
+        </template>
       </template>
 
       <div class="dashboard-buttons">
@@ -32,16 +32,14 @@ export default {
   mixins: [DashboardBaseMixin, DashboardAlertsMixin],
   data() {
     return {
-      componentIgnoredFields: [],
-      optionalFields: ["cool", "ssd", "image"],
       type: {singular: "build", plural: "builds"},
       api: BuildsAPI
     }
   },
   beforeRouteEnter(to, from, next) {
     BuildsAPI.get().then(
-      items => {
-        next(vm => vm.setData(items))
+      builds => {
+        next(vm => vm.setData(builds))
       }
     )
   },
@@ -52,14 +50,14 @@ export default {
       // the image field of the data we received from the GET to only include
       // the image ID.
       let flatBuilds = []
-      for(let build of builds.data) {
+      for(let build of builds.data.items) {
         if(build.image) {
           build.image = build.image.id
         }
         flatBuilds.push(build)
       }
 
-      return [this.createBlankEntry(builds.data[0]), ...flatBuilds]
+      return [this.createBlankEntry(builds.data.items[0]), ...flatBuilds]
     }
   }
 }

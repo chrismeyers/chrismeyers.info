@@ -42,9 +42,9 @@ void main(List<String> arguments) async {
     const JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
     final Map json = {
-      "images": cleanImagesJson(decoder.convert(images) as List),
-      "builds": cleanBuildsJson(decoder.convert(builds) as List),
-      "projects": cleanProjectsJson(decoder.convert(projects) as List)
+      "images": cleanImagesJson(decoder.convert(images)["items"] as List),
+      "builds": cleanBuildsJson(decoder.convert(builds)["items"] as List),
+      "projects": cleanProjectsJson(decoder.convert(projects)["items"] as List)
     };
 
     await File(join(dirname(Platform.script.path), "seed.json")).writeAsString(encoder.convert(json));
