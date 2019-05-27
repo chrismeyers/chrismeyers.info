@@ -11,7 +11,7 @@
       <span><b>active:</b></span><br />
       <input type="checkbox" v-model="selected['active']"><br />
       <template v-for="(field, index) in fields">
-        <span :key="index + '-span'"><b>{{ field }}:</b></span>
+        <span :key="index + '-span'"><b>{{ field }}:</b></span><span :key="index + '-req'" v-if="requiredField(field)" class="required-star"></span>
         <input class="inputbox-mod dashboard-text" type="text" v-model="selected[field]" :placeholder="field" :key="index + '-input'" :required="requiredField(field)">
       </template>
 
