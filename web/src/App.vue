@@ -207,6 +207,7 @@ h2.top {
 }
 
 input.inputbox-mod[type="text"],
+input.inputbox-mod[type="password"],
 input.inputbox-mod[type="url"],
 input.inputbox-mod[type="number"],
 textarea.textarea-mod {
@@ -219,6 +220,7 @@ textarea.textarea-mod {
   font-family: "Open Sans", sans-serif;
 }
 input.inputbox-mod:focus[type="text"],
+input.inputbox-mod:focus[type="password"],
 input.inputbox-mod:focus[type="url"],
 input.inputbox-mod:focus[type="number"],
 textarea.textarea-mod:focus {
