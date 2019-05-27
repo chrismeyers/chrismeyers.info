@@ -7,11 +7,14 @@
     <br />
 
     <form @submit.prevent="routeFormSubmission">
-      <span><b>active:</b></span><br />
-      <input type="checkbox" v-model="selected.active"><br />
-      <template v-for="(field, index) in fields">
-        <span :key="index + '-span'"><b>{{ field }}:</b></span><span :key="index + '-req'" v-if="requiredField(field)" class="required-star"></span>
-        <input class="inputbox-mod dashboard-text" type="text" v-model="selected[field]" :placeholder="field" :key="index + '-input'" :required="requiredField(field)">
+      <template v-for="(field, index) in schema">
+        <span :key="index + '-span'"><b>{{ field.field }}:</b></span><span :key="index + '-req'" v-if="field.required" class="required-star"></span>
+        <template v-if="field.tag === 'input'">
+          <input class="inputbox-mod dashboard-text" :type="field.type" v-model="selected[field.field]" :placeholder="field.field" :key="index + '-input'" :required="field.required">
+        </template>
+        <template v-else-if="field.tag === 'textarea'">
+          <textarea class="textarea-mod dashboard-text" v-model="selected[field.field]" :placeholder="field.field" :key="index + '-textarea'" :required="field.required"></textarea>
+        </template>
       </template>
 
       <div class="dashboard-buttons">
@@ -32,8 +35,6 @@ export default {
   mixins: [DashboardBaseMixin, DashboardAlertsMixin],
   data() {
     return {
-      componentIgnoredFields: [],
-      optionalFields: ["webUrl", "images"],
       type: {singular: "project", plural: "projects"},
       api: ProjectsAPI
     }
@@ -52,7 +53,7 @@ export default {
       // project, we can modify the image field of the data we received from
       // the GET to only include an comma separated list of image IDs.
       let flatProjects = []
-      for(let project of projects.data) {
+      for(let project of projects.data.items) {
         if(project.images) {
           let imageIds = []
           for(let image of project.images) {
@@ -63,7 +64,7 @@ export default {
         flatProjects.push(project)
       }
 
-      return [this.createBlankEntry(projects.data[0]), ...flatProjects]
+      return [this.createBlankEntry(projects.data.items[0]), ...flatProjects]
     }
   }
 }
