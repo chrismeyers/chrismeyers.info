@@ -66,6 +66,14 @@ export default {
         const updated = await this.api.get()
         if(updated.status === 200) {
           this.items = this.flattenData(updated)
+          this.selected = (() => {
+            for(const [i, item] of this.items.entries()) {
+              if(item.id === this.lastResponse.data.id) {
+                return this.items[i]
+              }
+            }
+            return this.items[0]
+          })()
           this.success(this.type.singular)
         }
         else {
