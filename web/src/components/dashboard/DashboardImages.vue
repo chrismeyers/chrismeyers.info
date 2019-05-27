@@ -6,9 +6,7 @@
 
     <br />
 
-    <template v-if="selected.id > 0">
-      <img :src="selected.path" class="img-preview">
-    </template>
+    <img v-if="selected.path" :src="selected.path" class="img-preview">
 
     <form @submit.prevent="routeFormSubmission">
       <template v-for="(field, index) in fields">
