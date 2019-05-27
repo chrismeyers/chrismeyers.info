@@ -7,8 +7,6 @@
     <br />
 
     <form @submit.prevent="routeFormSubmission">
-      <span><b>active:</b></span><br />
-      <input type="checkbox" v-model="selected.active"><br />
       <template v-for="(field, index) in schema">
         <span :key="index + '-span'"><b>{{ field.field }}:</b></span><span :key="index + '-req'" v-if="field.required" class="required-star"></span>
         <template v-if="field.tag === 'input'">
