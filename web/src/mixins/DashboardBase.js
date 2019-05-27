@@ -19,9 +19,22 @@ export default {
           this.fields.push(field)
         }
       }
+
+      this.selected = this.items[0]
     },
     flattenData(items) {
-      return items.data
+      return [this.createBlankEntry(items.data[0]), ...items.data]
+    },
+    createBlankEntry(template) {
+      // Adds a blank entry as a placeholder for new items.
+      let blank = {id: -1}
+      for(const field of Object.keys(template)) {
+        if(!this.ignoredFields.includes(field)) {
+          blank[field] = null
+        }
+      }
+
+      return blank
     },
     requiredField(field) {
       // These are the nullable fields.
@@ -40,7 +53,7 @@ export default {
       }
     },
     async addUpdateEntry() {
-      if(this.selected.id) {
+      if(this.selected.id > 0) {
         // Update existing (PUT)
         this.lastResponse = await this.api.update(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
       }
@@ -73,7 +86,7 @@ export default {
           const updated = await this.api.get()
           if(updated.status === 200) {
             this.items = this.flattenData(updated)
-            this.selected = {}
+            this.selected = this.items[0]
             this.success(this.type.singular)
           }
           else {

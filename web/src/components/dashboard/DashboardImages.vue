@@ -1,13 +1,12 @@
 <template>
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
-      <option :value="{}">Add new image</option>
-      <option v-for="image in items" :key="image.id" :value="image">Edit {{ image.id }}: {{ image.path }}</option>
+      <option v-for="image in items" :key="image.id" :value="image">{{ (image.id > 0) ? ("Edit " + image.id + ": " + image.path) : "Add new image" }}</option>
     </select>
 
     <br />
 
-    <template v-if="selected.id">
+    <template v-if="selected.id > 0">
       <img :src="selected.path" class="img-preview">
     </template>
 
@@ -18,8 +17,8 @@
       </template>
 
       <div class="dashboard-buttons">
-        <input class="submit-button dashboard-button" type="submit" @click="whichButton = 'addUpdate'" :value="selected.id ? 'Update' : 'Add'">
-        <input class="submit-button delete-button" type="submit" @click="whichButton = 'delete'" v-if="selected.id" value="Delete">
+        <input class="submit-button dashboard-button" type="submit" @click="whichButton = 'addUpdate'" :value="(selected.id > 0) ? 'Update' : 'Add'">
+        <input class="submit-button delete-button" type="submit" @click="whichButton = 'delete'" v-if="selected.id > 0" value="Delete">
       </div>
     </form>
   </div>
