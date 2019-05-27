@@ -7,16 +7,17 @@ class ProjectsPublicController extends ResourceController {
 
   ManagedContext context;
   List<Map<String, dynamic>> schema = [
-    {"field": "title",   "tag": "input",    "type": "text",   "required": true},
-    {"field": "webUrl",  "tag": "input",    "type": "url",    "required": false},
-    {"field": "codeUrl", "tag": "input",    "type": "url",    "required": true},
-    {"field": "date",    "tag": "input",    "type": "text",   "required": true},
-    {"field": "started", "tag": "input",    "type": "number", "required": true},
-    {"field": "lang",    "tag": "input",    "type": "text",   "required": true},
-    {"field": "info",    "tag": "textarea", "type": "text",   "required": true},
-    {"field": "role",    "tag": "input",    "type": "text",   "required": true},
-    {"field": "stat",    "tag": "input",    "type": "text",   "required": true},
-    {"field": "images",  "tag": "input",    "type": "text",   "required": false}
+    {"field": "active",  "tag": "input",    "type": "checkbox", "required": false},
+    {"field": "title",   "tag": "input",    "type": "text",     "required": true},
+    {"field": "webUrl",  "tag": "input",    "type": "url",      "required": false},
+    {"field": "codeUrl", "tag": "input",    "type": "url",      "required": true},
+    {"field": "date",    "tag": "input",    "type": "text",     "required": true},
+    {"field": "started", "tag": "input",    "type": "number",   "required": true},
+    {"field": "lang",    "tag": "input",    "type": "text",     "required": true},
+    {"field": "info",    "tag": "textarea", "type": "text",     "required": true},
+    {"field": "role",    "tag": "input",    "type": "text",     "required": true},
+    {"field": "stat",    "tag": "input",    "type": "text",     "required": true},
+    {"field": "images",  "tag": "input",    "type": "text",     "required": false}
   ];
 
   @Operation.get()

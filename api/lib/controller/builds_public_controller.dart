@@ -7,16 +7,17 @@ class BuildsPublicController extends ResourceController {
 
   ManagedContext context;
   List<Map<String, dynamic>> schema = [
-    {"field": "date",    "tag": "input", "type": "text",   "required": true},
-    {"field": "started", "tag": "input", "type": "number", "required": true},
-    {"field": "cpu",     "tag": "input", "type": "text",   "required": true},
-    {"field": "cool",    "tag": "input", "type": "text",   "required": false},
-    {"field": "mobo",    "tag": "input", "type": "text",   "required": true},
-    {"field": "ram",     "tag": "input", "type": "text",   "required": true},
-    {"field": "hdd",     "tag": "input", "type": "text",   "required": true},
-    {"field": "ssd",     "tag": "input", "type": "text",   "required": false},
-    {"field": "gpu",     "tag": "input", "type": "text",   "required": true},
-    {"field": "image",   "tag": "input", "type": "text",   "required": false}
+    {"field": "active",  "tag": "input", "type": "checkbox", "required": false},
+    {"field": "date",    "tag": "input", "type": "text",     "required": true},
+    {"field": "started", "tag": "input", "type": "number",   "required": true},
+    {"field": "cpu",     "tag": "input", "type": "text",     "required": true},
+    {"field": "cool",    "tag": "input", "type": "text",     "required": false},
+    {"field": "mobo",    "tag": "input", "type": "text",     "required": true},
+    {"field": "ram",     "tag": "input", "type": "text",     "required": true},
+    {"field": "hdd",     "tag": "input", "type": "text",     "required": true},
+    {"field": "ssd",     "tag": "input", "type": "text",     "required": false},
+    {"field": "gpu",     "tag": "input", "type": "text",     "required": true},
+    {"field": "image",   "tag": "input", "type": "text",     "required": false}
   ];
 
   @Operation.get()
