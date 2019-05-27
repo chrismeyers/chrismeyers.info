@@ -2,7 +2,7 @@ import axios from "axios"
 
 export default {
   // GET Methods
-  getImages() {
+  get() {
     return axios
       .get("/public/images")
       .then(response => {
@@ -14,7 +14,7 @@ export default {
   },
 
   // POST Methods
-  addImage(token, image) {
+  add(token, image) {
     return axios({
       method: "post",
       url: "/admin/images",
@@ -37,7 +37,7 @@ export default {
   },
 
   // PUT Methods
-  updateImage(token, image) {
+  update(token, image) {
     const imageId = image.id
 
     return axios({
@@ -62,7 +62,7 @@ export default {
   },
 
   // DELETE Methods
-  deleteImage(token, image) {
+  delete(token, image) {
     const imageId = image.id
 
     return axios({

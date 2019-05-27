@@ -58,7 +58,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    BuildsAPI.getBuilds().then(
+    BuildsAPI.get().then(
       builds => {
         next(vm => vm.setData(builds))
       }

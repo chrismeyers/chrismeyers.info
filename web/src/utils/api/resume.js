@@ -2,7 +2,7 @@ import axios from "axios"
 
 export default {
   // GET Methods
-  getResume() {
+  get() {
     return axios
       .get("/public/resume")
       .then(response => {

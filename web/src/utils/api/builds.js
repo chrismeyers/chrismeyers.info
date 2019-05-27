@@ -2,7 +2,7 @@ import axios from "axios"
 
 export default {
   // GET Methods
-  getBuilds() {
+  get() {
     return axios
       .get("/public/builds")
       .then(response => {
@@ -14,7 +14,7 @@ export default {
   },
 
   // POST Methods
-  addBuild(token, build) {
+  add(token, build) {
     return axios({
       method: "post",
       url: "/admin/builds",
@@ -44,7 +44,7 @@ export default {
   },
 
   // PUT Methods
-  updateBuild(token, build) {
+  update(token, build) {
     const buildId = build.id
 
     return axios({
@@ -76,7 +76,7 @@ export default {
   },
 
   // DELETE Methods
-  deleteBuild(token, build) {
+  delete(token, build) {
     const buildId = build.id
 
     return axios({

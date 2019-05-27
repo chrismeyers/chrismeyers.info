@@ -70,7 +70,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    ResumeAPI.getResume().then(
+    ResumeAPI.get().then(
       resume => {
         next(vm => vm.setData(resume))
       }
