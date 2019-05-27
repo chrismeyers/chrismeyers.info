@@ -40,8 +40,8 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     BuildsAPI.get().then(
-      items => {
-        next(vm => vm.setData(items))
+      builds => {
+        next(vm => vm.setData(builds))
       }
     )
   },
@@ -52,14 +52,14 @@ export default {
       // the image field of the data we received from the GET to only include
       // the image ID.
       let flatBuilds = []
-      for(let build of builds.data) {
+      for(let build of builds.data.items) {
         if(build.image) {
           build.image = build.image.id
         }
         flatBuilds.push(build)
       }
 
-      return [this.createBlankEntry(builds.data[0]), ...flatBuilds]
+      return [this.createBlankEntry(builds.data.items[0]), ...flatBuilds]
     }
   }
 }

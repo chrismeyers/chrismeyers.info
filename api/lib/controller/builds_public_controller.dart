@@ -6,6 +6,18 @@ class BuildsPublicController extends ResourceController {
   BuildsPublicController(this.context);
 
   ManagedContext context;
+  List<Map<String, dynamic>> schema = [
+    {"field": "date",    "tag": "input", "type": "text",   "required": true},
+    {"field": "started", "tag": "input", "type": "number", "required": true},
+    {"field": "cpu",     "tag": "input", "type": "text",   "required": true},
+    {"field": "cool",    "tag": "input", "type": "text",   "required": false},
+    {"field": "mobo",    "tag": "input", "type": "text",   "required": true},
+    {"field": "ram",     "tag": "input", "type": "text",   "required": true},
+    {"field": "hdd",     "tag": "input", "type": "text",   "required": true},
+    {"field": "ssd",     "tag": "input", "type": "text",   "required": false},
+    {"field": "gpu",     "tag": "input", "type": "text",   "required": true},
+    {"field": "image",   "tag": "input", "type": "text",   "required": false}
+  ];
 
   @Operation.get()
   Future<Response> getBuilds() async {
@@ -14,7 +26,7 @@ class BuildsPublicController extends ResourceController {
       ..sortBy((b) => b.started, QuerySortOrder.ascending);
     final List<Build> allBuilds = await query.fetch();
 
-    return Response.ok(allBuilds);
+    return Response.ok({"items": allBuilds.map((value) => value.asMap()).toList(), "schema": schema});
   }
 
   @Operation.get("id")

@@ -3,6 +3,7 @@ export default {
     return {
       whichButton: "",
       items: [],
+      schema: [],
       fields: [],
       selected: {},
       lastResponse: {},
@@ -10,9 +11,10 @@ export default {
     }
   },
   methods: {
-    setData(items) {
+    setData(response) {
       this.ignoredFields = [...this.ignoredFields, ...this.componentIgnoredFields]
-      this.items = this.flattenData(items)
+      this.items = this.flattenData(response)
+      this.schema = response.data.schema
 
       for(const field of Object.keys(this.items[0])) {
         if(!this.ignoredFields.includes(field)) {
@@ -22,8 +24,8 @@ export default {
 
       this.selected = this.items[0]
     },
-    flattenData(items) {
-      return [this.createBlankEntry(items.data[0]), ...items.data]
+    flattenData(response) {
+      return [this.createBlankEntry(response.data.items[0]), ...response.data.items]
     },
     createBlankEntry(template) {
       // Adds a blank entry as a placeholder for new items.
