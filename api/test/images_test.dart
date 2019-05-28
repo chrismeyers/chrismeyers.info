@@ -9,23 +9,28 @@ Future main() async {
 
   test("GET /public/images returns 200 - empty list", () async {
     final TestResponse response = await harness.publicAgent.get("/public/images");
-
-    expectResponse(response, 200, body: hasLength(equals(0)));
+    expectResponse(response, 200, body: {
+      "items": [],
+      "schema": isList
+    });
   });
 
   test("GET /public/images returns 200 - one image", () async {
     await queries.insertImage();
 
     final TestResponse response = await harness.publicAgent.get("/public/images");
-    expectResponse(response, 200, body: [{
-      "id": greaterThan(0),
-      "path": "/path/to/image.jpg",
-      "title": "A cool image",
-      "pos": 1,
-      "orient": "port",
-      "build": null,
-      "project": null
-    }]);
+    expectResponse(response, 200, body: {
+      "items": [{
+        "id": greaterThan(0),
+        "path": "/path/to/image.jpg",
+        "title": "A cool image",
+        "pos": 1,
+        "orient": "port",
+        "build": null,
+        "project": null
+      }],
+      "schema": isList
+    });
   });
 
   test("GET /public/images/:id returns 200 - matching ID", () async {
