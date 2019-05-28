@@ -210,7 +210,8 @@ input.inputbox-mod[type="text"],
 input.inputbox-mod[type="password"],
 input.inputbox-mod[type="url"],
 input.inputbox-mod[type="number"],
-textarea.textarea-mod {
+textarea.textarea-mod,
+select.select-scroll-mod {
   height: 25px;
   width: calc(100% - 5px - 5px - 2px); /* 100% - padding-left - padding-right - (2 * border size) */
   padding-left: 5px;
@@ -223,7 +224,8 @@ input.inputbox-mod:focus[type="text"],
 input.inputbox-mod:focus[type="password"],
 input.inputbox-mod:focus[type="url"],
 input.inputbox-mod:focus[type="number"],
-textarea.textarea-mod:focus {
+textarea.textarea-mod:focus,
+select.select-scroll-mod:focus {
   outline: none;
   border-color: #5bb75b;
 }
@@ -235,6 +237,13 @@ input.inputbox-mod[type="checkbox"] {
 textarea.textarea-mod {
   resize: vertical;
   height: 100px;
+}
+
+select.select-scroll-mod {
+  width: 100%;
+  height: 192px;
+  padding: 0px;
+  display: block;
 }
 
 /* This button was generated using CSSButtonGenerator.com */

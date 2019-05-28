@@ -4,6 +4,7 @@ export default {
       whichButton: "",
       items: [],
       schema: [],
+      images: [],
       selected: {},
       lastResponse: {}
     }
@@ -13,6 +14,9 @@ export default {
       this.items = this.flattenData(response)
       this.schema = response.data.schema
       this.selected = this.items[0]
+    },
+    setImages(response) {
+      this.images = response.data.items
     },
     flattenData(response) {
       return [this.createBlankEntry(response.data.items[0]), ...response.data.items]
