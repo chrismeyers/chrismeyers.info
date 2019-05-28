@@ -10,27 +10,33 @@ Future main() async {
 
   test("GET /public/builds returns 200 - empty list", () async {
     final TestResponse response = await harness.publicAgent.get("/public/builds");
-    expectResponse(response, 200, body: hasLength(equals(0)));
+    expectResponse(response, 200, body: {
+      "items": [],
+      "schema": isList
+    });
   });
 
   test("GET /public/builds returns 200 - one build", () async {
     await queries.insertBuild();
 
     final TestResponse response = await harness.publicAgent.get("/public/builds");
-    expectResponse(response, 200, body: [{
-      "id": greaterThan(0),
-      "date": "Sometime long ago",
-      "started": 20130101,
-      "cpu": "Very Fast 9000",
-      "cool": "Very Cold",
-      "mobo": "Lots of LEDs",
-      "ram": "Lots of memory",
-      "hdd": "Much storage",
-      "ssd": "Much fast storage",
-      "gpu": "Nice graphics",
-      "image": null,
-      "active": true
-    }]);
+    expectResponse(response, 200, body: {
+      "items": [{
+        "id": greaterThan(0),
+        "date": "Sometime long ago",
+        "started": 20130101,
+        "cpu": "Very Fast 9000",
+        "cool": "Very Cold",
+        "mobo": "Lots of LEDs",
+        "ram": "Lots of memory",
+        "hdd": "Much storage",
+        "ssd": "Much fast storage",
+        "gpu": "Nice graphics",
+        "image": null,
+        "active": true
+      }],
+      "schema": isList
+    });
   });
 
   test("GET /public/builds/:id returns 200 - matching ID", () async {

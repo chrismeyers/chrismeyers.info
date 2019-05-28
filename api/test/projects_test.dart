@@ -10,27 +10,33 @@ Future main() async {
 
   test("GET /public/projects returns 200 - empty list", () async {
     final TestResponse response = await harness.publicAgent.get("/public/projects");
-    expectResponse(response, 200, body: hasLength(equals(0)));
+    expectResponse(response, 200, body: {
+      "items": [],
+      "schema": isList
+    });
   });
 
   test("GET /public/projects returns 200 - one project", () async {
     await queries.insertProject();
 
     final TestResponse response = await harness.publicAgent.get("/public/projects");
-    expectResponse(response, 200, body: [{
-      "id": greaterThan(0),
-      "title": "A cool project",
-      "webUrl": "https://project.website",
-      "codeUrl": "https://project.code",
-      "date": "A very long time ago",
-      "started": 20130101,
-      "lang": "Machine Code",
-      "info": "I don't know, something",
-      "role": "Solo Project",
-      "stat": "Complete",
-      "images": [],
-      "active": true
-    }]);
+    expectResponse(response, 200, body: {
+      "items": [{
+        "id": greaterThan(0),
+        "title": "A cool project",
+        "webUrl": "https://project.website",
+        "codeUrl": "https://project.code",
+        "date": "A very long time ago",
+        "started": 20130101,
+        "lang": "Machine Code",
+        "info": "I don't know, something",
+        "role": "Solo Project",
+        "stat": "Complete",
+        "images": [],
+        "active": true
+      }],
+      "schema": isList
+    });
   });
 
   test("GET /public/projects/:id returns 200 - matching ID", () async {
