@@ -17,7 +17,7 @@ class ProjectsPublicController extends ResourceController {
     {"field": "info",    "tag": "textarea", "type": "text",     "required": true},
     {"field": "role",    "tag": "input",    "type": "text",     "required": true},
     {"field": "stat",    "tag": "input",    "type": "text",     "required": true},
-    {"field": "images",  "tag": "input",    "type": "text",     "required": false}
+    {"field": "images",  "tag": "select",   "multiple": true,   "required": false}
   ];
 
   @Operation.get()
