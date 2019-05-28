@@ -15,6 +15,12 @@
         <template v-else-if="field.tag === 'textarea'">
           <textarea class="textarea-mod dashboard-text" v-model="selected[field.field]" :placeholder="field.field" :key="index + '-textarea'" :required="field.required"></textarea>
         </template>
+        <template v-else-if="field.tag === 'select'">
+          <a class="fancytxt clear-button" :key="index - '-clear'" @click="selected.images = []">clear</a>
+          <select class="select-scroll-mod" size="10" :key="index + '-select'" :multiple="field.multiple" v-model="selected.images">
+            <option v-for="image in images" :key="image.id" :value="image.id">{{ "Image " + image.id + ": " + image.path }}</option>
+          </select>
+        </template>
       </template>
 
       <div class="dashboard-buttons">
@@ -27,6 +33,7 @@
 
 <script>
 import ProjectsAPI from "@/utils/api/projects"
+import ImagesAPI from "@/utils/api/images"
 import DashboardBaseMixin from "@/mixins/DashboardBase"
 import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
@@ -39,12 +46,13 @@ export default {
       api: ProjectsAPI
     }
   },
-  beforeRouteEnter(to, from, next) {
-    ProjectsAPI.get().then(
-      projects => {
-        next(vm => vm.setData(projects))
-      }
-    )
+  async beforeRouteEnter(to, from, next) {
+    let projects = await ProjectsAPI.get()
+    let images = await ImagesAPI.get()
+    next(vm => {
+      vm.setData(projects)
+      vm.setImages(images)
+    })
   },
   methods: {
     flattenData(projects) {
@@ -59,12 +67,15 @@ export default {
           for(let image of project.images) {
             imageIds.push(image.id)
           }
-          project.images = imageIds.join()
+          project.images = imageIds
         }
         flatProjects.push(project)
       }
 
-      return [this.createBlankEntry(projects.data.items[0]), ...flatProjects]
+      // The images select requires the model to be an array, not null
+      let blank = this.createBlankEntry(projects.data.items[0])
+      blank.images = []
+      return [blank, ...flatProjects]
     }
   }
 }
