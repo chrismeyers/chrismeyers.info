@@ -12,6 +12,12 @@
         <template v-if="field.tag === 'input'">
           <input class="inputbox-mod dashboard-text" :type="field.type" v-model="selected[field.field]" :placeholder="field.field" :key="index + '-input'" :required="field.required">
         </template>
+        <template v-else-if="field.tag === 'select'">
+          <a class="fancytxt clear-button" :key="index - '-clear'" @click="selected.image = null">clear</a>
+          <select class="select-scroll-mod" size="10" :key="index + '-select'" :multiple="field.multiple" v-model="selected.image">
+            <option v-for="image in images" :key="image.id" :value="image.id">{{ "Image " + image.id + ": " + image.path }}</option>
+          </select>
+        </template>
       </template>
 
       <div class="dashboard-buttons">
@@ -24,6 +30,7 @@
 
 <script>
 import BuildsAPI from "@/utils/api/builds"
+import ImagesAPI from "@/utils/api/images"
 import DashboardBaseMixin from "@/mixins/DashboardBase"
 import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
@@ -36,12 +43,13 @@ export default {
       api: BuildsAPI
     }
   },
-  beforeRouteEnter(to, from, next) {
-    BuildsAPI.get().then(
-      builds => {
-        next(vm => vm.setData(builds))
-      }
-    )
+  async beforeRouteEnter(to, from, next) {
+    let builds = await BuildsAPI.get()
+    let images = await ImagesAPI.get()
+    next(vm => {
+      vm.setData(builds)
+      vm.setImages(images)
+    })
   },
   methods: {
     flattenData(builds) {

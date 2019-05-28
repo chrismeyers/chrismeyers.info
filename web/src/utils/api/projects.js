@@ -15,8 +15,6 @@ export default {
 
   // POST Methods
   add(token, project) {
-    const images = imagesStringToArray(project.images)
-
     return axios({
       method: "post",
       url: "/admin/projects",
@@ -33,7 +31,7 @@ export default {
         "info": project.info,
         "role": project.role,
         "stat": project.stat,
-        "images": images,
+        "images": project.images,
         "active": ("active" in project && project.active) ? true : false
       }
     })
@@ -48,7 +46,6 @@ export default {
   // PUT Methods
   update(token, project) {
     const projectId = project.id
-    const images = imagesStringToArray(project.images)
 
     return axios({
       method: "put",
@@ -66,7 +63,7 @@ export default {
         "info": project.info,
         "role": project.role,
         "stat": project.stat,
-        "images": images,
+        "images": project.images,
         "active": ("active" in project && project.active) ? true : false
       }
     })
@@ -96,17 +93,4 @@ export default {
       return err.response
     })
   }
-}
-
-function imagesStringToArray(imagesStr) {
-  if(typeof imagesStr == "undefined" || imagesStr == null) {
-    return []
-  }
-
-  return imagesStr.split(",").filter(i => {
-    if(i === "") {
-      return false
-    }
-    return true
-  }).map(i => parseInt(i.trim()))
 }
