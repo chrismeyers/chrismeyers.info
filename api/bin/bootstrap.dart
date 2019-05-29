@@ -1,22 +1,26 @@
 #!/usr/bin/env dart
 /**
  * bootstrap.dart
- *   -m, --mode        Specifies the API that should be bootstrapped
- *                     [dev (default), prod]
+ *   -m, --mode                   Specifies the API that should be bootstrapped
+ *                                [dev (default), prod]
  *
- *   -u, --username    Specifies the admin username (required for POST)
- *   -p, --password    Specifies the admin password (required for POST)
- *   -c, --client      Specifies the OAuth 2.0 client (required for POST)
- *   -b, --backup      Updates seed.json with current data
- *   -h, --help        Displays this help information.
+ *   -u, --username               Specifies the admin username (required for POST)
+ *   -p, --password               Specifies the admin password (required for POST)
+ *   -c, --client                 Specifies the OAuth 2.0 client (required for POST)
+ *   -b, --backup                 Updates seed.json with current data
+ *   -r, --register               Creates a new user
+ *       --registration-secret    The secret required to create a user
+ *   -h, --help                   Displays this help information
  *
- * Bootstraps a database with initial data or backs up the current state of a
- * database.  The data is read from or written to seed.json, which should exist
- * in the same directory as this script.
+ * Bootstraps a database with initial data, backs up the current state of a
+ * database, and provides the ability to register users. The data is read
+ * from or written to seed.json, which should exist in the same directory as
+ * this script.
  *
  * Examples:
  *   dart bootstrap.dart -u USER -p PASS -c SOME.CLIENT.NAME -m dev|prod
  *   ./bootstrap.dart --backup -m dev|prod
+ *   bin/bootstrap.dart -r -u USER -p PASS --registration-secret SECRET
  */
 
 import "dart:async";
@@ -49,6 +53,20 @@ void main(List<String> arguments) async {
 
     await File(join(dirname(Platform.script.path), "seed.json")).writeAsString(encoder.convert(json));
   }
+  else if(args["register"] == true) {
+    final resp = await http.post(
+      "$apiBaseUrl/auth/register",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: jsonEncode({
+        "username": args["username"],
+        "password": args["password"],
+        "secret": args["registration-secret"]
+      }));
+
+    print("POST /auth/register ${resp.statusCode} - created user \"${args["username"]}\"");
+  }
   else {
     final String seedStr = File(join(dirname(Platform.script.path), "seed.json")).readAsStringSync();
     final seed = jsonDecode(seedStr);
@@ -74,8 +92,12 @@ void handleArgs(List<String> arguments) {
       help: "Specifies the OAuth 2.0 client (required for POST)")
     ..addFlag("backup", abbr: "b", negatable: false,
       help: "Updates seed.json with current data")
+    ..addFlag("register", abbr: "r", negatable: false,
+      help: "Creates a new user")
+    ..addOption("registration-secret",
+      help: "The secret required to create a user")
     ..addFlag("help", abbr: "h", negatable: false,
-      help: "Displays this help information.");
+      help: "Displays this help information");
 
   try {
     args = argParser.parse(arguments);
@@ -91,10 +113,18 @@ void handleArgs(List<String> arguments) {
     exit(0);
   }
 
-  if(args["backup"] == false && (args["username"] == null || args["password"] == null || args["client"] == null)) {
+  if((args["backup"] == false && args["register"] == false)
+     && (args["username"] == null || args["password"] == null || args["client"] == null)) {
     print("Error: Missing auth credentials.");
     print(argParser.usage);
-    exit(0);
+    exit(1);
+  }
+
+  if(args["register"] == true
+     && (args["username"] == null || args["password"] == null || args["registration-secret"] == null)) {
+    print("Error: Missing username, password, or registration secret.");
+    print(argParser.usage);
+    exit(1);
   }
 
   if(args["mode"] == "dev") {
