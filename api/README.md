@@ -30,7 +30,7 @@ See the documentation for [Deployment](https://aqueduct.io/docs/deploy/).
 2) Copy `config.src.yaml` to `config.yaml` and replace the values with the values from the previous step.
 3) Create `database.yaml` containing the values in the `database` section of `config.yaml`.
 4) Initialize the database tables by running `aqueduct db upgrade`.
-5) Register a user using the `/auth/register` endpoint.
+5) Register a user by sending a POST request to the `/auth/register` endpoint or running the `./bootstrap.dart --register ...` command.
 6) Add an OAuth 2.0 client by running `aqueduct auth add-client --id ...`.
 7) Import the initial data by running `dart bin/bootstrap.dart`.
 8) Copy `../bin/systemd/chrismeyers-info-api.service` to `/etc/systemd/system` and run `sudo systemctl daemon-reload`, `sudo systemctl enable chrismeyers-info-api.service`, and `sudo systemctl start chrismeyers-info-api.service`.
