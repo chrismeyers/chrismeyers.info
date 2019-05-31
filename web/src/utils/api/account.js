@@ -1,4 +1,5 @@
 import axios from "axios"
+import ErrorHandler from "../errors/handler"
 
 export default {
   // PUT Methods
@@ -16,8 +17,8 @@ export default {
     .then(response => {
       return response
     })
-    .catch(err => {
-      return err.response
+    .catch(error => {
+      return ErrorHandler.handle(error)
     })
   }
 }

@@ -49,6 +49,7 @@
 
 <script>
 import BuildsAPI from "@/utils/api/builds"
+import ConnectionError from "@/utils/errors/types/connection"
 
 export default {
   name: "Builds",
@@ -66,10 +67,18 @@ export default {
   },
   methods: {
     setData(builds) {
-      // Only display builds that are set to active.
-      this.builds = builds.data.items.filter(b => {
-        return b.active
-      })
+      if(builds instanceof ConnectionError) {
+        this.$parent.showErrorDialog(builds.title, builds.message)
+      }
+      else if(builds.status === 200) {
+        // Only display builds that are set to active.
+        this.builds = builds.data.items.filter(b => {
+          return b.active
+        })
+      }
+      else {
+        this.$parent.showErrorDialog(builds.statusText, builds.data.error)
+      }
     }
   }
 }

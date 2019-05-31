@@ -1,4 +1,5 @@
 import axios from "axios"
+import ErrorHandler from "../errors/handler"
 
 export default {
   // GET Methods
@@ -8,8 +9,8 @@ export default {
       .then(response => {
         return response
       })
-      .catch(err => {
-        return err.response
+      .catch(error => {
+        return ErrorHandler.handle(error)
       })
   },
   getInfoForAboutPage() {
@@ -18,11 +19,12 @@ export default {
       .then(response => {
         return {
           "langMap": getLanguageExperience(response.data.skills),
-          "currentJob": getCurrentJob(response.data.experience[0])
+          "currentJob": getCurrentJob(response.data.experience[0]),
+          "status": response.status
         }
       })
-      .catch(err => {
-        return err.response
+      .catch(error => {
+        return ErrorHandler.handle(error)
       })
   }
 }

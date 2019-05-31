@@ -3,7 +3,7 @@
     <div class="section-header section-header-size">Login</div>
 
     <div class="content-text">
-      <p v-if="error" style="color: red">Invalid Username or Password</p>
+      <p v-if="error !== ''" style="color: red">{{ error }}</p>
       <form @submit.prevent="login">
         <input class="inputbox-mod login-text" v-model="username" placeholder="Username" type="text" required>
         <input class="inputbox-mod login-text" v-model="password" placeholder="Password" type="password" required>
@@ -15,6 +15,7 @@
 
 <script>
 import AuthAPI from "@/utils/api/auth"
+import ConnectionError from "@/utils/errors/types/connection"
 
 export default {
   name: "Login",
@@ -22,22 +23,28 @@ export default {
     return {
       username: "",
       password: "",
-      error: false
+      error: ""
     }
   },
   methods: {
     login() {
       AuthAPI.login(this.username, this.password).then(
         auth => {
-          if(auth.status === 200) {
-            this.error = false
+          if(auth instanceof ConnectionError) {
+            this.error = auth.message
+          }
+          else if(auth.status === 200) {
+            this.error = ""
             this.$cookie.set("chrismeyers_info_apiToken", auth.data["access_token"], {expires: "1D"})
             this.$router.push({
               path: "/dashboard",
             })
           }
+          else if(auth.status >= 500) {
+            this.error = auth.data.error.charAt(0).toUpperCase() + auth.data.error.slice(1)
+          }
           else {
-            this.error = true
+            this.error = "Invalid Username or Password"
           }
         }
       )
