@@ -1,5 +1,6 @@
 import axios from "axios"
 import qs from "qs"
+import ErrorHandler from "../errors/handler"
 
 export default {
   // POST Methods
@@ -20,8 +21,8 @@ export default {
     .then(response => {
       return response
     })
-    .catch(err => {
-      return err.response
+    .catch(error => {
+      return ErrorHandler.handle(error)
     })
   },
 

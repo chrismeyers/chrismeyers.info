@@ -61,6 +61,7 @@
 
 <script>
 import ProjectsAPI from "@/utils/api/projects"
+import ConnectionError from "@/utils/errors/types/connection"
 
 export default {
   name: "Projects",
@@ -78,10 +79,18 @@ export default {
   },
   methods: {
     setData(projects) {
-      // Only display projects that are set to active.
-      this.projects = projects.data.items.filter(p => {
-        return p.active
-      })
+      if(projects instanceof ConnectionError) {
+        this.$parent.showErrorDialog(projects.title, projects.message)
+      }
+      else if(projects.status === 200) {
+        // Only display projects that are set to active.
+        this.projects = projects.data.items.filter(p => {
+          return p.active
+        })
+      }
+      else {
+        this.$parent.showErrorDialog(projects.statusText, projects.data.error)
+      }
     }
   }
 }

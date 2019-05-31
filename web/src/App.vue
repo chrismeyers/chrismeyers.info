@@ -67,6 +67,20 @@ export default {
           }
         ]
       })
+    },
+    showErrorDialog(title, error) {
+      this.$modal.show("dialog", {
+        title: title,
+        text: error.charAt(0).toUpperCase() + error.slice(1),
+        buttons: [
+          {
+            title: "Proceed",
+            handler: () => {
+              this.$modal.hide("dialog")
+            }
+          }
+        ]
+      })
     }
   }
 }

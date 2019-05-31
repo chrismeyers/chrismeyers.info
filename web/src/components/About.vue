@@ -59,6 +59,7 @@
 
 <script>
 import ResumeAPI from "@/utils/api/resume"
+import ConnectionError from "@/utils/errors/types/connection"
 import EmailTooltipMixin from "@/mixins/EmailTooltip"
 
 export default {
@@ -83,9 +84,17 @@ export default {
       this.$refs.clarkImg.click()
     },
     setData(info) {
-      this.langMap = info.langMap
-      this.currentJob = info.currentJob
-      this.employed = (this.currentJob.dates[1] === "Present")
+      if(info instanceof ConnectionError) {
+        this.$parent.showErrorDialog(info.title, info.message)
+      }
+      else if(info.status === 200) {
+        this.langMap = info.langMap
+        this.currentJob = info.currentJob
+        this.employed = (this.currentJob.dates[1] === "Present")
+      }
+      else {
+        this.$parent.showErrorDialog(info.statusText, info.data.error)
+      }
     }
   }
 }
