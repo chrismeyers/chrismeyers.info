@@ -11,6 +11,7 @@ import DashboardImages from "@/components/dashboard/DashboardImages"
 import DashboardBuilds from "@/components/dashboard/DashboardBuilds"
 import DashboardProjects from "@/components/dashboard/DashboardProjects"
 import DashboardAccount from "@/components/dashboard/DashboardAccount"
+import NotFound from "@/components/NotFound"
 
 Vue.use(VueRouter)
 
@@ -114,6 +115,14 @@ let router = new VueRouter({
           }
         }
       ]
+    },
+    {
+      path: "*",
+      component: NotFound,
+      meta: {
+        secure: false,
+        title: defaultTitle
+      }
     }
   ]
 })
