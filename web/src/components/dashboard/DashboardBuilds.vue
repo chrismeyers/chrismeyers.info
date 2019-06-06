@@ -32,11 +32,10 @@
 import BuildsAPI from "@/utils/api/builds"
 import ImagesAPI from "@/utils/api/images"
 import DashboardBaseMixin from "@/mixins/DashboardBase"
-import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
 export default {
   name: "Dashboard-Builds",
-  mixins: [DashboardBaseMixin, DashboardAlertsMixin],
+  mixins: [DashboardBaseMixin],
   data() {
     return {
       type: {singular: "build", plural: "builds"},

@@ -27,11 +27,10 @@
 <script>
 import ImagesAPI from "@/utils/api/images"
 import DashboardBaseMixin from "@/mixins/DashboardBase"
-import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
 export default {
   name: "Dashboard-Images",
-  mixins: [DashboardBaseMixin, DashboardAlertsMixin],
+  mixins: [DashboardBaseMixin],
   data() {
     return {
       type: {singular: "image", plural: "images"},

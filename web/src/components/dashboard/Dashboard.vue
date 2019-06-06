@@ -31,7 +31,7 @@ export default {
       let logout = await AuthAPI.logout(this.$cookie.get("chrismeyers_info_apiToken"))
 
       if(logout instanceof ConnectionError) {
-        this.showErrorDialog(logout.title, logout.message)
+        this.showDialog(logout.title, logout.message)
       }
       else if(logout.status === 200) {
         this.$cookie.delete("chrismeyers_info_apiToken")
@@ -40,7 +40,7 @@ export default {
         })
       }
       else {
-        this.showErrorDialog(logout.statusText, logout.data.error)
+        this.showDialog(logout.statusText, logout.data.error)
       }
     }
   }

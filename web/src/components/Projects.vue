@@ -82,7 +82,7 @@ export default {
   methods: {
     setData(projects) {
       if(projects instanceof ConnectionError) {
-        this.showErrorDialog(projects.title, projects.message)
+        this.showDialog(projects.title, projects.message)
       }
       else if(projects.status === 200) {
         // Only display projects that are set to active.
@@ -91,7 +91,7 @@ export default {
         })
       }
       else {
-        this.showErrorDialog(projects.statusText, projects.data.error)
+        this.showDialog(projects.statusText, projects.data.error)
       }
     }
   }
