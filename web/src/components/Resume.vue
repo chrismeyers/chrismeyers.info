@@ -59,9 +59,11 @@
 <script>
 import ResumeAPI from "@/utils/api/resume"
 import ConnectionError from "@/utils/errors/types/connection"
+import ModalsMixin from "@/mixins/Modals"
 
 export default {
   name: "Resume",
+  mixins: [ModalsMixin],
   data() {
     return {
       experience: [],
@@ -80,7 +82,7 @@ export default {
   methods: {
     setData(resume) {
       if(resume instanceof ConnectionError) {
-        this.$parent.showErrorDialog(resume.title, resume.message)
+        this.showErrorDialog(resume.title, resume.message)
       }
       else if(resume.status === 200) {
         this.experience = resume.data.experience
@@ -89,7 +91,7 @@ export default {
         this.lastModified = new Date(resume.data.lastModified).toString()
       }
       else {
-        this.$parent.showErrorDialog(resume.statusText, resume.data.error)
+        this.showErrorDialog(resume.statusText, resume.data.error)
       }
     }
   }
