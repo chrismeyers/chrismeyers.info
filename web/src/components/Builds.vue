@@ -50,9 +50,11 @@
 <script>
 import BuildsAPI from "@/utils/api/builds"
 import ConnectionError from "@/utils/errors/types/connection"
+import ModalsMixin from "@/mixins/Modals"
 
 export default {
   name: "Builds",
+  mixins: [ModalsMixin],
   data() {
     return {
       builds: null
@@ -68,7 +70,7 @@ export default {
   methods: {
     setData(builds) {
       if(builds instanceof ConnectionError) {
-        this.$parent.showErrorDialog(builds.title, builds.message)
+        this.showErrorDialog(builds.title, builds.message)
       }
       else if(builds.status === 200) {
         // Only display builds that are set to active.
@@ -77,7 +79,7 @@ export default {
         })
       }
       else {
-        this.$parent.showErrorDialog(builds.statusText, builds.data.error)
+        this.showErrorDialog(builds.statusText, builds.data.error)
       }
     }
   }

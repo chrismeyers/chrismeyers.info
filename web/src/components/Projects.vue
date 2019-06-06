@@ -62,9 +62,11 @@
 <script>
 import ProjectsAPI from "@/utils/api/projects"
 import ConnectionError from "@/utils/errors/types/connection"
+import ModalsMixin from "@/mixins/Modals"
 
 export default {
   name: "Projects",
+  mixins: [ModalsMixin],
   data() {
     return {
       projects: null
@@ -80,7 +82,7 @@ export default {
   methods: {
     setData(projects) {
       if(projects instanceof ConnectionError) {
-        this.$parent.showErrorDialog(projects.title, projects.message)
+        this.showErrorDialog(projects.title, projects.message)
       }
       else if(projects.status === 200) {
         // Only display projects that are set to active.
@@ -89,7 +91,7 @@ export default {
         })
       }
       else {
-        this.$parent.showErrorDialog(projects.statusText, projects.data.error)
+        this.showErrorDialog(projects.statusText, projects.data.error)
       }
     }
   }

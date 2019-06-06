@@ -61,10 +61,11 @@
 import ResumeAPI from "@/utils/api/resume"
 import ConnectionError from "@/utils/errors/types/connection"
 import EmailTooltipMixin from "@/mixins/EmailTooltip"
+import ModalsMixin from "@/mixins/Modals"
 
 export default {
   name: "About",
-  mixins: [EmailTooltipMixin],
+  mixins: [EmailTooltipMixin, ModalsMixin],
   data() {
     return {
       langMap: null,
@@ -85,7 +86,7 @@ export default {
     },
     setData(info) {
       if(info instanceof ConnectionError) {
-        this.$parent.showErrorDialog(info.title, info.message)
+        this.showErrorDialog(info.title, info.message)
       }
       else if(info.status === 200) {
         this.langMap = info.langMap
@@ -93,7 +94,7 @@ export default {
         this.employed = (this.currentJob.dates[1] === "Present")
       }
       else {
-        this.$parent.showErrorDialog(info.statusText, info.data.error)
+        this.showErrorDialog(info.statusText, info.data.error)
       }
     }
   }
