@@ -1,4 +1,8 @@
+import DashboardMessagesMixin from "@/mixins/DashboardMessages"
+import ModalsMixin from "@/mixins/Modals"
+
 export default {
+  mixins: [DashboardMessagesMixin, ModalsMixin],
   data () {
     return {
       whichButton: "",
@@ -48,6 +52,7 @@ export default {
         this.lastResponse = await this.api.add(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
       }
 
+      let result = {}
       if(this.lastResponse.status === 200) {
         const updated = await this.api.get()
         if(updated.status === 200) {
@@ -60,37 +65,46 @@ export default {
             }
             return this.items[0]
           })()
-          this.success(this.type.singular)
+          result = this.success(this.type.singular)
         }
         else {
-          this.retrievalError(this.type.plural)
+          result = this.retrievalError(this.type.plural)
         }
       }
       else {
-        this.addUpdateError(this.type.singular)
+        result = this.addUpdateError(this.type.singular)
       }
+
+      // Prevent closing the dialog by pressing enter to submit form.
+      setTimeout(() => this.showDialog(result.title, result.body), 100)
     },
-    async deleteEntry() {
-      let shouldDelete = confirm("Are you sure you want to delete " + this.type.singular + " " + this.selected.id + "?")
+    deleteEntry() {
+      let handler = async () => {
+        if(this.selected.id) {
+          this.lastResponse = await this.api.delete(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
 
-      if(shouldDelete && this.selected.id) {
-        this.lastResponse = await this.api.delete(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
-
-        if(this.lastResponse.status === 200) {
-          const updated = await this.api.get()
-          if(updated.status === 200) {
-            this.items = this.flattenData(updated)
-            this.selected = this.items[0]
-            this.success(this.type.singular)
+          let result = {}
+          if(this.lastResponse.status === 200) {
+            const updated = await this.api.get()
+            if(updated.status === 200) {
+              this.items = this.flattenData(updated)
+              this.selected = this.items[0]
+              result = this.success(this.type.singular)
+            }
+            else {
+              result = this.retrievalError(this.type.plural)
+            }
           }
           else {
-            this.retrievalError(this.type.plural)
+            result = this.deleteError(this.type.singular)
           }
-        }
-        else {
-          this.deleteError(this.type.singular)
+
+          // Prevent closing the dialog by pressing enter to submit form.
+          setTimeout(() => this.showDialog(result.title, result.body), 100)
         }
       }
+
+      this.showConfirm("Are you sure you want to delete " + this.type.singular + " " + this.selected.id + "?", handler,)
     }
   }
 }

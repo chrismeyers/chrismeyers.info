@@ -35,11 +35,10 @@
 import ProjectsAPI from "@/utils/api/projects"
 import ImagesAPI from "@/utils/api/images"
 import DashboardBaseMixin from "@/mixins/DashboardBase"
-import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
 
 export default {
   name: "Dashboard-Projects",
-  mixins: [DashboardBaseMixin, DashboardAlertsMixin],
+  mixins: [DashboardBaseMixin],
   data() {
     return {
       type: {singular: "project", plural: "projects"},

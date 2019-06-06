@@ -70,7 +70,7 @@ export default {
   methods: {
     setData(builds) {
       if(builds instanceof ConnectionError) {
-        this.showErrorDialog(builds.title, builds.message)
+        this.showDialog(builds.title, builds.message)
       }
       else if(builds.status === 200) {
         // Only display builds that are set to active.
@@ -79,7 +79,7 @@ export default {
         })
       }
       else {
-        this.showErrorDialog(builds.statusText, builds.data.error)
+        this.showDialog(builds.statusText, builds.data.error)
       }
     }
   }

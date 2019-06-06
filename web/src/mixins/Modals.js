@@ -16,10 +16,10 @@ export default {
         ]
       })
     },
-    showErrorDialog(title, error) {
+    showDialog(title, body) {
       this.$modal.show("dialog", {
         title: title,
-        text: error.charAt(0).toUpperCase() + error.slice(1),
+        text: body.charAt(0).toUpperCase() + body.slice(1),
         buttons: [
           {
             title: "Proceed",
@@ -29,6 +29,30 @@ export default {
           }
         ]
       })
+    },
+    showConfirm(text, handler, title = null) {
+      let options = {
+        text: text,
+        buttons: [
+          {
+            title: "No",
+            default: true
+          },
+          {
+            title: "Yes",
+            handler: () => {
+              this.$modal.hide("dialog")
+              handler()
+            }
+          }
+       ]
+      }
+
+      if(title) {
+        options.title = title
+      }
+
+      this.$modal.show("dialog", options)
     }
   }
 }

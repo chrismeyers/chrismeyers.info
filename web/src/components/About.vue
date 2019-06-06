@@ -86,7 +86,7 @@ export default {
     },
     setData(info) {
       if(info instanceof ConnectionError) {
-        this.showErrorDialog(info.title, info.message)
+        this.showDialog(info.title, info.message)
       }
       else if(info.status === 200) {
         this.langMap = info.langMap
@@ -94,7 +94,7 @@ export default {
         this.employed = (this.currentJob.dates[1] === "Present")
       }
       else {
-        this.showErrorDialog(info.statusText, info.data.error)
+        this.showDialog(info.statusText, info.data.error)
       }
     }
   }

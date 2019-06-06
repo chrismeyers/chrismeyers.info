@@ -17,11 +17,12 @@
 
 <script>
   import AccountAPI from "@/utils/api/account"
-  import DashboardAlertsMixin from "@/mixins/DashboardAlerts"
+  import DashboardMessagesMixin from "@/mixins/DashboardMessages"
+  import ModalsMixin from "@/mixins/Modals"
 
   export default {
     name: "Dashboard-Account",
-    mixins: [DashboardAlertsMixin],
+    mixins: [DashboardMessagesMixin, ModalsMixin],
     data() {
       return {
         passwords: {
@@ -39,12 +40,17 @@
         } else if(this.passwords["initial"] !== "" && this.passwords["confirm"] !== "") {
           this.error = null
           this.lastResponse = await AccountAPI.updatePassword(this.$cookie.get("chrismeyers_info_apiToken"), this.passwords["initial"])
+
+          let result = {}
           if(this.lastResponse.status === 200) {
-            this.success('password', false)
+            result = this.success('password', false)
           }
           else {
-            this.addUpdateError('password', false)
+            result = this.addUpdateError('password', false)
           }
+
+          // Prevent closing the dialog by pressing enter to submit form.
+          setTimeout(() => this.showDialog(result.title, result.body), 100)
         }
 
         this.passwords = {

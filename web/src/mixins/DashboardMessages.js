@@ -17,28 +17,30 @@ export default {
     success(type, showId = true) {
       let actions = this.determineActions()
       let id = showId ? (" " + this.lastResponse.data.id) : ""
-      alert(actions.past + " " + type + id)
+
+      return {title: "Success", body: actions.past + " " + type + id}
     },
     retrievalError(type) {
-      alert("[ERROR] Unable to retrieve " + type)
+      return {title: "Error", body: "Unable to retrieve " + type}
     },
     addUpdateError(type, showId = true) {
       let actions = this.determineActions()
       let error = this.lastResponse.data.error || null
       let detail = this.lastResponse.data.detail || null
+
       if(error && detail) {
-        alert("[ERROR] " + actions.present + " " + type + " error\n"
+        let msg = actions.present + " " + type + " error\n"
           + "  Error: " + error + "\n"
           + "  Detail: " + detail
-        )
+        return {title: "Error", body: msg}
       }
       else {
         let id = (showId && (actions.present === "Update")) ? (" " + this.selected.id) : ""
-        alert("[ERROR] Unable to " + actions.present.toLowerCase() + " " + type + id)
+        return {title: "Error", body: "Unable to " + actions.present.toLowerCase() + " " + type + id}
       }
     },
     deleteError(type) {
-      alert("[ERROR] Unable to delete " + type + " " + this.selected.id)
+      return {title: "Error", body: "Unable to delete " + type + " " + this.selected.id}
     }
   }
 }

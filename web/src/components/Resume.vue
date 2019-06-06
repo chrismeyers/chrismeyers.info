@@ -82,7 +82,7 @@ export default {
   methods: {
     setData(resume) {
       if(resume instanceof ConnectionError) {
-        this.showErrorDialog(resume.title, resume.message)
+        this.showDialog(resume.title, resume.message)
       }
       else if(resume.status === 200) {
         this.experience = resume.data.experience
@@ -91,7 +91,7 @@ export default {
         this.lastModified = new Date(resume.data.lastModified).toString()
       }
       else {
-        this.showErrorDialog(resume.statusText, resume.data.error)
+        this.showDialog(resume.statusText, resume.data.error)
       }
     }
   }
