@@ -2,7 +2,7 @@
   <div>
     <div>
       <h3>Change Password</h3>
-      <p v-if="error !== null" style="color: red">Passwords don't match</p>
+      <p v-if="error !== null" style="color: red">{{ error }}</p>
       <form @submit.prevent="updatePassword">
         <input class="inputbox-mod dashboard-text" type="password" v-model="passwords['initial']" placeholder="New Password"><br />
         <input class="inputbox-mod dashboard-text" type="password" v-model="passwords['confirm']" placeholder="Confirm Password">
