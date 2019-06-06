@@ -10,13 +10,28 @@ export default {
       url: "/auth/token",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Basic " + btoa(process.env.VUE_APP_API_CLIENT_ID + ":")
+        "Authorization": "Basic " + btoa(process.env.VUE_APP_API_CLIENT_ID + ":")
       },
       data: qs.stringify({
         "username": username,
         "password": password,
         "grant_type": "password"
       })
+    })
+    .then(response => {
+      return response
+    })
+    .catch(error => {
+      return ErrorHandler.handle(error)
+    })
+  },
+  logout(token) {
+    return axios({
+      method: "post",
+      url: "/auth/logout",
+      headers: {
+        "Authorization": "Bearer " + token
+      }
     })
     .then(response => {
       return response
@@ -32,8 +47,7 @@ export default {
       method: "get",
       url: "/auth/authorize",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token
+        "Authorization": "Bearer " + token
       }
     })
     .then(response => {

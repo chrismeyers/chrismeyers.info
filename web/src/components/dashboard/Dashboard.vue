@@ -16,17 +16,30 @@
 </template>
 
 <script>
+import AuthAPI from "@/utils/api/auth"
+import ConnectionError from "@/utils/errors/types/connection"
+
 export default {
   name: "Dashboard",
   methods: {
     getTitle() {
       return document.title
     },
-    logout() {
-      this.$cookie.delete("chrismeyers_info_apiToken")
-      this.$router.push({
-        path: "/login",
-      })
+    async logout() {
+      let logout = await AuthAPI.logout(this.$cookie.get("chrismeyers_info_apiToken"))
+
+      if(logout instanceof ConnectionError) {
+        this.$parent.showErrorDialog(logout.title, logout.message)
+      }
+      else if(logout.status === 200) {
+        this.$cookie.delete("chrismeyers_info_apiToken")
+        this.$router.push({
+          path: "/login"
+        })
+      }
+      else {
+        this.$parent.showErrorDialog(logout.statusText, logout.data.error)
+      }
     }
   }
 }
