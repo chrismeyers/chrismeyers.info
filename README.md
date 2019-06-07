@@ -1,7 +1,6 @@
 # chrismeyers.info
 This is the codebase for my personal website currently located at <https://chrismeyers.info>
 
-
 ## Requirements
 1) Install the Dart SDK (see https://dart.dev/get-dart)
     ```
@@ -26,8 +25,10 @@ This is the codebase for my personal website currently located at <https://chris
 
 ## Setup
 1) Setup a git remote on the production server by following the instructions in `bin/git/hooks/post-receive`.
-1) Follow the instructions in `api/README.md`.
-2) Follow the instructions in `web/README.md`.
+2) Configure apache virtual hosts by copying the files in `config/apache` into `/etc/apache2/sites-available` and running `a2ensite` for each virtual host.
+3) Install and configure LetsEncrypt. Ensure the virtual host files are still configured properly.
+4) Follow the instructions in `api/README.md`.
+5) Follow the instructions in `web/README.md`.
 
 ## Credit
 + The site uses a few open source tools and frameworks:
