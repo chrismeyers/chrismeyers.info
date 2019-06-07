@@ -5,7 +5,7 @@
         <router-link class="nav-link banner" to="/"><img src="@/assets/images/logos/meyers-logo-green.svg" alt="Chris Meyers. Developer, Tech enthusiast." class="banner-img" title="Home"></router-link>
       </div>
       <ul class="side-nav-items">
-        <li><router-link class="nav-link" :class="{ 'nav-selected': path == '' }" to="/">About</router-link></li>
+        <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'about' }" to="/">About</router-link></li>
         <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'resume' }" to="/resume">Résumé</router-link></li>
         <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'builds' }" to="/builds">Builds</router-link></li>
         <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'projects' }" to="/projects">Projects</router-link></li>
@@ -27,7 +27,7 @@
           <ul class="menu-dropdown">
             <li>
               <ul class="menu-items">
-                <router-link class="nav-link" :class="{ 'nav-selected': path == '' }" tag="a" to="/"><li class="section-title-small-txt">About</li></router-link>
+                <router-link class="nav-link" :class="{ 'nav-selected': path == 'about' }" tag="a" to="/"><li class="section-title-small-txt">About</li></router-link>
                 <router-link class="nav-link" :class="{ 'nav-selected': path == 'resume' }" tag="a" to="/resume"><li class="section-title-small-txt">Résumé</li></router-link>
                 <router-link class="nav-link" :class="{ 'nav-selected': path == 'builds' }" tag="a" to="/builds"><li class="section-title-small-txt">Builds</li></router-link>
                 <router-link class="nav-link" :class="{ 'nav-selected': path == 'projects' }" tag="a" to="/projects"><li class="section-title-small-txt">Projects</li></router-link>
@@ -45,23 +45,21 @@ export default {
   name: "Navigation",
   data() {
     return {
-      path: null,
+      path: "",
       menuDisplayed: false
     }
   },
-  mounted() {
-    let rawPath = this.$route.path
-    this.path = this.cleanPath(rawPath)
-  },
   watch: {
-    "$route.path" (rawPath) {
-      this.path = this.cleanPath(rawPath)
+    // eslint-disable-next-line no-unused-vars
+    "$route" (to, from) {
+      this.setPath(to.path);
       this.menuDisplayed = false
     }
   },
   methods: {
-    cleanPath (rawPath) {
-      return rawPath.replace(/\//g, "")
+    setPath(rawPath) {
+      let cleanedPath = rawPath.replace(/\//g, "")
+      this.path = (cleanedPath === "") ? "about" : cleanedPath
     },
     toggleMenu() {
       this.menuDisplayed = !this.menuDisplayed
