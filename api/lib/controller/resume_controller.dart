@@ -6,13 +6,20 @@ class ResumeController extends ResourceController {
   @Operation.get()
   Future<Response> getResume() async {
     final ResumeParser parser = ResumeParser("../resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex");
-    parser.parseLatexFile();
 
-    return Response.ok({
-      "experience": parser.parseComplexSection("Experience"),
-      "education": parser.parseComplexSection("Education"),
-      "skills": parser.parseListSection("TechnicalSkills"),
-      "lastModified": parser.lastModified.millisecondsSinceEpoch
-    });
+    if(request.path.string.endsWith("/summary")) {
+      return Response.ok({
+        "languages": parser.getLanguages(),
+        "mostRecentJob": parser.getMostRecentJob()
+      });
+    }
+    else {
+      return Response.ok({
+        "experience": parser.parseComplexSection("Experience"),
+        "education": parser.parseComplexSection("Education"),
+        "skills": parser.parseListSection("TechnicalSkills"),
+        "lastModified": parser.lastModified.millisecondsSinceEpoch
+      });
+    }
   }
 }
