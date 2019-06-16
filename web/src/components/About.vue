@@ -7,7 +7,7 @@
 
       <ul>
         <li>I studied Computer Science at <a class="fancytxt" href="https://www.rowan.edu/" target="_blank">Rowan University</a> in Glassboro, NJ and earned a Bachelor of Science in Computer Science.</li>
-        <li v-if="employed">Currently, I am employed as a {{ currentJob ? currentJob.title : "" }} at <a class="fancytxt" :href="currentJob ? currentJob.url : ''" target="_blank">{{ currentJob ? currentJob.company : "" }}</a>.</li>
+        <li v-if="employed">Currently, I am employed as a {{ mostRecentJob ? mostRecentJob.title : "" }} at <a class="fancytxt" :href="mostRecentJob ? mostRecentJob.url : ''" target="_blank">{{ mostRecentJob ? mostRecentJob.company : "" }}</a>.</li>
         <li>Some of my professional interests include:
           <ul>
             <li>Software Development, Web Development, Computer Networking</li>
@@ -31,12 +31,12 @@
       <ul>
         <li>Desktop and CLI applications:
           <ul>
-            <li>{{ langMap ? langMap.desktop : "" }}</li>
+            <li>{{ languages ? languages.desktop : "" }}</li>
           </ul>
         </li>
         <li>Websites, Web Apps, and APIs:
           <ul>
-            <li>{{ langMap ? langMap.web : "" }}</li>
+            <li>{{ languages ? languages.web : "" }}</li>
           </ul>
         </li>
       </ul>
@@ -68,15 +68,15 @@ export default {
   mixins: [EmailTooltipMixin, ModalsMixin],
   data() {
     return {
-      langMap: null,
-      currentJob: null,
+      languages: {},
+      mostRecentJob: {},
       employed: false
     }
   },
   beforeRouteEnter(to, from, next) {
-    ResumeAPI.getInfoForAboutPage().then(
-      info => {
-        next(vm => vm.setData(info))
+    ResumeAPI.getSummary().then(
+      summary => {
+        next(vm => vm.setData(summary))
       }
     )
   },
@@ -84,17 +84,17 @@ export default {
     showClarkImage() {
       this.$refs.clarkImg.click()
     },
-    setData(info) {
-      if(info instanceof ConnectionError) {
-        this.showDialog(info.title, info.message)
+    setData(summary) {
+      if(summary instanceof ConnectionError) {
+        this.showDialog(summary.title, summary.message)
       }
-      else if(info.status === 200) {
-        this.langMap = info.langMap
-        this.currentJob = info.currentJob
-        this.employed = (this.currentJob.dates[1] === "Present")
+      else if(summary.status === 200) {
+        this.languages = summary.data.languages
+        this.mostRecentJob = summary.data.mostRecentJob
+        this.employed = summary.data.mostRecentJob.employed
       }
       else {
-        this.showDialog(info.statusText, info.data.error)
+        this.showDialog(summary.statusText, summary.data.error)
       }
     }
   }
