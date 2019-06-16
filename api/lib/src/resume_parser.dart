@@ -36,15 +36,18 @@ class ResumeParser {
   DateTime get lastModified => _lastModified;
 
   void loadLatexFile() {
-    const String beginPattern = "% BEGIN ";
-    const String endPattern = "% END ";
+    const String beginPattern = "% BEGIN";
+    const String endPattern = "% END";
+    const String commentPattern = "\\begin{comment}";
     String section = "";
 
     for(String line in _lines) {
       line = line.trim();
-      // TODO: Handle blank lines and comment sections.
-      if(line.contains(beginPattern)) { // New section
-        section = line.substring(beginPattern.length);
+      if(line == "" || line.contains(commentPattern)) {
+        continue;
+      }
+      else if(line.contains(beginPattern)) { // New section
+        section = line.substring(beginPattern.length + 1);
       }
       else if(section.isNotEmpty && !line.contains(endPattern)) { // Between begin and end
         if(_rawSections.containsKey(section)) {
