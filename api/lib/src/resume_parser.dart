@@ -11,6 +11,9 @@ class ListItem {
     _subItems.add(subItem);
   }
 
+  String get mainItem => _mainItem;
+  List<String> get subItems => _subItems;
+
   Map<String, dynamic> toJson() => {
     "mainItem": _mainItem,
     "subItems": _subItems
@@ -21,7 +24,10 @@ class ResumeParser {
   ResumeParser(String path) :
     _lines = File(path).readAsLinesSync(),
     _rawSections = {},
-    _lastModified = File(path).lastModifiedSync();
+    _lastModified = File(path).lastModifiedSync()
+  {
+    loadLatexFile();
+  }
 
   final List<String> _lines;
   final Map<String, List<String>> _rawSections;
@@ -29,13 +35,14 @@ class ResumeParser {
 
   DateTime get lastModified => _lastModified;
 
-  void parseLatexFile() {
+  void loadLatexFile() {
     const String beginPattern = "% BEGIN ";
     const String endPattern = "% END ";
     String section = "";
 
     for(String line in _lines) {
       line = line.trim();
+      // TODO: Handle blank lines and comment sections.
       if(line.contains(beginPattern)) { // New section
         section = line.substring(beginPattern.length);
       }
@@ -172,6 +179,41 @@ class ResumeParser {
     }
 
     return items;
+  }
+
+  Map<String, String> getLanguages() {
+    final Map<String, String> langMap = {};
+    final List<ListItem> skills = parseListSection("TechnicalSkills");
+
+    for(final skill in skills) {
+      if(langMap.length == 2) {
+        break;
+      }
+      else if(skill.mainItem.toLowerCase().contains("desktop and cli")) {
+        langMap["desktop"] = skill.subItems[0];
+      }
+      else if(skill.mainItem.toLowerCase().contains("websites, web apps, and apis")) {
+        langMap["web"] = skill.subItems[0];
+      }
+    }
+
+    return langMap;
+  }
+
+  Map<String, dynamic> getMostRecentJob() {
+    final Map<String, dynamic> job = parseComplexSection("Experience")[0];
+
+    final List<String> dates = (job["secondLine"][0][1] as String)
+      .split("&ndash;")
+      .map((d) => d.trim()).toList();
+
+    return {
+      "employed": dates[1].toLowerCase() == "present",
+      "company": job["firstLine"][0],
+      "url": job["url"],
+      "title": job["secondLine"][0][0].split(",")[0],
+      "dates": dates
+    };
   }
 
   String _cleanString(String input) {
