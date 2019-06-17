@@ -1,3 +1,4 @@
+import 'package:api/src/schema_maker.dart';
 import "package:aqueduct/aqueduct.dart";
 import "package:api/api.dart";
 import "package:api/model/project.dart";
@@ -6,19 +7,6 @@ class ProjectsPublicController extends ResourceController {
   ProjectsPublicController(this.context);
 
   ManagedContext context;
-  List<Map<String, dynamic>> schema = [
-    {"field": "active",  "tag": "input",    "type": "checkbox", "required": false},
-    {"field": "title",   "tag": "input",    "type": "text",     "required": true},
-    {"field": "webUrl",  "tag": "input",    "type": "url",      "required": false},
-    {"field": "codeUrl", "tag": "input",    "type": "url",      "required": true},
-    {"field": "date",    "tag": "input",    "type": "text",     "required": true},
-    {"field": "started", "tag": "input",    "type": "number",   "required": true},
-    {"field": "lang",    "tag": "input",    "type": "text",     "required": true},
-    {"field": "info",    "tag": "textarea", "type": "text",     "required": true},
-    {"field": "role",    "tag": "input",    "type": "text",     "required": true},
-    {"field": "stat",    "tag": "input",    "type": "text",     "required": true},
-    {"field": "images",  "tag": "select",   "multiple": true,   "required": false}
-  ];
 
   @Operation.get()
   Future<Response> getProjects() async {
@@ -31,7 +19,10 @@ class ProjectsPublicController extends ResourceController {
       project.images.sort((a, b) => a.pos.compareTo(b.pos));
     }
 
-    return Response.ok({"items": allProjects.map((value) => value.asMap()).toList(), "schema": schema});
+    return Response.ok({
+      "items": allProjects.map((value) => value.asMap()).toList(),
+      "schema": SchemaMaker.build(Project().interface)
+    });
   }
 
   @Operation.get("id")
