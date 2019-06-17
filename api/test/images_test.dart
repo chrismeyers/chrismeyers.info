@@ -8,7 +8,7 @@ Future main() async {
   final Queries queries = Queries(harness);
 
   test("GET /public/images returns 200 - empty list", () async {
-    final TestResponse response = await harness.publicAgent.get("/public/images");
+    final TestResponse response = await harness.publicAgent.get("/public/images?schema");
     expectResponse(response, 200, body: {
       "items": [],
       "schema": isList
@@ -28,8 +28,7 @@ Future main() async {
         "orient": "port",
         "build": null,
         "project": null
-      }],
-      "schema": isList
+      }]
     });
   });
 

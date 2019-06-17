@@ -9,16 +9,20 @@ class BuildsPublicController extends ResourceController {
   ManagedContext context;
 
   @Operation.get()
-  Future<Response> getBuilds() async {
+  Future<Response> getBuilds({@Bind.query("schema") bool schema = false}) async {
     final Query<Build> query = Query<Build>(context)
       ..join(object: (b) => b.image)
       ..sortBy((b) => b.started, QuerySortOrder.ascending);
     final List<Build> allBuilds = await query.fetch();
 
-    return Response.ok({
-      "items": allBuilds.map((value) => value.asMap()).toList(),
-      "schema": SchemaMaker.build(Build().interface)
-    });
+    final Map<String, dynamic> response = {};
+    response["items"] = allBuilds.map((value) => value.asMap()).toList();
+
+    if(schema) {
+      response["schema"] = SchemaMaker.build(Build().interface);
+    }
+
+    return Response.ok(response);
   }
 
   @Operation.get("id")

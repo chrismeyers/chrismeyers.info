@@ -9,7 +9,7 @@ class ProjectsPublicController extends ResourceController {
   ManagedContext context;
 
   @Operation.get()
-  Future<Response> getProjects() async {
+  Future<Response> getProjects({@Bind.query("schema") bool schema = false}) async {
     final Query<Project> query = Query<Project>(context)
       ..join(set: (p) => p.images)
       ..sortBy((p) => p.started, QuerySortOrder.ascending);
@@ -19,10 +19,14 @@ class ProjectsPublicController extends ResourceController {
       project.images.sort((a, b) => a.pos.compareTo(b.pos));
     }
 
-    return Response.ok({
-      "items": allProjects.map((value) => value.asMap()).toList(),
-      "schema": SchemaMaker.build(Project().interface)
-    });
+    final Map<String, dynamic> response = {};
+    response["items"] = allProjects.map((value) => value.asMap()).toList();
+
+    if(schema) {
+      response["schema"] = SchemaMaker.build(Project().interface);
+    }
+
+    return Response.ok(response);
   }
 
   @Operation.get("id")
