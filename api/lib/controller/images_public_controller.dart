@@ -9,15 +9,19 @@ class ImagesPublicController extends ResourceController {
   ManagedContext context;
 
   @Operation.get()
-  Future<Response> getImages() async {
+  Future<Response> getImages({@Bind.query("schema") bool schema = false}) async {
     final Query<Image> query = Query<Image>(context)
       ..sortBy((i) => i.id, QuerySortOrder.ascending);
     final List<Image> allImages = await query.fetch();
 
-    return Response.ok({
-      "items": allImages.map((value) => value.asMap()).toList(),
-      "schema": SchemaMaker.build(Image().interface)
-    });
+    final Map<String, dynamic> response = {};
+    response["items"] = allImages.map((value) => value.asMap()).toList();
+
+    if(schema) {
+      response["schema"] = SchemaMaker.build(Image().interface);
+    }
+
+    return Response.ok(response);
   }
 
   @Operation.get("id")
