@@ -4,7 +4,7 @@ import "build.dart";
 import "project.dart";
 
 class Image extends ManagedObject<_Image> implements _Image {
-  Type get interface => _Image;
+  static Type get interface => _Image;
 }
 
 class _Image {

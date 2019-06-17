@@ -3,7 +3,7 @@ import "package:api/src/schema_field.dart";
 import "image.dart";
 
 class Project extends ManagedObject<_Project> implements _Project {
-  Type get interface => _Project;
+  static Type get interface => _Project;
 }
 
 class _Project {
