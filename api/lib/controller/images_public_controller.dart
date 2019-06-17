@@ -18,7 +18,7 @@ class ImagesPublicController extends ResourceController {
     response["items"] = allImages.map((value) => value.asMap()).toList();
 
     if(schema) {
-      response["schema"] = SchemaMaker.build(Image().interface);
+      response["schema"] = SchemaMaker.build(Image.interface);
     }
 
     return Response.ok(response);

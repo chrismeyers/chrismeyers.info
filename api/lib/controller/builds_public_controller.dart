@@ -19,7 +19,7 @@ class BuildsPublicController extends ResourceController {
     response["items"] = allBuilds.map((value) => value.asMap()).toList();
 
     if(schema) {
-      response["schema"] = SchemaMaker.build(Build().interface);
+      response["schema"] = SchemaMaker.build(Build.interface);
     }
 
     return Response.ok(response);
