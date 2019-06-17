@@ -1,11 +1,12 @@
 import axios from "axios"
+import qs from "qs"
 import ErrorHandler from "../errors/handler"
 
 export default {
   // GET Methods
-  get() {
+  get(params = {}) {
     return axios
-      .get("/public/images")
+      .get("/public/images" + qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true}))
       .then(response => {
         return response
       })

@@ -43,7 +43,7 @@ export default {
     }
   },
   async beforeRouteEnter(to, from, next) {
-    let builds = await BuildsAPI.get()
+    let builds = await BuildsAPI.get({schema: null})
     let images = await ImagesAPI.get()
     next(vm => {
       vm.setData(builds)
