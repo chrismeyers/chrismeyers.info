@@ -54,7 +54,7 @@ export default {
 
       let result = {}
       if(this.lastResponse.status === 200) {
-        const updated = await this.api.get()
+        const updated = await this.api.get({schema: null})
         if(updated.status === 200) {
           this.items = this.flattenData(updated)
           this.selected = (() => {
@@ -85,7 +85,7 @@ export default {
 
           let result = {}
           if(this.lastResponse.status === 200) {
-            const updated = await this.api.get()
+            const updated = await this.api.get({schema: null})
             if(updated.status === 200) {
               this.items = this.flattenData(updated)
               this.selected = this.items[0]

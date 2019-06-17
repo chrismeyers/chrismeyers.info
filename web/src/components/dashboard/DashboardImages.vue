@@ -38,7 +38,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    ImagesAPI.get().then(
+    ImagesAPI.get({schema: null}).then(
       images => {
         next(vm => vm.setData(images))
       }
