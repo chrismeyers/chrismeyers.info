@@ -4,7 +4,7 @@
 
     <div class="content-text">
       <p class="center">The path <pre class="path">{{ path }}</pre> does not exist.</p>
-      <p class="center"> Go back <router-link class="fancytxt" to="/">home</router-link>!</p>
+      <p class="center">Go back <router-link class="fancytxt" to="/">home</router-link>!</p>
     </div>
   </div>
 </template>
