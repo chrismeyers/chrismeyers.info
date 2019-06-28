@@ -3,7 +3,8 @@
     <div class="section-header section-header-size">404 - Page Not Found</div>
 
     <div class="content-text">
-      <h2 class="center">Oh no! The path <pre class="path">{{ path }}</pre> does not exist. Take me <router-link class="fancytxt" to="/">home</router-link>!</h2>
+      <p class="center">The path <pre class="path">{{ path }}</pre> does not exist.</p>
+      <p class="center"> Go back <router-link class="fancytxt" to="/">home</router-link>!</p>
     </div>
   </div>
 </template>
