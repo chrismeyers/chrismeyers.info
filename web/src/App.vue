@@ -154,6 +154,7 @@ h2.top {
   padding: 10px 15px;
   max-width: 800px;
   margin: 0 auto;
+  text-align: justify;
 }
 
 .dt-mod {
