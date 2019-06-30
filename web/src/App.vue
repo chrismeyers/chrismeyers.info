@@ -390,6 +390,7 @@ select.select-scroll-mod {
 
   .content-text {
     padding: 10px;
+    text-align: left;
   }
 
   .section-header-size {
