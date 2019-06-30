@@ -3,7 +3,7 @@
     <textarea v-if="textareaVisible" v-model="info" class="textarea-mod prompt-style" id="prompt-textarea" readonly="readonly"></textarea>
     <input class="input-mod prompt-style" id="prompt-caret" value=">" maxlength="1" readonly="readonly">
     <input v-model="command" ref="prompt" class="input-mod prompt-style" id="prompt" maxlength="75">
-    <button class="prompt-style" id="prompt-textarea-btn" @click="toggleTextarea" v-html="arrows[arrowDirection]"></button>
+    <button class="prompt-style" id="prompt-textarea-btn" @click="run('toggle')" v-html="arrows[arrowDirection]"></button>
   </div>
 </template>
 
@@ -94,7 +94,10 @@ export default {
     hideTextarea() {
       this.textareaVisible = false
       this.arrowDirection = "up"
-      this.clearTextarea()
+    },
+    scrollTextareaToBottom() {
+      let textarea = this.$el.querySelector("#prompt-textarea")
+      textarea.scrollTop = textarea.scrollHeight
     },
     clearCommand() {
       this.command = ""
@@ -136,17 +139,22 @@ export default {
         }
       }
     },
-    run() {
-      this.history.unshift(this.command) // Push to top of history stack
+    run(command = null) {
+      if(command) {
+        // Only store user entered commands
+        this.command = command
+      }
+      else {
+        // Push to top of history stack
+        this.history.unshift(this.command)
+      }
 
       const parts = this.command.toLowerCase().split(" ").filter(p => {
-        if(p === "") {
-          return false
-        }
-        return true
+        return p !== ""
       }).map(p => p.trim())
       const cmd = parts[0].trim()
       const args = parts.slice(1)
+      let refreshHistory = true
 
       if(cmd === "echo") {
         this.echo(args)
@@ -158,17 +166,22 @@ export default {
         this.cd(["login"])
       }
       else if(cmd === "toggle") {
-        this.toggle()
+        this.toggleTextarea()
       }
       else if(cmd === "exit") {
         this.exit()
       }
       else if(cmd === "help") {
         this.help()
+        refreshHistory = false
       }
 
       this.historyIndex = -1
       this.clearCommand()
+
+      if(refreshHistory && this.textareaVisible) {
+        this.printHistory()
+      }
     },
     echo(args) {
       alert(args.join(" "))
@@ -181,9 +194,6 @@ export default {
 
       this.$router.push({path: "/" + path})
     },
-    toggle() {
-      this.toggleTextarea()
-    },
     exit() {
       this.hidePrompt()
     },
@@ -191,13 +201,31 @@ export default {
       this.clearTextarea()
       this.info = `usage: command [arg1] [arg2] ...
 Available commands:
-  echo - prints args to alert() box
-  cd - navigates to the given arg
+  echo   - prints args to alert() box
+  cd     - navigates to the given arg
   toggle - toggles the info box
-  exit - closes the command prompt
-  help - prints this message
+  exit   - closes the command prompt
+  help   - prints this message
 `
-      this.showTextarea()
+      if(!this.textareaVisible) {
+        this.showTextarea()
+      }
+    },
+    printHistory() {
+      this.clearTextarea()
+
+      let gutter = this.history.length.toString().length + 1
+      this.history.slice().reverse().forEach((item, i) => {
+        this.info += `${(i + 1).toString().padStart(gutter, ' ')} ${item} \n`
+      })
+
+      if(!this.textareaVisible) {
+        this.showTextarea()
+      }
+
+      this.$nextTick(() => {
+        this.scrollTextareaToBottom()
+      })
     },
   }
 }
@@ -222,7 +250,7 @@ Available commands:
 #prompt-caret {
   width: 10px;
   font-weight: bold;
-  padding-left: 1px;
+  padding-left: 5px;
   padding-right: 1px;
 }
 #prompt-caret:focus {
@@ -243,7 +271,7 @@ Available commands:
 }
 
 #prompt-textarea {
-  width: 531px;
+  width: 535px;
   padding: 2px;
   border: 0;
   resize: none;
