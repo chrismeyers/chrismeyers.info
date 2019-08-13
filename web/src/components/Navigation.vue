@@ -7,8 +7,8 @@
       <ul class="side-nav-items">
         <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'about' }" to="/">About</router-link></li>
         <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'resume' }" to="/resume">Résumé</router-link></li>
-        <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'builds' }" to="/builds">Builds</router-link></li>
         <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'projects' }" to="/projects">Projects</router-link></li>
+        <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'builds' }" to="/builds">Builds</router-link></li>
       </ul>
     </div>
     <div id="hamburger-menu">
@@ -29,8 +29,8 @@
               <ul class="menu-items">
                 <router-link class="nav-link" :class="{ 'nav-selected': path == 'about' }" tag="a" to="/"><li class="section-title-small-txt">About</li></router-link>
                 <router-link class="nav-link" :class="{ 'nav-selected': path == 'resume' }" tag="a" to="/resume"><li class="section-title-small-txt">Résumé</li></router-link>
-                <router-link class="nav-link" :class="{ 'nav-selected': path == 'builds' }" tag="a" to="/builds"><li class="section-title-small-txt">Builds</li></router-link>
                 <router-link class="nav-link" :class="{ 'nav-selected': path == 'projects' }" tag="a" to="/projects"><li class="section-title-small-txt">Projects</li></router-link>
+                <router-link class="nav-link" :class="{ 'nav-selected': path == 'builds' }" tag="a" to="/builds"><li class="section-title-small-txt">Builds</li></router-link>
               </ul>
             </li>
           </ul>
