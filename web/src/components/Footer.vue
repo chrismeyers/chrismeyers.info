@@ -22,16 +22,6 @@
       <div class="footer-bullets">&bull;</div>
 
       <div class="footer-social">
-        <a href="https://www.facebook.com/meyers42"
-           target="_blank"
-           style="text-decoration: none;">
-          <img alt="Find me on Facebook" title="Facebook" src="@/assets/images/social/facebook-logo.svg">
-        </a>
-      </div>
-
-      <div class="footer-bullets">&bull;</div>
-
-      <div class="footer-social">
         <a>
           <img v-tooltip="copyMessageOptions"
                alt="Send Message"
