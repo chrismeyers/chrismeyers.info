@@ -9,9 +9,9 @@
           <li class="left-column company" v-html="job.firstLine[0]"></li>
           <li class="right-column location" v-html="job.firstLine[1]"></li>
           <template v-for="(secondLine, i) in job.secondLine">
-            <li class="left-column sub-left-column job-title" :class="{ 'same-company-spacing': i > 0 }" :key="secondLine.id" v-html="secondLine[0]"></li>
-            <li class="right-column tenure" :class="{ 'same-company-spacing': i > 0 }" :key="secondLine.id" v-html="secondLine[1]"></li>
-            <li class="remove-bullets" :key="secondLine.id">
+            <li class="left-column sub-left-column job-title" :class="{ 'same-company-spacing': i > 0 && job.info[i - 1].length > 0 }" :key="secondLine.id" v-html="secondLine[0]"></li>
+            <li class="right-column tenure" :class="{ 'same-company-spacing': i > 0 && job.info[i - 1].length > 0 }" :key="secondLine.id" v-html="secondLine[1]"></li>
+            <li class="remove-bullets" v-if="job.info[i].length > 0" :key="secondLine.id">
               <ul class="more-info">
                 <template v-for="info in job.info[i]">
                   <li class="more-info" :key="info.id" v-html="info"></li>
