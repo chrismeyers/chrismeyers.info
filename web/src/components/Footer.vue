@@ -32,6 +32,10 @@
                @mouseleave="resetCopyMessage">
         </a>
       </div>
+
+      <div class="theme-toggle">
+        <a @click="toggleTheme">THEME</a>
+      </div>
     </div>
 
     <span class="footer-years">Designed and Developed by Chris Meyers, 2013-{{ new Date().getFullYear() }}</span>
@@ -43,7 +47,12 @@ import EmailTooltipMixin from "@/mixins/EmailTooltip"
 
 export default {
   name: "Footer",
-  mixins: [EmailTooltipMixin]
+  mixins: [EmailTooltipMixin],
+  methods: {
+    toggleTheme() {
+      this.$store.commit('toggleTheme')
+    }
+  }
 }
 </script>
 

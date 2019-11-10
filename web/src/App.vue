@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{'body--dark': $store.state.theme === 'dark'}">
     <Navigation/>
     <v-dialog/>
     <vue-progress-bar></vue-progress-bar>
@@ -71,6 +71,11 @@ html {
 
 body {
   margin: 0;
+  /* background: #000000; */
+}
+
+.body--dark {
+  background: #000000;
 }
 
 img {
