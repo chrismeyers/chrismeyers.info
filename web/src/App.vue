@@ -63,11 +63,19 @@ export default {
 :root {
   --font-color: #000000;
   --bg-color: #FFFFFF;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --tooltip-bg-color: #000000;
+  --tooltip-font-color: #FFFFFF;
+  --tooltip-border-color: #000000;
 }
 
 [data-theme="dark"] {
   --font-color: #FFFFFF;
   --bg-color: #000000;
+  --border-color: rgba(255, 255, 255, 0.3);
+  --tooltip-bg-color: #FFFFFF;
+  --tooltip-font-color: #000000;
+  --tooltip-border-color: #FFFFFF;
 }
 
 #app {
@@ -155,7 +163,7 @@ h2.top {
 .section-header {
   text-align: center;
   font-family: "Open Sans", sans-serif;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .content {
@@ -198,7 +206,7 @@ h2.top {
   font-size: 13px;
   border: 1px solid #000000;
   font-family: "Open Sans", sans-serif;
-  background-color: #FFFFFF;
+  background-color: var(--bg-color);
   border-radius: 0;
 }
 .dropdown-mod:focus {
@@ -298,8 +306,8 @@ select.select-scroll-mod {
 }
 
 .tooltip .tooltip-inner {
-  background: black;
-  color: white;
+  background: var(--tooltip-bg-color);
+  color: var(--tooltip-font-color);
   border-radius: 16px;
   padding: 5px 10px 4px;
 }
@@ -310,7 +318,7 @@ select.select-scroll-mod {
   border-style: solid;
   position: absolute;
   margin: 5px;
-  border-color: black;
+  border-color: var(--tooltip-border-color);
   z-index: 1;
 }
 

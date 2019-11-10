@@ -94,12 +94,12 @@ nav {
   left: 0;
   width: 300px;
   height: 100%;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid var(--border-color);
 }
 
 #hamburger-menu {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-color);
   height: 60px;
 }
 
@@ -121,7 +121,7 @@ nav {
   padding-right: 10px;
   padding-top: 20px;
   margin-top: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--border-color);
 }
 .side-nav-items > li {
   height: 70px;
@@ -145,7 +145,7 @@ nav {
 }
 
 .section-title-menu {
-  background-color: #FFFFFF;
+  background-color: var(--bg-color);
   display: table-cell;
   color: white;
   font-size: x-large;
@@ -157,8 +157,8 @@ nav {
 }
 
 .section-title-small-txt {
-  border-bottom: 1px solid #DCDCDC;
-  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-color);
   line-height: 50px;
   text-align: center;
   vertical-align: middle;
