@@ -38,5 +38,7 @@ This is the codebase for my personal website currently located at <https://chris
     * [vue-progressbar](https://github.com/hilongjw/vue-progressbar) to display of the loading state of a page.
     * [v-tooltip](https://github.com/Akryum/v-tooltip)/[vue-clipboard2](https://github.com/Inndy/vue-clipboard2) to copy my contact email address to the clipboard.
     * [vue-cookie](https://github.com/alfhen/vue-cookie) to handle cookie manipulation.
+    * [vuex](https://github.com/vuejs/vuex) for front-end state management.
+    * [vuex-persist](https://github.com/championswimmer/vuex-persist) to persist vuex state.
   * [Aqueduct](https://aqueduct.io/) as a backend API framework.
   * [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon.
