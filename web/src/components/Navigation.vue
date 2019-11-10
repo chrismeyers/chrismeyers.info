@@ -74,7 +74,7 @@ nav {
 }
 
 .nav-link {
-  color: #000000;
+  color: var(--font-color);
   text-decoration: none;
 }
 

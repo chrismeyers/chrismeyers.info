@@ -14,8 +14,12 @@ export const Store = new Vuex.Store({
     theme: "light"
   },
   mutations: {
-    toggleTheme (state) {
+    toggleTheme(state) {
       state.theme = (state.theme === "light") ? "dark" : "light"
+      document.documentElement.setAttribute("data-theme", state.theme);
+    },
+    setTheme(state) {
+      document.documentElement.setAttribute("data-theme", state.theme);
     }
   },
   plugins: [vuexLocalStorage.plugin]

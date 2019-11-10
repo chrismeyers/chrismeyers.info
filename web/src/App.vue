@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="{'body--dark': $store.state.theme === 'dark'}">
+  <div id="app">
     <Navigation/>
     <v-dialog/>
     <vue-progress-bar></vue-progress-bar>
@@ -46,6 +46,8 @@ export default {
     })
   },
   mounted() {
+    this.$store.commit('setTheme')
+
     // [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish()
 
@@ -58,6 +60,16 @@ export default {
 
 <style>
 /********************* GENERAL *********************/
+:root {
+  --font-color: #000000;
+  --bg-color: #FFFFFF;
+}
+
+[data-theme="dark"] {
+  --font-color: #FFFFFF;
+  --bg-color: #000000;
+}
+
 #app {
   font-family: "Open Sans", sans-serif;
   display: -webkit-flex;
@@ -71,11 +83,10 @@ html {
 
 body {
   margin: 0;
-  /* background: #000000; */
-}
-
-.body--dark {
-  background: #000000;
+  padding:0;
+  height:100%;
+  background-color: var(--bg-color);
+  color: var(--font-color);
 }
 
 img {
@@ -107,7 +118,7 @@ h2.top {
 }
 
 .fancytxt {
-  color: #000000;
+  color: var(--font-color);
   text-decoration: underline;
   cursor: pointer;
 }
