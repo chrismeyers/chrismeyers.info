@@ -67,6 +67,7 @@ export default {
   --tooltip-bg-color: #000000;
   --tooltip-font-color: #FFFFFF;
   --tooltip-border-color: #000000;
+  --hamburgers-color: #000000;
 }
 
 [data-theme="dark"] {
@@ -76,6 +77,7 @@ export default {
   --tooltip-bg-color: #FFFFFF;
   --tooltip-font-color: #000000;
   --tooltip-border-color: #FFFFFF;
+  --hamburgers-color: #FFFFFF;
 }
 
 #app {
@@ -283,6 +285,17 @@ select.select-scroll-mod {
 .delete-button:hover,
 .reset-button:hover {
   background-color: #d9534f;
+}
+
+/******************* hamburgers overrides ******************/
+.hamburger:hover{
+  opacity: 1;
+}
+
+.hamburger-inner,
+.hamburger-inner:after,
+.hamburger-inner:before {
+  background-color: var(--hamburgers-color);
 }
 
 /********************* v-img overrides *********************/
