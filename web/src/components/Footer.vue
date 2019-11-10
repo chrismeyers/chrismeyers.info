@@ -33,7 +33,9 @@
         </a>
       </div>
 
-      <div class="theme-toggle">
+      <div class="footer-bullets">&bull;</div>
+
+      <div class="footer-theme">
         <a @click="toggleTheme">THEME</a>
       </div>
     </div>
@@ -63,7 +65,7 @@ footer {
   height: auto;
   left: 0;
   right: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--border-color);
   width: 300px;
   position: fixed;
   text-align: center;
@@ -90,7 +92,7 @@ footer {
   margin: 0px 3px;
 }
 
-.footer-social, .footer-bullets, .footer-message {
+.footer-social, .footer-bullets, .footer-message, .footer-theme {
   display: inline-block;
   vertical-align: middle;
 }
