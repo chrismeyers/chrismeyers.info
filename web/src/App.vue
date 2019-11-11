@@ -220,7 +220,7 @@ h2.top {
   font-size: 13px;
   border: 1px solid #000000;
   font-family: "Open Sans", sans-serif;
-  background-color: var(--bg-color);
+  background-color: #FFFFFF;
   border-radius: 0;
 }
 .dropdown-mod:focus {
