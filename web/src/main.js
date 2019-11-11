@@ -1,17 +1,20 @@
 import "babel-polyfill"
 import Vue from "vue"
-import router from "./router"
+import Router from "./router"
 import App from "./App"
-import axios from "axios"
+import { Store } from "./store/store"
+import Axios from "axios"
 import VModal from "vue-js-modal"
 import VueProgressBar from "vue-progressbar"
 import VueImg from "v-img"
 import VTooltip from "v-tooltip"
 import VueClipboard from "vue-clipboard2"
+import SvgIcon from "vue-svgicon"
+import ToggleButton from "vue-js-toggle-button"
 
 var VueCookie = require("vue-cookie")
 
-axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
+Axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
 
 Vue.config.productionTip = false
 
@@ -30,11 +33,14 @@ Vue.use(VueImg, {
 Vue.use(VueCookie)
 Vue.use(VTooltip)
 Vue.use(VueClipboard)
+Vue.use(SvgIcon)
+Vue.use(ToggleButton)
 
 // See: https://stackoverflow.com/a/9851769/7159369
 Vue.prototype.$isIE = /*@cc_on!@*/false || !!document.documentMode
 
 new Vue({
-  router,
-  render: create => create(App)
+  router: Router,
+  render: create => create(App),
+  store: Store
 }).$mount("#app")

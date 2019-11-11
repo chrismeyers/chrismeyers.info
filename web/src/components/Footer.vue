@@ -5,7 +5,7 @@
         <a href="https://github.com/chrismeyers"
            target="_blank"
            style="text-decoration: none;">
-          <img alt="Find me on GitHub" title="GitHub" src="@/assets/images/social/github-logo.svg">
+          <svgicon name="github" class="link-image large" alt="Find me on GitHub" title="GitHub"></svgicon>
         </a>
       </div>
 
@@ -15,22 +15,33 @@
         <a href="https://www.linkedin.com/in/chris-meyers"
            target="_blank"
            style="text-decoration: none;">
-          <img alt="Connect with me on LinkedIn" title="LinkedIn" src="@/assets/images/social/linkedin-logo.svg">
+          <svgicon name="linkedin" class="link-image large" alt="Connect with me on LinkedIn" title="LinkedIn"></svgicon>
         </a>
       </div>
 
       <div class="footer-bullets">&bull;</div>
 
       <div class="footer-social">
-        <a>
-          <img v-tooltip="copyMessageOptions"
-               alt="Send Message"
-               src="@/assets/images/social/mail-logo.svg"
-               style="cursor: pointer;"
-               v-clipboard:copy="email"
-               v-clipboard:success="onCopyEmail"
-               @mouseleave="resetCopyMessage">
+        <a v-tooltip="copyMessageOptions"
+           alt="Send Message"
+           style="cursor: pointer;"
+           v-clipboard:copy="email"
+           v-clipboard:success="onCopyEmail"
+           @mouseleave="resetCopyMessage">
+          <svgicon name="mail" class="link-image large"></svgicon>
         </a>
+      </div>
+
+      <div class="footer-bullets">&bull;</div>
+
+      <div class="footer-theme">
+        <toggle-button
+          :value="$store.state.theme === $store.state.themes.DARK"
+          :labels="{checked: $store.state.themes.DARK, unchecked: $store.state.themes.LIGHT}"
+          :width="55"
+          :color="{checked: mainThemeColor}"
+          :sync="true"
+          @change="$store.commit('toggleTheme')" />
       </div>
     </div>
 
@@ -40,10 +51,18 @@
 
 <script>
 import EmailTooltipMixin from "@/mixins/EmailTooltip"
+import "@/assets/images/icons/generated/github"
+import "@/assets/images/icons/generated/linkedin"
+import "@/assets/images/icons/generated/mail"
 
 export default {
   name: "Footer",
-  mixins: [EmailTooltipMixin]
+  mixins: [EmailTooltipMixin],
+  computed: {
+    mainThemeColor: function() {
+      return getComputedStyle(document.documentElement).getPropertyValue('--main-theme-color')
+    }
+  }
 }
 </script>
 
@@ -54,7 +73,7 @@ footer {
   height: auto;
   left: 0;
   right: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--border-color);
   width: 300px;
   position: fixed;
   text-align: center;
@@ -81,9 +100,10 @@ footer {
   margin: 0px 3px;
 }
 
-.footer-social, .footer-bullets, .footer-message {
+.footer-social, .footer-bullets, .footer-message, .footer-theme {
   display: inline-block;
   vertical-align: middle;
+  margin-left: 5px;
 }
 
 @media screen and (max-width: 969px) {

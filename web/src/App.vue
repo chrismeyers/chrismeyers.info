@@ -46,6 +46,8 @@ export default {
     })
   },
   mounted() {
+    this.$store.commit('applyTheme')
+
     // [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish()
 
@@ -58,6 +60,29 @@ export default {
 
 <style>
 /********************* GENERAL *********************/
+:root {
+  --main-theme-color: rgb(91, 183, 91);
+  --font-color: #000000;
+  --bg-color: #FFFFFF;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --tooltip-bg-color: #000000;
+  --tooltip-font-color: #FFFFFF;
+  --tooltip-border-color: #000000;
+  --hamburgers-color: #000000;
+  --icon-color: #000000;
+}
+
+[data-theme="dark"] {
+  --font-color: #FFFFFF;
+  --bg-color: #000000;
+  --border-color: rgba(255, 255, 255, 0.3);
+  --tooltip-bg-color: #FFFFFF;
+  --tooltip-font-color: #000000;
+  --tooltip-border-color: #FFFFFF;
+  --hamburgers-color: #FFFFFF;
+  --icon-color: #FFFFFF;
+}
+
 #app {
   font-family: "Open Sans", sans-serif;
   display: -webkit-flex;
@@ -71,6 +96,10 @@ html {
 
 body {
   margin: 0;
+  padding:0;
+  height:100%;
+  background-color: var(--bg-color);
+  color: var(--font-color);
 }
 
 img {
@@ -102,13 +131,13 @@ h2.top {
 }
 
 .fancytxt {
-  color: #000000;
+  color: var(--font-color);
   text-decoration: underline;
   cursor: pointer;
 }
 
 .fancytxt:hover {
-  color: rgb(91, 183, 91);
+  color: var(--main-theme-color);
   cursor: pointer;
 }
 
@@ -130,16 +159,25 @@ h2.top {
   color: #A9A9A9;
 }
 
-.link-image-small {
-    height: 16px;
-    width: 16px;
+.link-image {
+  fill: var(--icon-color);
+}
+
+.link-image.small {
+  height: 16px;
+  width: 16px;
+}
+
+.link-image.large {
+  height: 24px;
+  width: 20px;
 }
 
 /********************* CONTENT *********************/
 .section-header {
   text-align: center;
   font-family: "Open Sans", sans-serif;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .content {
@@ -182,7 +220,7 @@ h2.top {
   font-size: 13px;
   border: 1px solid #000000;
   font-family: "Open Sans", sans-serif;
-  background-color: #FFFFFF;
+  background-color: var(--bg-color);
   border-radius: 0;
 }
 .dropdown-mod:focus {
@@ -261,6 +299,17 @@ select.select-scroll-mod {
   background-color: #d9534f;
 }
 
+/******************* hamburgers overrides ******************/
+.hamburger:hover{
+  opacity: 1;
+}
+
+.hamburger-inner,
+.hamburger-inner:after,
+.hamburger-inner:before {
+  background-color: var(--hamburgers-color);
+}
+
 /********************* v-img overrides *********************/
 .title-v-img,
 .count-v-img,
@@ -282,8 +331,8 @@ select.select-scroll-mod {
 }
 
 .tooltip .tooltip-inner {
-  background: black;
-  color: white;
+  background: var(--tooltip-bg-color);
+  color: var(--tooltip-font-color);
   border-radius: 16px;
   padding: 5px 10px 4px;
 }
@@ -294,12 +343,12 @@ select.select-scroll-mod {
   border-style: solid;
   position: absolute;
   margin: 5px;
-  border-color: black;
+  border-color: var(--tooltip-border-color);
   z-index: 1;
 }
 
 .tooltip[x-placement^="top"] {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .tooltip[x-placement^="top"] .tooltip-arrow {
