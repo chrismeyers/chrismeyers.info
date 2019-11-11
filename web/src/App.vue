@@ -68,6 +68,7 @@ export default {
   --tooltip-font-color: #FFFFFF;
   --tooltip-border-color: #000000;
   --hamburgers-color: #000000;
+  --icon-color: #000000;
 }
 
 [data-theme="dark"] {
@@ -78,6 +79,7 @@ export default {
   --tooltip-font-color: #000000;
   --tooltip-border-color: #FFFFFF;
   --hamburgers-color: #FFFFFF;
+  --icon-color: #FFFFFF;
 }
 
 #app {
@@ -156,9 +158,18 @@ h2.top {
   color: #A9A9A9;
 }
 
-.link-image-small {
-    height: 16px;
-    width: 16px;
+.link-image {
+  fill: var(--icon-color);
+}
+
+.link-image.small {
+  height: 16px;
+  width: 16px;
+}
+
+.link-image.large {
+  height: 24px;
+  width: 20px;
 }
 
 /********************* CONTENT *********************/

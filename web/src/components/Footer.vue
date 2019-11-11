@@ -5,7 +5,7 @@
         <a href="https://github.com/chrismeyers"
            target="_blank"
            style="text-decoration: none;">
-          <img alt="Find me on GitHub" title="GitHub" src="@/assets/images/social/github-logo.svg">
+          <svgicon name="github" class="link-image large" alt="Find me on GitHub" title="GitHub"></svgicon>
         </a>
       </div>
 
@@ -15,21 +15,20 @@
         <a href="https://www.linkedin.com/in/chris-meyers"
            target="_blank"
            style="text-decoration: none;">
-          <img alt="Connect with me on LinkedIn" title="LinkedIn" src="@/assets/images/social/linkedin-logo.svg">
+          <svgicon name="linkedin" class="link-image large" alt="Connect with me on LinkedIn" title="LinkedIn"></svgicon>
         </a>
       </div>
 
       <div class="footer-bullets">&bull;</div>
 
       <div class="footer-social">
-        <a>
-          <img v-tooltip="copyMessageOptions"
-               alt="Send Message"
-               src="@/assets/images/social/mail-logo.svg"
-               style="cursor: pointer;"
-               v-clipboard:copy="email"
-               v-clipboard:success="onCopyEmail"
-               @mouseleave="resetCopyMessage">
+        <a v-tooltip="copyMessageOptions"
+           alt="Send Message"
+           style="cursor: pointer;"
+           v-clipboard:copy="email"
+           v-clipboard:success="onCopyEmail"
+           @mouseleave="resetCopyMessage">
+          <svgicon name="mail" class="link-image large"></svgicon>
         </a>
       </div>
 
@@ -46,6 +45,9 @@
 
 <script>
 import EmailTooltipMixin from "@/mixins/EmailTooltip"
+import "@/assets/images/icons/generated/github"
+import "@/assets/images/icons/generated/linkedin"
+import "@/assets/images/icons/generated/mail"
 
 export default {
   name: "Footer",

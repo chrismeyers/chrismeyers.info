@@ -23,8 +23,8 @@
                   <dd>{{ project.stat }}</dd>
 
                 <dt class="dt-mod dt-links"><b>Links:</b></dt>
-                  <dd v-if="project.webUrl !== null" class="project-link-image"><img src="@/assets/images/icons/link.svg" class="link-image-small">&nbsp;<a :href="project.webUrl" class="fancytxt" target="_blank">Website</a></dd>
-                  <dd class="project-link-image"><img src="@/assets/images/social/github-logo.svg" class="link-image-small">&nbsp;<a :href="project.codeUrl" class="fancytxt" target="_blank">Code</a></dd>
+                  <dd v-if="project.webUrl !== null" class="project-link-image"><svgicon name="link" class="link-image small"></svgicon>&nbsp;<a :href="project.webUrl" class="fancytxt" target="_blank">Website</a></dd>
+                  <dd class="project-link-image"><svgicon name="github" class="link-image small"></svgicon>&nbsp;<a :href="project.codeUrl" class="fancytxt" target="_blank">Code</a></dd>
               </dl>
             </div>
 
@@ -63,6 +63,8 @@
 import ProjectsAPI from "@/utils/api/projects"
 import ConnectionError from "@/utils/errors/types/connection"
 import ModalsMixin from "@/mixins/Modals"
+import "@/assets/images/icons/generated/github"
+import "@/assets/images/icons/generated/link"
 
 export default {
   name: "Projects",

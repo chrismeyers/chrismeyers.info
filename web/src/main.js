@@ -9,6 +9,7 @@ import VueProgressBar from "vue-progressbar"
 import VueImg from "v-img"
 import VTooltip from "v-tooltip"
 import VueClipboard from "vue-clipboard2"
+import SvgIcon from "vue-svgicon"
 
 var VueCookie = require("vue-cookie")
 
@@ -31,6 +32,7 @@ Vue.use(VueImg, {
 Vue.use(VueCookie)
 Vue.use(VTooltip)
 Vue.use(VueClipboard)
+Vue.use(SvgIcon)
 
 // See: https://stackoverflow.com/a/9851769/7159369
 Vue.prototype.$isIE = /*@cc_on!@*/false || !!document.documentMode
