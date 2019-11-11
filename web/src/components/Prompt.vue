@@ -95,6 +95,9 @@ export default {
       this.textareaVisible = false
       this.arrowDirection = "up"
     },
+    toggleTheme(which) {
+      this.$store.commit('setTheme', which)
+    },
     scrollTextareaToBottom() {
       let textarea = this.$el.querySelector("#prompt-textarea")
       textarea.scrollTop = textarea.scrollHeight
@@ -168,6 +171,9 @@ export default {
       else if(cmd === "toggle") {
         this.toggleTextarea()
       }
+      else if(cmd === "theme") {
+        this.toggleTheme(args[0])
+      }
       else if(cmd === "exit") {
         this.exit()
       }
@@ -199,11 +205,13 @@ export default {
     },
     help() {
       this.clearTextarea()
+      let themeList = Object.values(this.$store.state.themes).reduce((acc, cur) => acc + ", " + cur)
       this.info = `usage: command [arg1] [arg2] ...
 Available commands:
   echo   - prints args to alert() box
   cd     - navigates to the given arg
   toggle - toggles the info box
+  theme  - sets the theme to the arg (options: ${themeList})
   exit   - closes the command prompt
   help   - prints this message
 `
