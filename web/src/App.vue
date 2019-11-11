@@ -347,7 +347,7 @@ select.select-scroll-mod {
 }
 
 .tooltip[x-placement^="top"] {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .tooltip[x-placement^="top"] .tooltip-arrow {
