@@ -61,6 +61,7 @@ export default {
 <style>
 /********************* GENERAL *********************/
 :root {
+  --main-theme-color: rgb(91, 183, 91);
   --font-color: #000000;
   --bg-color: #FFFFFF;
   --border-color: rgba(0, 0, 0, 0.1);
@@ -136,7 +137,7 @@ h2.top {
 }
 
 .fancytxt:hover {
-  color: rgb(91, 183, 91);
+  color: var(--main-theme-color);
   cursor: pointer;
 }
 

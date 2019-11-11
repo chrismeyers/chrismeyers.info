@@ -35,7 +35,13 @@
       <div class="footer-bullets">&bull;</div>
 
       <div class="footer-theme">
-        <a @click="toggleTheme">THEME</a>
+        <toggle-button
+          :value="$store.state.theme === $store.state.themes.DARK"
+          :labels="{checked: $store.state.themes.DARK, unchecked: $store.state.themes.LIGHT}"
+          :width="55"
+          :color="{checked: mainThemeColor}"
+          :sync="true"
+          @change="$store.commit('toggleTheme')" />
       </div>
     </div>
 
@@ -52,9 +58,9 @@ import "@/assets/images/icons/generated/mail"
 export default {
   name: "Footer",
   mixins: [EmailTooltipMixin],
-  methods: {
-    toggleTheme() {
-      this.$store.commit('toggleTheme')
+  computed: {
+    mainThemeColor: function() {
+      return getComputedStyle(document.documentElement).getPropertyValue('--main-theme-color')
     }
   }
 }
@@ -97,6 +103,7 @@ footer {
 .footer-social, .footer-bullets, .footer-message, .footer-theme {
   display: inline-block;
   vertical-align: middle;
+  margin-left: 5px;
 }
 
 @media screen and (max-width: 969px) {
