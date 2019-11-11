@@ -46,7 +46,7 @@ export default {
     })
   },
   mounted() {
-    this.$store.commit('setTheme')
+    this.$store.commit('applyTheme')
 
     // [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish()
