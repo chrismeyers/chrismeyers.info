@@ -40,5 +40,7 @@ This is the codebase for my personal website currently located at <https://chris
     * [vue-cookie](https://github.com/alfhen/vue-cookie) to handle cookie manipulation.
     * [vuex](https://github.com/vuejs/vuex) for front-end state management.
     * [vuex-persist](https://github.com/championswimmer/vuex-persist) to persist vuex state.
+    * [vue-svgicon](https://github.com/MMF-FE/vue-svgicon) to dynamically change the fill color of SVGs.
+    * [vue-js-toggle-button](https://github.com/euvl/vue-js-toggle-button) to toggle themes.
   * [Aqueduct](https://aqueduct.io/) as a backend API framework.
   * [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon.
