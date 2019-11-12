@@ -51,7 +51,7 @@ export default {
     // [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish()
 
-    if(this.$isIE) {
+    if(this.$store.state.isIE) {
       this.showIEDialog()
     }
   }
