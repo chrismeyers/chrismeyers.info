@@ -16,10 +16,14 @@ const themes = {
   DARK: "dark"
 }
 
+// See: https://stackoverflow.com/a/9851769/7159369
+const isIE = /*@cc_on!@*/false || !!document.documentMode
+
 export const Store = new Vuex.Store({
   state: {
     themes: themes,
-    theme: themes.LIGHT
+    theme: themes.LIGHT,
+    isIE: isIE,
   },
   mutations: {
     toggleTheme(state) {

@@ -36,9 +36,6 @@ Vue.use(VueClipboard)
 Vue.use(SvgIcon)
 Vue.use(ToggleButton)
 
-// See: https://stackoverflow.com/a/9851769/7159369
-Vue.prototype.$isIE = /*@cc_on!@*/false || !!document.documentMode
-
 new Vue({
   router: Router,
   render: create => create(App),
