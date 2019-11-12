@@ -62,8 +62,8 @@ export default {
 /********************* GENERAL *********************/
 :root {
   --main-theme-color: rgb(91, 183, 91);
-  --font-color: #000000;
-  --bg-color: #FFFFFF;
+  --font-color: #444444;
+  --bg-color: #F7F7F7;
   --border-color: rgba(0, 0, 0, 0.1);
   --tooltip-bg-color: #000000;
   --tooltip-font-color: #FFFFFF;
@@ -74,14 +74,14 @@ export default {
 }
 
 [data-theme="dark"] {
-  --font-color: #c9c9c9;
-  --bg-color: #000000;
+  --font-color: #E9E9E9;
+  --bg-color: #202020;
   --border-color: rgba(255, 255, 255, 0.3);
   --tooltip-bg-color: #FFFFFF;
   --tooltip-font-color: #000000;
   --tooltip-border-color: #FFFFFF;
-  --hamburgers-color: #c9c9c9;
-  --icon-color: #c9c9c9;
+  --hamburgers-color: #E9E9E9;
+  --icon-color: #E9E9E9;
   --modal-bg-color: #303030;
 }
 
@@ -315,6 +315,7 @@ select.select-scroll-mod {
 /****************** vue-js-modal overrides *****************/
 .v--modal {
   background-color: var(--modal-bg-color) !important;
+  box-shadow: none !important;
 }
 
 .vue-dialog .vue-dialog-buttons {
