@@ -51,7 +51,7 @@ export default {
     // [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish()
 
-    if(this.$store.state.isIE) {
+    if(!this.$store.state.isIE) {
       this.showIEDialog()
     }
   }
@@ -70,6 +70,7 @@ export default {
   --tooltip-border-color: #000000;
   --hamburgers-color: #000000;
   --icon-color: #000000;
+  --modal-bg-color: #FFFFFF;
 }
 
 [data-theme="dark"] {
@@ -81,6 +82,7 @@ export default {
   --tooltip-border-color: #FFFFFF;
   --hamburgers-color: #FFFFFF;
   --icon-color: #FFFFFF;
+  --modal-bg-color: #303030;
 }
 
 #app {
@@ -308,6 +310,19 @@ select.select-scroll-mod {
 .hamburger-inner:after,
 .hamburger-inner:before {
   background-color: var(--hamburgers-color);
+}
+
+/****************** vue-js-modal overrides *****************/
+.v--modal {
+  background-color: var(--modal-bg-color) !important;
+}
+
+.vue-dialog .vue-dialog-buttons {
+  border-top: 1px solid var(--border-color) !important;
+}
+
+.vue-dialog-button:not(:first-of-type) {
+    border-left: 1px solid var(--border-color) !important;
 }
 
 /********************* v-img overrides *********************/
