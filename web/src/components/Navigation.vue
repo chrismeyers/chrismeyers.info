@@ -79,7 +79,7 @@ nav {
 }
 
 .nav-selected {
-  color: #5bb75b !important;
+  color: var(--main-theme-color);
 }
 
 .banner img {
@@ -128,7 +128,7 @@ nav {
   font-size: 33px;
 }
 .side-nav-items > li > a:hover {
-  color: #5bb75b !important;
+  color: var(--main-theme-color);
 }
 
 .small-nav-logo img {

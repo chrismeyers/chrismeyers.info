@@ -225,7 +225,7 @@ h2.top {
 }
 .dropdown-mod:focus {
   outline: none;
-  border-color: #5bb75b;
+  border-color: var(--main-theme-color);
 }
 
 input.inputbox-mod[type="text"],
@@ -249,7 +249,7 @@ input.inputbox-mod:focus[type="number"],
 textarea.textarea-mod:focus,
 select.select-scroll-mod:focus {
   outline: none;
-  border-color: #5bb75b;
+  border-color: var(--main-theme-color);
 }
 
 input.inputbox-mod[type="checkbox"] {
@@ -284,7 +284,7 @@ select.select-scroll-mod {
   text-align:center;
 }
 .submit-button:hover {
-  background-color:#5bb75b;
+  background-color: var(--main-theme-color);
   color: #FFFFFF;
   cursor: pointer;
 }.submit-button:active {

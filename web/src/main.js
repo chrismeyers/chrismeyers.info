@@ -22,7 +22,7 @@ Vue.use(VModal, {
   dialog: true
 })
 Vue.use(VueProgressBar, {
-  color: "rgb(91, 183, 91)"
+  color: getComputedStyle(document.documentElement).getPropertyValue('--main-theme-color')
 })
 Vue.use(VueImg, {
   altAsTitle: true,
