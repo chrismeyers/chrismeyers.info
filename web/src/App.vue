@@ -74,14 +74,14 @@ export default {
 }
 
 [data-theme="dark"] {
-  --font-color: #FFFFFF;
+  --font-color: #c9c9c9;
   --bg-color: #000000;
   --border-color: rgba(255, 255, 255, 0.3);
   --tooltip-bg-color: #FFFFFF;
   --tooltip-font-color: #000000;
   --tooltip-border-color: #FFFFFF;
-  --hamburgers-color: #FFFFFF;
-  --icon-color: #FFFFFF;
+  --hamburgers-color: #c9c9c9;
+  --icon-color: #c9c9c9;
   --modal-bg-color: #303030;
 }
 
