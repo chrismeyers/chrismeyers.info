@@ -1,4 +1,5 @@
 import "babel-polyfill"
+import cssVars from "css-vars-ponyfill"
 import Vue from "vue"
 import Router from "./router"
 import App from "./App"
@@ -35,6 +36,8 @@ Vue.use(VTooltip)
 Vue.use(VueClipboard)
 Vue.use(SvgIcon)
 Vue.use(ToggleButton)
+
+cssVars()
 
 new Vue({
   router: Router,
