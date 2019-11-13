@@ -71,6 +71,7 @@ export default {
   --hamburgers-color: #000000;
   --icon-color: #000000;
   --modal-bg-color: #FFFFFF;
+  --page-not-found-path-bg: #EAEAEA;
 }
 
 [data-theme="dark"] {
@@ -83,6 +84,7 @@ export default {
   --hamburgers-color: #E9E9E9;
   --icon-color: #E9E9E9;
   --modal-bg-color: #303030;
+  --page-not-found-path-bg: #444444;
 }
 
 #app {
