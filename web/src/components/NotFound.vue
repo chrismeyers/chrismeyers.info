@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="section-header section-header-size">404 - Page Not Found</div>
+    <div class="section-header section-header-size">404 Page not found</div>
 
     <div class="content-text">
       <p class="center">The path <pre class="path">{{ path }}</pre> does not exist.</p>
@@ -35,6 +35,7 @@ export default {
 
 .path {
   display: inline;
-  background: whitesmoke;
+  background: var(--page-not-found-path-bg);
+  padding: 3px;
 }
 </style>
