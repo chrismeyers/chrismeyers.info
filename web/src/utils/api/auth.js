@@ -30,7 +30,7 @@ export default {
       method: "post",
       url: "/auth/logout",
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       }
     })
     .then(response => {
@@ -47,7 +47,7 @@ export default {
       method: "get",
       url: "/auth/authorize",
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       }
     })
     .then(response => {

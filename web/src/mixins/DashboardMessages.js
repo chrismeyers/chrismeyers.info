@@ -2,45 +2,42 @@ export default {
   methods: {
     determineActions() {
       if(Object.keys(this.lastResponse).length === 0) {
-        return {"present": "N/A", "past": "N/A"}
+        return {present: "N/A", past: "N/A"}
       }
       else if(this.lastResponse.config.method === "post") {
-        return {"present": "Add", "past": "Added"}
+        return {present: "Add", past: "Added"}
       }
       else if(this.lastResponse.config.method === "put") {
-        return {"present": "Update", "past": "Updated"}
+        return {present: "Update", past: "Updated"}
       }
       else if(this.lastResponse.config.method === "delete") {
-        return {"present": "Delete", "past": "Deleted"}
+        return {present: "Delete", past: "Deleted"}
       }
     },
     success(type, showId = true) {
       let actions = this.determineActions()
-      let id = showId ? (" " + this.lastResponse.data.id) : ""
+      let item = showId ? `${type} ${this.lastResponse.data.id}` : type
 
-      return {title: "Success", body: actions.past + " " + type + id}
+      return {title: "Success", body: `${actions.past} ${item}`}
     },
-    retrievalError(type) {
-      return {title: "Error", body: "Unable to retrieve " + type}
+    retrievalError(type, showId = true) {
+      let item = showId ? `${type} ${this.lastResponse.data.id}` : type
+
+      return {title: "Error", body: `Unable to retrieve ${item}`}
     },
-    addUpdateError(type, showId = true) {
+    modificationError(type, showId = true) {
       let actions = this.determineActions()
       let error = this.lastResponse.data.error || null
       let detail = this.lastResponse.data.detail || null
 
+      let item = (showId && (actions.present !== "Add")) ? `${type} ${this.selected.id}` : type
+      let msg = `Unable to ${actions.present.toLowerCase()} ${item}`
+
       if(error && detail) {
-        let msg = actions.present + " " + type + " error\n"
-          + "  Error: " + error + "\n"
-          + "  Detail: " + detail
-        return {title: "Error", body: msg}
+        msg += `<ul><li>Error: ${error}</li><li>Detail: ${detail}</li></ul>`
       }
-      else {
-        let id = (showId && (actions.present === "Update")) ? (" " + this.selected.id) : ""
-        return {title: "Error", body: "Unable to " + actions.present.toLowerCase() + " " + type + id}
-      }
-    },
-    deleteError(type) {
-      return {title: "Error", body: "Unable to delete " + type + " " + this.selected.id}
+
+      return {title: "Error", body: msg}
     }
   }
 }

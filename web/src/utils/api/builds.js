@@ -5,8 +5,9 @@ import ErrorHandler from "../errors/handler"
 export default {
   // GET Methods
   get(params = {}) {
+    let queryString = qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true})
     return axios
-      .get("/public/builds" + qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true}))
+      .get(`/public/builds${queryString}`)
       .then(response => {
         return response
       })
@@ -21,7 +22,7 @@ export default {
       method: "post",
       url: "/admin/builds",
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       },
       data: {
         "date": build.date,
@@ -51,9 +52,9 @@ export default {
 
     return axios({
       method: "put",
-      url: "/admin/builds/" + buildId,
+      url: `/admin/builds/${buildId}`,
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       },
       data: {
         "date": build.date,
@@ -83,9 +84,9 @@ export default {
 
     return axios({
       method: "delete",
-      url: "/admin/builds/" + buildId,
+      url: `/admin/builds/${buildId}`,
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       }
     })
     .then(response => {

@@ -8,7 +8,7 @@ export default {
       method: "put",
       url: "/account/password",
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       },
       data: {
         "password": password

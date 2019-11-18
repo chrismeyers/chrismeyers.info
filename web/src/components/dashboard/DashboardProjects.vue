@@ -1,7 +1,7 @@
 <template>
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
-      <option v-for="project in items" :key="project.id" :value="project">{{ (project.id > 0) ? ("Edit " + project.id + ": " + project.title) : "Add new project" }}</option>
+      <option v-for="project in items" :key="project.id" :value="project">{{ (project.id > 0) ? `Edit ${project.id}: ${project.title}` : "Add new project" }}</option>
     </select>
 
     <br />
@@ -18,7 +18,7 @@
         <template v-else-if="field.tag === 'select'">
           <a class="fancytxt clear-button" :key="index - '-clear'" @click="selected.images = []">clear</a>
           <select class="select-scroll-mod" size="10" :key="index + '-select'" :multiple="field.multiple" v-model="selected.images">
-            <option v-for="image in images" :key="image.id" :value="image.id">{{ "Image " + image.id + ": " + image.path }}</option>
+            <option v-for="image in images" :key="image.id" :value="image.id">{{ `Image ${image.id}: ${image.path}` }}</option>
           </select>
         </template>
       </template>
