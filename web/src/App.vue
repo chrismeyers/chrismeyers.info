@@ -62,6 +62,8 @@ export default {
 /********************* GENERAL *********************/
 :root {
   --main-theme-color: rgb(91, 183, 91);
+  --warning-color: #D9534F;
+
   --font-color: #444444;
   --bg-color: #F7F7F7;
   --border-color: rgba(0, 0, 0, 0.1);
@@ -71,6 +73,7 @@ export default {
   --hamburgers-color: #000000;
   --icon-color: #000000;
   --modal-bg-color: #FFFFFF;
+  --modal-button-text-color: #FFFFFF;
   --page-not-found-path-bg: #EAEAEA;
 }
 
@@ -84,6 +87,7 @@ export default {
   --hamburgers-color: #E9E9E9;
   --icon-color: #E9E9E9;
   --modal-bg-color: #303030;
+  --modal-button-text-color: #FFFFFF;
   --page-not-found-path-bg: #444444;
 }
 
@@ -300,7 +304,7 @@ select.select-scroll-mod {
 }
 .delete-button:hover,
 .reset-button:hover {
-  background-color: #d9534f;
+  background-color: var(--warning-color);
 }
 
 /******************* hamburgers overrides ******************/
@@ -325,7 +329,12 @@ select.select-scroll-mod {
 }
 
 .vue-dialog-button:not(:first-of-type) {
-    border-left: 1px solid var(--border-color) !important;
+  border-left: 1px solid var(--border-color) !important;
+}
+
+.vue-dialog-button.confirm:hover {
+  color: var(--modal-button-text-color);
+  background-color: var(--warning-color);
 }
 
 /********************* v-img overrides *********************/
