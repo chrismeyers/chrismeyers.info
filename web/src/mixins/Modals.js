@@ -36,10 +36,12 @@ export default {
         buttons: [
           {
             title: "No",
+            class: ["vue-dialog-button", "negate"],
             default: true
           },
           {
             title: "Yes",
+            class: ["vue-dialog-button", "confirm"],
             handler: () => {
               this.$modal.hide("dialog")
               handler()
