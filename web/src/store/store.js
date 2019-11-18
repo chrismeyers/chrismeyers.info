@@ -11,19 +11,20 @@ const vuexLocalStorage = new VuexPersist({
   storage: window.localStorage
 })
 
+// See: https://stackoverflow.com/a/9851769/7159369
+const isIE = /*@cc_on!@*/false || !!document.documentMode
+const tokenKey = "chrismeyers_info_apiToken"
 const themes = {
   LIGHT: "light",
   DARK: "dark"
 }
 
-// See: https://stackoverflow.com/a/9851769/7159369
-const isIE = /*@cc_on!@*/false || !!document.documentMode
-
 export const Store = new Vuex.Store({
   state: {
+    isIE: isIE,
+    tokenKey: tokenKey,
     themes: themes,
     theme: themes.LIGHT,
-    isIE: isIE,
   },
   mutations: {
     toggleTheme(state) {

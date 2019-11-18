@@ -5,8 +5,9 @@ import ErrorHandler from "../errors/handler"
 export default {
   // GET Methods
   get(params = {}) {
+    let queryString = qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true})
     return axios
-      .get("/public/images" + qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true}))
+      .get(`/public/images${queryString}`)
       .then(response => {
         return response
       })
@@ -21,7 +22,7 @@ export default {
       method: "post",
       url: "/admin/images",
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       },
       data: {
         "path": image.path,
@@ -40,13 +41,11 @@ export default {
 
   // PUT Methods
   update(token, image) {
-    const imageId = image.id
-
     return axios({
       method: "put",
-      url: "/admin/images/" + imageId,
+      url: `/admin/images/${image.id}`,
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       },
       data: {
         "path": image.path,
@@ -65,13 +64,11 @@ export default {
 
   // DELETE Methods
   delete(token, image) {
-    const imageId = image.id
-
     return axios({
       method: "delete",
-      url: "/admin/images/" + imageId,
+      url: `/admin/images/${image.id}`,
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       }
     })
     .then(response => {

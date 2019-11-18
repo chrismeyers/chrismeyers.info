@@ -39,14 +39,17 @@
           this.error = "Passwords do not match"
         } else if(this.passwords["initial"] !== "" && this.passwords["confirm"] !== "") {
           this.error = null
-          this.lastResponse = await AccountAPI.updatePassword(this.$cookie.get("chrismeyers_info_apiToken"), this.passwords["initial"])
+          this.lastResponse = await AccountAPI.updatePassword(
+            this.$cookie.get(this.$store.state.tokenKey),
+            this.passwords["initial"]
+          )
 
           let result = {}
           if(this.lastResponse.status === 200) {
-            result = this.success('password', false)
+            result = this.success("password", false)
           }
           else {
-            result = this.addUpdateError('password', false)
+            result = this.modificationError("password", false)
           }
 
           // Prevent closing the dialog by pressing enter to submit form.

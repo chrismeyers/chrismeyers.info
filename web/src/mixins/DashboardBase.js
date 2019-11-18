@@ -45,11 +45,17 @@ export default {
     async addUpdateEntry() {
       if(this.selected.id > 0) {
         // Update existing (PUT)
-        this.lastResponse = await this.api.update(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await this.api.update(
+          this.$cookie.get(this.$store.state.tokenKey),
+          this.selected
+        )
       }
       else {
         // Add new (POST)
-        this.lastResponse = await this.api.add(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+        this.lastResponse = await this.api.add(
+          this.$cookie.get(this.$store.state.tokenKey),
+          this.selected
+        )
       }
 
       let result = {}
@@ -68,11 +74,11 @@ export default {
           result = this.success(this.type.singular)
         }
         else {
-          result = this.retrievalError(this.type.plural)
+          result = this.retrievalError(this.type.plural, false)
         }
       }
       else {
-        result = this.addUpdateError(this.type.singular)
+        result = this.modificationError(this.type.singular)
       }
 
       // Prevent closing the dialog by pressing enter to submit form.
@@ -81,7 +87,10 @@ export default {
     deleteEntry() {
       let handler = async () => {
         if(this.selected.id) {
-          this.lastResponse = await this.api.delete(this.$cookie.get("chrismeyers_info_apiToken"), this.selected)
+          this.lastResponse = await this.api.delete(
+            this.$cookie.get(this.$store.state.tokenKey),
+            this.selected
+          )
 
           let result = {}
           if(this.lastResponse.status === 200) {
@@ -92,11 +101,11 @@ export default {
               result = this.success(this.type.singular)
             }
             else {
-              result = this.retrievalError(this.type.plural)
+              result = this.retrievalError(this.type.plural, false)
             }
           }
           else {
-            result = this.deleteError(this.type.singular)
+            result = this.modificationError(this.type.singular)
           }
 
           // Prevent closing the dialog by pressing enter to submit form.
@@ -104,7 +113,10 @@ export default {
         }
       }
 
-      this.showConfirm("Are you sure you want to delete " + this.type.singular + " " + this.selected.id + "?", handler,)
+      this.showConfirm(
+        `Are you sure you want to delete ${this.type.singular} ${this.selected.id}?`,
+        handler
+      )
     }
   }
 }

@@ -3,9 +3,9 @@ export default {
     showIEDialog() {
       this.$modal.show("dialog", {
         title: "Internet Explorer Detected",
-        text: "For a better browsing experience, please visit this website " +
-              "on a different browser, if possible.<br/><br/><i>Some functionality may " +
-              "not work as expected on Internet Explorer.</i>",
+        text: `For a better browsing experience, please visit this website on
+               a different browser, if possible.<br/><br/><i>Some functionality
+               may not work as expected on Internet Explorer.</i>`,
         buttons: [
           {
             title: "Proceed",

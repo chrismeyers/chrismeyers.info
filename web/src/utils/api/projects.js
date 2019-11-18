@@ -5,8 +5,9 @@ import ErrorHandler from "../errors/handler"
 export default {
   // GET Methods
   get(params = {}) {
+    let queryString = qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true})
     return axios
-      .get("/public/projects" + qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true}))
+      .get(`/public/projects${queryString}`)
       .then(response => {
         return response
       })
@@ -21,7 +22,7 @@ export default {
       method: "post",
       url: "/admin/projects",
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       },
       data: {
         "title": project.title,
@@ -47,13 +48,11 @@ export default {
 
   // PUT Methods
   update(token, project) {
-    const projectId = project.id
-
     return axios({
       method: "put",
-      url: "/admin/projects/" + projectId,
+      url: `/admin/projects/${project.id}`,
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       },
       data: {
         "title": project.title,
@@ -79,13 +78,11 @@ export default {
 
   // DELETE Methods
   delete(token, project) {
-    const projectId = project.id
-
     return axios({
       method: "delete",
-      url: "/admin/projects/" + projectId,
+      url: `/admin/projects/${project.id}`,
       headers: {
-        "Authorization": "Bearer " + token
+        "Authorization": `Bearer ${token}`
       }
     })
     .then(response => {

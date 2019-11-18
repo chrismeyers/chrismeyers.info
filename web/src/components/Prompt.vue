@@ -198,14 +198,14 @@ export default {
         path = ""
       }
 
-      this.$router.push({path: "/" + path})
+      this.$router.push({path: `/${path}`})
     },
     exit() {
       this.hidePrompt()
     },
     help() {
       this.clearTextarea()
-      let themeList = Object.values(this.$store.state.themes).reduce((acc, cur) => acc + ", " + cur)
+      let themeList = Object.values(this.$store.state.themes).reduce((acc, cur) => `${acc}, ${cur}`)
       this.info = `usage: command [arg1] [arg2] ...
 Available commands:
   echo   - prints args to alert() box

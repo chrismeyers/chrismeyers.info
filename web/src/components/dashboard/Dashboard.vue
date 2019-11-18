@@ -28,13 +28,13 @@ export default {
       return document.title
     },
     async logout() {
-      let logout = await AuthAPI.logout(this.$cookie.get("chrismeyers_info_apiToken"))
+      let logout = await AuthAPI.logout(this.$cookie.get(this.$store.state.tokenKey))
 
       if(logout instanceof ConnectionError) {
         this.showDialog(logout.title, logout.message)
       }
       else if(logout.status === 200) {
-        this.$cookie.delete("chrismeyers_info_apiToken")
+        this.$cookie.delete(this.$store.state.tokenKey)
         this.$router.push({
           path: "/login"
         })

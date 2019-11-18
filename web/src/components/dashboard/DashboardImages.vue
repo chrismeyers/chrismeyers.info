@@ -1,7 +1,7 @@
 <template>
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
-      <option v-for="image in items" :key="image.id" :value="image">{{ (image.id > 0) ? ("Edit " + image.id + ": " + image.path) : "Add new image" }}</option>
+      <option v-for="image in items" :key="image.id" :value="image">{{ (image.id > 0) ? `Edit ${image.id}: ${image.path}` : "Add new image" }}</option>
     </select>
 
     <br />
