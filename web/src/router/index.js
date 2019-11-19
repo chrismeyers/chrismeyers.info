@@ -12,7 +12,7 @@ import DashboardBuilds from "@/components/dashboard/DashboardBuilds"
 import DashboardProjects from "@/components/dashboard/DashboardProjects"
 import DashboardAccount from "@/components/dashboard/DashboardAccount"
 import NotFound from "@/components/NotFound"
-import { Store } from "@/store/store"
+import { API_TOKEN_KEY } from "@/store/constants"
 
 Vue.use(VueRouter)
 
@@ -137,7 +137,7 @@ router.beforeEach(async (to, from, next) => {
   // Checking if valid cookie exists, skips login if true
   if(to.fullPath === "/login") {
     match = document.cookie.match(
-      new RegExp(`(^| )${Store.state.tokenKey}=([^]+)`)
+      new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`)
     )
 
     if(match === null) {
@@ -159,7 +159,7 @@ router.beforeEach(async (to, from, next) => {
   }
   else if(to.matched.some(record => record.meta.secure)) {
     match = document.cookie.match(
-      new RegExp(`(^| )${Store.state.tokenKey}=([^]+)`)
+      new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`)
     )
 
     if(match === null) {

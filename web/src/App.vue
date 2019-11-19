@@ -2,7 +2,7 @@
   <div id="app">
     <Navigation/>
     <v-dialog/>
-    <vue-progress-bar></vue-progress-bar>
+    <vue-progress-bar/>
     <router-view/>
     <Footer/>
     <Prompt/>
@@ -46,7 +46,7 @@ export default {
     })
   },
   mounted() {
-    this.$store.commit('applyTheme')
+    this.$store.commit("applyTheme")
 
     // [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish()

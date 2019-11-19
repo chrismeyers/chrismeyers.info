@@ -1,5 +1,6 @@
 import DashboardMessagesMixin from "@/mixins/DashboardMessages"
 import ModalsMixin from "@/mixins/Modals"
+import { API_TOKEN_KEY } from "@/store/constants"
 
 export default {
   mixins: [DashboardMessagesMixin, ModalsMixin],
@@ -46,14 +47,14 @@ export default {
       if(this.selected.id > 0) {
         // Update existing (PUT)
         this.lastResponse = await this.api.update(
-          this.$cookie.get(this.$store.state.tokenKey),
+          this.$cookie.get(API_TOKEN_KEY),
           this.selected
         )
       }
       else {
         // Add new (POST)
         this.lastResponse = await this.api.add(
-          this.$cookie.get(this.$store.state.tokenKey),
+          this.$cookie.get(API_TOKEN_KEY),
           this.selected
         )
       }
@@ -88,7 +89,7 @@ export default {
       let handler = async () => {
         if(this.selected.id) {
           this.lastResponse = await this.api.delete(
-            this.$cookie.get(this.$store.state.tokenKey),
+            this.$cookie.get(API_TOKEN_KEY),
             this.selected
           )
 

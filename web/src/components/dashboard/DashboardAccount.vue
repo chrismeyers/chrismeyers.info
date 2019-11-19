@@ -19,6 +19,7 @@
   import AccountAPI from "@/utils/api/account"
   import DashboardMessagesMixin from "@/mixins/DashboardMessages"
   import ModalsMixin from "@/mixins/Modals"
+  import { API_TOKEN_KEY } from "@/store/constants"
 
   export default {
     name: "Dashboard-Account",
@@ -40,7 +41,7 @@
         } else if(this.passwords["initial"] !== "" && this.passwords["confirm"] !== "") {
           this.error = null
           this.lastResponse = await AccountAPI.updatePassword(
-            this.$cookie.get(this.$store.state.tokenKey),
+            this.$cookie.get(API_TOKEN_KEY),
             this.passwords["initial"]
           )
 

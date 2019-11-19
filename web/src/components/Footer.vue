@@ -36,8 +36,8 @@
 
       <div class="footer-theme">
         <toggle-button
-          :value="$store.state.theme === $store.state.themes.DARK"
-          :labels="{checked: $store.state.themes.DARK, unchecked: $store.state.themes.LIGHT}"
+          :value="$store.state.theme === THEMES.DARK"
+          :labels="{checked: THEMES.DARK, unchecked: THEMES.LIGHT}"
           :width="55"
           :color="{checked: mainThemeColor}"
           :sync="true"
@@ -54,10 +54,16 @@ import EmailTooltipMixin from "@/mixins/EmailTooltip"
 import "@/assets/images/icons/generated/github"
 import "@/assets/images/icons/generated/linkedin"
 import "@/assets/images/icons/generated/mail"
+import { THEMES } from "@/store/constants"
 
 export default {
   name: "Footer",
   mixins: [EmailTooltipMixin],
+  data() {
+    return {
+      THEMES: THEMES
+    }
+  },
   computed: {
     mainThemeColor: function() {
       return getComputedStyle(document.documentElement).getPropertyValue('--main-theme-color')

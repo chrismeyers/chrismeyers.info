@@ -19,6 +19,7 @@
 import AuthAPI from "@/utils/api/auth"
 import ConnectionError from "@/utils/errors/types/connection"
 import ModalsMixin from "@/mixins/Modals"
+import { API_TOKEN_KEY } from "@/store/constants"
 
 export default {
   name: "Dashboard",
@@ -28,13 +29,13 @@ export default {
       return document.title
     },
     async logout() {
-      let logout = await AuthAPI.logout(this.$cookie.get(this.$store.state.tokenKey))
+      let logout = await AuthAPI.logout(this.$cookie.get(API_TOKEN_KEY))
 
       if(logout instanceof ConnectionError) {
         this.showDialog(logout.title, logout.message)
       }
       else if(logout.status === 200) {
-        this.$cookie.delete(this.$store.state.tokenKey)
+        this.$cookie.delete(API_TOKEN_KEY)
         this.$router.push({
           path: "/login"
         })
