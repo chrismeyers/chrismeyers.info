@@ -16,6 +16,7 @@
 <script>
 import AuthAPI from "@/utils/api/auth"
 import ConnectionError from "@/utils/errors/types/connection"
+import { API_TOKEN_KEY } from "@/store/constants"
 
 export default {
   name: "Login",
@@ -36,7 +37,7 @@ export default {
           else if(auth.status === 200) {
             this.error = ""
             this.$cookie.set(
-              this.$store.state.tokenKey,
+              API_TOKEN_KEY,
               auth.data["access_token"],
               {expires: "1D"}
             )

@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { THEMES } from "@/store/constants"
+
 export default {
   name: "Prompt",
   data() {
@@ -96,7 +98,7 @@ export default {
       this.arrowDirection = "up"
     },
     toggleTheme(which) {
-      this.$store.commit('setTheme', which)
+      this.$store.commit("setTheme", which)
     },
     scrollTextareaToBottom() {
       let textarea = this.$el.querySelector("#prompt-textarea")
@@ -205,7 +207,7 @@ export default {
     },
     help() {
       this.clearTextarea()
-      let themeList = Object.values(this.$store.state.themes).reduce((acc, cur) => `${acc}, ${cur}`)
+      let themeList = Object.values(THEMES).reduce((acc, cur) => `${acc}, ${cur}`)
       this.info = `usage: command [arg1] [arg2] ...
 Available commands:
   echo   - prints args to alert() box
