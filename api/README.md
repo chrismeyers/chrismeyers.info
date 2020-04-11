@@ -34,3 +34,6 @@ See the documentation for [Deployment](https://aqueduct.io/docs/deploy/).
 6) Add an OAuth 2.0 client by running `aqueduct auth add-client --id ...`.
 7) Import the initial data by running `dart bin/bootstrap.dart`.
 8) Copy `../bin/systemd/chrismeyers-info-api.service` to `/etc/systemd/system` and run `sudo systemctl daemon-reload`, `sudo systemctl enable chrismeyers-info-api.service`, and `sudo systemctl start chrismeyers-info-api.service`.
+
+## Troubleshooting
+- `pub global activate aqueduct` may need to be run to use the `aqueduct` CLI tool
