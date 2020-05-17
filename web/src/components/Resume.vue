@@ -44,14 +44,12 @@
           <li :key="skill.id">{{ skill.mainItem }}
             <template v-if="skill.subItems.length > 0">
               <ul>
-                <li :key="subItem.id" v-for="subItem in skill.subItems">{{ subItem}}</li>
+                <li :key="subItem.id" v-for="subItem in skill.subItems">{{ subItem }}</li>
               </ul>
             </template>
           </li>
         </template>
       </ul>
-
-      <span class="timestamp">Last updated on: {{ lastModified }}</span>
     </div>
   </div>
 </template>
@@ -68,8 +66,7 @@ export default {
     return {
       experience: [],
       education: [],
-      skills: [],
-      lastModified: null
+      skills: []
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -88,7 +85,6 @@ export default {
         this.experience = resume.data.experience
         this.education = resume.data.education
         this.skills = resume.data.skills
-        this.lastModified = new Date(resume.data.lastModified).toString()
       }
       else {
         this.showDialog(resume.statusText, resume.data.error)
