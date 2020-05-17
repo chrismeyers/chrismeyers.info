@@ -21,13 +21,28 @@ do
     git --work-tree=/home/chris/www/chrismeyers.info --git-dir=/home/chris/repo/chrismeyers.info.git checkout -f
 
     cd /home/chris/www/chrismeyers.info/web
-    /usr/bin/npm install
-    /usr/bin/npm run build
+    docker build -t chrismeyers-info-web .
+    docker rm -f chrismeyers-info-web
+    docker run \
+        -d \
+        -p 8080:80 \
+        --log-opt max-size=25m \
+        --log-opt max-file=2 \
+        --name chrismeyers-info-web \
+        --restart always \
+        chrismeyers-info-web
 
-    cd /home/chris/www/chrismeyers.info/api
-    /usr/lib/dart/bin/pub get
-    /home/chris/.pub-cache/bin/aqueduct db upgrade
-    sudo /bin/systemctl restart chrismeyers-info-api.service
+    cd /home/chris/www/chrismeyers.info
+    docker build -t chrismeyers-info-api -f api/Dockerfile .
+    docker rm -f chrismeyers-info-api
+    docker run \
+        -d \
+        --net=host \
+        --log-opt max-size=25m \
+        --log-opt max-file=2 \
+        --name chrismeyers-info-api \
+        --restart always \
+        chrismeyers-info-api
   else
     echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server."
   fi
