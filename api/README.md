@@ -52,6 +52,7 @@ docker run \
     --log-opt max-file=2 \
     --rm \
     --name chrismeyers-info-api \
+    --restart always \
     chrismeyers-info-api
 ```
 
