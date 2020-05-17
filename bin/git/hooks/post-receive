@@ -30,6 +30,7 @@ do
         --log-opt max-file=2 \
         --rm \
         --name chrismeyers-info-web \
+        --restart always \
         chrismeyers-info-web
 
     cd /home/chris/www/chrismeyers.info
@@ -42,6 +43,7 @@ do
         --log-opt max-file=2 \
         --rm \
         --name chrismeyers-info-api \
+        --restart always \
         chrismeyers-info-api
   else
     echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server."

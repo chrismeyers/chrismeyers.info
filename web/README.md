@@ -47,5 +47,6 @@ docker run \
     --log-opt max-file=2 \
     --rm \
     --name chrismeyers-info-web \
+    --restart always \
     chrismeyers-info-web
 ```
