@@ -39,13 +39,12 @@ docker build -t chrismeyers-info-web .
 
 ### Run
 ```
-docker stop chrismeyers-info-web
+docker rm -f chrismeyers-info-web
 docker run \
     -d \
     -p 8080:80 \
     --log-opt max-size=25m \
     --log-opt max-file=2 \
-    --rm \
     --name chrismeyers-info-web \
     --restart always \
     chrismeyers-info-web

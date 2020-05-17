@@ -22,26 +22,24 @@ do
 
     cd /home/chris/www/chrismeyers.info/web
     docker build -t chrismeyers-info-web .
-    docker stop chrismeyers-info-web
+    docker rm -f chrismeyers-info-web
     docker run \
         -d \
         -p 8080:80 \
         --log-opt max-size=25m \
         --log-opt max-file=2 \
-        --rm \
         --name chrismeyers-info-web \
         --restart always \
         chrismeyers-info-web
 
     cd /home/chris/www/chrismeyers.info
     docker build -t chrismeyers-info-api -f api/Dockerfile .
-    docker stop chrismeyers-info-api
+    docker rm -f chrismeyers-info-api
     docker run \
         -d \
         --net=host \
         --log-opt max-size=25m \
         --log-opt max-file=2 \
-        --rm \
         --name chrismeyers-info-api \
         --restart always \
         chrismeyers-info-api
