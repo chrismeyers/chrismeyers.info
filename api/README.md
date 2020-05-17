@@ -45,7 +45,14 @@ docker build -t chrismeyers-info-api -f api/Dockerfile .
 ### Run
 ```
 docker stop chrismeyers-info-api
-docker run -d --rm --net=host --name chrismeyers-info-api chrismeyers-info-api
+docker run \
+    -d \
+    --net=host \
+    --log-opt max-size=25m \
+    --log-opt max-file=2 \
+    --rm \
+    --name chrismeyers-info-api \
+    chrismeyers-info-api
 ```
 
 ## Troubleshooting
