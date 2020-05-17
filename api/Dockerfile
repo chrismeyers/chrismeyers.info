@@ -7,10 +7,10 @@ WORKDIR /app
 ADD api/pubspec.* ./
 RUN pub get --no-precompile
 ADD api/ ./
+RUN pub global activate aqueduct
 
 WORKDIR /app
 EXPOSE 8888
 
-CMD pub global activate aqueduct \
-    && aqueduct db upgrade \
+CMD aqueduct db upgrade \
     && dart bin/main.dart
