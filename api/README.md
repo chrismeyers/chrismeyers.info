@@ -38,21 +38,12 @@ See the documentation for [Deployment](https://aqueduct.io/docs/deploy/).
 ## Docker
 ### Build
 ```
-# From the root of this repo (up one directory from this file)
-docker build -t chrismeyers-info-api -f api/Dockerfile .
+scripts/build.sh
 ```
 
 ### Run
 ```
-docker rm -f chrismeyers-info-api
-docker run \
-    -d \
-    --net=host \
-    --log-opt max-size=25m \
-    --log-opt max-file=2 \
-    --name chrismeyers-info-api \
-    --restart always \
-    chrismeyers-info-api
+scripts/run.sh
 ```
 
 ## Troubleshooting

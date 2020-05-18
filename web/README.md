@@ -34,18 +34,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## Docker
 ### Build
 ```
-docker build -t chrismeyers-info-web .
+scripts/build.sh
 ```
 
 ### Run
 ```
-docker rm -f chrismeyers-info-web
-docker run \
-    -d \
-    -p 8080:80 \
-    --log-opt max-size=25m \
-    --log-opt max-file=2 \
-    --name chrismeyers-info-web \
-    --restart always \
-    chrismeyers-info-web
+scripts/run.sh
 ```
