@@ -1,2 +1,5 @@
+.dockerignore
+Dockerfile
+scripts/
 **/node_modules
 **/dist
