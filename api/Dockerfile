@@ -4,9 +4,9 @@ WORKDIR /resume
 ADD resume/ ./
 
 WORKDIR /app
-ADD api/pubspec.* ./
+ADD pubspec.* ./
 RUN pub get --no-precompile
-ADD api/ ./
+ADD . ./
 RUN pub global activate aqueduct
 
 WORKDIR /app
