@@ -34,10 +34,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## Docker
 ### Build
 ```
+# Additional docker build arguments can be passed through such as:
+#   --no-cache (do not use cache when building image)
 scripts/build.sh
 ```
 
 ### Run
 ```
+# Additional docker run arguments can be passed through such as:
+#   -it (allow for signals such as SIGINT <ctrl-c>)
+#   -d  (detached - run container in background)
 scripts/run.sh
 ```
