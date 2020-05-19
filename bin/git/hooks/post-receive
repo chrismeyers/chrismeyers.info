@@ -23,10 +23,10 @@ do
     cd /home/chris/www/chrismeyers.info
 
     web/scripts/build.sh
-    web/scripts/run.sh
+    web/scripts/run.sh -d
 
     api/scripts/build.sh
-    api/scripts/run.sh
+    api/scripts/run.sh -d
   else
     echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server."
   fi
