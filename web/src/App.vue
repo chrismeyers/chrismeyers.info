@@ -161,7 +161,8 @@ h2.top {
   list-style-type: disc;
 }
 
-.timestamp {
+.timestamp,
+.faded {
   font-style: italic;
   font-size: 0.75em;
   color: #A9A9A9;
