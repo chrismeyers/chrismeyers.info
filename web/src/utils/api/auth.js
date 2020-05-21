@@ -4,7 +4,7 @@ import ErrorHandler from "../errors/handler"
 
 export default {
   // POST Methods
-  login(username, password) {
+  login (username, password) {
     return axios({
       method: "post",
       url: "/auth/token",
@@ -25,7 +25,7 @@ export default {
       return ErrorHandler.handle(error)
     })
   },
-  logout(token) {
+  logout (token) {
     return axios({
       method: "post",
       url: "/auth/logout",
@@ -42,7 +42,7 @@ export default {
   },
 
   // GET Methods
-  checkLoggedIn(token) {
+  checkLoggedIn (token) {
     return axios({
       method: "get",
       url: "/auth/authorize",
@@ -51,10 +51,9 @@ export default {
       }
     })
     .then(response => {
-      if(response.status < 400) {
+      if (response.status < 400) {
         return true
-      }
-      else {
+      } else {
         return false
       }
     })

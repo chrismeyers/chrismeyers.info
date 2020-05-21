@@ -55,12 +55,12 @@ import ModalsMixin from "@/mixins/Modals"
 export default {
   name: "Builds",
   mixins: [ModalsMixin],
-  data() {
+  data () {
     return {
       builds: null
     }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     BuildsAPI.get().then(
       builds => {
         next(vm => vm.setData(builds))
@@ -68,17 +68,15 @@ export default {
     )
   },
   methods: {
-    setData(builds) {
-      if(builds instanceof ConnectionError) {
+    setData (builds) {
+      if (builds instanceof ConnectionError) {
         this.showDialog(builds.title, builds.message)
-      }
-      else if(builds.status === 200) {
+      } else if (builds.status === 200) {
         // Only display builds that are set to active.
         this.builds = builds.data.items.filter(b => {
           return b.active
         })
-      }
-      else {
+      } else {
         this.showDialog(builds.statusText, builds.data.error)
       }
     }

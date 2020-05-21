@@ -39,13 +39,13 @@ import DashboardBaseMixin from "@/mixins/DashboardBase"
 export default {
   name: "Dashboard-Projects",
   mixins: [DashboardBaseMixin],
-  data() {
+  data () {
     return {
       type: {singular: "project", plural: "projects"},
       api: ProjectsAPI
     }
   },
-  async beforeRouteEnter(to, from, next) {
+  async beforeRouteEnter (to, from, next) {
     let projects = await ProjectsAPI.get({schema: null})
     let images = await ImagesAPI.get()
     next(vm => {
@@ -54,16 +54,16 @@ export default {
     })
   },
   methods: {
-    flattenData(projects) {
+    flattenData (projects) {
       // The images for each project is an array of objects. Since the API only
       // takes an array of image IDs when creating/updating the images of a
       // project, we can modify the image field of the data we received from
       // the GET to only include an comma separated list of image IDs.
       let flatProjects = []
-      for(let project of projects.data.items) {
-        if(project.images) {
+      for (let project of projects.data.items) {
+        if (project.images) {
           let imageIds = []
-          for(let image of project.images) {
+          for (let image of project.images) {
             imageIds.push(image.id)
           }
           project.images = imageIds

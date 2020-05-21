@@ -66,14 +66,14 @@ import ModalsMixin from "@/mixins/Modals"
 export default {
   name: "Resume",
   mixins: [ModalsMixin],
-  data() {
+  data () {
     return {
       experience: [],
       education: [],
       skills: []
     }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     ResumeAPI.get().then(
       resume => {
         next(vm => vm.setData(resume))
@@ -81,16 +81,14 @@ export default {
     )
   },
   methods: {
-    setData(resume) {
-      if(resume instanceof ConnectionError) {
+    setData (resume) {
+      if (resume instanceof ConnectionError) {
         this.showDialog(resume.title, resume.message)
-      }
-      else if(resume.status === 200) {
+      } else if (resume.status === 200) {
         this.experience = resume.data.experience
         this.education = resume.data.education
         this.skills = resume.data.skills
-      }
-      else {
+      } else {
         this.showDialog(resume.statusText, resume.data.error)
       }
     }

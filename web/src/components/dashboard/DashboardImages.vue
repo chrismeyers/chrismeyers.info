@@ -31,13 +31,13 @@ import DashboardBaseMixin from "@/mixins/DashboardBase"
 export default {
   name: "Dashboard-Images",
   mixins: [DashboardBaseMixin],
-  data() {
+  data () {
     return {
       type: {singular: "image", plural: "images"},
       api: ImagesAPI
     }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     ImagesAPI.get({schema: null}).then(
       images => {
         next(vm => vm.setData(images))

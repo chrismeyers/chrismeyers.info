@@ -4,7 +4,7 @@ import ErrorHandler from "../errors/handler"
 
 export default {
   // GET Methods
-  get(params = {}) {
+  get (params = {}) {
     let queryString = qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true})
     return axios
       .get(`/public/builds${queryString}`)
@@ -17,7 +17,7 @@ export default {
   },
 
   // POST Methods
-  add(token, build) {
+  add (token, build) {
     return axios({
       method: "post",
       url: "/admin/builds",
@@ -47,7 +47,7 @@ export default {
   },
 
   // PUT Methods
-  update(token, build) {
+  update (token, build) {
     const buildId = build.id
 
     return axios({
@@ -79,7 +79,7 @@ export default {
   },
 
   // DELETE Methods
-  delete(token, build) {
+  delete (token, build) {
     const buildId = build.id
 
     return axios({

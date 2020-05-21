@@ -15,43 +15,41 @@ export default {
     }
   },
   methods: {
-    setData(response) {
+    setData (response) {
       this.items = this.flattenData(response)
       this.schema = response.data.schema
       this.selected = this.items[0]
     },
-    setImages(response) {
+    setImages (response) {
       this.images = response.data.items
     },
-    flattenData(response) {
+    flattenData (response) {
       return [this.createBlankEntry(response.data.items[0]), ...response.data.items]
     },
-    createBlankEntry(template) {
+    createBlankEntry (template) {
       // Adds a blank entry as a placeholder for new items.
       let blank = {id: -1}
-      for(const field of Object.keys(template)) {
+      for (const field of Object.keys(template)) {
         blank[field] = null
       }
 
       return blank
     },
-    routeFormSubmission() {
-      if(this.whichButton === "addUpdate") {
+    routeFormSubmission () {
+      if (this.whichButton === "addUpdate") {
         this.addUpdateEntry()
-      }
-      else if(this.whichButton === "delete") {
+      } else if (this.whichButton === "delete") {
         this.deleteEntry()
       }
     },
-    async addUpdateEntry() {
-      if(this.selected.id > 0) {
+    async addUpdateEntry () {
+      if (this.selected.id > 0) {
         // Update existing (PUT)
         this.lastResponse = await this.api.update(
           this.$cookie.get(API_TOKEN_KEY),
           this.selected
         )
-      }
-      else {
+      } else {
         // Add new (POST)
         this.lastResponse = await this.api.add(
           this.$cookie.get(API_TOKEN_KEY),
@@ -60,52 +58,48 @@ export default {
       }
 
       let result = {}
-      if(this.lastResponse.status === 200) {
+      if (this.lastResponse.status === 200) {
         const updated = await this.api.get({schema: null})
-        if(updated.status === 200) {
+        if (updated.status === 200) {
           this.items = this.flattenData(updated)
           this.selected = (() => {
-            for(const [i, item] of this.items.entries()) {
-              if(item.id === this.lastResponse.data.id) {
+            for (const [i, item] of this.items.entries()) {
+              if (item.id === this.lastResponse.data.id) {
                 return this.items[i]
               }
             }
             return this.items[0]
           })()
           result = this.success(this.type.singular)
-        }
-        else {
+        } else {
           result = this.retrievalError(this.type.plural, false)
         }
-      }
-      else {
+      } else {
         result = this.modificationError(this.type.singular)
       }
 
       // Prevent closing the dialog by pressing enter to submit form.
       setTimeout(() => this.showDialog(result.title, result.body), 100)
     },
-    deleteEntry() {
+    deleteEntry () {
       let handler = async () => {
-        if(this.selected.id) {
+        if (this.selected.id) {
           this.lastResponse = await this.api.delete(
             this.$cookie.get(API_TOKEN_KEY),
             this.selected
           )
 
           let result = {}
-          if(this.lastResponse.status === 200) {
+          if (this.lastResponse.status === 200) {
             const updated = await this.api.get({schema: null})
-            if(updated.status === 200) {
+            if (updated.status === 200) {
               this.items = this.flattenData(updated)
               this.selected = this.items[0]
               result = this.success(this.type.singular)
-            }
-            else {
+            } else {
               result = this.retrievalError(this.type.plural, false)
             }
-          }
-          else {
+          } else {
             result = this.modificationError(this.type.singular)
           }
 

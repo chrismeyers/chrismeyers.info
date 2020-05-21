@@ -3,7 +3,7 @@ import ErrorHandler from "../errors/handler"
 
 export default {
   // PUT Methods
-  updatePassword(token, password) {
+  updatePassword (token, password) {
     return axios({
       method: "put",
       url: "/account/password",
