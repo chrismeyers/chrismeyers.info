@@ -4,7 +4,7 @@ import { API_TOKEN_KEY } from "@/store/constants"
 
 export default {
   mixins: [DashboardMessagesMixin, ModalsMixin],
-  data () {
+  data() {
     return {
       whichButton: "",
       items: [],
@@ -15,34 +15,37 @@ export default {
     }
   },
   methods: {
-    setData (response) {
+    setData(response) {
       this.items = this.flattenData(response)
       this.schema = response.data.schema
       this.selected = this.items[0]
     },
-    setImages (response) {
+    setImages(response) {
       this.images = response.data.items
     },
-    flattenData (response) {
-      return [this.createBlankEntry(response.data.items[0]), ...response.data.items]
+    flattenData(response) {
+      return [
+        this.createBlankEntry(response.data.items[0]),
+        ...response.data.items
+      ]
     },
-    createBlankEntry (template) {
+    createBlankEntry(template) {
       // Adds a blank entry as a placeholder for new items.
-      let blank = {id: -1}
+      let blank = { id: -1 }
       for (const field of Object.keys(template)) {
         blank[field] = null
       }
 
       return blank
     },
-    routeFormSubmission () {
+    routeFormSubmission() {
       if (this.whichButton === "addUpdate") {
         this.addUpdateEntry()
       } else if (this.whichButton === "delete") {
         this.deleteEntry()
       }
     },
-    async addUpdateEntry () {
+    async addUpdateEntry() {
       if (this.selected.id > 0) {
         // Update existing (PUT)
         this.lastResponse = await this.api.update(
@@ -59,7 +62,7 @@ export default {
 
       let result = {}
       if (this.lastResponse.status === 200) {
-        const updated = await this.api.get({schema: null})
+        const updated = await this.api.get({ schema: null })
         if (updated.status === 200) {
           this.items = this.flattenData(updated)
           this.selected = (() => {
@@ -81,7 +84,7 @@ export default {
       // Prevent closing the dialog by pressing enter to submit form.
       setTimeout(() => this.showDialog(result.title, result.body), 100)
     },
-    deleteEntry () {
+    deleteEntry() {
       let handler = async () => {
         if (this.selected.id) {
           this.lastResponse = await this.api.delete(
@@ -91,7 +94,7 @@ export default {
 
           let result = {}
           if (this.lastResponse.status === 200) {
-            const updated = await this.api.get({schema: null})
+            const updated = await this.api.get({ schema: null })
             if (updated.status === 200) {
               this.items = this.flattenData(updated)
               this.selected = this.items[0]

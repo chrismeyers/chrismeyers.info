@@ -4,10 +4,18 @@
 
     <div class="content-text">
       <div class="dashboard-nav">
-        <router-link class="fancytxt" to="/dashboard/images">Edit Images</router-link><span>&nbsp;&bull;&nbsp;</span>
-        <router-link class="fancytxt" to="/dashboard/builds">Edit Builds</router-link><span>&nbsp;&bull;&nbsp;</span>
-        <router-link class="fancytxt" to="/dashboard/projects">Edit Projects</router-link><span>&nbsp;&bull;&nbsp;</span>
-        <router-link class="fancytxt" to="/dashboard/account">Account</router-link><span>&nbsp;&bull;&nbsp;</span>
+        <router-link class="fancytxt" to="/dashboard/images"
+          >Edit Images</router-link
+        ><span>&nbsp;&bull;&nbsp;</span>
+        <router-link class="fancytxt" to="/dashboard/builds"
+          >Edit Builds</router-link
+        ><span>&nbsp;&bull;&nbsp;</span>
+        <router-link class="fancytxt" to="/dashboard/projects"
+          >Edit Projects</router-link
+        ><span>&nbsp;&bull;&nbsp;</span>
+        <router-link class="fancytxt" to="/dashboard/account"
+          >Account</router-link
+        ><span>&nbsp;&bull;&nbsp;</span>
         <a class="fancytxt" @click="logout()">Logout</a>
       </div>
       <router-view></router-view>
@@ -25,10 +33,10 @@ export default {
   name: "Dashboard",
   mixins: [ModalsMixin],
   methods: {
-    getTitle () {
+    getTitle() {
       return document.title
     },
-    async logout () {
+    async logout() {
       let logout = await AuthAPI.logout(this.$cookie.get(API_TOKEN_KEY))
 
       if (logout instanceof ConnectionError) {
@@ -64,12 +72,12 @@ export default {
   margin-bottom: 20px;
 }
 
-input[type=checkbox] {
-  -webkit-appearance:checkbox;
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
 }
 
 .required-star:after {
-  content: ' *';
+  content: " *";
   color: red;
 }
 
