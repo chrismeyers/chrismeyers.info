@@ -10,10 +10,7 @@ Future main() async {
 
   test("GET /public/projects returns 200 - empty list", () async {
     final TestResponse response = await harness.publicAgent.get("/public/projects?schema");
-    expectResponse(response, 200, body: {
-      "items": [],
-      "schema": isList
-    });
+    expectResponse(response, 200, body: {"items": [], "schema": isList});
   });
 
   test("GET /public/projects returns 200 - one project", () async {
@@ -21,20 +18,22 @@ Future main() async {
 
     final TestResponse response = await harness.publicAgent.get("/public/projects");
     expectResponse(response, 200, body: {
-      "items": [{
-        "id": greaterThan(0),
-        "title": "A cool project",
-        "webUrl": "https://project.website",
-        "codeUrl": "https://project.code",
-        "date": "A very long time ago",
-        "started": 20130101,
-        "lang": "Machine Code",
-        "info": "I don't know, something",
-        "role": "Solo Project",
-        "stat": "Complete",
-        "images": [],
-        "active": true
-      }]
+      "items": [
+        {
+          "id": greaterThan(0),
+          "title": "A cool project",
+          "webUrl": "https://project.website",
+          "codeUrl": "https://project.code",
+          "date": "A very long time ago",
+          "started": 20130101,
+          "lang": "Machine Code",
+          "info": "I don't know, something",
+          "role": "Solo Project",
+          "stat": "Complete",
+          "images": [],
+          "active": true
+        }
+      ]
     });
   });
 
@@ -133,17 +132,17 @@ Future main() async {
       "info": "Yup",
       "role": "Solo Project",
       "stat": "Complete",
-      "images":  [{
-        "id": 1,
-        "path": "/path/to/image.jpg",
-        "title": "A cool image",
-        "pos": 1,
-        "orient": "port",
-        "build": null,
-        "project": {
-          "id": 1
+      "images": [
+        {
+          "id": 1,
+          "path": "/path/to/image.jpg",
+          "title": "A cool image",
+          "pos": 1,
+          "orient": "port",
+          "build": null,
+          "project": {"id": 1}
         }
-      }],
+      ],
       "active": false
     });
 
@@ -168,7 +167,7 @@ Future main() async {
       "info": "Yup",
       "role": "Solo Project",
       "stat": "Complete",
-      "images": [1,2],
+      "images": [1, 2],
       "active": true
     });
 

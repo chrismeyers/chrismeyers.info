@@ -20,8 +20,7 @@ class LogoutController extends ResourceController {
     await tokenQuery.delete();
 
     // Get the username of the logged out user for the response.
-    final Query<User> userQuery = Query<User>(context)
-      ..where((u) => u.id).equalTo(userId);
+    final Query<User> userQuery = Query<User>(context)..where((u) => u.id).equalTo(userId);
     final User user = await userQuery.fetchOne();
 
     return Response.ok({"id": userId, "username": user.username, "message": "logged out"});

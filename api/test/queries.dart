@@ -6,8 +6,7 @@ import "package:api/model/user.dart";
 import "harness/app.dart";
 
 class Queries {
-  Queries(Harness harness) :
-    _harness = harness;
+  Queries(Harness harness) : _harness = harness;
 
   Harness _harness;
 

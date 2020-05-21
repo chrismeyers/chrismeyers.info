@@ -18,7 +18,7 @@ class BuildsPublicController extends ResourceController {
     final Map<String, dynamic> response = {};
     response["items"] = allBuilds.map((value) => value.asMap()).toList();
 
-    if(schema) {
+    if (schema) {
       response["schema"] = SchemaMaker.build(Build.interface);
     }
 
@@ -32,7 +32,7 @@ class BuildsPublicController extends ResourceController {
       ..join(object: (b) => b.image);
     final Build build = await query.fetchOne();
 
-    if(build == null) {
+    if (build == null) {
       return Response.notFound(body: {"message": "build id $id does not exist"});
     }
 

@@ -16,18 +16,16 @@ class RegisterController extends ResourceController {
     final Map<String, dynamic> body = await request.body.decode();
 
     // Don't allow public accounts
-    if(body["secret"] != config.registrationSecret) {
+    if (body["secret"] != config.registrationSecret) {
       return Response.forbidden();
     }
 
     // Check for required parameters before we spend time hashing
-    if(body["username"] == null || body["password"] == null) {
-      return Response.badRequest(
-        body: {"error": "username and password required."});
+    if (body["username"] == null || body["password"] == null) {
+      return Response.badRequest(body: {"error": "username and password required."});
     }
 
-    final User user = User()
-      ..username = body["username"] as String;
+    final User user = User()..username = body["username"] as String;
 
     user
       ..salt = AuthUtility.generateRandomSalt()
