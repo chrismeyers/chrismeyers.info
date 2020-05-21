@@ -9,9 +9,27 @@
           <li class="left-column company" v-html="job.firstLine[0]"></li>
           <li class="right-column location" v-html="job.firstLine[1]"></li>
           <template v-for="(secondLine, i) in job.secondLine">
-            <li class="left-column sub-left-column job-title" :class="{ 'same-company-spacing': i > 0 && job.info[i - 1].length > 0 }" :key="secondLine.id" v-html="secondLine[0]"></li>
-            <li class="right-column tenure" :class="{ 'same-company-spacing': i > 0 && job.info[i - 1].length > 0 }" :key="secondLine.id" v-html="secondLine[1]"></li>
-            <li class="remove-bullets" v-if="job.info[i].length > 0" :key="secondLine.id">
+            <li
+              class="left-column sub-left-column job-title"
+              :class="{
+                'same-company-spacing': i > 0 && job.info[i - 1].length > 0
+              }"
+              :key="secondLine.id"
+              v-html="secondLine[0]"
+            ></li>
+            <li
+              class="right-column tenure"
+              :class="{
+                'same-company-spacing': i > 0 && job.info[i - 1].length > 0
+              }"
+              :key="secondLine.id"
+              v-html="secondLine[1]"
+            ></li>
+            <li
+              class="remove-bullets"
+              v-if="job.info[i].length > 0"
+              :key="secondLine.id"
+            >
               <ul class="more-info">
                 <template v-for="info in job.info[i]">
                   <li class="more-info" :key="info.id" v-html="info"></li>
@@ -22,36 +40,53 @@
         </ul>
       </template>
 
-      <br /> <hr>
+      <br />
+      <hr />
 
       <h2>Education</h2>
       <template v-for="school in education">
         <ul :key="school.id" class="italic-spacer">
-            <li class="left-column school" v-html="school.firstLine[0]"></li>
-            <li class="right-column location" v-html="school.firstLine[1]"></li>
-            <template v-for="secondLine in school.secondLine">
-              <li class="left-column sub-left-column degree" :key="secondLine.id" v-html="secondLine[0]"></li>
-              <li class="right-column tenure" :key="secondLine.id" v-html="secondLine[1]"></li>
-            </template>
+          <li class="left-column school" v-html="school.firstLine[0]"></li>
+          <li class="right-column location" v-html="school.firstLine[1]"></li>
+          <template v-for="secondLine in school.secondLine">
+            <li
+              class="left-column sub-left-column degree"
+              :key="secondLine.id"
+              v-html="secondLine[0]"
+            ></li>
+            <li
+              class="right-column tenure"
+              :key="secondLine.id"
+              v-html="secondLine[1]"
+            ></li>
+          </template>
         </ul>
       </template>
 
-      <br /> <hr>
+      <br />
+      <hr />
 
       <h2>Technical Skills</h2>
       <ul>
         <template v-for="skill in skills">
-          <li :key="skill.id">{{ skill.mainItem }}
+          <li :key="skill.id">
+            {{ skill.mainItem }}
             <template v-if="skill.subItems.length > 0">
               <ul>
-                <li :key="subItem.id" v-for="subItem in skill.subItems">{{ subItem }}</li>
+                <li :key="subItem.id" v-for="subItem in skill.subItems">
+                  {{ subItem }}
+                </li>
               </ul>
             </template>
           </li>
         </template>
       </ul>
 
-      <a class="faded" href="https://github.com/chrismeyers/chrismeyers.info/blob/master/resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.pdf" target="_blank">
+      <a
+        class="faded"
+        href="https://github.com/chrismeyers/chrismeyers.info/blob/master/resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.pdf"
+        target="_blank"
+      >
         View or download the PDF version of my résumé
       </a>
     </div>
@@ -66,22 +101,20 @@ import ModalsMixin from "@/mixins/Modals"
 export default {
   name: "Resume",
   mixins: [ModalsMixin],
-  data () {
+  data() {
     return {
       experience: [],
       education: [],
       skills: []
     }
   },
-  beforeRouteEnter (to, from, next) {
-    ResumeAPI.get().then(
-      resume => {
-        next(vm => vm.setData(resume))
-      }
-    )
+  beforeRouteEnter(to, from, next) {
+    ResumeAPI.get().then(resume => {
+      next(vm => vm.setData(resume))
+    })
   },
   methods: {
-    setData (resume) {
+    setData(resume) {
       if (resume instanceof ConnectionError) {
         this.showDialog(resume.title, resume.message)
       } else if (resume.status === 200) {
@@ -128,11 +161,15 @@ export default {
     list-style-type: none;
   }
 
-  .company, .school, .location {
+  .company,
+  .school,
+  .location {
     font-weight: bold;
   }
 
-  .degree, .job-title, .tenure {
+  .degree,
+  .job-title,
+  .tenure {
     font-style: italic;
   }
 
@@ -142,18 +179,26 @@ export default {
 }
 
 @media screen and (max-width: 911px) {
-  .company, .school {
+  .company,
+  .school {
     font-weight: bold;
   }
 
-  .location, .degree {
+  .location,
+  .degree {
     font-weight: normal;
   }
 
-  .location, .degree, .job-title, .tenure {
+  .location,
+  .degree,
+  .job-title,
+  .tenure {
     list-style-type: none;
   }
-  .location:before, .degree:before, .job-title:before, .tenure:before {
+  .location:before,
+  .degree:before,
+  .job-title:before,
+  .tenure:before {
     content: "- ";
   }
 }

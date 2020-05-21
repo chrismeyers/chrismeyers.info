@@ -15,20 +15,20 @@ const vuexLocalStorage = new VuexPersist({
 export const Store = new Vuex.Store({
   state: {
     isIE: IS_IE,
-    theme: THEMES.LIGHT,
+    theme: THEMES.LIGHT
   },
   mutations: {
-    toggleTheme (state) {
-      state.theme = (state.theme === THEMES.LIGHT) ? THEMES.DARK : THEMES.LIGHT
-      document.documentElement.setAttribute("data-theme", state.theme);
+    toggleTheme(state) {
+      state.theme = state.theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT
+      document.documentElement.setAttribute("data-theme", state.theme)
     },
-    applyTheme (state) {
-      document.documentElement.setAttribute("data-theme", state.theme);
+    applyTheme(state) {
+      document.documentElement.setAttribute("data-theme", state.theme)
     },
-    setTheme (state, which) {
+    setTheme(state, which) {
       if (Object.values(THEMES).includes(which)) {
         state.theme = which
-        document.documentElement.setAttribute("data-theme", state.theme);
+        document.documentElement.setAttribute("data-theme", state.theme)
       }
     }
   },

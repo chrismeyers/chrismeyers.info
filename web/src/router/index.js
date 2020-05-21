@@ -18,14 +18,14 @@ Vue.use(VueRouter)
 
 let defaultTitle = "Chris Meyers - Developer, Tech Enthusiast"
 
-let formatTitle = (name) => {
+let formatTitle = name => {
   // Surround hyphens with spaces
-  return name.replace(/([!?-])/g, ' $1 ')
+  return name.replace(/([!?-])/g, " $1 ")
 }
 
 let router = new VueRouter({
   mode: "history",
-  scrollBehavior () {
+  scrollBehavior() {
     return { x: 0, y: 0 }
   },
   routes: [
@@ -136,17 +136,13 @@ router.beforeEach(async (to, from, next) => {
 
   // Checking if valid cookie exists, skips login if true
   if (to.fullPath === "/login") {
-    match = document.cookie.match(
-      new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`)
-    )
+    match = document.cookie.match(new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`))
 
     if (match === null) {
       return next()
     }
 
-    authorized = await AuthAPI.checkLoggedIn(
-      document.cookie.match(match[2])
-    )
+    authorized = await AuthAPI.checkLoggedIn(document.cookie.match(match[2]))
 
     // Checking if valid cookie exists before going to secure page.
     // Redirects to login if false, continues if true.
@@ -156,17 +152,13 @@ router.beforeEach(async (to, from, next) => {
       next("/dashboard")
     }
   } else if (to.matched.some(record => record.meta.secure)) {
-    match = document.cookie.match(
-      new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`)
-    )
+    match = document.cookie.match(new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`))
 
     if (match === null) {
       return next("/login")
     }
 
-    authorized = await AuthAPI.checkLoggedIn(
-      document.cookie.match(match[2])
-    )
+    authorized = await AuthAPI.checkLoggedIn(document.cookie.match(match[2]))
 
     if (!authorized) {
       next("/login")

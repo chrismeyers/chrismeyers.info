@@ -1,21 +1,21 @@
 export default {
-  data () {
+  data() {
     return {
       email: "chris@chrismeyers.info",
       copyMessage: "Copy email address"
     }
   },
   methods: {
-    onCopyEmail () {
+    onCopyEmail() {
       this.copyMessage = "Email address copied!"
     },
-    resetCopyMessage () {
+    resetCopyMessage() {
       // Wait some time so the user doesn't see the message flash.
-      setTimeout(() => this.copyMessage = "Copy email address", 100)
+      setTimeout(() => (this.copyMessage = "Copy email address"), 100)
     }
   },
   computed: {
-    copyMessageOptions () {
+    copyMessageOptions() {
       return {
         content: this.copyMessage,
         hideOnTargetClick: false

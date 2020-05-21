@@ -2,22 +2,67 @@
   <nav>
     <div id="full-menu">
       <div class="side-nav-logo">
-        <router-link class="nav-link banner" to="/"><img src="@/assets/images/logos/meyers-logo-green.svg" alt="Chris Meyers. Developer, Tech enthusiast." class="banner-img" title="Home"></router-link>
+        <router-link class="nav-link banner" to="/"
+          ><img
+            src="@/assets/images/logos/meyers-logo-green.svg"
+            alt="Chris Meyers. Developer, Tech enthusiast."
+            class="banner-img"
+            title="Home"
+        /></router-link>
       </div>
       <ul class="side-nav-items">
-        <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'about' }" to="/">About</router-link></li>
-        <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'resume' }" to="/resume">Résumé</router-link></li>
-        <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'projects' }" to="/projects">Projects</router-link></li>
-        <li><router-link class="nav-link" :class="{ 'nav-selected': path == 'builds' }" to="/builds">Builds</router-link></li>
+        <li>
+          <router-link
+            class="nav-link"
+            :class="{ 'nav-selected': path == 'about' }"
+            to="/"
+            >About</router-link
+          >
+        </li>
+        <li>
+          <router-link
+            class="nav-link"
+            :class="{ 'nav-selected': path == 'resume' }"
+            to="/resume"
+            >Résumé</router-link
+          >
+        </li>
+        <li>
+          <router-link
+            class="nav-link"
+            :class="{ 'nav-selected': path == 'projects' }"
+            to="/projects"
+            >Projects</router-link
+          >
+        </li>
+        <li>
+          <router-link
+            class="nav-link"
+            :class="{ 'nav-selected': path == 'builds' }"
+            to="/builds"
+            >Builds</router-link
+          >
+        </li>
       </ul>
     </div>
     <div id="hamburger-menu">
       <div class="banner-icon">
         <router-link to="/" class="small-nav-logo">
-          <img src="@/assets/images/logos/meyers-logo-green.svg" alt="Chris Meyers. Developer, Tech enthusiast." class="banner-img" title="Home">
+          <img
+            src="@/assets/images/logos/meyers-logo-green.svg"
+            alt="Chris Meyers. Developer, Tech enthusiast."
+            class="banner-img"
+            title="Home"
+          />
         </router-link>
 
-        <button style="outline: none;" class="hamburger hamburger--collapse" :class="{ 'is-active': menuDisplayed }" type="button" @click="toggleMenu()">
+        <button
+          style="outline: none;"
+          class="hamburger hamburger--collapse"
+          :class="{ 'is-active': menuDisplayed }"
+          type="button"
+          @click="toggleMenu()"
+        >
           <span class="hamburger-box" style="height: 26px;">
             <span class="hamburger-inner"></span>
           </span>
@@ -27,10 +72,36 @@
           <ul class="menu-dropdown">
             <li>
               <ul class="menu-items">
-                <router-link class="nav-link" :class="{ 'nav-selected': path == 'about' }" tag="a" to="/"><li class="section-title-small-txt">About</li></router-link>
-                <router-link class="nav-link" :class="{ 'nav-selected': path == 'resume' }" tag="a" to="/resume"><li class="section-title-small-txt">Résumé</li></router-link>
-                <router-link class="nav-link" :class="{ 'nav-selected': path == 'projects' }" tag="a" to="/projects"><li class="section-title-small-txt">Projects</li></router-link>
-                <router-link class="nav-link" :class="{ 'nav-selected': path == 'builds' }" tag="a" to="/builds"><li class="section-title-small-txt">Builds</li></router-link>
+                <router-link
+                  class="nav-link"
+                  :class="{ 'nav-selected': path == 'about' }"
+                  tag="a"
+                  to="/"
+                  ><li class="section-title-small-txt">About</li></router-link
+                >
+                <router-link
+                  class="nav-link"
+                  :class="{ 'nav-selected': path == 'resume' }"
+                  tag="a"
+                  to="/resume"
+                  ><li class="section-title-small-txt">Résumé</li></router-link
+                >
+                <router-link
+                  class="nav-link"
+                  :class="{ 'nav-selected': path == 'projects' }"
+                  tag="a"
+                  to="/projects"
+                  ><li class="section-title-small-txt">
+                    Projects
+                  </li></router-link
+                >
+                <router-link
+                  class="nav-link"
+                  :class="{ 'nav-selected': path == 'builds' }"
+                  tag="a"
+                  to="/builds"
+                  ><li class="section-title-small-txt">Builds</li></router-link
+                >
               </ul>
             </li>
           </ul>
@@ -43,7 +114,7 @@
 <script>
 export default {
   name: "Navigation",
-  data () {
+  data() {
     return {
       path: "",
       menuDisplayed: false
@@ -51,17 +122,17 @@ export default {
   },
   watch: {
     // eslint-disable-next-line no-unused-vars
-    "$route" (to, from) {
-      this.setPath(to.path);
+    $route(to, from) {
+      this.setPath(to.path)
       this.menuDisplayed = false
     }
   },
   methods: {
-    setPath (rawPath) {
+    setPath(rawPath) {
       let cleanedPath = rawPath.replace(/\//g, "")
-      this.path = (cleanedPath === "") ? "about" : cleanedPath
+      this.path = cleanedPath === "" ? "about" : cleanedPath
     },
-    toggleMenu () {
+    toggleMenu() {
       this.menuDisplayed = !this.menuDisplayed
     }
   }
@@ -83,7 +154,7 @@ nav {
 }
 
 .banner img {
-  width:100%;
+  width: 100%;
   display: inline-block;
   padding-top: 10px;
 }
@@ -104,7 +175,7 @@ nav {
 }
 
 .header-link {
-  margin-left: 20px
+  margin-left: 20px;
 }
 
 .side-nav-logo {

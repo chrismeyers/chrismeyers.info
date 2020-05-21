@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Navigation/>
-    <v-dialog/>
-    <vue-progress-bar/>
-    <router-view/>
-    <Footer/>
-    <Prompt/>
+    <Navigation />
+    <v-dialog />
+    <vue-progress-bar />
+    <router-view />
+    <Footer />
+    <Prompt />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
     Footer,
     Prompt
   },
-  created () {
+  created() {
     // [App.vue specific] When App.vue is first loaded start the progress bar
     this.$Progress.start()
     // hook the progress bar to start before we move router-view
@@ -45,7 +45,7 @@ export default {
       this.$Progress.finish()
     })
   },
-  mounted () {
+  mounted() {
     this.$store.commit("applyTheme")
 
     // [App.vue specific] When App.vue is finish loading finish the progress bar
@@ -62,32 +62,32 @@ export default {
 /********************* GENERAL *********************/
 :root {
   --main-theme-color: rgb(91, 183, 91);
-  --warning-color: #D9534F;
+  --warning-color: #d9534f;
 
   --font-color: #444444;
-  --bg-color: #F7F7F7;
+  --bg-color: #f7f7f7;
   --border-color: rgba(0, 0, 0, 0.1);
   --tooltip-bg-color: #000000;
-  --tooltip-font-color: #FFFFFF;
+  --tooltip-font-color: #ffffff;
   --tooltip-border-color: #000000;
   --hamburgers-color: #000000;
   --icon-color: #000000;
-  --modal-bg-color: #FFFFFF;
-  --modal-button-text-color: #FFFFFF;
-  --page-not-found-path-bg: #EAEAEA;
+  --modal-bg-color: #ffffff;
+  --modal-button-text-color: #ffffff;
+  --page-not-found-path-bg: #eaeaea;
 }
 
 [data-theme="dark"] {
-  --font-color: #E9E9E9;
+  --font-color: #e9e9e9;
   --bg-color: #202020;
   --border-color: rgba(255, 255, 255, 0.3);
-  --tooltip-bg-color: #FFFFFF;
+  --tooltip-bg-color: #ffffff;
   --tooltip-font-color: #000000;
-  --tooltip-border-color: #FFFFFF;
-  --hamburgers-color: #E9E9E9;
-  --icon-color: #E9E9E9;
+  --tooltip-border-color: #ffffff;
+  --hamburgers-color: #e9e9e9;
+  --icon-color: #e9e9e9;
   --modal-bg-color: #303030;
-  --modal-button-text-color: #FFFFFF;
+  --modal-button-text-color: #ffffff;
   --page-not-found-path-bg: #444444;
 }
 
@@ -104,8 +104,8 @@ html {
 
 body {
   margin: 0;
-  padding:0;
-  height:100%;
+  padding: 0;
+  height: 100%;
   background-color: var(--bg-color);
   color: var(--font-color);
 }
@@ -165,7 +165,7 @@ h2.top {
 .faded {
   font-style: italic;
   font-size: 0.75em;
-  color: #A9A9A9;
+  color: #a9a9a9;
 }
 
 .link-image {
@@ -229,7 +229,7 @@ h2.top {
   font-size: 13px;
   border: 1px solid #000000;
   font-family: "Open Sans", sans-serif;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 0;
 }
 .dropdown-mod:focus {
@@ -244,7 +244,9 @@ input.inputbox-mod[type="number"],
 textarea.textarea-mod,
 select.select-scroll-mod {
   height: 25px;
-  width: calc(100% - 5px - 5px - 2px); /* 100% - padding-left - padding-right - (2 * border size) */
+  width: calc(
+    100% - 5px - 5px - 2px
+  ); /* 100% - padding-left - padding-right - (2 * border size) */
   padding-left: 5px;
   padding-right: 5px;
   font-size: 13px;
@@ -279,26 +281,27 @@ select.select-scroll-mod {
 
 /* This button was generated using CSSButtonGenerator.com */
 .submit-button {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #000000;
-  text-indent:0;
-  border:1px solid #000000;
-  display:inline-block;
-  font-family: 'Open Sans', sans-serif;
+  text-indent: 0;
+  border: 1px solid #000000;
+  display: inline-block;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
-  height:40px;
-  line-height:30px;
-  width:100px;
-  text-decoration:none;
-  text-align:center;
+  height: 40px;
+  line-height: 30px;
+  width: 100px;
+  text-decoration: none;
+  text-align: center;
 }
 .submit-button:hover {
   background-color: var(--main-theme-color);
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
-}.submit-button:active {
-  position:relative;
-  top:1px;
+}
+.submit-button:active {
+  position: relative;
+  top: 1px;
 }
 .submit-button:focus {
   outline: 0;
@@ -440,23 +443,23 @@ select.select-scroll-mod {
   color: black;
   padding: 24px;
   border-radius: 5px;
-  box-shadow: 0 5px 30px rgba(black, .1);
+  box-shadow: 0 5px 30px rgba(black, 0.1);
 }
 
 .tooltip.popover .popover-arrow {
   border-color: #f9f9f9;
 }
 
-.tooltip[aria-hidden='true'] {
+.tooltip[aria-hidden="true"] {
   visibility: hidden;
   opacity: 0;
-  transition: opacity .15s, visibility .15s;
+  transition: opacity 0.15s, visibility 0.15s;
 }
 
-.tooltip[aria-hidden='false'] {
+.tooltip[aria-hidden="false"] {
   visibility: visible;
   opacity: 1;
-  transition: opacity .15s;
+  transition: opacity 0.15s;
 }
 
 @media screen and (max-width: 969px) {

@@ -1,9 +1,32 @@
 <template>
   <div v-show="promptVisible" id="prompt-div">
-    <textarea v-if="textareaVisible" v-model="info" class="textarea-mod prompt-style" id="prompt-textarea" readonly="readonly"></textarea>
-    <input class="input-mod prompt-style" id="prompt-caret" value=">" maxlength="1" readonly="readonly">
-    <input v-model="command" ref="prompt" class="input-mod prompt-style" id="prompt" maxlength="75">
-    <button class="prompt-style" id="prompt-textarea-btn" @click="run('toggle')" v-html="arrows[arrowDirection]"></button>
+    <textarea
+      v-if="textareaVisible"
+      v-model="info"
+      class="textarea-mod prompt-style"
+      id="prompt-textarea"
+      readonly="readonly"
+    ></textarea>
+    <input
+      class="input-mod prompt-style"
+      id="prompt-caret"
+      value=">"
+      maxlength="1"
+      readonly="readonly"
+    />
+    <input
+      v-model="command"
+      ref="prompt"
+      class="input-mod prompt-style"
+      id="prompt"
+      maxlength="75"
+    />
+    <button
+      class="prompt-style"
+      id="prompt-textarea-btn"
+      @click="run('toggle')"
+      v-html="arrows[arrowDirection]"
+    ></button>
   </div>
 </template>
 
@@ -12,13 +35,13 @@ import { THEMES } from "@/store/constants"
 
 export default {
   name: "Prompt",
-  data () {
+  data() {
     return {
       promptVisible: false,
       textareaVisible: false,
       arrows: {
-        "up": "&#9650;",
-        "down": "&#9660;"
+        up: "&#9650;",
+        down: "&#9660;"
       },
       arrowDirection: "up",
       command: "",
@@ -27,7 +50,7 @@ export default {
       historyIndex: -1
     }
   },
-  mounted () {
+  mounted() {
     // eslint-disable-next-line no-console
     console.info(
       `%c[${window.location.host}] Hey, prefer a CLI? Press the tilde (~) key and type \`help\` for usage.`,
@@ -56,63 +79,63 @@ export default {
     })
   },
   methods: {
-    togglePrompt () {
+    togglePrompt() {
       if (this.promptVisible) {
         this.hidePrompt()
       } else {
         this.showPrompt()
       }
     },
-    showPrompt () {
+    showPrompt() {
       this.promptVisible = true
       this.focusPrompt()
     },
-    hidePrompt () {
+    hidePrompt() {
       this.promptVisible = false
       this.historyIndex = -1
       this.hideTextarea()
       this.clearCommand()
     },
-    focusPrompt () {
+    focusPrompt() {
       this.$nextTick(() => {
         this.$refs.prompt.focus()
       })
     },
-    toggleTextarea () {
+    toggleTextarea() {
       if (this.textareaVisible) {
         this.hideTextarea()
       } else {
         this.showTextarea()
       }
     },
-    showTextarea () {
+    showTextarea() {
       this.textareaVisible = true
       this.arrowDirection = "down"
     },
-    hideTextarea () {
+    hideTextarea() {
       this.textareaVisible = false
       this.arrowDirection = "up"
     },
-    toggleTheme (which) {
+    toggleTheme(which) {
       this.$store.commit("setTheme", which)
     },
-    scrollTextareaToBottom () {
+    scrollTextareaToBottom() {
       let textarea = this.$el.querySelector("#prompt-textarea")
       textarea.scrollTop = textarea.scrollHeight
     },
-    clearCommand () {
+    clearCommand() {
       this.command = ""
     },
-    setCommand (cmd) {
+    setCommand(cmd) {
       this.command = cmd
       // Force the model to update even if the adjacent command is the same
       // as the current command.
       this.$forceUpdate()
     },
-    clearTextarea () {
+    clearTextarea() {
       this.info = ""
     },
-    moveCursorToEnd () {
+    moveCursorToEnd() {
       const pos = this.command.length
 
       // NOTE: this.$nextTick doesn't work here...
@@ -121,7 +144,7 @@ export default {
         this.$refs.prompt.selectionEnd = pos
       }, 10)
     },
-    prev () {
+    prev() {
       if (this.historyIndex < this.history.length - 1) {
         this.historyIndex++
         this.setCommand(this.history[this.historyIndex])
@@ -129,7 +152,7 @@ export default {
 
       this.moveCursorToEnd()
     },
-    next () {
+    next() {
       if (this.historyIndex >= 0) {
         this.historyIndex--
         if (this.historyIndex < 0) {
@@ -139,7 +162,7 @@ export default {
         }
       }
     },
-    run (command = null) {
+    run(command = null) {
       if (command) {
         // Only store user entered commands
         this.command = command
@@ -148,9 +171,13 @@ export default {
         this.history.unshift(this.command)
       }
 
-      const parts = this.command.toLowerCase().split(" ").filter(p => {
-        return p !== ""
-      }).map(p => p.trim())
+      const parts = this.command
+        .toLowerCase()
+        .split(" ")
+        .filter(p => {
+          return p !== ""
+        })
+        .map(p => p.trim())
       const cmd = parts[0].trim()
       const args = parts.slice(1)
       let refreshHistory = true
@@ -179,23 +206,25 @@ export default {
         this.printHistory()
       }
     },
-    echo (args) {
+    echo(args) {
       alert(args.join(" "))
     },
-    cd (args) {
+    cd(args) {
       let path = args[0]
       if (args.length < 1) {
         path = ""
       }
 
-      this.$router.push({path: `/${path}`})
+      this.$router.push({ path: `/${path}` })
     },
-    exit () {
+    exit() {
       this.hidePrompt()
     },
-    help () {
+    help() {
       this.clearTextarea()
-      let themeList = Object.values(THEMES).reduce((acc, cur) => `${acc}, ${cur}`)
+      let themeList = Object.values(THEMES).reduce(
+        (acc, cur) => `${acc}, ${cur}`
+      )
       this.info = `usage: command [arg1] [arg2] ...
 Available commands:
   echo   - prints args to alert() box
@@ -209,13 +238,16 @@ Available commands:
         this.showTextarea()
       }
     },
-    printHistory () {
+    printHistory() {
       this.clearTextarea()
 
       let gutter = this.history.length.toString().length + 1
-      this.history.slice().reverse().forEach((item, i) => {
-        this.info += `${(i + 1).toString().padStart(gutter, ' ')} ${item} \n`
-      })
+      this.history
+        .slice()
+        .reverse()
+        .forEach((item, i) => {
+          this.info += `${(i + 1).toString().padStart(gutter, " ")} ${item} \n`
+        })
 
       if (!this.textareaVisible) {
         this.showTextarea()
@@ -224,7 +256,7 @@ Available commands:
       this.$nextTick(() => {
         this.scrollTextareaToBottom()
       })
-    },
+    }
   }
 }
 </script>
@@ -232,8 +264,8 @@ Available commands:
 <style scoped>
 .prompt-style {
   height: 25px;
-  background-color: rgba(0,0,0,0.85);
-  color: #00CC00;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #00cc00;
   font-family: "Courier New", Courier, monospace;
   border: 0;
   font-weight: bold;
