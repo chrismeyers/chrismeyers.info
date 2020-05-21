@@ -31,7 +31,7 @@ class ImagesAdminController extends ResourceController {
       ..where((i) => i.id).equalTo(id);
     final Image image = await query.updateOne();
 
-    if(image == null) {
+    if (image == null) {
       return Response.notFound(body: {"message": "image id $id does not exist"});
     }
 
@@ -40,11 +40,10 @@ class ImagesAdminController extends ResourceController {
 
   @Operation.delete("id")
   Future<Response> deleteImage(@Bind.path("id") int id) async {
-    final Query<Image> query = Query<Image>(context)
-      ..where((i) => i.id).equalTo(id);
+    final Query<Image> query = Query<Image>(context)..where((i) => i.id).equalTo(id);
     final int numDeleted = await query.delete();
 
-    if(numDeleted == 0) {
+    if (numDeleted == 0) {
       return Response.notFound(body: {"message": "image id $id does not exist"});
     }
 

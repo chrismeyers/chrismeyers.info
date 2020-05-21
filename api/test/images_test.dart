@@ -9,10 +9,7 @@ Future main() async {
 
   test("GET /public/images returns 200 - empty list", () async {
     final TestResponse response = await harness.publicAgent.get("/public/images?schema");
-    expectResponse(response, 200, body: {
-      "items": [],
-      "schema": isList
-    });
+    expectResponse(response, 200, body: {"items": [], "schema": isList});
   });
 
   test("GET /public/images returns 200 - one image", () async {
@@ -20,15 +17,17 @@ Future main() async {
 
     final TestResponse response = await harness.publicAgent.get("/public/images");
     expectResponse(response, 200, body: {
-      "items": [{
-        "id": greaterThan(0),
-        "path": "/path/to/image.jpg",
-        "title": "A cool image",
-        "pos": 1,
-        "orient": "port",
-        "build": null,
-        "project": null
-      }]
+      "items": [
+        {
+          "id": greaterThan(0),
+          "path": "/path/to/image.jpg",
+          "title": "A cool image",
+          "pos": 1,
+          "orient": "port",
+          "build": null,
+          "project": null
+        }
+      ]
     });
   });
 
@@ -60,12 +59,8 @@ Future main() async {
   test("POST /admin/images returns 200 - image added", () async {
     await queries.loginUser();
 
-    final TestResponse response = await harness.publicAgent.post("/admin/images", body: {
-      "path": "/path/to/image.jpg",
-      "title": "A cool image",
-      "pos": 1,
-      "orient": "port"
-    });
+    final TestResponse response = await harness.publicAgent.post("/admin/images",
+        body: {"path": "/path/to/image.jpg", "title": "A cool image", "pos": 1, "orient": "port"});
     expectResponse(response, 200, body: {
       "id": greaterThan(0),
       "path": "/path/to/image.jpg",
@@ -85,12 +80,8 @@ Future main() async {
     await queries.insertImage();
     await queries.loginUser();
 
-    final TestResponse response = await harness.publicAgent.put("/admin/images/1", body: {
-      "path": "/path/to/another/image.jpg",
-      "title": "Another cool image",
-      "pos": 2,
-      "orient": "land"
-    });
+    final TestResponse response = await harness.publicAgent.put("/admin/images/1",
+        body: {"path": "/path/to/another/image.jpg", "title": "Another cool image", "pos": 2, "orient": "land"});
     expectResponse(response, 200, body: {
       "id": 1,
       "path": "/path/to/another/image.jpg",

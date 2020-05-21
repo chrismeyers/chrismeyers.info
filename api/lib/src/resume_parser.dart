@@ -1,8 +1,7 @@
 import "dart:io";
 
 class ListItem {
-  ListItem(this._mainItem) :
-    _subItems = [];
+  ListItem(this._mainItem) : _subItems = [];
 
   final String _mainItem;
   final List<String> _subItems;
@@ -14,18 +13,14 @@ class ListItem {
   String get mainItem => _mainItem;
   List<String> get subItems => _subItems;
 
-  Map<String, dynamic> toJson() => {
-    "mainItem": _mainItem,
-    "subItems": _subItems
-  };
+  Map<String, dynamic> toJson() => {"mainItem": _mainItem, "subItems": _subItems};
 }
 
 class ResumeParser {
-  ResumeParser(String path) :
-    _lines = File(path).readAsLinesSync(),
-    _rawSections = {},
-    _lastModified = File(path).lastModifiedSync()
-  {
+  ResumeParser(String path)
+      : _lines = File(path).readAsLinesSync(),
+        _rawSections = {},
+        _lastModified = File(path).lastModifiedSync() {
     loadLatexFile();
   }
 
@@ -41,23 +36,22 @@ class ResumeParser {
     const String commentPattern = "\\begin{comment}";
     String section = "";
 
-    for(String line in _lines) {
+    for (String line in _lines) {
       line = line.trim();
-      if(line == "" || line.contains(commentPattern)) {
+      if (line == "" || line.contains(commentPattern)) {
         continue;
-      }
-      else if(line.contains(beginPattern)) { // New section
+      } else if (line.contains(beginPattern)) {
+        // New section
         section = line.substring(beginPattern.length + 1);
-      }
-      else if(section.isNotEmpty && !line.contains(endPattern)) { // Between begin and end
-        if(_rawSections.containsKey(section)) {
+      } else if (section.isNotEmpty && !line.contains(endPattern)) {
+        // Between begin and end
+        if (_rawSections.containsKey(section)) {
           _rawSections[section].add(line);
-        }
-        else {
+        } else {
           _rawSections[section] = [line];
         }
-      }
-      else { // Between end and begin
+      } else {
+        // Between end and begin
         section = "";
         continue;
       }
@@ -82,40 +76,38 @@ class ResumeParser {
     List<String> currentSecondLine = [];
     List<String> currentInfo = [];
 
-    for(int i = 0; i < _rawSections[section].length; i++) {
+    for (int i = 0; i < _rawSections[section].length; i++) {
       final String line = _rawSections[section][i].trim();
 
-      if(line.startsWith(urlPattern)) {
+      if (line.startsWith(urlPattern)) {
         final int beginPatternIndex = line.indexOf(urlPattern) + urlPattern.length + 1;
 
         url = line.substring(beginPatternIndex);
-      }
-      else if(line.startsWith(firstLinePattern)) {
+      } else if (line.startsWith(firstLinePattern)) {
         final int beginPatternIndex = line.indexOf(firstLinePattern) + firstLinePattern.length;
         final int endPatternIndex = line.indexOf(endPattern);
-        final String cleaned = _cleanString(line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""));
+        final String cleaned =
+            _cleanString(line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""));
 
         firstLine.add(cleaned);
-      }
-      else if(line.startsWith(secondLinePattern)){
+      } else if (line.startsWith(secondLinePattern)) {
         final int beginPatternIndex = line.indexOf(secondLinePattern) + secondLinePattern.length;
         final int endPatternIndex = line.indexOf(endPattern);
-        final String cleaned = _cleanString(line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""));
+        final String cleaned =
+            _cleanString(line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""));
 
         currentSecondLine.add(cleaned);
-      }
-      else if(line.startsWith(sameCompanyPattern)) {
+      } else if (line.startsWith(sameCompanyPattern)) {
         secondLine.add(List<String>.from(currentSecondLine));
         info.add(List<String>.from(currentInfo));
 
         currentSecondLine = [];
         currentInfo = [];
-      }
-      else if(line.startsWith(infoPattern)) {
-        if(i == 0) {
+      } else if (line.startsWith(infoPattern)) {
+        if (i == 0) {
           continue;
-        }
-        else if(line.length == infoPattern.length) { // Beginning of new entry (blank $infoPattern line)
+        } else if (line.length == infoPattern.length) {
+          // Beginning of new entry (blank $infoPattern line)
           secondLine.add(List<String>.from(currentSecondLine));
           info.add(List<String>.from(currentInfo));
 
@@ -132,8 +124,7 @@ class ResumeParser {
           info = [];
           currentSecondLine = [];
           currentInfo = [];
-        }
-        else {
+        } else {
           final String cleaned = _cleanString(line.substring(infoPattern.length + 1));
           currentInfo.add(cleaned);
         }
@@ -162,19 +153,16 @@ class ResumeParser {
     bool subItem = false;
     int count = 0;
 
-    for(String line in _rawSections[section]) {
-      if(line.startsWith(beginSubPattern)) {
+    for (String line in _rawSections[section]) {
+      if (line.startsWith(beginSubPattern)) {
         subItem = true;
-      }
-      else if(line.startsWith(endSubPattern)) {
+      } else if (line.startsWith(endSubPattern)) {
         subItem = false;
-      }
-      else if(line.startsWith(itemPattern)) {
+      } else if (line.startsWith(itemPattern)) {
         final String cleaned = _cleanString(line.substring(itemPattern.length + 1));
-        if(subItem) {
+        if (subItem) {
           items[count - 1].add(cleaned);
-        }
-        else {
+        } else {
           items.add(ListItem(cleaned));
           count++;
         }
@@ -188,14 +176,12 @@ class ResumeParser {
     final Map<String, String> langMap = {};
     final List<ListItem> skills = parseListSection("TechnicalSkills");
 
-    for(final skill in skills) {
-      if(langMap.length == 2) {
+    for (final skill in skills) {
+      if (langMap.length == 2) {
         break;
-      }
-      else if(skill.mainItem.toLowerCase().contains("desktop and cli")) {
+      } else if (skill.mainItem.toLowerCase().contains("desktop and cli")) {
         langMap["desktop"] = skill.subItems[0];
-      }
-      else if(skill.mainItem.toLowerCase().contains("websites, web apps, and apis")) {
+      } else if (skill.mainItem.toLowerCase().contains("websites, web apps, and apis")) {
         langMap["web"] = skill.subItems[0];
       }
     }
@@ -206,9 +192,7 @@ class ResumeParser {
   Map<String, dynamic> getMostRecentJob() {
     final Map<String, dynamic> job = parseComplexSection("Experience")[0];
 
-    final List<String> dates = (job["secondLine"][0][1] as String)
-      .split("&ndash;")
-      .map((d) => d.trim()).toList();
+    final List<String> dates = (job["secondLine"][0][1] as String).split("&ndash;").map((d) => d.trim()).toList();
 
     return {
       "employed": dates[1].toLowerCase() == "present",
