@@ -5,54 +5,75 @@
     <div class="content-text">
       <template v-for="(project, index) in projects">
         <div class="proj" :key="project.id">
-          <h2 :class="{ 'first-header': (index == 0) }">{{ project.title }}</h2>
+          <h2 :class="{ 'first-header': index == 0 }">{{ project.title }}</h2>
           <h3>{{ project.date }}</h3>
           <div class="projWrapper">
             <div class="projDesc">
               <dl>
                 <dt class="dt-mod"><b>Language(s):</b></dt>
-                  <dd v-html="project.lang"></dd>
+                <dd v-html="project.lang"></dd>
 
                 <dt class="dt-mod"><b>Description:</b></dt>
-                  <dd v-html="project.info"></dd>
+                <dd v-html="project.info"></dd>
 
                 <dt class="dt-mod"><b>My Role:</b></dt>
-                  <dd>{{ project.role }}</dd>
+                <dd>{{ project.role }}</dd>
 
                 <dt class="dt-mod"><b>Status:</b></dt>
-                  <dd>{{ project.stat }}</dd>
+                <dd>{{ project.stat }}</dd>
 
                 <dt class="dt-mod dt-links"><b>Links:</b></dt>
-                  <dd v-if="project.webUrl !== null" class="project-link-image"><svgicon name="link" class="link-image small"></svgicon>&nbsp;<a :href="project.webUrl" class="fancytxt" target="_blank">Website</a></dd>
-                  <dd class="project-link-image"><svgicon name="github" class="link-image small"></svgicon>&nbsp;<a :href="project.codeUrl" class="fancytxt" target="_blank">Code</a></dd>
+                <dd v-if="project.webUrl !== null" class="project-link-image">
+                  <svgicon name="link" class="link-image small"></svgicon
+                  >&nbsp;<a
+                    :href="project.webUrl"
+                    class="fancytxt"
+                    target="_blank"
+                    >Website</a
+                  >
+                </dd>
+                <dd class="project-link-image">
+                  <svgicon name="github" class="link-image small"></svgicon
+                  >&nbsp;<a
+                    :href="project.codeUrl"
+                    class="fancytxt"
+                    target="_blank"
+                    >Code</a
+                  >
+                </dd>
               </dl>
             </div>
 
             <div class="projImages">
               <template v-for="(image, index) in project.images">
-                  <template v-if="index == 0">
-                    <img v-img="{'group': project.id}"
-                         :src="image.path"
-                         :class="'projImages-full-img-' + image.orient"
-                         v-bind:alt="image.title"
-                         title="Click to enlarge"
-                         :key="image.id + '-full'">
-                    <br :key="image.id + '-br'" />
-                  </template>
-                  <div v-else class="projImages-small" :key="image.id + '-small'">
-                    <img v-img="{'group': project.id}"
-                         :src="image.path"
-                         :class="'projImages-small-img-' + image.orient"
-                         v-bind:alt="image.title"
-                         title="Click to enlarge">
-                  </div>
+                <template v-if="index == 0">
+                  <img
+                    v-img="{ group: project.id }"
+                    :src="image.path"
+                    :class="'projImages-full-img-' + image.orient"
+                    v-bind:alt="image.title"
+                    title="Click to enlarge"
+                    :key="image.id + '-full'"
+                  />
+                  <br :key="image.id + '-br'" />
+                </template>
+                <div v-else class="projImages-small" :key="image.id + '-small'">
+                  <img
+                    v-img="{ group: project.id }"
+                    :src="image.path"
+                    :class="'projImages-small-img-' + image.orient"
+                    v-bind:alt="image.title"
+                    title="Click to enlarge"
+                  />
+                </div>
               </template>
             </div>
           </div>
         </div>
 
         <template v-if="index < projects.length - 1">
-          <br :key="project.id + '-br'"><hr :key="project.id + '-hr'"/>
+          <br :key="project.id + '-br'" />
+          <hr :key="project.id + '-hr'" />
         </template>
       </template>
     </div>
@@ -75,24 +96,20 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    ProjectsAPI.get().then(
-      projects => {
-        next(vm => vm.setData(projects))
-      }
-    )
+    ProjectsAPI.get().then(projects => {
+      next(vm => vm.setData(projects))
+    })
   },
   methods: {
     setData(projects) {
-      if(projects instanceof ConnectionError) {
+      if (projects instanceof ConnectionError) {
         this.showDialog(projects.title, projects.message)
-      }
-      else if(projects.status === 200) {
+      } else if (projects.status === 200) {
         // Only display projects that are set to active.
         this.projects = projects.data.items.filter(p => {
           return p.active
         })
-      }
-      else {
+      } else {
         this.showDialog(projects.statusText, projects.data.error)
       }
     }
@@ -152,13 +169,15 @@ export default {
   border-color: #707070;
 }
 
-.projImages-full-img-square, .projImages-full-img-land, .projImages-full-img-port  {
+.projImages-full-img-square,
+.projImages-full-img-land,
+.projImages-full-img-port {
   border-style: solid;
   border-width: 1px;
   border-color: #707070;
 }
 
-@media screen and (min-width: 970px){
+@media screen and (min-width: 970px) {
   .projWrapper {
     display: -webkit-flex;
     display: flex;

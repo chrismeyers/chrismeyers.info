@@ -1,9 +1,32 @@
 <template>
   <div v-show="promptVisible" id="prompt-div">
-    <textarea v-if="textareaVisible" v-model="info" class="textarea-mod prompt-style" id="prompt-textarea" readonly="readonly"></textarea>
-    <input class="input-mod prompt-style" id="prompt-caret" value=">" maxlength="1" readonly="readonly">
-    <input v-model="command" ref="prompt" class="input-mod prompt-style" id="prompt" maxlength="75">
-    <button class="prompt-style" id="prompt-textarea-btn" @click="run('toggle')" v-html="arrows[arrowDirection]"></button>
+    <textarea
+      v-if="textareaVisible"
+      v-model="info"
+      class="textarea-mod prompt-style"
+      id="prompt-textarea"
+      readonly="readonly"
+    ></textarea>
+    <input
+      class="input-mod prompt-style"
+      id="prompt-caret"
+      value=">"
+      maxlength="1"
+      readonly="readonly"
+    />
+    <input
+      v-model="command"
+      ref="prompt"
+      class="input-mod prompt-style"
+      id="prompt"
+      maxlength="75"
+    />
+    <button
+      class="prompt-style"
+      id="prompt-textarea-btn"
+      @click="run('toggle')"
+      v-html="arrows[arrowDirection]"
+    ></button>
   </div>
 </template>
 
@@ -17,8 +40,8 @@ export default {
       promptVisible: false,
       textareaVisible: false,
       arrows: {
-        "up": "&#9650;",
-        "down": "&#9660;"
+        up: "&#9650;",
+        down: "&#9660;"
       },
       arrowDirection: "up",
       command: "",
@@ -29,29 +52,27 @@ export default {
   },
   mounted() {
     // eslint-disable-next-line no-console
-    console.info(`%c[${window.location.host}] Hey, prefer a CLI? Press the tilde (~) key and type \`help\` for usage.`,
-      "font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: 'Courier New', Courier, monospace;")
+    console.info(
+      `%c[${window.location.host}] Hey, prefer a CLI? Press the tilde (~) key and type \`help\` for usage.`,
+      "font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: 'Courier New', Courier, monospace;"
+    )
 
     window.addEventListener("keydown", e => {
-      if(e.code === "Backquote") {
+      if (e.code === "Backquote") {
         e.preventDefault() // Prevents adding ` when opening the prompt
         this.showPrompt()
-      }
-      else if(e.code === "Escape") {
+      } else if (e.code === "Escape") {
         this.hidePrompt()
-      }
-      else if(e.code === "Enter") {
-        if(this.promptVisible) {
+      } else if (e.code === "Enter") {
+        if (this.promptVisible) {
           this.run()
         }
-      }
-      else if(e.code === "ArrowUp") {
-        if(this.promptVisible) {
+      } else if (e.code === "ArrowUp") {
+        if (this.promptVisible) {
           this.prev()
         }
-      }
-      else if(e.code === "ArrowDown") {
-        if(this.promptVisible) {
+      } else if (e.code === "ArrowDown") {
+        if (this.promptVisible) {
           this.next()
         }
       }
@@ -59,10 +80,9 @@ export default {
   },
   methods: {
     togglePrompt() {
-      if(this.promptVisible) {
+      if (this.promptVisible) {
         this.hidePrompt()
-      }
-      else {
+      } else {
         this.showPrompt()
       }
     },
@@ -82,10 +102,9 @@ export default {
       })
     },
     toggleTextarea() {
-      if(this.textareaVisible) {
+      if (this.textareaVisible) {
         this.hideTextarea()
-      }
-      else {
+      } else {
         this.showTextarea()
       }
     },
@@ -126,7 +145,7 @@ export default {
       }, 10)
     },
     prev() {
-      if(this.historyIndex < this.history.length - 1) {
+      if (this.historyIndex < this.history.length - 1) {
         this.historyIndex++
         this.setCommand(this.history[this.historyIndex])
       }
@@ -134,52 +153,48 @@ export default {
       this.moveCursorToEnd()
     },
     next() {
-      if(this.historyIndex >= 0) {
+      if (this.historyIndex >= 0) {
         this.historyIndex--
-        if(this.historyIndex < 0) {
+        if (this.historyIndex < 0) {
           this.setCommand("")
-        }
-        else {
+        } else {
           this.setCommand(this.history[this.historyIndex])
         }
       }
     },
     run(command = null) {
-      if(command) {
+      if (command) {
         // Only store user entered commands
         this.command = command
-      }
-      else {
+      } else {
         // Push to top of history stack
         this.history.unshift(this.command)
       }
 
-      const parts = this.command.toLowerCase().split(" ").filter(p => {
-        return p !== ""
-      }).map(p => p.trim())
+      const parts = this.command
+        .toLowerCase()
+        .split(" ")
+        .filter(p => {
+          return p !== ""
+        })
+        .map(p => p.trim())
       const cmd = parts[0].trim()
       const args = parts.slice(1)
       let refreshHistory = true
 
-      if(cmd === "echo") {
+      if (cmd === "echo") {
         this.echo(args)
-      }
-      else if(cmd === "cd") {
+      } else if (cmd === "cd") {
         this.cd(args)
-      }
-      else if(cmd === "login") {
+      } else if (cmd === "login") {
         this.cd(["login"])
-      }
-      else if(cmd === "toggle") {
+      } else if (cmd === "toggle") {
         this.toggleTextarea()
-      }
-      else if(cmd === "theme") {
+      } else if (cmd === "theme") {
         this.toggleTheme(args[0])
-      }
-      else if(cmd === "exit") {
+      } else if (cmd === "exit") {
         this.exit()
-      }
-      else if(cmd === "help") {
+      } else if (cmd === "help") {
         this.help()
         refreshHistory = false
       }
@@ -187,7 +202,7 @@ export default {
       this.historyIndex = -1
       this.clearCommand()
 
-      if(refreshHistory && this.textareaVisible) {
+      if (refreshHistory && this.textareaVisible) {
         this.printHistory()
       }
     },
@@ -196,18 +211,20 @@ export default {
     },
     cd(args) {
       let path = args[0]
-      if(args.length < 1) {
+      if (args.length < 1) {
         path = ""
       }
 
-      this.$router.push({path: `/${path}`})
+      this.$router.push({ path: `/${path}` })
     },
     exit() {
       this.hidePrompt()
     },
     help() {
       this.clearTextarea()
-      let themeList = Object.values(THEMES).reduce((acc, cur) => `${acc}, ${cur}`)
+      let themeList = Object.values(THEMES).reduce(
+        (acc, cur) => `${acc}, ${cur}`
+      )
       this.info = `usage: command [arg1] [arg2] ...
 Available commands:
   echo   - prints args to alert() box
@@ -217,7 +234,7 @@ Available commands:
   exit   - closes the command prompt
   help   - prints this message
 `
-      if(!this.textareaVisible) {
+      if (!this.textareaVisible) {
         this.showTextarea()
       }
     },
@@ -225,18 +242,21 @@ Available commands:
       this.clearTextarea()
 
       let gutter = this.history.length.toString().length + 1
-      this.history.slice().reverse().forEach((item, i) => {
-        this.info += `${(i + 1).toString().padStart(gutter, ' ')} ${item} \n`
-      })
+      this.history
+        .slice()
+        .reverse()
+        .forEach((item, i) => {
+          this.info += `${(i + 1).toString().padStart(gutter, " ")} ${item} \n`
+        })
 
-      if(!this.textareaVisible) {
+      if (!this.textareaVisible) {
         this.showTextarea()
       }
 
       this.$nextTick(() => {
         this.scrollTextareaToBottom()
       })
-    },
+    }
   }
 }
 </script>
@@ -244,8 +264,8 @@ Available commands:
 <style scoped>
 .prompt-style {
   height: 25px;
-  background-color: rgba(0,0,0,0.85);
-  color: #00CC00;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #00cc00;
   font-family: "Courier New", Courier, monospace;
   border: 0;
   font-weight: bold;

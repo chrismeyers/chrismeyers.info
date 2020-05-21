@@ -2,8 +2,8 @@ import "package:api/api.dart";
 
 Future main() async {
   final Application app = Application<ApiChannel>()
-      ..options.configurationFilePath = "config.yaml"
-      ..options.port = 8888;
+    ..options.configurationFilePath = "config.yaml"
+    ..options.port = 8888;
 
   final int count = Platform.numberOfProcessors ~/ 2;
   await app.start(numberOfInstances: count > 0 ? count : 1);

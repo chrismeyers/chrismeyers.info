@@ -26,12 +26,8 @@ class ApiChannel extends ApplicationChannel {
     config = ApiConfig(options.configurationFilePath);
 
     final ManagedDataModel dataModel = ManagedDataModel.fromCurrentMirrorSystem();
-    final PostgreSQLPersistentStore psc = PostgreSQLPersistentStore.fromConnectionInfo(
-        config.database.username,
-        config.database.password,
-        config.database.host,
-        config.database.port,
-        config.database.databaseName);
+    final PostgreSQLPersistentStore psc = PostgreSQLPersistentStore.fromConnectionInfo(config.database.username,
+        config.database.password, config.database.host, config.database.port, config.database.databaseName);
 
     context = ManagedContext(dataModel, psc);
 
@@ -49,59 +45,41 @@ class ApiChannel extends ApplicationChannel {
   Controller get entryPoint {
     final Router router = Router();
 
-    router
-      .route("/auth/register")
-      .link(() => RegisterController(context, authServer, config));
+    router.route("/auth/register").link(() => RegisterController(context, authServer, config));
+
+    router.route("/auth/token").link(() => AuthController(authServer));
+
+    router.route("/auth/authorize").link(() => Authorizer.bearer(authServer)).link(() => AuthAuthorizedController());
+
+    router.route("/auth/logout").link(() => Authorizer.bearer(authServer)).link(() => LogoutController(context));
 
     router
-      .route("/auth/token")
-      .link(() => AuthController(authServer));
+        .route("/account/password")
+        .link(() => Authorizer.bearer(authServer))
+        .link(() => PasswordController(context, authServer));
+
+    router.route("/public/resume[/summary]").link(() => ResumeController());
 
     router
-      .route("/auth/authorize")
-      .link(() => Authorizer.bearer(authServer))
-      .link(() => AuthAuthorizedController());
+        .route("/admin/images/[:id]")
+        .link(() => Authorizer.bearer(authServer))
+        .link(() => ImagesAdminController(context));
+
+    router.route("/public/images/[:id]").link(() => ImagesPublicController(context));
 
     router
-      .route("/auth/logout")
-      .link(() => Authorizer.bearer(authServer))
-      .link(() => LogoutController(context));
+        .route("/admin/builds/[:id]")
+        .link(() => Authorizer.bearer(authServer))
+        .link(() => BuildsAdminController(context));
+
+    router.route("/public/builds/[:id]").link(() => BuildsPublicController(context));
 
     router
-      .route("/account/password")
-      .link(() => Authorizer.bearer(authServer))
-      .link(() => PasswordController(context, authServer));
+        .route("/admin/projects/[:id]")
+        .link(() => Authorizer.bearer(authServer))
+        .link(() => ProjectsAdminController(context));
 
-    router
-      .route("/public/resume[/summary]")
-      .link(() => ResumeController());
-
-    router
-      .route("/admin/images/[:id]")
-      .link(() => Authorizer.bearer(authServer))
-      .link(() => ImagesAdminController(context));
-
-    router
-      .route("/public/images/[:id]")
-      .link(() => ImagesPublicController(context));
-
-    router
-      .route("/admin/builds/[:id]")
-      .link(() => Authorizer.bearer(authServer))
-      .link(() => BuildsAdminController(context));
-
-    router
-      .route("/public/builds/[:id]")
-      .link(() => BuildsPublicController(context));
-
-    router
-      .route("/admin/projects/[:id]")
-      .link(() => Authorizer.bearer(authServer))
-      .link(() => ProjectsAdminController(context));
-
-    router
-      .route("/public/projects/[:id]")
-      .link(() => ProjectsPublicController(context));
+    router.route("/public/projects/[:id]").link(() => ProjectsPublicController(context));
 
     return router;
   }

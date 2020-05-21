@@ -10,10 +10,7 @@ Future main() async {
 
   test("GET /public/builds returns 200 - empty list", () async {
     final TestResponse response = await harness.publicAgent.get("/public/builds?schema");
-    expectResponse(response, 200, body: {
-      "items": [],
-      "schema": isList
-    });
+    expectResponse(response, 200, body: {"items": [], "schema": isList});
   });
 
   test("GET /public/builds returns 200 - one build", () async {
@@ -21,20 +18,22 @@ Future main() async {
 
     final TestResponse response = await harness.publicAgent.get("/public/builds");
     expectResponse(response, 200, body: {
-      "items": [{
-        "id": greaterThan(0),
-        "date": "Sometime long ago",
-        "started": 20130101,
-        "cpu": "Very Fast 9000",
-        "cool": "Very Cold",
-        "mobo": "Lots of LEDs",
-        "ram": "Lots of memory",
-        "hdd": "Much storage",
-        "ssd": "Much fast storage",
-        "gpu": "Nice graphics",
-        "image": null,
-        "active": true
-      }]
+      "items": [
+        {
+          "id": greaterThan(0),
+          "date": "Sometime long ago",
+          "started": 20130101,
+          "cpu": "Very Fast 9000",
+          "cool": "Very Cold",
+          "mobo": "Lots of LEDs",
+          "ram": "Lots of memory",
+          "hdd": "Much storage",
+          "ssd": "Much fast storage",
+          "gpu": "Nice graphics",
+          "image": null,
+          "active": true
+        }
+      ]
     });
   });
 
@@ -133,15 +132,13 @@ Future main() async {
       "hdd": "Very much storage",
       "ssd": "Very much fast storage",
       "gpu": "VeryNice graphics",
-      "image":  {
+      "image": {
         "id": 1,
         "path": "/path/to/image.jpg",
         "title": "A cool image",
         "pos": 1,
         "orient": "port",
-        "build": {
-          "id": 1
-        },
+        "build": {"id": 1},
         "project": null
       },
       "active": false

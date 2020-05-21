@@ -5,7 +5,10 @@ import ErrorHandler from "../errors/handler"
 export default {
   // GET Methods
   get(params = {}) {
-    let queryString = qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true})
+    let queryString = qs.stringify(params, {
+      addQueryPrefix: true,
+      strictNullHandling: true
+    })
     return axios
       .get(`/public/projects${queryString}`)
       .then(response => {
@@ -22,28 +25,28 @@ export default {
       method: "post",
       url: "/admin/projects",
       headers: {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       },
       data: {
-        "title": project.title,
-        "webUrl": (project.webUrl === "") ? null : project.webUrl,
-        "codeUrl": project.codeUrl,
-        "date": project.date,
-        "started": parseInt(project.started),
-        "lang": project.lang,
-        "info": project.info,
-        "role": project.role,
-        "stat": project.stat,
-        "images": project.images,
-        "active": ("active" in project && project.active) ? true : false
+        title: project.title,
+        webUrl: project.webUrl === "" ? null : project.webUrl,
+        codeUrl: project.codeUrl,
+        date: project.date,
+        started: parseInt(project.started),
+        lang: project.lang,
+        info: project.info,
+        role: project.role,
+        stat: project.stat,
+        images: project.images,
+        active: "active" in project && project.active ? true : false
       }
     })
-    .then(response => {
-      return response
-    })
-    .catch(error => {
-      return ErrorHandler.handle(error)
-    })
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+        return ErrorHandler.handle(error)
+      })
   },
 
   // PUT Methods
@@ -52,28 +55,28 @@ export default {
       method: "put",
       url: `/admin/projects/${project.id}`,
       headers: {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       },
       data: {
-        "title": project.title,
-        "webUrl": (project.webUrl === "") ? null : project.webUrl,
-        "codeUrl": project.codeUrl,
-        "date": project.date,
-        "started": parseInt(project.started),
-        "lang": project.lang,
-        "info": project.info,
-        "role": project.role,
-        "stat": project.stat,
-        "images": project.images,
-        "active": ("active" in project && project.active) ? true : false
+        title: project.title,
+        webUrl: project.webUrl === "" ? null : project.webUrl,
+        codeUrl: project.codeUrl,
+        date: project.date,
+        started: parseInt(project.started),
+        lang: project.lang,
+        info: project.info,
+        role: project.role,
+        stat: project.stat,
+        images: project.images,
+        active: "active" in project && project.active ? true : false
       }
     })
-    .then(response => {
-      return response
-    })
-    .catch(error => {
-      return ErrorHandler.handle(error)
-    })
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+        return ErrorHandler.handle(error)
+      })
   },
 
   // DELETE Methods
@@ -82,14 +85,14 @@ export default {
       method: "delete",
       url: `/admin/projects/${project.id}`,
       headers: {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       }
     })
-    .then(response => {
-      return response
-    })
-    .catch(error => {
-      return ErrorHandler.handle(error)
-    })
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+        return ErrorHandler.handle(error)
+      })
   }
 }

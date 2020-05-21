@@ -47,10 +47,10 @@ export default {
               handler()
             }
           }
-       ]
+        ]
       }
 
-      if(title) {
+      if (title) {
         options.title = title
       }
 

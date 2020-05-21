@@ -5,42 +5,45 @@
     <div class="content-text">
       <template v-for="(build, index) in builds">
         <div class="build" :key="build.id">
-          <h2 :class="{ 'first-header': (index == 0) }">{{ build.date }}</h2>
+          <h2 :class="{ 'first-header': index == 0 }">{{ build.date }}</h2>
           <div class="build-info">
             <div class="build-specs">
               <dl>
                 <dt class="dt-mod"><b>Processor:</b></dt>
-                  <dd>{{ build.cpu }}</dd>
+                <dd>{{ build.cpu }}</dd>
                 <template v-if="build.cool !== null">
                   <dt class="dt-mod"><b>Cooling:</b></dt>
-                    <dd>{{ build.cool }}</dd>
+                  <dd>{{ build.cool }}</dd>
                 </template>
                 <dt class="dt-mod"><b>Mobo:</b></dt>
-                  <dd>{{ build.mobo }}</dd>
+                <dd>{{ build.mobo }}</dd>
                 <dt class="dt-mod"><b>Memory:</b></dt>
-                  <dd>{{ build.ram }}</dd>
+                <dd>{{ build.ram }}</dd>
                 <dt class="dt-mod"><b>HDD:</b></dt>
-                  <dd>{{ build.hdd }}</dd>
+                <dd>{{ build.hdd }}</dd>
                 <template v-if="build.ssd !== null">
                   <dt class="dt-mod"><b>SSD:</b></dt>
-                    <dd>{{ build.ssd }}</dd>
+                  <dd>{{ build.ssd }}</dd>
                 </template>
                 <dt class="dt-mod"><b>Video Card:</b></dt>
-                  <dd>{{ build.gpu }}</dd>
+                <dd>{{ build.gpu }}</dd>
               </dl>
             </div>
             <div class="build-pic">
-              <img v-img
-                   v-if="build.image"
-                   :src="build.image.path"
-                   :class="'build-pic-img-' + build.image.orient"
-                   v-bind:alt="build.image.title"
-                   title="Click to enlarge">
+              <img
+                v-img
+                v-if="build.image"
+                :src="build.image.path"
+                :class="'build-pic-img-' + build.image.orient"
+                v-bind:alt="build.image.title"
+                title="Click to enlarge"
+              />
             </div>
           </div>
         </div>
         <template v-if="index < builds.length - 1">
-          <br :key="build.id + '-br'"><hr :key="build.id + '-hr'"/>
+          <br :key="build.id + '-br'" />
+          <hr :key="build.id + '-hr'" />
         </template>
       </template>
     </div>
@@ -61,24 +64,20 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    BuildsAPI.get().then(
-      builds => {
-        next(vm => vm.setData(builds))
-      }
-    )
+    BuildsAPI.get().then(builds => {
+      next(vm => vm.setData(builds))
+    })
   },
   methods: {
     setData(builds) {
-      if(builds instanceof ConnectionError) {
+      if (builds instanceof ConnectionError) {
         this.showDialog(builds.title, builds.message)
-      }
-      else if(builds.status === 200) {
+      } else if (builds.status === 200) {
         // Only display builds that are set to active.
         this.builds = builds.data.items.filter(b => {
           return b.active
         })
-      }
-      else {
+      } else {
         this.showDialog(builds.statusText, builds.data.error)
       }
     }
@@ -111,7 +110,7 @@ export default {
   border-color: #707070;
 }
 
-@media screen and (min-width: 970px){
+@media screen and (min-width: 970px) {
   .build-info {
     display: -webkit-flex;
     display: flex;

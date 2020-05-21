@@ -8,17 +8,17 @@ export default {
       method: "put",
       url: "/account/password",
       headers: {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       },
       data: {
-        "password": password
+        password: password
       }
     })
-    .then(response => {
-      return response
-    })
-    .catch(error => {
-      return ErrorHandler.handle(error)
-    })
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+        return ErrorHandler.handle(error)
+      })
   }
 }

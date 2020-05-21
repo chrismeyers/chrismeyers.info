@@ -13,15 +13,10 @@ Future main() async {
     const String newPassword = "apples";
     await queries.loginUser(username: username, password: oldPassword);
 
-    TestResponse response = await harness.publicAgent.put("/account/password", body: {
-      "password": newPassword
-    });
+    TestResponse response = await harness.publicAgent.put("/account/password", body: {"password": newPassword});
 
     // Make sure PUT /account/password succeeds
-    expectResponse(response, 200, body: {
-      "id": 1,
-      "username": username
-    });
+    expectResponse(response, 200, body: {"id": 1, "username": username});
 
     // Try logging in with the old password
     harness.publicAgent.headers['authorization'] = "Basic ${base64.encode("${harness.client}:".codeUnits)}";
@@ -37,10 +32,6 @@ Future main() async {
     request.body = utf8.encode("username=$username&password=$newPassword&grant_type=password");
     response = await request.post();
 
-    expectResponse(response, 200, body: {
-      "access_token": isString,
-      "token_type": "bearer",
-      "expires_in": isInteger
-    });
+    expectResponse(response, 200, body: {"access_token": isString, "token_type": "bearer", "expires_in": isInteger});
   });
 }

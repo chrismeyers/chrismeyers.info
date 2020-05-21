@@ -15,14 +15,14 @@ class ProjectsPublicController extends ResourceController {
       ..sortBy((p) => p.started, QuerySortOrder.ascending);
     final List<Project> allProjects = await query.fetch();
 
-    for(final Project project in allProjects) {
+    for (final Project project in allProjects) {
       project.images.sort((a, b) => a.pos.compareTo(b.pos));
     }
 
     final Map<String, dynamic> response = {};
     response["items"] = allProjects.map((value) => value.asMap()).toList();
 
-    if(schema) {
+    if (schema) {
       response["schema"] = SchemaMaker.build(Project.interface);
     }
 
@@ -36,7 +36,7 @@ class ProjectsPublicController extends ResourceController {
       ..join(set: (p) => p.images);
     final Project project = await query.fetchOne();
 
-    if(project == null) {
+    if (project == null) {
       return Response.notFound(body: {"message": "project id $id does not exist"});
     }
 
