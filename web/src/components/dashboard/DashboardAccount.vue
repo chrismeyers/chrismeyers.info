@@ -24,7 +24,7 @@
   export default {
     name: "Dashboard-Account",
     mixins: [DashboardMessagesMixin, ModalsMixin],
-    data() {
+    data () {
       return {
         passwords: {
           "initial": "",
@@ -35,10 +35,10 @@
       }
     },
     methods: {
-      async updatePassword() {
-        if(this.passwords["initial"] !== this.passwords["confirm"]) {
+      async updatePassword () {
+        if (this.passwords["initial"] !== this.passwords["confirm"]) {
           this.error = "Passwords do not match"
-        } else if(this.passwords["initial"] !== "" && this.passwords["confirm"] !== "") {
+        } else if (this.passwords["initial"] !== "" && this.passwords["confirm"] !== "") {
           this.error = null
           this.lastResponse = await AccountAPI.updatePassword(
             this.$cookie.get(API_TOKEN_KEY),
@@ -46,10 +46,9 @@
           )
 
           let result = {}
-          if(this.lastResponse.status === 200) {
+          if (this.lastResponse.status === 200) {
             result = this.success("password", false)
-          }
-          else {
+          } else {
             result = this.modificationError("password", false)
           }
 

@@ -36,13 +36,13 @@ import DashboardBaseMixin from "@/mixins/DashboardBase"
 export default {
   name: "Dashboard-Builds",
   mixins: [DashboardBaseMixin],
-  data() {
+  data () {
     return {
       type: {singular: "build", plural: "builds"},
       api: BuildsAPI
     }
   },
-  async beforeRouteEnter(to, from, next) {
+  async beforeRouteEnter (to, from, next) {
     let builds = await BuildsAPI.get({schema: null})
     let images = await ImagesAPI.get()
     next(vm => {
@@ -51,14 +51,14 @@ export default {
     })
   },
   methods: {
-    flattenData(builds) {
+    flattenData (builds) {
       // The image for each build is an object. Since the API only takes the
       // image ID when creating/updating the image of a build, we can modify
       // the image field of the data we received from the GET to only include
       // the image ID.
       let flatBuilds = []
-      for(let build of builds.data.items) {
-        if(build.image) {
+      for (let build of builds.data.items) {
+        if (build.image) {
           build.image = build.image.id
         }
         flatBuilds.push(build)

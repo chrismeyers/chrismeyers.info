@@ -20,7 +20,7 @@ import { API_TOKEN_KEY } from "@/store/constants"
 
 export default {
   name: "Login",
-  data() {
+  data () {
     return {
       username: "",
       password: "",
@@ -28,13 +28,12 @@ export default {
     }
   },
   methods: {
-    login() {
+    login () {
       AuthAPI.login(this.username, this.password).then(
         auth => {
-          if(auth instanceof ConnectionError) {
+          if (auth instanceof ConnectionError) {
             this.error = auth.message
-          }
-          else if(auth.status === 200) {
+          } else if (auth.status === 200) {
             this.error = ""
             this.$cookie.set(
               API_TOKEN_KEY,
@@ -44,11 +43,9 @@ export default {
             this.$router.push({
               path: "/dashboard",
             })
-          }
-          else if(auth.status >= 500) {
+          } else if (auth.status >= 500) {
             this.error = auth.data.error.charAt(0).toUpperCase() + auth.data.error.slice(1)
-          }
-          else {
+          } else {
             this.error = "Invalid Username or Password"
           }
         }

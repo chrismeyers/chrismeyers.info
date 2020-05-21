@@ -25,22 +25,20 @@ export default {
   name: "Dashboard",
   mixins: [ModalsMixin],
   methods: {
-    getTitle() {
+    getTitle () {
       return document.title
     },
-    async logout() {
+    async logout () {
       let logout = await AuthAPI.logout(this.$cookie.get(API_TOKEN_KEY))
 
-      if(logout instanceof ConnectionError) {
+      if (logout instanceof ConnectionError) {
         this.showDialog(logout.title, logout.message)
-      }
-      else if(logout.status === 200) {
+      } else if (logout.status === 200) {
         this.$cookie.delete(API_TOKEN_KEY)
         this.$router.push({
           path: "/login"
         })
-      }
-      else {
+      } else {
         this.showDialog(logout.statusText, logout.data.error)
       }
     }

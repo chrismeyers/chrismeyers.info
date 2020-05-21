@@ -25,7 +25,7 @@ let formatTitle = (name) => {
 
 let router = new VueRouter({
   mode: "history",
-  scrollBehavior() {
+  scrollBehavior () {
     return { x: 0, y: 0 }
   },
   routes: [
@@ -135,12 +135,12 @@ router.beforeEach(async (to, from, next) => {
   document.title = to.meta.title
 
   // Checking if valid cookie exists, skips login if true
-  if(to.fullPath === "/login") {
+  if (to.fullPath === "/login") {
     match = document.cookie.match(
       new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`)
     )
 
-    if(match === null) {
+    if (match === null) {
       return next()
     }
 
@@ -150,19 +150,17 @@ router.beforeEach(async (to, from, next) => {
 
     // Checking if valid cookie exists before going to secure page.
     // Redirects to login if false, continues if true.
-    if(!authorized) {
+    if (!authorized) {
       next()
-    }
-    else {
+    } else {
       next("/dashboard")
     }
-  }
-  else if(to.matched.some(record => record.meta.secure)) {
+  } else if (to.matched.some(record => record.meta.secure)) {
     match = document.cookie.match(
       new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`)
     )
 
-    if(match === null) {
+    if (match === null) {
       return next("/login")
     }
 
@@ -170,14 +168,12 @@ router.beforeEach(async (to, from, next) => {
       document.cookie.match(match[2])
     )
 
-    if(!authorized) {
+    if (!authorized) {
       next("/login")
-    }
-    else {
+    } else {
       next()
     }
-  }
-  else {
+  } else {
     next()
   }
 })

@@ -4,7 +4,7 @@ import ErrorHandler from "../errors/handler"
 
 export default {
   // GET Methods
-  get(params = {}) {
+  get (params = {}) {
     let queryString = qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true})
     return axios
       .get(`/public/images${queryString}`)
@@ -17,7 +17,7 @@ export default {
   },
 
   // POST Methods
-  add(token, image) {
+  add (token, image) {
     return axios({
       method: "post",
       url: "/admin/images",
@@ -40,7 +40,7 @@ export default {
   },
 
   // PUT Methods
-  update(token, image) {
+  update (token, image) {
     return axios({
       method: "put",
       url: `/admin/images/${image.id}`,
@@ -63,7 +63,7 @@ export default {
   },
 
   // DELETE Methods
-  delete(token, image) {
+  delete (token, image) {
     return axios({
       method: "delete",
       url: `/admin/images/${image.id}`,

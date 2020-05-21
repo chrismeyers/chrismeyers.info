@@ -1,6 +1,6 @@
 export default {
   methods: {
-    showIEDialog() {
+    showIEDialog () {
       this.$modal.show("dialog", {
         title: "Internet Explorer Detected",
         text: `For a better browsing experience, please visit this website on
@@ -16,7 +16,7 @@ export default {
         ]
       })
     },
-    showDialog(title, body) {
+    showDialog (title, body) {
       this.$modal.show("dialog", {
         title: title,
         text: body.charAt(0).toUpperCase() + body.slice(1),
@@ -30,7 +30,7 @@ export default {
         ]
       })
     },
-    showConfirm(text, handler, title = null) {
+    showConfirm (text, handler, title = null) {
       let options = {
         text: text,
         buttons: [
@@ -50,7 +50,7 @@ export default {
        ]
       }
 
-      if(title) {
+      if (title) {
         options.title = title
       }
 

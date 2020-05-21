@@ -3,7 +3,7 @@ import ErrorHandler from "../errors/handler"
 
 export default {
   // GET Methods
-  get() {
+  get () {
     return axios
       .get("/public/resume")
       .then(response => {
@@ -13,7 +13,7 @@ export default {
         return ErrorHandler.handle(error)
       })
   },
-  getSummary() {
+  getSummary () {
     return axios
       .get("/public/resume/summary")
       .then(response => {

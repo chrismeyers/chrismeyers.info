@@ -69,12 +69,12 @@ import "@/assets/images/icons/generated/link"
 export default {
   name: "Projects",
   mixins: [ModalsMixin],
-  data() {
+  data () {
     return {
       projects: null
     }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     ProjectsAPI.get().then(
       projects => {
         next(vm => vm.setData(projects))
@@ -82,17 +82,15 @@ export default {
     )
   },
   methods: {
-    setData(projects) {
-      if(projects instanceof ConnectionError) {
+    setData (projects) {
+      if (projects instanceof ConnectionError) {
         this.showDialog(projects.title, projects.message)
-      }
-      else if(projects.status === 200) {
+      } else if (projects.status === 200) {
         // Only display projects that are set to active.
         this.projects = projects.data.items.filter(p => {
           return p.active
         })
-      }
-      else {
+      } else {
         this.showDialog(projects.statusText, projects.data.error)
       }
     }
@@ -158,7 +156,7 @@ export default {
   border-color: #707070;
 }
 
-@media screen and (min-width: 970px){
+@media screen and (min-width: 970px) {
   .projWrapper {
     display: -webkit-flex;
     display: flex;

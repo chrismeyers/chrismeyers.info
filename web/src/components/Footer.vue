@@ -59,14 +59,14 @@ import { THEMES } from "@/store/constants"
 export default {
   name: "Footer",
   mixins: [EmailTooltipMixin],
-  data() {
+  data () {
     return {
       THEMES: THEMES
     }
   },
   computed: {
-    mainThemeColor: function() {
-      return getComputedStyle(document.documentElement).getPropertyValue('--main-theme-color')
+    mainThemeColor: function () {
+      return getComputedStyle(document.documentElement).getPropertyValue("--main-theme-color")
     }
   }
 }

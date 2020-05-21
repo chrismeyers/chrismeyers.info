@@ -23,7 +23,7 @@ Vue.use(VModal, {
   dialog: true
 })
 Vue.use(VueProgressBar, {
-  color: getComputedStyle(document.documentElement).getPropertyValue('--main-theme-color')
+  color: getComputedStyle(document.documentElement).getPropertyValue("--main-theme-color")
 })
 Vue.use(VueImg, {
   altAsTitle: true,

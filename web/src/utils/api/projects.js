@@ -4,7 +4,7 @@ import ErrorHandler from "../errors/handler"
 
 export default {
   // GET Methods
-  get(params = {}) {
+  get (params = {}) {
     let queryString = qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true})
     return axios
       .get(`/public/projects${queryString}`)
@@ -17,7 +17,7 @@ export default {
   },
 
   // POST Methods
-  add(token, project) {
+  add (token, project) {
     return axios({
       method: "post",
       url: "/admin/projects",
@@ -47,7 +47,7 @@ export default {
   },
 
   // PUT Methods
-  update(token, project) {
+  update (token, project) {
     return axios({
       method: "put",
       url: `/admin/projects/${project.id}`,
@@ -77,7 +77,7 @@ export default {
   },
 
   // DELETE Methods
-  delete(token, project) {
+  delete (token, project) {
     return axios({
       method: "delete",
       url: `/admin/projects/${project.id}`,

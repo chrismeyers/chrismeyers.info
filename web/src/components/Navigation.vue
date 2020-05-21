@@ -43,7 +43,7 @@
 <script>
 export default {
   name: "Navigation",
-  data() {
+  data () {
     return {
       path: "",
       menuDisplayed: false
@@ -57,11 +57,11 @@ export default {
     }
   },
   methods: {
-    setPath(rawPath) {
+    setPath (rawPath) {
       let cleanedPath = rawPath.replace(/\//g, "")
       this.path = (cleanedPath === "") ? "about" : cleanedPath
     },
-    toggleMenu() {
+    toggleMenu () {
       this.menuDisplayed = !this.menuDisplayed
     }
   }
@@ -183,7 +183,7 @@ nav {
   background: rgba(0, 0, 0, 0.3);
 }
 
-@media screen and (min-width: 970px){
+@media screen and (min-width: 970px) {
   #hamburger-menu {
     display: none;
   }

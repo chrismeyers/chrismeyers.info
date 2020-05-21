@@ -18,15 +18,15 @@ export const Store = new Vuex.Store({
     theme: THEMES.LIGHT,
   },
   mutations: {
-    toggleTheme(state) {
+    toggleTheme (state) {
       state.theme = (state.theme === THEMES.LIGHT) ? THEMES.DARK : THEMES.LIGHT
       document.documentElement.setAttribute("data-theme", state.theme);
     },
-    applyTheme(state) {
+    applyTheme (state) {
       document.documentElement.setAttribute("data-theme", state.theme);
     },
-    setTheme(state, which) {
-      if(Object.values(THEMES).includes(which)) {
+    setTheme (state, which) {
+      if (Object.values(THEMES).includes(which)) {
         state.theme = which
         document.documentElement.setAttribute("data-theme", state.theme);
       }

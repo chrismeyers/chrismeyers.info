@@ -66,14 +66,14 @@ import ModalsMixin from "@/mixins/Modals"
 export default {
   name: "About",
   mixins: [EmailTooltipMixin, ModalsMixin],
-  data() {
+  data () {
     return {
       languages: {},
       mostRecentJob: {},
       employed: false
     }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     ResumeAPI.getSummary().then(
       summary => {
         next(vm => vm.setData(summary))
@@ -81,19 +81,17 @@ export default {
     )
   },
   methods: {
-    showClarkImage() {
+    showClarkImage () {
       this.$refs.clarkImg.click()
     },
-    setData(summary) {
-      if(summary instanceof ConnectionError) {
+    setData (summary) {
+      if (summary instanceof ConnectionError) {
         this.showDialog(summary.title, summary.message)
-      }
-      else if(summary.status === 200) {
+      } else if (summary.status === 200) {
         this.languages = summary.data.languages
         this.mostRecentJob = summary.data.mostRecentJob
         this.employed = summary.data.mostRecentJob.employed
-      }
-      else {
+      } else {
         this.showDialog(summary.statusText, summary.data.error)
       }
     }

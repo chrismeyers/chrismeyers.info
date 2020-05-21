@@ -12,16 +12,16 @@
 <script>
 export default {
   name: "NotFound",
-  data() {
+  data () {
     return {
       path: ""
     }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => vm.setPath(to.path))
   },
   methods: {
-    setPath(path) {
+    setPath (path) {
       this.path = path
     }
   }
