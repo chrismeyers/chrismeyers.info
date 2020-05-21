@@ -1,24 +1,50 @@
 <template>
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
-      <option v-for="image in items" :key="image.id" :value="image">{{ (image.id > 0) ? `Edit ${image.id}: ${image.path}` : "Add new image" }}</option>
+      <option v-for="image in items" :key="image.id" :value="image">{{
+        image.id > 0 ? `Edit ${image.id}: ${image.path}` : "Add new image"
+      }}</option>
     </select>
 
     <br />
 
-    <img v-if="selected.path" :src="selected.path" class="img-preview">
+    <img v-if="selected.path" :src="selected.path" class="img-preview" />
 
     <form @submit.prevent="routeFormSubmission">
       <template v-for="(field, index) in schema">
-        <span :key="index + '-span'"><b>{{ field.field }}:</b></span><span :key="index + '-req'" v-if="field.required" class="required-star"></span>
+        <span :key="index + '-span'"
+          ><b>{{ field.field }}:</b></span
+        ><span
+          :key="index + '-req'"
+          v-if="field.required"
+          class="required-star"
+        ></span>
         <template v-if="field.tag === 'input'">
-          <input class="inputbox-mod dashboard-text" :type="field.type" v-model="selected[field.field]" :placeholder="field.field" :key="index + '-input'" :required="field.required">
+          <input
+            class="inputbox-mod dashboard-text"
+            :type="field.type"
+            v-model="selected[field.field]"
+            :placeholder="field.field"
+            :key="index + '-input'"
+            :required="field.required"
+          />
         </template>
       </template>
 
       <div class="dashboard-buttons">
-        <input class="submit-button dashboard-button" type="submit" @click="whichButton = 'addUpdate'" :value="(selected.id > 0) ? 'Update' : 'Add'">
-        <input class="submit-button delete-button" type="submit" @click="whichButton = 'delete'" v-if="selected.id > 0" value="Delete">
+        <input
+          class="submit-button dashboard-button"
+          type="submit"
+          @click="whichButton = 'addUpdate'"
+          :value="selected.id > 0 ? 'Update' : 'Add'"
+        />
+        <input
+          class="submit-button delete-button"
+          type="submit"
+          @click="whichButton = 'delete'"
+          v-if="selected.id > 0"
+          value="Delete"
+        />
       </div>
     </form>
   </div>
@@ -33,16 +59,14 @@ export default {
   mixins: [DashboardBaseMixin],
   data() {
     return {
-      type: {singular: "image", plural: "images"},
+      type: { singular: "image", plural: "images" },
       api: ImagesAPI
     }
   },
   beforeRouteEnter(to, from, next) {
-    ImagesAPI.get({schema: null}).then(
-      images => {
-        next(vm => vm.setData(images))
-      }
-    )
+    ImagesAPI.get({ schema: null }).then(images => {
+      next(vm => vm.setData(images))
+    })
   },
   methods: {}
 }

@@ -5,7 +5,10 @@ import ErrorHandler from "../errors/handler"
 export default {
   // GET Methods
   get(params = {}) {
-    let queryString = qs.stringify(params, {addQueryPrefix: true, strictNullHandling: true})
+    let queryString = qs.stringify(params, {
+      addQueryPrefix: true,
+      strictNullHandling: true
+    })
     return axios
       .get(`/public/images${queryString}`)
       .then(response => {
@@ -22,21 +25,21 @@ export default {
       method: "post",
       url: "/admin/images",
       headers: {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       },
       data: {
-        "path": image.path,
-        "title": image.title,
-        "pos": parseInt(image.pos),
-        "orient": image.orient
+        path: image.path,
+        title: image.title,
+        pos: parseInt(image.pos),
+        orient: image.orient
       }
     })
-    .then(response => {
-      return response
-    })
-    .catch(error => {
-      return ErrorHandler.handle(error)
-    })
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+        return ErrorHandler.handle(error)
+      })
   },
 
   // PUT Methods
@@ -45,21 +48,21 @@ export default {
       method: "put",
       url: `/admin/images/${image.id}`,
       headers: {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       },
       data: {
-        "path": image.path,
-        "title": image.title,
-        "pos": parseInt(image.pos),
-        "orient": image.orient
+        path: image.path,
+        title: image.title,
+        pos: parseInt(image.pos),
+        orient: image.orient
       }
     })
-    .then(response => {
-      return response
-    })
-    .catch(error => {
-      return ErrorHandler.handle(error)
-    })
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+        return ErrorHandler.handle(error)
+      })
   },
 
   // DELETE Methods
@@ -68,14 +71,14 @@ export default {
       method: "delete",
       url: `/admin/images/${image.id}`,
       headers: {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       }
     })
-    .then(response => {
-      return response
-    })
-    .catch(error => {
-      return ErrorHandler.handle(error)
-    })
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+        return ErrorHandler.handle(error)
+      })
   }
 }

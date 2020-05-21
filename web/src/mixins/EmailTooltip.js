@@ -11,7 +11,7 @@ export default {
     },
     resetCopyMessage() {
       // Wait some time so the user doesn't see the message flash.
-      setTimeout(() => this.copyMessage = "Copy email address", 100)
+      setTimeout(() => (this.copyMessage = "Copy email address"), 100)
     }
   },
   computed: {

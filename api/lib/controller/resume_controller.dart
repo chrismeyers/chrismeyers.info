@@ -7,13 +7,9 @@ class ResumeController extends ResourceController {
   Future<Response> getResume() async {
     final ResumeParser parser = ResumeParser("../resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex");
 
-    if(request.path.string.endsWith("/summary")) {
-      return Response.ok({
-        "languages": parser.getLanguages(),
-        "mostRecentJob": parser.getMostRecentJob()
-      });
-    }
-    else {
+    if (request.path.string.endsWith("/summary")) {
+      return Response.ok({"languages": parser.getLanguages(), "mostRecentJob": parser.getMostRecentJob()});
+    } else {
       return Response.ok({
         "experience": parser.parseComplexSection("Experience"),
         "education": parser.parseComplexSection("Education"),

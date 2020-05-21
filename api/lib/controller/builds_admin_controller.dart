@@ -62,14 +62,13 @@ class BuildsAdminController extends ResourceController {
         ..where((b) => b.id).equalTo(id);
       final Build build = await queryUpdateData.updateOne();
 
-      if(build == null) {
+      if (build == null) {
         return null;
       }
 
-      final Query<Image> queryCurrentImage = Query<Image>(transaction)
-        ..where((i) => i.build.id).equalTo(id);
+      final Query<Image> queryCurrentImage = Query<Image>(transaction)..where((i) => i.build.id).equalTo(id);
       final Image currentImage = await queryCurrentImage.fetchOne();
-      if(currentImage != null && currentImage.id != imageId) {
+      if (currentImage != null && currentImage.id != imageId) {
         // Un-relate the image to prepare for update.
         final Query<Image> queryClearImage = Query<Image>(transaction)
           ..where((i) => i.id).equalTo(currentImage.id)
@@ -89,7 +88,7 @@ class BuildsAdminController extends ResourceController {
       return await complete.fetchOne();
     });
 
-    if(build == null) {
+    if (build == null) {
       return Response.notFound(body: {"message": "build id $id does not exist"});
     }
 
@@ -98,12 +97,11 @@ class BuildsAdminController extends ResourceController {
 
   @Operation.delete("id")
   Future<Response> deleteBuild(@Bind.path("id") int id) async {
-    final Query<Build> query = Query<Build>(context)
-      ..where((b) => b.id).equalTo(id);
+    final Query<Build> query = Query<Build>(context)..where((b) => b.id).equalTo(id);
 
     final int numDeleted = await query.delete();
 
-    if(numDeleted == 0) {
+    if (numDeleted == 0) {
       return Response.notFound(body: {"message": "build id $id does not exist"});
     }
 

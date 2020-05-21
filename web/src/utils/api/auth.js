@@ -10,35 +10,35 @@ export default {
       url: "/auth/token",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Basic " + btoa(process.env.VUE_APP_API_CLIENT_ID + ":")
+        Authorization: "Basic " + btoa(process.env.VUE_APP_API_CLIENT_ID + ":")
       },
       data: qs.stringify({
-        "username": username,
-        "password": password,
-        "grant_type": "password"
+        username: username,
+        password: password,
+        grant_type: "password"
       })
     })
-    .then(response => {
-      return response
-    })
-    .catch(error => {
-      return ErrorHandler.handle(error)
-    })
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+        return ErrorHandler.handle(error)
+      })
   },
   logout(token) {
     return axios({
       method: "post",
       url: "/auth/logout",
       headers: {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       }
     })
-    .then(response => {
-      return response
-    })
-    .catch(error => {
-      return ErrorHandler.handle(error)
-    })
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+        return ErrorHandler.handle(error)
+      })
   },
 
   // GET Methods
@@ -47,19 +47,18 @@ export default {
       method: "get",
       url: "/auth/authorize",
       headers: {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       }
     })
-    .then(response => {
-      if(response.status < 400) {
-        return true
-      }
-      else {
+      .then(response => {
+        if (response.status < 400) {
+          return true
+        } else {
+          return false
+        }
+      })
+      .catch(() => {
         return false
-      }
-    })
-    .catch(() => {
-      return false
-    })
+      })
   }
 }
