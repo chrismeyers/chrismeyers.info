@@ -28,8 +28,8 @@ export default {
         Authorization: `Bearer ${token}`
       },
       data: {
-        date: build.date,
-        started: parseInt(build.started),
+        displayDate: build.displayDate,
+        startedDate: `${build.startedDate}T00:00:00.000Z`,
         cpu: build.cpu,
         cool: build.cool === "" ? null : build.cool,
         mobo: build.mobo,
@@ -60,8 +60,8 @@ export default {
         Authorization: `Bearer ${token}`
       },
       data: {
-        date: build.date,
-        started: parseInt(build.started),
+        displayDate: build.displayDate,
+        startedDate: `${build.startedDate}T00:00:00.000Z`,
         cpu: build.cpu,
         cool: build.cool === "" ? null : build.cool,
         mobo: build.mobo,

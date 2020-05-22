@@ -2,7 +2,9 @@
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
       <option v-for="build in items" :key="build.id" :value="build">{{
-        build.id > 0 ? `Edit ${build.id}: ${build.date}` : "Add new build"
+        build.id > 0
+          ? `Edit ${build.id}: ${build.displayDate}`
+          : "Add new build"
       }}</option>
     </select>
 
@@ -95,11 +97,15 @@ export default {
       // image ID when creating/updating the image of a build, we can modify
       // the image field of the data we received from the GET to only include
       // the image ID.
+      //
+      // The API returns startedDate as a timestamp. The HTML date input type
+      // only works if given a date, so the time is trimmed off.
       let flatBuilds = []
       for (let build of builds.data.items) {
         if (build.image) {
           build.image = build.image.id
         }
+        build.startedDate = build.startedDate.split("T")[0]
         flatBuilds.push(build)
       }
 
