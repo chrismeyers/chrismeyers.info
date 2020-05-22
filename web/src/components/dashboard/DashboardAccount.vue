@@ -36,7 +36,7 @@ import ModalsMixin from "@/mixins/Modals"
 import { API_TOKEN_KEY } from "@/store/constants"
 
 export default {
-  name: "Dashboard-Account",
+  name: "dashboard-account",
   mixins: [DashboardMessagesMixin, ModalsMixin],
   data() {
     return {

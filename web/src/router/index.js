@@ -1,26 +1,39 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 import AuthAPI from "@/utils/api/auth"
-import About from "@/components/About"
-import Resume from "@/components/Resume"
-import Builds from "@/components/Builds"
-import Projects from "@/components/Projects"
-import Login from "@/components/Login"
-import Dashboard from "@/components/dashboard/Dashboard"
+import AboutPage from "@/components/AboutPage"
+import ResumePage from "@/components/ResumePage"
+import ProjectsPage from "@/components/ProjectsPage"
+import BuildsPage from "@/components/BuildsPage"
+import LoginPage from "@/components/LoginPage"
+import DashboardHome from "@/components/dashboard/DashboardHome"
 import DashboardImages from "@/components/dashboard/DashboardImages"
 import DashboardBuilds from "@/components/dashboard/DashboardBuilds"
 import DashboardProjects from "@/components/dashboard/DashboardProjects"
 import DashboardAccount from "@/components/dashboard/DashboardAccount"
-import NotFound from "@/components/NotFound"
+import NotFoundPage from "@/components/NotFoundPage"
 import { API_TOKEN_KEY } from "@/store/constants"
 
 Vue.use(VueRouter)
 
 let defaultTitle = "Chris Meyers - Developer, Tech Enthusiast"
 
-let formatTitle = name => {
-  // Surround hyphens with spaces
-  return name.replace(/([!?-])/g, " $1 ")
+let formatPageTitle = name => {
+  // Remove hyphens and "page"
+  return name
+    .toLowerCase()
+    .split("-")
+    .filter(s => s !== "page")
+    .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+}
+
+let formatDashboardTitle = name => {
+  // Capitalize each word and surround hyphens with spaces
+  return name
+    .toLowerCase()
+    .split("-")
+    .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+    .join(" - ")
 }
 
 let router = new VueRouter({
@@ -31,8 +44,7 @@ let router = new VueRouter({
   routes: [
     {
       path: "/",
-      name: "About",
-      component: About,
+      component: AboutPage,
       meta: {
         secure: false,
         title: defaultTitle
@@ -40,8 +52,7 @@ let router = new VueRouter({
     },
     {
       path: "/resume",
-      name: "Resume",
-      component: Resume,
+      component: ResumePage,
       meta: {
         secure: false,
         title: defaultTitle
@@ -49,8 +60,7 @@ let router = new VueRouter({
     },
     {
       path: "/builds",
-      name: "Builds",
-      component: Builds,
+      component: BuildsPage,
       meta: {
         secure: false,
         title: defaultTitle
@@ -58,8 +68,7 @@ let router = new VueRouter({
     },
     {
       path: "/projects",
-      name: "Projects",
-      component: Projects,
+      component: ProjectsPage,
       meta: {
         secure: false,
         title: defaultTitle
@@ -67,20 +76,18 @@ let router = new VueRouter({
     },
     {
       path: "/login",
-      name: "Login",
-      component: Login,
+      component: LoginPage,
       meta: {
         secure: false,
-        title: formatTitle(Login.name)
+        title: formatPageTitle(LoginPage.name)
       }
     },
     {
       path: "/dashboard",
-      name: "Dashboard",
-      component: Dashboard,
+      component: DashboardHome,
       meta: {
         secure: true,
-        title: formatTitle(Dashboard.name)
+        title: formatDashboardTitle(DashboardHome.name)
       },
       children: [
         {
@@ -88,7 +95,7 @@ let router = new VueRouter({
           component: DashboardImages,
           meta: {
             secure: true,
-            title: formatTitle(DashboardImages.name)
+            title: formatDashboardTitle(DashboardImages.name)
           }
         },
         {
@@ -96,7 +103,7 @@ let router = new VueRouter({
           component: DashboardBuilds,
           meta: {
             secure: true,
-            title: formatTitle(DashboardBuilds.name)
+            title: formatDashboardTitle(DashboardBuilds.name)
           }
         },
         {
@@ -104,7 +111,7 @@ let router = new VueRouter({
           component: DashboardProjects,
           meta: {
             secure: true,
-            title: formatTitle(DashboardProjects.name)
+            title: formatDashboardTitle(DashboardProjects.name)
           }
         },
         {
@@ -112,14 +119,14 @@ let router = new VueRouter({
           component: DashboardAccount,
           meta: {
             secure: true,
-            title: formatTitle(DashboardAccount.name)
+            title: formatDashboardTitle(DashboardAccount.name)
           }
         }
       ]
     },
     {
       path: "*",
-      component: NotFound,
+      component: NotFoundPage,
       meta: {
         secure: false,
         title: defaultTitle

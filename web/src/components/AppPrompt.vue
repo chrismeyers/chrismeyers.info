@@ -34,7 +34,7 @@
 import { THEMES } from "@/store/constants"
 
 export default {
-  name: "Prompt",
+  name: "app-prompt",
   data() {
     return {
       promptVisible: false,

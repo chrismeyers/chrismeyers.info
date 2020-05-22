@@ -1,27 +1,27 @@
 <template>
   <div id="app">
-    <Navigation />
+    <app-navigation />
     <v-dialog />
     <vue-progress-bar />
     <router-view />
-    <Footer />
-    <Prompt />
+    <app-footer />
+    <app-prompt />
   </div>
 </template>
 
 <script>
-import Navigation from "@/components/Navigation"
-import Footer from "@/components/Footer"
-import Prompt from "@/components/Prompt"
+import AppNavigation from "@/components/AppNavigation"
+import AppFooter from "@/components/AppFooter"
+import AppPrompt from "@/components/AppPrompt"
 import ModalsMixin from "@/mixins/Modals"
 
 export default {
   name: "App",
   mixins: [ModalsMixin],
   components: {
-    Navigation,
-    Footer,
-    Prompt
+    AppNavigation,
+    AppFooter,
+    AppPrompt
   },
   created() {
     // [App.vue specific] When App.vue is first loaded start the progress bar
