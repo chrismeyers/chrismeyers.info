@@ -113,7 +113,7 @@
 
 <script>
 export default {
-  name: "Navigation",
+  name: "app-navigation",
   data() {
     return {
       path: "",

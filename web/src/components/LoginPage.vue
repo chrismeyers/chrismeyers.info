@@ -31,7 +31,7 @@ import ConnectionError from "@/utils/errors/types/connection"
 import { API_TOKEN_KEY } from "@/store/constants"
 
 export default {
-  name: "Login",
+  name: "login-page",
   data() {
     return {
       username: "",
