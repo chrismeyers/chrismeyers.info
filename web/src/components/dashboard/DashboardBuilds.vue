@@ -73,7 +73,7 @@ import ImagesAPI from "@/utils/api/images"
 import DashboardBaseMixin from "@/mixins/DashboardBase"
 
 export default {
-  name: "Dashboard-Builds",
+  name: "dashboard-builds",
   mixins: [DashboardBaseMixin],
   data() {
     return {

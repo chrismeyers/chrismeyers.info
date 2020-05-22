@@ -88,7 +88,7 @@ import "@/assets/images/icons/generated/github"
 import "@/assets/images/icons/generated/link"
 
 export default {
-  name: "Projects",
+  name: "projects-page",
   mixins: [ModalsMixin],
   data() {
     return {

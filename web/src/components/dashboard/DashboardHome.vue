@@ -30,7 +30,7 @@ import ModalsMixin from "@/mixins/Modals"
 import { API_TOKEN_KEY } from "@/store/constants"
 
 export default {
-  name: "Dashboard",
+  name: "dashboard-home",
   mixins: [ModalsMixin],
   methods: {
     getTitle() {

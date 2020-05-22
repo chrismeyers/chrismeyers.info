@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "NotFound",
+  name: "not-found-page",
   data() {
     return {
       path: ""

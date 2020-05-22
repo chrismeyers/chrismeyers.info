@@ -78,7 +78,7 @@ import "@/assets/images/icons/generated/mail"
 import { THEMES } from "@/store/constants"
 
 export default {
-  name: "Footer",
+  name: "app-footer",
   mixins: [EmailTooltipMixin],
   data() {
     return {

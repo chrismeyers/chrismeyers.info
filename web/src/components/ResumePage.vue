@@ -99,7 +99,7 @@ import ConnectionError from "@/utils/errors/types/connection"
 import ModalsMixin from "@/mixins/Modals"
 
 export default {
-  name: "Resume",
+  name: "resume-page",
   mixins: [ModalsMixin],
   data() {
     return {
