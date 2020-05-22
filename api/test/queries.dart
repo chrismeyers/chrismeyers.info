@@ -29,8 +29,8 @@ class Queries {
 
   Future<Null> insertBuild() async {
     final Query<Build> insertQuery = Query<Build>(_harness.application.channel.context)
-      ..values.date = "Sometime long ago"
-      ..values.started = 20130101
+      ..values.displayDate = "Sometime long ago"
+      ..values.startedDate = DateTime.parse("2013-01-01T00:00:00.000Z")
       ..values.cpu = "Very Fast 9000"
       ..values.cool = "Very Cold"
       ..values.mobo = "Lots of LEDs"
@@ -48,8 +48,8 @@ class Queries {
       ..values.title = "A cool project"
       ..values.webUrl = "https://project.website"
       ..values.codeUrl = "https://project.code"
-      ..values.date = "A very long time ago"
-      ..values.started = 20130101
+      ..values.displayDate = "A very long time ago"
+      ..values.startedDate = DateTime.parse("2013-01-01T00:00:00.000Z")
       ..values.lang = "Machine Code"
       ..values.info = "I don't know, something"
       ..values.role = "Solo Project"

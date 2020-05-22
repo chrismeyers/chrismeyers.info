@@ -6,7 +6,7 @@
       <template v-for="(project, index) in projects">
         <div class="proj" :key="project.id">
           <h2 :class="{ 'first-header': index == 0 }">{{ project.title }}</h2>
-          <h3>{{ project.date }}</h3>
+          <h3>{{ project.displayDate }}</h3>
           <div class="projWrapper">
             <div class="projDesc">
               <dl>

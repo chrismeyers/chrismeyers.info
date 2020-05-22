@@ -12,7 +12,7 @@ class ProjectsPublicController extends ResourceController {
   Future<Response> getProjects({@Bind.query("schema") bool schema = false}) async {
     final Query<Project> query = Query<Project>(context)
       ..join(set: (p) => p.images)
-      ..sortBy((p) => p.started, QuerySortOrder.ascending);
+      ..sortBy((p) => p.startedDate, QuerySortOrder.ascending);
     final List<Project> allProjects = await query.fetch();
 
     for (final Project project in allProjects) {

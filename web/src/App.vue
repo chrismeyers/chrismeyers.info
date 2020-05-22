@@ -241,6 +241,7 @@ input.inputbox-mod[type="text"],
 input.inputbox-mod[type="password"],
 input.inputbox-mod[type="url"],
 input.inputbox-mod[type="number"],
+input.inputbox-mod[type="date"],
 textarea.textarea-mod,
 select.select-scroll-mod {
   height: 25px;
