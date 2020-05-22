@@ -110,7 +110,7 @@ import EmailTooltipMixin from "@/mixins/EmailTooltip"
 import ModalsMixin from "@/mixins/Modals"
 
 export default {
-  name: "About",
+  name: "about-page",
   mixins: [EmailTooltipMixin, ModalsMixin],
   data() {
     return {

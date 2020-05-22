@@ -56,7 +56,7 @@ import ConnectionError from "@/utils/errors/types/connection"
 import ModalsMixin from "@/mixins/Modals"
 
 export default {
-  name: "Builds",
+  name: "builds-page",
   mixins: [ModalsMixin],
   data() {
     return {
