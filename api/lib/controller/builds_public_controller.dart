@@ -12,7 +12,7 @@ class BuildsPublicController extends ResourceController {
   Future<Response> getBuilds({@Bind.query("schema") bool schema = false}) async {
     final Query<Build> query = Query<Build>(context)
       ..join(object: (b) => b.image)
-      ..sortBy((b) => b.started, QuerySortOrder.ascending);
+      ..sortBy((b) => b.startedDate, QuerySortOrder.ascending);
     final List<Build> allBuilds = await query.fetch();
 
     final Map<String, dynamic> response = {};

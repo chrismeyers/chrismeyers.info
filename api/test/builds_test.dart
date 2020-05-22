@@ -21,8 +21,8 @@ Future main() async {
       "items": [
         {
           "id": greaterThan(0),
-          "date": "Sometime long ago",
-          "started": 20130101,
+          "displayDate": "Sometime long ago",
+          "startedDate": "2013-01-01T00:00:00.000Z",
           "cpu": "Very Fast 9000",
           "cool": "Very Cold",
           "mobo": "Lots of LEDs",
@@ -43,8 +43,8 @@ Future main() async {
     final TestResponse response = await harness.publicAgent.get("/public/builds/1");
     expectResponse(response, 200, body: {
       "id": greaterThan(0),
-      "date": "Sometime long ago",
-      "started": 20130101,
+      "displayDate": "Sometime long ago",
+      "startedDate": "2013-01-01T00:00:00.000Z",
       "cpu": "Very Fast 9000",
       "cool": "Very Cold",
       "mobo": "Lots of LEDs",
@@ -71,8 +71,8 @@ Future main() async {
     await queries.loginUser();
 
     final TestResponse response = await harness.publicAgent.post("/admin/builds", body: {
-      "date": "Sometime long ago",
-      "started": 20130101,
+      "displayDate": "Sometime long ago",
+      "startedDate": "2013-01-01T00:00:00.000Z",
       "cpu": "Very Fast 9000",
       "cool": "Very Cold",
       "mobo": "Lots of LEDs",
@@ -85,8 +85,8 @@ Future main() async {
     });
     expectResponse(response, 200, body: {
       "id": greaterThan(0),
-      "date": "Sometime long ago",
-      "started": 20130101,
+      "displayDate": "Sometime long ago",
+      "startedDate": "2013-01-01T00:00:00.000Z",
       "cpu": "Very Fast 9000",
       "cool": "Very Cold",
       "mobo": "Lots of LEDs",
@@ -109,8 +109,8 @@ Future main() async {
     await queries.loginUser();
 
     final TestResponse response = await harness.publicAgent.put("/admin/builds/1", body: {
-      "date": "Sometime very long ago",
-      "started": 20120202,
+      "displayDate": "Sometime very long ago",
+      "startedDate": "2012-02-02T00:00:00.000Z",
       "cpu": "Very very Fast 9000",
       "cool": "Very very Cold",
       "mobo": "Lots and lots of LEDs",
@@ -123,8 +123,8 @@ Future main() async {
     });
     expectResponse(response, 200, body: {
       "id": 1,
-      "date": "Sometime very long ago",
-      "started": 20120202,
+      "displayDate": "Sometime very long ago",
+      "startedDate": "2012-02-02T00:00:00.000Z",
       "cpu": "Very very Fast 9000",
       "cool": "Very very Cold",
       "mobo": "Lots and lots of LEDs",
@@ -155,8 +155,8 @@ Future main() async {
     await queries.loginUser();
 
     await harness.publicAgent.put("/admin/builds/1", body: {
-      "date": "Sometime very long ago",
-      "started": 20120202,
+      "displayDate": "Sometime very long ago",
+      "startedDate": "2012-02-02T00:00:00.000Z",
       "cpu": "Very very Fast 9000",
       "cool": "Very very Cold",
       "mobo": "Lots and lots of LEDs",
@@ -179,8 +179,8 @@ Future main() async {
     expect(images[0].build.id, 1);
 
     await harness.publicAgent.put("/admin/builds/1", body: {
-      "date": "Sometime very long ago",
-      "started": 20120202,
+      "displayDate": "Sometime very long ago",
+      "startedDate": "2012-02-02T00:00:00.000Z",
       "cpu": "Very very Fast 9000",
       "cool": "Very very Cold",
       "mobo": "Lots and lots of LEDs",
