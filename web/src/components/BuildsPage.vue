@@ -5,7 +5,9 @@
     <div class="content-text">
       <template v-for="(build, index) in builds">
         <div class="build" :key="build.id">
-          <h2 :class="{ 'first-header': index == 0 }">{{ build.date }}</h2>
+          <h2 :class="{ 'first-header': index == 0 }">
+            {{ build.displayDate }}
+          </h2>
           <div class="build-info">
             <div class="build-specs">
               <dl>
