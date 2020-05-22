@@ -17,8 +17,8 @@ class ProjectsAdminController extends ResourceController {
         ..values.title = body["title"] as String
         ..values.webUrl = body["webUrl"] as String
         ..values.codeUrl = body["codeUrl"] as String
-        ..values.date = body["date"] as String
-        ..values.started = body["started"] as int
+        ..values.displayDate = body["displayDate"] as String
+        ..values.startedDate = DateTime.parse(body["startedDate"] as String)
         ..values.lang = body["lang"] as String
         ..values.info = body["info"] as String
         ..values.role = body["role"] as String
@@ -54,8 +54,8 @@ class ProjectsAdminController extends ResourceController {
         ..values.title = body["title"] as String
         ..values.webUrl = body["webUrl"] as String
         ..values.codeUrl = body["codeUrl"] as String
-        ..values.date = body["date"] as String
-        ..values.started = body["started"] as int
+        ..values.displayDate = body["displayDate"] as String
+        ..values.startedDate = DateTime.parse(body["startedDate"] as String)
         ..values.lang = body["lang"] as String
         ..values.info = body["info"] as String
         ..values.role = body["role"] as String
