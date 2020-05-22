@@ -15,13 +15,10 @@ class _Build {
   bool active;
 
   @SchemaField(multiple: null)
-  String date;
+  String displayDate;
 
-  // An integer representation (YYYYMMDD) of when the project was started that
-  // can be used for sorting.
-  //   Ex: February 2018 -> 20180201, Summer 2018 -> 20180601
-  @SchemaField(type: "number", multiple: null)
-  int started;
+  @SchemaField(type: "date", multiple: null)
+  DateTime startedDate;
 
   @SchemaField(multiple: null)
   String cpu;
