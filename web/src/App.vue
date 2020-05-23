@@ -243,7 +243,8 @@ input.inputbox-mod[type="url"],
 input.inputbox-mod[type="number"],
 input.inputbox-mod[type="date"],
 textarea.textarea-mod,
-select.select-scroll-mod {
+select.select-scroll-mod,
+select.select-mod {
   height: 25px;
   width: calc(
     100% - 5px - 5px - 2px
@@ -278,6 +279,13 @@ select.select-scroll-mod {
   height: 192px;
   padding: 0px;
   display: block;
+}
+
+select.select-mod {
+  width: 100%;
+  height: 27px;
+  display: block;
+  background-color: white;
 }
 
 /* This button was generated using CSSButtonGenerator.com */
