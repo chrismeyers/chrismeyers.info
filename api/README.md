@@ -20,36 +20,23 @@ The default configuration file used when testing is `config.src.yaml`. This file
 
 See the documentation for [Deployment](https://aqueduct.io/docs/deploy/).
 
+---
+
 ## Setup
-1) Create a database, add a database user, then grant database permissions to this user (see https://aqueduct.io/docs/db/connecting/).
+NOTE: `aqueduct` commands may need to be run within the docker container (`docker exec -it {CONTAINER_NAME} sh`)
+1. Create a database, add a database user, then grant database permissions to this user (see https://aqueduct.io/docs/db/connecting/)
     ```
     CREATE DATABASE my_app_name;
     CREATE USER my_app_name_user WITH PASSWORD 'password';
     GRANT ALL ON DATABASE my_app_name TO my_app_name_user;
     ```
-2) Copy `config.src.yaml` to `config.yaml` and replace the values with the values from the previous step.
-3) Create `database.yaml` containing the values in the `database` section of `config.yaml`.
-4) Initialize the database tables by running `aqueduct db upgrade`.
-5) Register a user by sending a POST request to the `/auth/register` endpoint or running the `./bootstrap.dart --register ...` command.
-6) Add an OAuth 2.0 client by running `aqueduct auth add-client --id ...`.
-7) Import the initial data by running `dart bin/bootstrap.dart`.
-8) Copy `../bin/systemd/chrismeyers-info-api.service` to `/etc/systemd/system` and run `sudo systemctl daemon-reload`, `sudo systemctl enable chrismeyers-info-api.service`, and `sudo systemctl start chrismeyers-info-api.service`.
-
-## Docker
-### Build
-```
-# Additional docker build arguments can be passed through such as:
-#   --no-cache (do not use cache when building image)
-scripts/build.sh
-```
-
-### Run
-```
-# Additional docker run arguments can be passed through such as:
-#   -it (allow for signals such as SIGINT <ctrl-c>)
-#   -d  (detached - run container in background)
-scripts/run.sh
-```
+1. Copy `config.src.yaml` to `config.yaml` and replace the values with the values from the previous step
+1. Create `database.yaml` containing the values in the `database` section of `config.yaml`
+1. Initialize the database tables by running `aqueduct db upgrade`
+1. Register a user by sending a POST request to the `/auth/register` endpoint or running the `./bootstrap.dart --register ...` command
+1. Add an OAuth 2.0 client by running `aqueduct auth add-client --id ...`
+1. Import the initial data by running `dart bin/bootstrap.dart`
+1. Copy `../bin/systemd/chrismeyers-info-api.service` to `/etc/systemd/system` and run `sudo systemctl daemon-reload`, `sudo systemctl enable chrismeyers-info-api.service`, and `sudo systemctl start chrismeyers-info-api.service` (this should only be done if **not** using docker)
 
 ## Troubleshooting
 - `pub global activate aqueduct` may need to be run to use the `aqueduct` CLI tool
