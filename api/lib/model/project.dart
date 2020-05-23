@@ -11,37 +11,37 @@ class _Project {
   int id;
 
   // Controls if the entry should be displayed on the front-end.
-  @SchemaField(type: "checkbox", multiple: null, required: false)
+  @SchemaField(type: "checkbox", required: false)
   bool active;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String title;
 
   @Column(nullable: true)
-  @SchemaField(type: "url", multiple: null, required: false)
+  @SchemaField(type: "url", required: false)
   String webUrl;
 
-  @SchemaField(type: "url", multiple: null)
+  @SchemaField(type: "url")
   String codeUrl;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String displayDate;
 
-  @SchemaField(type: "date", multiple: null)
+  @SchemaField(type: "date")
   DateTime startedDate;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String lang;
 
-  @SchemaField(tag: "textarea", multiple: null)
+  @SchemaField(tag: "textarea", type: null)
   String info;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String role;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String stat;
 
-  @SchemaField(type: null, tag: "select", multiple: true, required: false)
+  @SchemaField(tag: "select", type: null, multiple: true, required: false)
   ManagedSet<Image> images;
 }
