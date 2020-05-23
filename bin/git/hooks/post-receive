@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Setup:
-#   1. Make the directory /path/to/repo/*.git
-#   2. git init --bare /path/to/repo/*.git
-#   3. Create and edit /path/to/repo/*.git/hooks/post-receive
-#     3a. This needs to be updated manually when changes are made
+#   1. Make the directory /path/to/repo/{REPO_NAME}.git
+#   2. git init --bare /path/to/repo/{REPO_NAME}.git
+#   3. Create and edit /path/to/repo/{REPO_NAME}.git/hooks/post-receive
+#     3a. This needs to be updated manually when changes are made!
 #   4. Create all directories in the --work-tree path
-#   5. Add new git remote: ssh://USER_NAME@IP/path/to/repo/*.git
+#   5. Add new git remote: ssh://USER_NAME@IP/path/to/repo/{REPO_NAME}.git
 #   6. Push to the new git remote
 #
 # Ensure the sudoers entry for the user pushing to production has NOPASSWD
@@ -23,10 +23,10 @@ do
     cd /home/chris/www/chrismeyers.info
 
     web/scripts/build.sh
-    web/scripts/run.sh -d
+    web/scripts/run.sh "-d --restart always"
 
     api/scripts/build.sh
-    api/scripts/run.sh -d
+    api/scripts/run.sh "-d --restart always"
   else
     echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server."
   fi

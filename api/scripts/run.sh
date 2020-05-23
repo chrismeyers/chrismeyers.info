@@ -9,7 +9,6 @@ docker run \
     --log-opt max-size=25m \
     --log-opt max-file=2 \
     --name chrismeyers-info-api \
-    --restart always \
     chrismeyers-info-api
 
 popd > /dev/null 2>&1
