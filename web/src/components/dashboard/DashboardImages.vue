@@ -29,6 +29,22 @@
             :required="field.required"
           />
         </template>
+        <template v-else-if="field.tag === 'select'">
+          <select
+            class="select-mod"
+            v-model="selected[field.field]"
+            :placeholder="field.field"
+            :key="index + '-select'"
+            :required="field.required"
+          >
+            <option
+              v-for="option in field.options"
+              :key="option + '-option'"
+              :value="option"
+              >{{ option }}</option
+            >
+          </select>
+        </template>
       </template>
 
       <div class="dashboard-buttons">
