@@ -23,6 +23,9 @@ class SchemaMaker {
           if (inst.getField(#required).reflectee != null) {
             item["required"] = inst.getField(#required).reflectee;
           }
+          if (inst.getField(#options).reflectee != null) {
+            item["options"] = inst.getField(#options).reflectee;
+          }
 
           schema.add(item);
         }
