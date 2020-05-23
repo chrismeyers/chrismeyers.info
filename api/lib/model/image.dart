@@ -11,16 +11,16 @@ class _Image {
   @Column(primaryKey: true, autoincrement: true)
   int id;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String path;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String title;
 
-  @SchemaField(type: "number", multiple: null)
+  @SchemaField(type: "number")
   int pos;
 
-  @SchemaField(multiple: null)
+  @SchemaField(tag: "select", type: null, multiple: false, options: ["square", "port", "land"])
   String orient;
 
   @Relate(#image)

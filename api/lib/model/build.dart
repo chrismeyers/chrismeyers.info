@@ -11,38 +11,38 @@ class _Build {
   int id;
 
   // Controls if the entry should be displayed on the front-end.
-  @SchemaField(type: "checkbox", multiple: null, required: false)
+  @SchemaField(type: "checkbox", required: false)
   bool active;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String displayDate;
 
-  @SchemaField(type: "date", multiple: null)
+  @SchemaField(type: "date")
   DateTime startedDate;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String cpu;
 
   @Column(nullable: true)
-  @SchemaField(multiple: null, required: false)
+  @SchemaField(required: false)
   String cool;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String mobo;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String ram;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String hdd;
 
   @Column(nullable: true)
-  @SchemaField(multiple: null, required: false)
+  @SchemaField(required: false)
   String ssd;
 
-  @SchemaField(multiple: null)
+  @SchemaField()
   String gpu;
 
-  @SchemaField(type: null, tag: "select", multiple: false, required: false)
+  @SchemaField(tag: "select", type: null, multiple: false, required: false)
   Image image;
 }
