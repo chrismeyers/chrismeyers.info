@@ -12,5 +12,4 @@ ADD resume/ ./
 WORKDIR /app
 EXPOSE 8888
 
-CMD aqueduct db upgrade \
-    && dart bin/main.dart
+CMD dart bin/main.dart
