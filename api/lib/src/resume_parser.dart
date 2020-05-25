@@ -173,16 +173,14 @@ class ResumeParser {
   }
 
   Map<String, String> getLanguages() {
+    const String languagesPattern = "% LANGUAGES";
     final Map<String, String> langMap = {};
     final List<ListItem> skills = parseListSection("TechnicalSkills");
 
     for (final skill in skills) {
-      if (langMap.length == 2) {
-        break;
-      } else if (skill.mainItem.toLowerCase().contains("desktop and cli")) {
-        langMap["desktop"] = skill.subItems[0];
-      } else if (skill.mainItem.toLowerCase().contains("websites, web apps, and apis")) {
-        langMap["web"] = skill.subItems[0];
+      if (skill.mainItem.contains(languagesPattern)) {
+        final String type = skill.mainItem.split(languagesPattern)[1].trim();
+        langMap[type] = skill.subItems[0];
       }
     }
 
