@@ -204,15 +204,15 @@ class ResumeParser {
   String _cleanString(String input, bool removeInlineComments) {
     String output = input.trim();
 
+    if (removeInlineComments) {
+      // This regex skips escaped percent signs by using negative lookbehind
+      output = output.split(RegExp(r"(?<!\\)%"))[0].trim();
+    }
+
     output = output.replaceAll("\\CPP", "C++");
     output = output.replaceAll("\\break", "");
     output = output.replaceAll("--", "&ndash;");
     output = output.replaceAll("\\", "");
-
-    if (removeInlineComments) {
-      // TODO: handle non-comment percent signs
-      output = output.split("%")[0].trim();
-    }
 
     return output;
   }
