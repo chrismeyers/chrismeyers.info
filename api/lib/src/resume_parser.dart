@@ -58,7 +58,7 @@ class ResumeParser {
     }
   }
 
-  List<Map<String, dynamic>> parseComplexSection(String section) {
+  List<Map<String, dynamic>> parseComplexSection(String section, {bool removeInlineComments = true}) {
     const String urlPattern = "% URL";
     const String firstLinePattern = "{\\textbf{";
     const String secondLinePattern = "{\\emph{";
@@ -86,15 +86,15 @@ class ResumeParser {
       } else if (line.startsWith(firstLinePattern)) {
         final int beginPatternIndex = line.indexOf(firstLinePattern) + firstLinePattern.length;
         final int endPatternIndex = line.indexOf(endPattern);
-        final String cleaned =
-            _cleanString(line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""));
+        final String cleaned = _cleanString(
+            line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""), removeInlineComments);
 
         firstLine.add(cleaned);
       } else if (line.startsWith(secondLinePattern)) {
         final int beginPatternIndex = line.indexOf(secondLinePattern) + secondLinePattern.length;
         final int endPatternIndex = line.indexOf(endPattern);
-        final String cleaned =
-            _cleanString(line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""));
+        final String cleaned = _cleanString(
+            line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""), removeInlineComments);
 
         currentSecondLine.add(cleaned);
       } else if (line.startsWith(sameCompanyPattern)) {
@@ -125,7 +125,7 @@ class ResumeParser {
           currentSecondLine = [];
           currentInfo = [];
         } else {
-          final String cleaned = _cleanString(line.substring(infoPattern.length + 1));
+          final String cleaned = _cleanString(line.substring(infoPattern.length + 1), removeInlineComments);
           currentInfo.add(cleaned);
         }
       }
@@ -144,7 +144,7 @@ class ResumeParser {
     return items;
   }
 
-  List<ListItem> parseListSection(String section) {
+  List<ListItem> parseListSection(String section, {bool removeInlineComments = true}) {
     const String itemPattern = "\\item";
     const String beginSubPattern = "\\begin{itemize*}";
     const String endSubPattern = "\\end{itemize*}";
@@ -159,7 +159,7 @@ class ResumeParser {
       } else if (line.startsWith(endSubPattern)) {
         subItem = false;
       } else if (line.startsWith(itemPattern)) {
-        final String cleaned = _cleanString(line.substring(itemPattern.length + 1));
+        final String cleaned = _cleanString(line.substring(itemPattern.length + 1), removeInlineComments);
         if (subItem) {
           items[count - 1].add(cleaned);
         } else {
@@ -175,7 +175,7 @@ class ResumeParser {
   Map<String, String> getLanguages() {
     const String languagesPattern = "% LANGUAGES";
     final Map<String, String> langMap = {};
-    final List<ListItem> skills = parseListSection("TechnicalSkills");
+    final List<ListItem> skills = parseListSection("TechnicalSkills", removeInlineComments: false);
 
     for (final skill in skills) {
       if (skill.mainItem.contains(languagesPattern)) {
@@ -201,13 +201,18 @@ class ResumeParser {
     };
   }
 
-  String _cleanString(String input) {
+  String _cleanString(String input, bool removeInlineComments) {
     String output = input.trim();
 
     output = output.replaceAll("\\CPP", "C++");
     output = output.replaceAll("\\break", "");
     output = output.replaceAll("--", "&ndash;");
     output = output.replaceAll("\\", "");
+
+    if (removeInlineComments) {
+      // TODO: handle non-comment percent signs
+      output = output.split("%")[0].trim();
+    }
 
     return output;
   }
