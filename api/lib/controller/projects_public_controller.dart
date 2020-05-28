@@ -9,7 +9,8 @@ class ProjectsPublicController extends ResourceController {
   ManagedContext context;
 
   @Operation.get()
-  Future<Response> getProjects({@Bind.query("schema") bool schema = false}) async {
+  Future<Response> getProjects(
+      {@Bind.query("schema") bool schema = false}) async {
     final Query<Project> query = Query<Project>(context)
       ..join(set: (p) => p.images)
       ..sortBy((p) => p.startedDate, QuerySortOrder.ascending);
@@ -37,7 +38,8 @@ class ProjectsPublicController extends ResourceController {
     final Project project = await query.fetchOne();
 
     if (project == null) {
-      return Response.notFound(body: {"message": "project id $id does not exist"});
+      return Response.notFound(
+          body: {"message": "project id $id does not exist"});
     }
 
     return Response.ok(project);

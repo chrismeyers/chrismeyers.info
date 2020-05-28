@@ -68,7 +68,8 @@ class ProjectsAdminController extends ResourceController {
         return null;
       }
 
-      final Query<Image> queryCurrentImages = Query<Image>(transaction)..where((i) => i.project.id).equalTo(id);
+      final Query<Image> queryCurrentImages = Query<Image>(transaction)
+        ..where((i) => i.project.id).equalTo(id);
       final List<Image> currentImages = await queryCurrentImages.fetch();
       for (final Image currentImage in currentImages) {
         if (!imageIds.contains(currentImage.id)) {
@@ -95,7 +96,8 @@ class ProjectsAdminController extends ResourceController {
     });
 
     if (project == null) {
-      return Response.notFound(body: {"message": "project id $id does not exist"});
+      return Response.notFound(
+          body: {"message": "project id $id does not exist"});
     }
 
     return Response.ok(project);
@@ -103,11 +105,13 @@ class ProjectsAdminController extends ResourceController {
 
   @Operation.delete("id")
   Future<Response> deleteProject(@Bind.path("id") int id) async {
-    final Query<Project> query = Query<Project>(context)..where((p) => p.id).equalTo(id);
+    final Query<Project> query = Query<Project>(context)
+      ..where((p) => p.id).equalTo(id);
     final int numDeleted = await query.delete();
 
     if (numDeleted == 0) {
-      return Response.notFound(body: {"message": "project id $id does not exist"});
+      return Response.notFound(
+          body: {"message": "project id $id does not exist"});
     }
 
     return Response.ok({"id": id});

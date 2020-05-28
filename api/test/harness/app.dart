@@ -20,7 +20,8 @@ export "package:aqueduct/aqueduct.dart";
 ///           });
 ///         }
 ///
-class Harness extends TestHarness<ApiChannel> with TestHarnessAuthMixin<ApiChannel>, TestHarnessORMMixin {
+class Harness extends TestHarness<ApiChannel>
+    with TestHarnessAuthMixin<ApiChannel>, TestHarnessORMMixin {
   @override
   ManagedContext get context => channel.context;
 
@@ -44,7 +45,11 @@ class Harness extends TestHarness<ApiChannel> with TestHarnessAuthMixin<ApiChann
     withClient ??= publicAgent;
 
     final TestRequest req = withClient.request("/auth/register")
-      ..body = {"username": user.username, "password": user.password, "secret": "secret"};
+      ..body = {
+        "username": user.username,
+        "password": user.password,
+        "secret": "secret"
+      };
     await req.post();
 
     return loginUser(withClient, user.username, user.password);

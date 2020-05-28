@@ -9,14 +9,16 @@ Future main() async {
   final Queries queries = Queries(harness);
 
   test("GET /public/builds returns 200 - empty list", () async {
-    final TestResponse response = await harness.publicAgent.get("/public/builds?schema");
+    final TestResponse response =
+        await harness.publicAgent.get("/public/builds?schema");
     expectResponse(response, 200, body: {"items": [], "schema": isList});
   });
 
   test("GET /public/builds returns 200 - one build", () async {
     await queries.insertBuild();
 
-    final TestResponse response = await harness.publicAgent.get("/public/builds");
+    final TestResponse response =
+        await harness.publicAgent.get("/public/builds");
     expectResponse(response, 200, body: {
       "items": [
         {
@@ -40,7 +42,8 @@ Future main() async {
   test("GET /public/builds/:id returns 200 - matching ID", () async {
     await queries.insertBuild();
 
-    final TestResponse response = await harness.publicAgent.get("/public/builds/1");
+    final TestResponse response =
+        await harness.publicAgent.get("/public/builds/1");
     expectResponse(response, 200, body: {
       "id": greaterThan(0),
       "displayDate": "Sometime long ago",
@@ -58,19 +61,24 @@ Future main() async {
   });
 
   test("GET /public/builds/:id returns 404 - no matching ID", () async {
-    final TestResponse response = await harness.publicAgent.get("/public/builds/1234");
+    final TestResponse response =
+        await harness.publicAgent.get("/public/builds/1234");
     expectResponse(response, 404);
   });
 
-  test("POST /admin/builds returns 400 - invalid_authorization_header", () async {
-    final TestResponse response = await harness.publicAgent.post("/admin/builds", body: {});
-    expectResponse(response, 400, body: {"error": "invalid_authorization_header"});
+  test("POST /admin/builds returns 400 - invalid_authorization_header",
+      () async {
+    final TestResponse response =
+        await harness.publicAgent.post("/admin/builds", body: {});
+    expectResponse(response, 400,
+        body: {"error": "invalid_authorization_header"});
   });
 
   test("POST /admin/builds returns 200 - build added", () async {
     await queries.loginUser();
 
-    final TestResponse response = await harness.publicAgent.post("/admin/builds", body: {
+    final TestResponse response =
+        await harness.publicAgent.post("/admin/builds", body: {
       "displayDate": "Sometime long ago",
       "startedDate": "2013-01-01T00:00:00.000Z",
       "cpu": "Very Fast 9000",
@@ -98,7 +106,8 @@ Future main() async {
       "active": false
     });
 
-    final Query<Build> fetchQuery = Query<Build>(harness.application.channel.context);
+    final Query<Build> fetchQuery =
+        Query<Build>(harness.application.channel.context);
     final List<Build> builds = await fetchQuery.fetch();
     expect(builds.length, equals(1));
   });
@@ -108,7 +117,8 @@ Future main() async {
     await queries.insertImage();
     await queries.loginUser();
 
-    final TestResponse response = await harness.publicAgent.put("/admin/builds/1", body: {
+    final TestResponse response =
+        await harness.publicAgent.put("/admin/builds/1", body: {
       "displayDate": "Sometime very long ago",
       "startedDate": "2012-02-02T00:00:00.000Z",
       "cpu": "Very very Fast 9000",
@@ -144,7 +154,8 @@ Future main() async {
       "active": false
     });
 
-    final Query<Build> fetchQuery = Query<Build>(harness.application.channel.context);
+    final Query<Build> fetchQuery =
+        Query<Build>(harness.application.channel.context);
     final List<Build> builds = await fetchQuery.fetch();
     expect(builds.length, equals(1));
   });
@@ -168,8 +179,9 @@ Future main() async {
       "active": true
     });
 
-    final Query<Build> fetchBuildsQuery = Query<Build>(harness.application.channel.context)
-      ..join(object: (b) => b.image);
+    final Query<Build> fetchBuildsQuery =
+        Query<Build>(harness.application.channel.context)
+          ..join(object: (b) => b.image);
     final fetchImagesQuery = Query<Image>(harness.application.channel.context);
 
     List<Build> builds = await fetchBuildsQuery.fetch();
@@ -203,11 +215,13 @@ Future main() async {
     await queries.insertBuild();
     await queries.loginUser();
 
-    final Query<Build> fetchQuery = Query<Build>(harness.application.channel.context);
+    final Query<Build> fetchQuery =
+        Query<Build>(harness.application.channel.context);
     List<Build> builds = await fetchQuery.fetch();
     expect(builds.length, equals(1));
 
-    final TestResponse response = await harness.publicAgent.delete("/admin/builds/1");
+    final TestResponse response =
+        await harness.publicAgent.delete("/admin/builds/1");
     expectResponse(response, 200, body: {"id": 1});
 
     builds = await fetchQuery.fetch();

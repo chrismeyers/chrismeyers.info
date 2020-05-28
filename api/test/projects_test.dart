@@ -9,14 +9,16 @@ Future main() async {
   final Queries queries = Queries(harness);
 
   test("GET /public/projects returns 200 - empty list", () async {
-    final TestResponse response = await harness.publicAgent.get("/public/projects?schema");
+    final TestResponse response =
+        await harness.publicAgent.get("/public/projects?schema");
     expectResponse(response, 200, body: {"items": [], "schema": isList});
   });
 
   test("GET /public/projects returns 200 - one project", () async {
     await queries.insertProject();
 
-    final TestResponse response = await harness.publicAgent.get("/public/projects");
+    final TestResponse response =
+        await harness.publicAgent.get("/public/projects");
     expectResponse(response, 200, body: {
       "items": [
         {
@@ -40,7 +42,8 @@ Future main() async {
   test("GET /public/projects/:id returns 200 - matching ID", () async {
     await queries.insertProject();
 
-    final TestResponse response = await harness.publicAgent.get("/public/projects/1");
+    final TestResponse response =
+        await harness.publicAgent.get("/public/projects/1");
     expectResponse(response, 200, body: {
       "id": 1,
       "title": "A cool project",
@@ -58,19 +61,24 @@ Future main() async {
   });
 
   test("GET /public/projects/:id returns 404 - no matching ID", () async {
-    final TestResponse response = await harness.publicAgent.get("/public/projects/1234");
+    final TestResponse response =
+        await harness.publicAgent.get("/public/projects/1234");
     expectResponse(response, 404);
   });
 
-  test("POST /admin/projects returns 400 - invalid_authorization_header", () async {
-    final TestResponse response = await harness.publicAgent.post("/admin/projects", body: {});
-    expectResponse(response, 400, body: {"error": "invalid_authorization_header"});
+  test("POST /admin/projects returns 400 - invalid_authorization_header",
+      () async {
+    final TestResponse response =
+        await harness.publicAgent.post("/admin/projects", body: {});
+    expectResponse(response, 400,
+        body: {"error": "invalid_authorization_header"});
   });
 
   test("POST /admin/projects returns 200 - project added", () async {
     await queries.loginUser();
 
-    final TestResponse response = await harness.publicAgent.post("/admin/projects", body: {
+    final TestResponse response =
+        await harness.publicAgent.post("/admin/projects", body: {
       "title": "A cool project",
       "webUrl": "https://project.website",
       "codeUrl": "https://project.code",
@@ -98,7 +106,8 @@ Future main() async {
       "active": false
     });
 
-    final Query<Project> fetchQuery = Query<Project>(harness.application.channel.context);
+    final Query<Project> fetchQuery =
+        Query<Project>(harness.application.channel.context);
     final List<Project> projects = await fetchQuery.fetch();
     expect(projects.length, equals(1));
   });
@@ -108,7 +117,8 @@ Future main() async {
     await queries.insertImage();
     await queries.loginUser();
 
-    final TestResponse response = await harness.publicAgent.put("/admin/projects/1", body: {
+    final TestResponse response =
+        await harness.publicAgent.put("/admin/projects/1", body: {
       "title": "Another cool project",
       "webUrl": "https://project2.website",
       "codeUrl": "https://project2.code",
@@ -146,7 +156,8 @@ Future main() async {
       "active": false
     });
 
-    final Query<Project> fetchQuery = Query<Project>(harness.application.channel.context);
+    final Query<Project> fetchQuery =
+        Query<Project>(harness.application.channel.context);
     final List<Project> projects = await fetchQuery.fetch();
     expect(projects.length, equals(1));
   });
@@ -171,8 +182,9 @@ Future main() async {
       "active": true
     });
 
-    final Query<Project> fetchProjectsQuery = Query<Project>(harness.application.channel.context)
-      ..join(set: (p) => p.images);
+    final Query<Project> fetchProjectsQuery =
+        Query<Project>(harness.application.channel.context)
+          ..join(set: (p) => p.images);
     final fetchImagesQuery = Query<Image>(harness.application.channel.context);
 
     List<Project> projects = await fetchProjectsQuery.fetch();
@@ -209,11 +221,13 @@ Future main() async {
     await queries.insertProject();
     await queries.loginUser();
 
-    final Query<Project> fetchQuery = Query<Project>(harness.application.channel.context);
+    final Query<Project> fetchQuery =
+        Query<Project>(harness.application.channel.context);
     List<Project> projects = await fetchQuery.fetch();
     expect(projects.length, equals(1));
 
-    final TestResponse response = await harness.publicAgent.delete("/admin/projects/1");
+    final TestResponse response =
+        await harness.publicAgent.delete("/admin/projects/1");
     expectResponse(response, 200, body: {"id": 1});
 
     projects = await fetchQuery.fetch();

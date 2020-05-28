@@ -13,7 +13,8 @@ class ListItem {
   String get mainItem => _mainItem;
   List<String> get subItems => _subItems;
 
-  Map<String, dynamic> toJson() => {"mainItem": _mainItem, "subItems": _subItems};
+  Map<String, dynamic> toJson() =>
+      {"mainItem": _mainItem, "subItems": _subItems};
 }
 
 class ResumeParser {
@@ -58,7 +59,8 @@ class ResumeParser {
     }
   }
 
-  List<Map<String, dynamic>> parseComplexSection(String section, {bool removeInlineComments = true}) {
+  List<Map<String, dynamic>> parseComplexSection(String section,
+      {bool removeInlineComments = true}) {
     const String urlPattern = "% URL";
     const String firstLinePattern = "{\\textbf{";
     const String secondLinePattern = "{\\emph{";
@@ -80,21 +82,30 @@ class ResumeParser {
       final String line = _rawSections[section][i].trim();
 
       if (line.startsWith(urlPattern)) {
-        final int beginPatternIndex = line.indexOf(urlPattern) + urlPattern.length + 1;
+        final int beginPatternIndex =
+            line.indexOf(urlPattern) + urlPattern.length + 1;
 
         url = line.substring(beginPatternIndex);
       } else if (line.startsWith(firstLinePattern)) {
-        final int beginPatternIndex = line.indexOf(firstLinePattern) + firstLinePattern.length;
+        final int beginPatternIndex =
+            line.indexOf(firstLinePattern) + firstLinePattern.length;
         final int endPatternIndex = line.indexOf(endPattern);
         final String cleaned = _cleanString(
-            line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""), removeInlineComments);
+            line
+                .substring(beginPatternIndex, endPatternIndex)
+                .replaceAll(endPattern, ""),
+            removeInlineComments);
 
         firstLine.add(cleaned);
       } else if (line.startsWith(secondLinePattern)) {
-        final int beginPatternIndex = line.indexOf(secondLinePattern) + secondLinePattern.length;
+        final int beginPatternIndex =
+            line.indexOf(secondLinePattern) + secondLinePattern.length;
         final int endPatternIndex = line.indexOf(endPattern);
         final String cleaned = _cleanString(
-            line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""), removeInlineComments);
+            line
+                .substring(beginPatternIndex, endPatternIndex)
+                .replaceAll(endPattern, ""),
+            removeInlineComments);
 
         currentSecondLine.add(cleaned);
       } else if (line.startsWith(sameCompanyPattern)) {
@@ -125,7 +136,8 @@ class ResumeParser {
           currentSecondLine = [];
           currentInfo = [];
         } else {
-          final String cleaned = _cleanString(line.substring(infoPattern.length + 1), removeInlineComments);
+          final String cleaned = _cleanString(
+              line.substring(infoPattern.length + 1), removeInlineComments);
           currentInfo.add(cleaned);
         }
       }
@@ -144,7 +156,8 @@ class ResumeParser {
     return items;
   }
 
-  List<ListItem> parseListSection(String section, {bool removeInlineComments = true}) {
+  List<ListItem> parseListSection(String section,
+      {bool removeInlineComments = true}) {
     const String itemPattern = "\\item";
     const String beginSubPattern = "\\begin{itemize*}";
     const String endSubPattern = "\\end{itemize*}";
@@ -159,7 +172,8 @@ class ResumeParser {
       } else if (line.startsWith(endSubPattern)) {
         subItem = false;
       } else if (line.startsWith(itemPattern)) {
-        final String cleaned = _cleanString(line.substring(itemPattern.length + 1), removeInlineComments);
+        final String cleaned = _cleanString(
+            line.substring(itemPattern.length + 1), removeInlineComments);
         if (subItem) {
           items[count - 1].add(cleaned);
         } else {
@@ -175,7 +189,8 @@ class ResumeParser {
   Map<String, String> getLanguages() {
     const String languagesPattern = "% LANGUAGES";
     final Map<String, String> langMap = {};
-    final List<ListItem> skills = parseListSection("TechnicalSkills", removeInlineComments: false);
+    final List<ListItem> skills =
+        parseListSection("TechnicalSkills", removeInlineComments: false);
 
     for (final skill in skills) {
       if (skill.mainItem.contains(languagesPattern)) {
@@ -190,7 +205,10 @@ class ResumeParser {
   Map<String, dynamic> getMostRecentJob() {
     final Map<String, dynamic> job = parseComplexSection("Experience")[0];
 
-    final List<String> dates = (job["secondLine"][0][1] as String).split("&ndash;").map((d) => d.trim()).toList();
+    final List<String> dates = (job["secondLine"][0][1] as String)
+        .split("&ndash;")
+        .map((d) => d.trim())
+        .toList();
 
     return {
       "employed": dates[1].toLowerCase() == "present",
