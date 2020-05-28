@@ -22,14 +22,16 @@ class RegisterController extends ResourceController {
 
     // Check for required parameters before we spend time hashing
     if (body["username"] == null || body["password"] == null) {
-      return Response.badRequest(body: {"error": "username and password required."});
+      return Response.badRequest(
+          body: {"error": "username and password required."});
     }
 
     final User user = User()..username = body["username"] as String;
 
     user
       ..salt = AuthUtility.generateRandomSalt()
-      ..hashedPassword = authServer.hashPassword(body["password"] as String, user.salt);
+      ..hashedPassword =
+          authServer.hashPassword(body["password"] as String, user.salt);
 
     return Response.ok(await Query(context, values: user).insert());
   }

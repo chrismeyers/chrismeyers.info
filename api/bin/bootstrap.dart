@@ -1,4 +1,5 @@
 #!/usr/bin/env dart
+
 /// bootstrap.dart
 ///   -m, --mode                   Specifies the API that should be bootstrapped
 ///                                [dev (default), prod]
@@ -49,16 +50,23 @@ void main(List<String> arguments) async {
       "projects": cleanProjectsJson(decoder.convert(projects)["items"] as List)
     };
 
-    await File(join(dirname(Platform.script.path), "seed.json")).writeAsString(encoder.convert(json));
+    await File(join(dirname(Platform.script.path), "seed.json"))
+        .writeAsString(encoder.convert(json));
   } else if (args["register"] == true) {
     final resp = await http.post("$apiBaseUrl/auth/register",
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode(
-            {"username": args["username"], "password": args["password"], "secret": args["registration-secret"]}));
+        body: jsonEncode({
+          "username": args["username"],
+          "password": args["password"],
+          "secret": args["registration-secret"]
+        }));
 
-    print("POST /auth/register ${resp.statusCode} - created user \"${args["username"]}\"");
+    print(
+        "POST /auth/register ${resp.statusCode} - created user \"${args["username"]}\"");
   } else {
-    final String seedStr = File(join(dirname(Platform.script.path), "seed.json")).readAsStringSync();
+    final String seedStr =
+        File(join(dirname(Platform.script.path), "seed.json"))
+            .readAsStringSync();
     final seed = jsonDecode(seedStr);
 
     final http.Response tokenResponse = await getAccessToken();
@@ -73,14 +81,26 @@ void main(List<String> arguments) async {
 void handleArgs(List<String> arguments) {
   final ArgParser argParser = ArgParser()
     ..addOption("mode",
-        abbr: "m", defaultsTo: "dev", allowed: ["dev", "prod"], help: "Specifies the API that should be bootstrapped")
-    ..addOption("username", abbr: "u", help: "Specifies the admin username (required for POST)")
-    ..addOption("password", abbr: "p", help: "Specifies the admin password (required for POST)")
-    ..addOption("client", abbr: "c", help: "Specifies the OAuth 2.0 client (required for POST)")
-    ..addFlag("backup", abbr: "b", negatable: false, help: "Updates seed.json with current data")
-    ..addFlag("register", abbr: "r", negatable: false, help: "Creates a new user")
-    ..addOption("registration-secret", help: "The secret required to create a user")
-    ..addFlag("help", abbr: "h", negatable: false, help: "Displays this help information");
+        abbr: "m",
+        defaultsTo: "dev",
+        allowed: ["dev", "prod"],
+        help: "Specifies the API that should be bootstrapped")
+    ..addOption("username",
+        abbr: "u", help: "Specifies the admin username (required for POST)")
+    ..addOption("password",
+        abbr: "p", help: "Specifies the admin password (required for POST)")
+    ..addOption("client",
+        abbr: "c", help: "Specifies the OAuth 2.0 client (required for POST)")
+    ..addFlag("backup",
+        abbr: "b",
+        negatable: false,
+        help: "Updates seed.json with current data")
+    ..addFlag("register",
+        abbr: "r", negatable: false, help: "Creates a new user")
+    ..addOption("registration-secret",
+        help: "The secret required to create a user")
+    ..addFlag("help",
+        abbr: "h", negatable: false, help: "Displays this help information");
 
   try {
     args = argParser.parse(arguments);
@@ -96,14 +116,18 @@ void handleArgs(List<String> arguments) {
   }
 
   if ((args["backup"] == false && args["register"] == false) &&
-      (args["username"] == null || args["password"] == null || args["client"] == null)) {
+      (args["username"] == null ||
+          args["password"] == null ||
+          args["client"] == null)) {
     print("Error: Missing auth credentials.");
     print(argParser.usage);
     exit(1);
   }
 
   if (args["register"] == true &&
-      (args["username"] == null || args["password"] == null || args["registration-secret"] == null)) {
+      (args["username"] == null ||
+          args["password"] == null ||
+          args["registration-secret"] == null)) {
     print("Error: Missing username, password, or registration secret.");
     print(argParser.usage);
     exit(1);
@@ -117,18 +141,27 @@ void handleArgs(List<String> arguments) {
 }
 
 Future<http.Response> getAccessToken() async {
-  final body = "username=${args["username"]}&password=${args["password"]}&grant_type=password";
-  final clientCredentials = Base64Encoder().convert("${args["client"]}:".codeUnits);
+  final body =
+      "username=${args["username"]}&password=${args["password"]}&grant_type=password";
+  final clientCredentials =
+      Base64Encoder().convert("${args["client"]}:".codeUnits);
 
   return await http.post("$apiBaseUrl/auth/token",
-      headers: {"Content-Type": "application/x-www-form-urlencoded", "Authorization": "Basic $clientCredentials"},
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Basic $clientCredentials"
+      },
       body: body);
 }
 
 Future<void> postItems(String which, List items) async {
   for (final item in items) {
     final resp = await http.post("$apiBaseUrl/admin/$which",
-        headers: {"Content-Type": "application/json", "Authorization": "Bearer $accessToken"}, body: jsonEncode(item));
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $accessToken"
+        },
+        body: jsonEncode(item));
 
     print("POST /admin/$which ${resp.statusCode}");
   }

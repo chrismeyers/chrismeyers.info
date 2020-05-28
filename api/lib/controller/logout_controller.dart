@@ -12,7 +12,8 @@ class LogoutController extends ResourceController {
   Future<Response> logout() async {
     // For more info see: https://stackoverflow.com/a/56258100
     final int userId = request.authorization.ownerID;
-    final String token = request.raw.headers.value("authorization").split(' ')[1];
+    final String token =
+        request.raw.headers.value("authorization").split(' ')[1];
 
     // Delete the token from the database.
     final Query<ManagedAuthToken> tokenQuery = Query<ManagedAuthToken>(context)
@@ -20,9 +21,11 @@ class LogoutController extends ResourceController {
     await tokenQuery.delete();
 
     // Get the username of the logged out user for the response.
-    final Query<User> userQuery = Query<User>(context)..where((u) => u.id).equalTo(userId);
+    final Query<User> userQuery = Query<User>(context)
+      ..where((u) => u.id).equalTo(userId);
     final User user = await userQuery.fetchOne();
 
-    return Response.ok({"id": userId, "username": user.username, "message": "logged out"});
+    return Response.ok(
+        {"id": userId, "username": user.username, "message": "logged out"});
   }
 }

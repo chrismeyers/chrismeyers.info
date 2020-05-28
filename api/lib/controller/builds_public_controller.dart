@@ -9,7 +9,8 @@ class BuildsPublicController extends ResourceController {
   ManagedContext context;
 
   @Operation.get()
-  Future<Response> getBuilds({@Bind.query("schema") bool schema = false}) async {
+  Future<Response> getBuilds(
+      {@Bind.query("schema") bool schema = false}) async {
     final Query<Build> query = Query<Build>(context)
       ..join(object: (b) => b.image)
       ..sortBy((b) => b.startedDate, QuerySortOrder.ascending);
@@ -33,7 +34,8 @@ class BuildsPublicController extends ResourceController {
     final Build build = await query.fetchOne();
 
     if (build == null) {
-      return Response.notFound(body: {"message": "build id $id does not exist"});
+      return Response.notFound(
+          body: {"message": "build id $id does not exist"});
     }
 
     return Response.ok(build);

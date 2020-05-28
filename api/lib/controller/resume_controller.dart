@@ -5,10 +5,14 @@ import "package:api/src/resume_parser.dart";
 class ResumeController extends ResourceController {
   @Operation.get()
   Future<Response> getResume() async {
-    final ResumeParser parser = ResumeParser("../resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex");
+    final ResumeParser parser =
+        ResumeParser("../resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex");
 
     if (request.path.string.endsWith("/summary")) {
-      return Response.ok({"languages": parser.getLanguages(), "mostRecentJob": parser.getMostRecentJob()});
+      return Response.ok({
+        "languages": parser.getLanguages(),
+        "mostRecentJob": parser.getMostRecentJob()
+      });
     } else {
       return Response.ok({
         "experience": parser.parseComplexSection("Experience"),

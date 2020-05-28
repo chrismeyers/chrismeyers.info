@@ -20,7 +20,11 @@ class _Image {
   @SchemaField(type: "number")
   int pos;
 
-  @SchemaField(tag: "select", type: null, multiple: false, options: ["square", "port", "land"])
+  @SchemaField(
+      tag: "select",
+      type: null,
+      multiple: false,
+      options: ["square", "port", "land"])
   String orient;
 
   @Relate(#image)
