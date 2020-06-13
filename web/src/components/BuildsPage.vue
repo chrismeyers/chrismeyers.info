@@ -11,23 +11,23 @@
           <div class="build-info">
             <div class="build-specs">
               <dl>
-                <dt class="dt-mod"><b>Processor:</b></dt>
+                <dt class="dt-mod"><b>CPU</b></dt>
                 <dd>{{ build.cpu }}</dd>
                 <template v-if="build.cool !== null">
-                  <dt class="dt-mod"><b>Cooling:</b></dt>
+                  <dt class="dt-mod"><b>Cooling</b></dt>
                   <dd>{{ build.cool }}</dd>
                 </template>
-                <dt class="dt-mod"><b>Mobo:</b></dt>
+                <dt class="dt-mod"><b>Motherboard</b></dt>
                 <dd>{{ build.mobo }}</dd>
-                <dt class="dt-mod"><b>Memory:</b></dt>
+                <dt class="dt-mod"><b>RAM</b></dt>
                 <dd>{{ build.ram }}</dd>
-                <dt class="dt-mod"><b>HDD:</b></dt>
+                <dt class="dt-mod"><b>HDD</b></dt>
                 <dd>{{ build.hdd }}</dd>
                 <template v-if="build.ssd !== null">
-                  <dt class="dt-mod"><b>SSD:</b></dt>
+                  <dt class="dt-mod"><b>SSD</b></dt>
                   <dd>{{ build.ssd }}</dd>
                 </template>
-                <dt class="dt-mod"><b>Video Card:</b></dt>
+                <dt class="dt-mod"><b>GPU</b></dt>
                 <dd>{{ build.gpu }}</dd>
               </dl>
             </div>
