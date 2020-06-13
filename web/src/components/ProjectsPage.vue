@@ -10,19 +10,19 @@
           <div class="projWrapper">
             <div class="projDesc">
               <dl>
-                <dt class="dt-mod"><b>Language(s):</b></dt>
+                <dt class="dt-mod"><b>Language(s)</b></dt>
                 <dd v-html="project.lang"></dd>
 
-                <dt class="dt-mod"><b>Description:</b></dt>
+                <dt class="dt-mod"><b>Description</b></dt>
                 <dd v-html="project.info"></dd>
 
-                <dt class="dt-mod"><b>My Role:</b></dt>
+                <dt class="dt-mod"><b>My Role</b></dt>
                 <dd>{{ project.role }}</dd>
 
-                <dt class="dt-mod"><b>Status:</b></dt>
+                <dt class="dt-mod"><b>Status</b></dt>
                 <dd>{{ project.stat }}</dd>
 
-                <dt class="dt-mod dt-links"><b>Links:</b></dt>
+                <dt class="dt-mod dt-links"><b>Links</b></dt>
                 <dd v-if="project.webUrl !== null" class="project-link-image">
                   <svgicon name="link" class="link-image small"></svgicon
                   >&nbsp;<a
