@@ -179,27 +179,27 @@ export default {
 }
 
 @media screen and (max-width: 911px) {
-  .company,
-  .degree {
-    font-weight: bold;
-  }
-
-  .location,
-  .school {
-    font-weight: normal;
-  }
-
   .location,
   .school,
   .job-title,
   .tenure {
     list-style-type: none;
   }
-  .location:before,
-  .school:before,
-  .job-title:before,
-  .tenure:before {
-    content: "- ";
+
+  .company,
+  .degree,
+  .location {
+    font-weight: bold;
+  }
+
+  .school,
+  .job-title,
+  .tenure {
+    font-style: italic;
+  }
+
+  .job-title.same-company-spacing {
+    margin-top: 15px;
   }
 }
 </style>
