@@ -1,5 +1,5 @@
-import 'package:api/src/resume_parser.dart';
-import 'package:test/test.dart';
+import "package:api/src/resume_parser.dart";
+import "package:test/test.dart";
 
 void main() {
   ResumeParser parser;
@@ -66,12 +66,12 @@ void main() {
       expect(items[0]["info"][0], equals([]));
     });
 
-    test('ResumeParser parses technical skills section', () {
+    test("ResumeParser parses technical skills section", () {
       final List<ListItem> items = parser.parseListSection("TechnicalSkills");
 
       expect(items.length, equals(4));
 
-      expect(items[0].mainItem, equals("Lanuguage list:"));
+      expect(items[0].mainItem, equals("Lanuguage list 100%:"));
       expect(items[0].subItems.length, equals(1));
       expect(
           items[0].subItems[0], equals("Language 1, Language 2, Language 3"));
@@ -79,6 +79,29 @@ void main() {
       expect(items[1].mainItem, equals("Item 1"));
       expect(items[2].mainItem, equals("Item 2"));
       expect(items[3].mainItem, equals("Item 3"));
+    });
+  });
+
+  group("Summary parsing", () {
+    test("ResumeParser parses language summary", () {
+      final Map<String, String> items = parser.getLanguages();
+
+      expect(items.length, equals(1));
+
+      expect(items["web"], equals("Language 1, Language 2, Language 3"));
+    });
+
+    test("ResumeParser parses most recent job", () {
+      final Map<String, dynamic> items = parser.getMostRecentJob();
+
+      expect(items.length, equals(5));
+
+      expect(items["employed"], equals(true));
+      expect(items["company"], equals("Company 1"));
+      expect(items["url"], equals("https://www.company1.com"));
+      expect(items["title"], equals("Position 1"));
+      expect(items["dates"].length, equals(2));
+      expect(items["dates"], equals(["June 1234", "Present"]));
     });
   });
 }
