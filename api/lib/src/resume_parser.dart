@@ -32,9 +32,9 @@ class ResumeParser {
   DateTime get lastModified => _lastModified;
 
   void loadLatexFile() {
-    const String beginPattern = "% BEGIN";
-    const String endPattern = "% END";
-    const String commentPattern = "\\begin{comment}";
+    const String beginPattern = r"% BEGIN";
+    const String endPattern = r"% END";
+    const String commentPattern = r"\begin{comment}";
     String section = "";
 
     for (String line in _lines) {
@@ -61,12 +61,13 @@ class ResumeParser {
 
   List<Map<String, dynamic>> parseComplexSection(String section,
       {bool removeInlineComments = true}) {
-    const String urlPattern = "% URL";
-    const String firstLinePattern = "{\\textbf{";
-    const String secondLinePattern = "{\\emph{";
-    const String endPattern = "}}";
-    const String infoPattern = "\\item";
-    const String sameCompanyPattern = "% Same Company";
+    const String urlPattern = r"% URL";
+    const String firstLinePattern = r"{\textbf{";
+    const String secondLinePattern = r"{\emph{";
+    const String endPattern = r"}}";
+    const String infoPattern = r"\item";
+    const String circleInfoPattern = r"\item[$\circ$]";
+    const String sameCompanyPattern = r"% Same Company";
 
     final List<Map<String, dynamic>> items = [];
 
@@ -137,7 +138,8 @@ class ResumeParser {
           currentInfo = [];
         } else {
           final String cleaned = _cleanString(
-              line.substring(infoPattern.length + 1), removeInlineComments);
+              line.substring(circleInfoPattern.length + 1),
+              removeInlineComments);
           currentInfo.add(cleaned);
         }
       }
@@ -158,9 +160,10 @@ class ResumeParser {
 
   List<ListItem> parseListSection(String section,
       {bool removeInlineComments = true}) {
-    const String itemPattern = "\\item";
-    const String beginSubPattern = "\\begin{itemize*}";
-    const String endSubPattern = "\\end{itemize*}";
+    const String itemPattern = r"\item";
+    const String circleItemPattern = r"\item[$\circ$]";
+    const String beginSubPattern = r"\begin{itemize*}";
+    const String endSubPattern = r"\end{itemize*}";
 
     final List<ListItem> items = [];
     bool subItem = false;
@@ -172,11 +175,15 @@ class ResumeParser {
       } else if (line.startsWith(endSubPattern)) {
         subItem = false;
       } else if (line.startsWith(itemPattern)) {
-        final String cleaned = _cleanString(
-            line.substring(itemPattern.length + 1), removeInlineComments);
+        String cleaned;
+
         if (subItem) {
+          cleaned = _cleanString(line.substring(circleItemPattern.length + 1),
+              removeInlineComments);
           items[count - 1].add(cleaned);
         } else {
+          cleaned = _cleanString(
+              line.substring(itemPattern.length + 1), removeInlineComments);
           items.add(ListItem(cleaned));
           count++;
         }
@@ -187,7 +194,7 @@ class ResumeParser {
   }
 
   Map<String, String> getLanguages() {
-    const String languagesPattern = "% LANGUAGES";
+    const String languagesPattern = r"% LANGUAGES";
     final Map<String, String> langMap = {};
     final List<ListItem> skills =
         parseListSection("TechnicalSkills", removeInlineComments: false);
@@ -227,10 +234,10 @@ class ResumeParser {
       output = output.split(RegExp(r"(?<!\\)%"))[0].trim();
     }
 
-    output = output.replaceAll("\\CPP", "C++");
-    output = output.replaceAll("\\break", "");
-    output = output.replaceAll("--", "&ndash;");
-    output = output.replaceAll("\\", "");
+    output = output.replaceAll(r"\CPP", r"C++");
+    output = output.replaceAll(r"\break", r"");
+    output = output.replaceAll(r"--", r"&ndash;");
+    output = output.replaceAll(r"\", r"");
 
     return output;
   }
