@@ -46,11 +46,11 @@
       <h2>Education</h2>
       <template v-for="school in education">
         <ul :key="school.id" class="italic-spacer">
-          <li class="left-column school" v-html="school.firstLine[0]"></li>
+          <li class="left-column degree" v-html="school.firstLine[0]"></li>
           <li class="right-column location" v-html="school.firstLine[1]"></li>
           <template v-for="secondLine in school.secondLine">
             <li
-              class="left-column sub-left-column degree"
+              class="left-column sub-left-column school"
               :key="secondLine.id"
               v-html="secondLine[0]"
             ></li>
@@ -162,12 +162,12 @@ export default {
   }
 
   .company,
-  .school,
+  .degree,
   .location {
     font-weight: bold;
   }
 
-  .degree,
+  .school,
   .job-title,
   .tenure {
     font-style: italic;
@@ -180,23 +180,23 @@ export default {
 
 @media screen and (max-width: 911px) {
   .company,
-  .school {
+  .degree {
     font-weight: bold;
   }
 
   .location,
-  .degree {
+  .school {
     font-weight: normal;
   }
 
   .location,
-  .degree,
+  .school,
   .job-title,
   .tenure {
     list-style-type: none;
   }
   .location:before,
-  .degree:before,
+  .school:before,
   .job-title:before,
   .tenure:before {
     content: "- ";
