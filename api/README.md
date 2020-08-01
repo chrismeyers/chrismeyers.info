@@ -36,7 +36,13 @@ NOTE: `aqueduct` commands may need to be run within the docker container (`docke
 1. Register a user by sending a POST request to the `/auth/register` endpoint or running the `./bootstrap.dart --register ...` command
 1. Add an OAuth 2.0 client by running `aqueduct auth add-client --id ...`
 1. Import the initial data by running `dart bin/bootstrap.dart`
-1. Copy `../bin/systemd/chrismeyers-info-api.service` to `/etc/systemd/system` and run `sudo systemctl daemon-reload`, `sudo systemctl enable chrismeyers-info-api.service`, and `sudo systemctl start chrismeyers-info-api.service` (this should only be done if **not** using docker)
+1. Configure a `systemd` service only if docker is **not** being used
+    ```
+    cp ../bin/systemd/chrismeyers-info-api.service /etc/systemd/system
+    sudo systemctl daemon-reload
+    sudo systemctl enable chrismeyers-info-api.service
+    sudo systemctl start chrismeyers-info-api.service
+    ```
 
 ## Troubleshooting
 - `pub global activate aqueduct` may need to be run to use the `aqueduct` CLI tool
