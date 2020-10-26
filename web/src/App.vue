@@ -388,7 +388,7 @@ select.select-mod {
 }
 
 .tooltip[x-placement^="top"] {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .tooltip[x-placement^="top"] .tooltip-arrow {
@@ -403,7 +403,7 @@ select.select-mod {
 }
 
 .tooltip[x-placement^="bottom"] {
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .tooltip[x-placement^="bottom"] .tooltip-arrow {

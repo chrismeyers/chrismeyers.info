@@ -4,15 +4,15 @@
 
     <div class="content-text">
       <span
-        >My name is Chris Meyers and I am a Software Developer and technology
-        enthusiast. Here's a quick list of things you should know about
+        >Hey, my name is Chris Meyers and I am a software engineer and
+        technology enthusiast. Here are some things you should know about
         me:</span
       >
 
       <ul>
         <li>
-          I studied Computer Science at
-          <a class="fancytxt" href="https://www.rowan.edu/" target="_blank"
+          I studied computer science at
+          <a class="fancytxt" href="https://www.rowan.edu" target="_blank"
             >Rowan University</a
           >
           in Glassboro, NJ and earned a Bachelor of Science in Computer Science
@@ -30,18 +30,29 @@
         <li>
           Some of my professional interests include:
           <ul>
-            <li>Software Development, Web Development, Computer Networking</li>
+            <li>Software development</li>
+            <li>Web development</li>
+            <li>Computer networking</li>
           </ul>
         </li>
         <li>
-          My hobbies include:
+          Some of my hobbies include:
           <ul>
             <li>
-              Photography, reading,
-              <router-link class="fancytxt" to="/builds"
-                >building custom computers</router-link
-              >, playing video games
+              <a
+                class="fancytxt"
+                href="https://www.goodreads.com/chrismeyers"
+                target="_blank"
+                >Reading</a
+              >
             </li>
+            <li>Photography</li>
+            <li>
+              <router-link class="fancytxt" to="/builds"
+                >Building custom computers</router-link
+              >
+            </li>
+            <li>Playing video games</li>
           </ul>
         </li>
         <li>
@@ -78,27 +89,19 @@
       </ul>
 
       <span
-        >I have spent my entire professional programming career striving to
-        write clean, modular, and maintainable code. I am always up for the
-        challenge of learning new languages and frameworks. If a language or
-        framework that I'm unfamiliar with is the best choice for a project, I
-        have no hesitation in breaking away from my comfort zones to explore new
-        options. My primary goal is to create innovative and usable applications
-        that solve problems.</span
-      >
-
-      <p>
+        >As a professional software engineer, I strive to write clean, modular,
+        and maintainable code. My primary goal is to create innovative and
+        usable applications that solve problems. If you have any questions,
+        comments, or would like to work together on a project, please
         <a
           class="fancytxt"
           v-tooltip.bottom="copyMessageOptions"
           v-clipboard:copy="email"
           v-clipboard:success="onCopyEmail"
           @mouseleave="resetCopyMessage"
-          >Send me a message</a
-        >
-        if you have any questions, comments, or would like to work together on a
-        project.
-      </p>
+          >send me a message.</a
+        ></span
+      >
     </div>
   </div>
 </template>
