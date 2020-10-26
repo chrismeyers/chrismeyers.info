@@ -51,7 +51,7 @@ void main() {
 
       expect(items.length, equals(1));
 
-      expect(items[0]["url"], equals("https://www.school.com"));
+      expect(items[0]["url"], equals("https://www.school.edu"));
 
       expect(items[0]["firstLine"].length, equals(2));
       expect(items[0]["firstLine"][0], equals("Degree"));
@@ -74,7 +74,9 @@ void main() {
       expect(items[0].mainItem, equals("Lanuguage list 100%:"));
       expect(items[0].subItems.length, equals(1));
       expect(
-          items[0].subItems[0], equals("Language 1, Language 2, Language 3"));
+          items[0].subItems[0],
+          equals(
+              "Language 1 (Something 1, Something 2), Language 2, Language 3"));
 
       expect(items[1].mainItem, equals("Item 1"));
       expect(items[2].mainItem, equals("Item 2"));
@@ -84,11 +86,17 @@ void main() {
 
   group("Summary parsing", () {
     test("ResumeParser parses language summary", () {
-      final Map<String, String> items = parser.getLanguages();
+      final Map<String, List<String>> items = parser.getLanguages();
 
       expect(items.length, equals(1));
 
-      expect(items["web"], equals("Language 1, Language 2, Language 3"));
+      expect(
+          items["web"],
+          equals([
+            "Language 1 (Something 1, Something 2)",
+            "Language 2",
+            "Language 3"
+          ]));
     });
 
     test("ResumeParser parses most recent job", () {

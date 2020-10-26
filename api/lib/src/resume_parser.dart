@@ -193,16 +193,19 @@ class ResumeParser {
     return items;
   }
 
-  Map<String, String> getLanguages() {
+  Map<String, List<String>> getLanguages() {
     const String languagesPattern = r"% LANGUAGES";
-    final Map<String, String> langMap = {};
+    // Splits the language lists on commas, except within parentheses
+    final RegExp regexp = RegExp(r"(?!\(.*),(?![^(]*?\))");
+    final Map<String, List<String>> langMap = {};
     final List<ListItem> skills =
         parseListSection("TechnicalSkills", removeInlineComments: false);
 
     for (final skill in skills) {
       if (skill.mainItem.contains(languagesPattern)) {
         final String type = skill.mainItem.split(languagesPattern)[1].trim();
-        langMap[type] = skill.subItems[0];
+        langMap[type] =
+            skill.subItems[0].split(regexp).map((s) => s.trim()).toList();
       }
     }
 

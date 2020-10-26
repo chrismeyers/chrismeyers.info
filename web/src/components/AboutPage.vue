@@ -77,13 +77,17 @@
         <li>
           Desktop and CLI applications:
           <ul>
-            <li>{{ languages ? languages.desktop : "" }}</li>
+            <li v-for="language in languages.desktop" :key="language + 'dt-li'">
+              {{ language }}
+            </li>
           </ul>
         </li>
         <li>
           Websites, Web Apps, and APIs:
           <ul>
-            <li>{{ languages ? languages.web : "" }}</li>
+            <li v-for="language in languages.web" :key="language + 'web-li'">
+              {{ language }}
+            </li>
           </ul>
         </li>
       </ul>
