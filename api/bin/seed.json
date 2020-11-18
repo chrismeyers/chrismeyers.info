@@ -446,6 +446,19 @@
       "images": [
         33
       ]
+    },
+    {
+      "active": true,
+      "title": "data-shifter",
+      "webUrl": "https://www.npmjs.com/package/data-shifter",
+      "codeUrl": "https://github.com/chrismeyers/data-shifter",
+      "displayDate": "Personal Project, November 2020",
+      "startedDate": "2020-11-02T00:00:00.000Z",
+      "lang": "JavaScript",
+      "info": "data-shifter is a JavaScript package that provides a data validation and transformation pipeline. Due to the functional nature of this package, it's easy to swap the components of the pipeline to dynamically generate different transformations. This package comes with a few predefined validators and shifters (transformation definitions), but the real power of this library comes from the fact that the pipeline just acts as a framework that custom validators and shifters can be plugged into.<br><br>The primary reason for starting this project was to get some experience with functional programming concepts, specifically currying, while abstracting and simplifying a common task. Design goals include:<ul><li>Leveraging the flexibility of currying</li><li>Providing an intuitive validation and transformation pipeline</li><li>Allowing easy and powerful customization</li></ul>",
+      "role": "Solo Project",
+      "stat": "In Development",
+      "images": []
     }
   ]
 }
