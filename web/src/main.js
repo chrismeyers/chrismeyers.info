@@ -31,6 +31,7 @@ Vue.use(VueImg, {
   altAsTitle: true,
   openOn: "click",
   thumbnails: true,
+  sourceButton: true,
   closeOnScroll: false
 })
 Vue.use(VueCookie)

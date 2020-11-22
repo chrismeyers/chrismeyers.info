@@ -182,6 +182,11 @@ h2.top {
   width: 20px;
 }
 
+.link-image.xlarge {
+  height: 80px;
+  width: 80px;
+}
+
 /********************* CONTENT *********************/
 .section-header {
   text-align: center;
