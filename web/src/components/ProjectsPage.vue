@@ -47,14 +47,31 @@
             <div class="projImages">
               <template v-for="(image, index) in project.images">
                 <template v-if="index == 0">
-                  <img
-                    v-img="{ group: project.id }"
-                    :src="image.path"
-                    :class="'projImages-full-img-' + image.orient"
-                    v-bind:alt="image.title"
-                    title="Click to enlarge"
-                    :key="image.id + '-full'"
-                  />
+                  <template v-if="image.path.toLowerCase().endsWith('.gif')">
+                    <img
+                      v-img
+                      :src="image.path"
+                      :alt="image.title"
+                      :key="image.id + '-full'"
+                      :ref="`project-${project.id}-${index}-gif`"
+                      style="display:none;"
+                    />
+                    <div :key="image.id + '-gif-link'">
+                      <a @click="showGIF(`project-${project.id}-${index}-gif`)"
+                        >Play GIF</a
+                      >
+                    </div>
+                  </template>
+                  <template v-else>
+                    <img
+                      v-img="{ group: project.id }"
+                      :src="image.path"
+                      :class="'projImages-full-img-' + image.orient"
+                      :alt="image.title"
+                      :key="image.id + '-full'"
+                      title="Click to enlarge"
+                    />
+                  </template>
                   <br :key="image.id + '-br'" />
                 </template>
                 <div v-else class="projImages-small" :key="image.id + '-small'">
@@ -62,7 +79,7 @@
                     v-img="{ group: project.id }"
                     :src="image.path"
                     :class="'projImages-small-img-' + image.orient"
-                    v-bind:alt="image.title"
+                    :alt="image.title"
                     title="Click to enlarge"
                   />
                 </div>
@@ -112,6 +129,17 @@ export default {
       } else {
         this.showDialog(projects.statusText, projects.data.error)
       }
+    },
+    showGIF(which) {
+      const gif = this.$refs[which][0]
+
+      gif.click()
+
+      // Restart the GIF each time it's opened
+      setTimeout(() => {
+        const img = document.querySelectorAll(".content-v-img > img")[0]
+        img.src = gif.src
+      }, 100)
     }
   }
 }
