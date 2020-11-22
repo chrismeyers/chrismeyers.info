@@ -57,7 +57,7 @@
         </li>
         <li>
           I am the owner of this
-          <a class="fancytxt" @click="showClarkImage()">majestic beast</a>
+          <a class="fancytxt" @click="showImage('clarkImg')">majestic beast</a>
         </li>
         <img
           v-img
@@ -132,8 +132,9 @@ export default {
     })
   },
   methods: {
-    showClarkImage() {
-      this.$refs.clarkImg.click()
+    showImage(which) {
+      const img = this.$refs[which]
+      img.click()
     },
     setData(summary) {
       if (summary instanceof ConnectionError) {
