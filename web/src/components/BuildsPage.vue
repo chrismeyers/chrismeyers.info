@@ -37,7 +37,7 @@
                 v-if="build.image"
                 :src="build.image.path"
                 :class="'build-pic-img-' + build.image.orient"
-                v-bind:alt="build.image.title"
+                :alt="build.image.title"
                 title="Click to enlarge"
               />
             </div>
