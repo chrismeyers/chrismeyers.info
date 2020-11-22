@@ -86,11 +86,10 @@ export default {
     }
   },
   computed: {
-    mainThemeColor: function() {
-      return getComputedStyle(document.documentElement).getPropertyValue(
+    mainThemeColor: () =>
+      getComputedStyle(document.documentElement).getPropertyValue(
         "--main-theme-color"
       )
-    }
   }
 }
 </script>

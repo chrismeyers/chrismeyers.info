@@ -47,14 +47,39 @@
             <div class="projImages">
               <template v-for="(image, index) in project.images">
                 <template v-if="index == 0">
-                  <img
-                    v-img="{ group: project.id }"
-                    :src="image.path"
-                    :class="'projImages-full-img-' + image.orient"
-                    v-bind:alt="image.title"
-                    title="Click to enlarge"
-                    :key="image.id + '-full'"
-                  />
+                  <template v-if="image.path.toLowerCase().endsWith('.gif')">
+                    <img
+                      v-img
+                      :src="image.path"
+                      :alt="image.title"
+                      :key="image.id + '-full'"
+                      :ref="`project-${project.id}-${index}-gif`"
+                      style="display:none;"
+                    />
+                    <div
+                      class="projImages-full-img-land projImages-gif"
+                      :key="image.id + '-gif-link'"
+                      @click="showGIF(`project-${project.id}-${index}-gif`)"
+                    >
+                      <svgicon
+                        name="play"
+                        class="link-image xlarge"
+                        alt="Plays the associated GIF"
+                        title="Play GIF"
+                      ></svgicon>
+                      <div>Play GIF</div>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <img
+                      v-img="{ group: project.id }"
+                      :src="image.path"
+                      :class="'projImages-full-img-' + image.orient"
+                      :alt="image.title"
+                      :key="image.id + '-full'"
+                      title="Click to enlarge"
+                    />
+                  </template>
                   <br :key="image.id + '-br'" />
                 </template>
                 <div v-else class="projImages-small" :key="image.id + '-small'">
@@ -62,7 +87,7 @@
                     v-img="{ group: project.id }"
                     :src="image.path"
                     :class="'projImages-small-img-' + image.orient"
-                    v-bind:alt="image.title"
+                    :alt="image.title"
                     title="Click to enlarge"
                   />
                 </div>
@@ -86,6 +111,7 @@ import ConnectionError from "@/utils/errors/types/connection"
 import ModalsMixin from "@/mixins/Modals"
 import "@/assets/images/icons/generated/github"
 import "@/assets/images/icons/generated/link"
+import "@/assets/images/icons/generated/play"
 
 export default {
   name: "projects-page",
@@ -112,6 +138,17 @@ export default {
       } else {
         this.showDialog(projects.statusText, projects.data.error)
       }
+    },
+    showGIF(which) {
+      const gif = this.$refs[which][0]
+
+      gif.click()
+
+      // Restart the GIF each time it's opened
+      setTimeout(() => {
+        const img = document.querySelectorAll(".content-v-img > img")[0]
+        img.src = gif.src
+      }, 100)
     }
   }
 }
@@ -136,6 +173,7 @@ export default {
 }
 
 .projImages > img,
+.projImages > div,
 .projImages-small > img {
   cursor: pointer;
 }
@@ -175,6 +213,16 @@ export default {
   border-style: solid;
   border-width: 1px;
   border-color: #707070;
+}
+
+.projImages-gif {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-style: none;
 }
 
 @media screen and (min-width: 970px) {
