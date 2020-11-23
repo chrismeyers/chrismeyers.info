@@ -95,7 +95,7 @@ export default {
 
 #app {
   font-family: "Open Sans", sans-serif;
-  display: -webkit-flex;
+  flex: 1;
 }
 
 html,
