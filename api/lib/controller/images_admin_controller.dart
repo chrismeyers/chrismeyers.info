@@ -12,6 +12,7 @@ class ImagesAdminController extends ResourceController {
     final Map<String, dynamic> body = await request.body.decode();
     final Query<Image> query = Query<Image>(context)
       ..values.path = body["path"] as String
+      ..values.thumbnail = body["thumbnail"] as String
       ..values.title = body["title"] as String
       ..values.pos = body["pos"] as int
       ..values.orient = body["orient"] as String;
@@ -25,6 +26,7 @@ class ImagesAdminController extends ResourceController {
     final Map<String, dynamic> body = await request.body.decode();
     final Query<Image> query = Query<Image>(context)
       ..values.path = body["path"] as String
+      ..values.thumbnail = body["thumbnail"] as String
       ..values.title = body["title"] as String
       ..values.pos = body["pos"] as int
       ..values.orient = body["orient"] as String
