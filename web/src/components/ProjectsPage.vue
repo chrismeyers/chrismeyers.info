@@ -7,7 +7,10 @@
         <div class="proj" :key="project.id" :id="`project-${project.id}`">
           <h2 :class="{ 'first-header': index == 0 }">
             {{ project.title }}
-            <router-link :to="`#project-${project.id}`">
+            <router-link
+              :to="`#project-${project.id}`"
+              title="Jump directly to this project"
+            >
               <svgicon
                 name="paragraph"
                 class="link-image small jump-anchor"
