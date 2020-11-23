@@ -66,41 +66,64 @@
                       v-img
                       :src="image.path"
                       :alt="image.title"
-                      :key="image.id + '-full'"
+                      :key="`${image.id}-full`"
                       :ref="`project-${project.id}-${index}-gif`"
                       style="display:none;"
                     />
-                    <div
-                      class="projImages-full-img-land projImages-gif"
-                      :key="image.id + '-gif-link'"
-                      @click="showGIF(`project-${project.id}-${index}-gif`)"
-                    >
-                      <svgicon
-                        name="play"
-                        class="link-image xlarge"
-                        alt="Plays the associated GIF"
+                    <template v-if="image.thumbnail">
+                      <div
+                        class="gif-overlay"
+                        :key="`${image.id}-gif-thumbnail-wrapper`"
                         title="Play GIF"
-                      ></svgicon>
-                      <div>Play GIF</div>
-                    </div>
+                      >
+                        <img
+                          :src="image.thumbnail"
+                          :class="`projImages-full-img-${image.orient}`"
+                          :key="`${image.id}-gif-thumbnail`"
+                          @click="showGIF(`project-${project.id}-${index}-gif`)"
+                        />
+                        <svgicon
+                          name="play"
+                          class="link-image xlarge play-overlay"
+                          alt="Plays the associated GIF"
+                          title="Play GIF"
+                          :key="`${image.id}-gif-thumbnail-play`"
+                        ></svgicon>
+                      </div>
+                    </template>
+                    <template v-else>
+                      <div
+                        class="projImages-full-img-land projImages-gif"
+                        :key="`${image.id}-missing-gif-thumbnail`"
+                        @click="showGIF(`project-${project.id}-${index}-gif`)"
+                      >
+                        <svgicon
+                          name="play"
+                          class="link-image xlarge"
+                          alt="Plays the associated GIF"
+                          title="Play GIF"
+                        ></svgicon>
+                        <div>Play GIF</div>
+                      </div>
+                    </template>
                   </template>
                   <template v-else>
                     <img
                       v-img="{ group: project.id }"
                       :src="image.path"
-                      :class="'projImages-full-img-' + image.orient"
+                      :class="`projImages-full-img-${image.orient}`"
                       :alt="image.title"
-                      :key="image.id + '-full'"
+                      :key="`${image.id}-full`"
                       title="Click to enlarge"
                     />
                   </template>
-                  <br :key="image.id + '-br'" />
+                  <br :key="`${image.id}-br`" />
                 </template>
-                <div v-else class="projImages-small" :key="image.id + '-small'">
+                <div v-else class="projImages-small" :key="`${image.id}-small`">
                   <img
                     v-img="{ group: project.id }"
                     :src="image.path"
-                    :class="'projImages-small-img-' + image.orient"
+                    :class="`projImages-small-img-${image.orient}`"
                     :alt="image.title"
                     title="Click to enlarge"
                   />
@@ -111,8 +134,8 @@
         </div>
 
         <template v-if="index < projects.length - 1">
-          <br :key="project.id + '-br'" />
-          <hr :key="project.id + '-hr'" />
+          <br :key="`${project.id}-br`" />
+          <hr :key="`${project.id}-hr`" />
         </template>
       </template>
     </div>
@@ -240,6 +263,21 @@ export default {
   border-style: none;
 }
 
+.link-image.play-overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.gif-overlay {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (min-width: 970px) {
   .projWrapper {
     display: -webkit-flex;
@@ -247,24 +285,26 @@ export default {
   }
 
   .projDesc {
-    -webkit-flex: 1;
-    flex: 1;
+    -webkit-flex: 3;
+    flex: 3;
     padding-right: 20px;
   }
 
+  .projImages {
+    -webkit-flex: 2;
+    flex: 2;
+  }
+
   .projImages-full-img-square {
-    height: 415px;
-    width: 415px;
+    max-width: 100%;
   }
 
   .projImages-full-img-land {
-    height: 260px;
-    width: 415px;
+    max-width: 100%;
   }
 
   .projImages-full-img-port {
-    height: 415px;
-    width: 260px;
+    max-width: 100%;
   }
 }
 
