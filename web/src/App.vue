@@ -187,6 +187,14 @@ h2.top {
   width: 80px;
 }
 
+.jump-anchor {
+  cursor: pointer;
+}
+
+.jump-anchor:hover {
+  fill: var(--main-theme-color);
+}
+
 /********************* CONTENT *********************/
 .section-header {
   text-align: center;

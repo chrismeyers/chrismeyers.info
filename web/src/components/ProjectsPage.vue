@@ -4,8 +4,16 @@
 
     <div class="content-text">
       <template v-for="(project, index) in projects">
-        <div class="proj" :key="project.id">
-          <h2 :class="{ 'first-header': index == 0 }">{{ project.title }}</h2>
+        <div class="proj" :key="project.id" :id="`project-${project.id}`">
+          <h2 :class="{ 'first-header': index == 0 }">
+            {{ project.title }}
+            <router-link :to="`#project-${project.id}`">
+              <svgicon
+                name="paragraph"
+                class="link-image small jump-anchor"
+              ></svgicon>
+            </router-link>
+          </h2>
           <h3>{{ project.displayDate }}</h3>
           <div class="projWrapper">
             <div class="projDesc">
@@ -24,7 +32,10 @@
 
                 <dt class="dt-mod dt-links"><b>Links</b></dt>
                 <dd v-if="project.webUrl !== null" class="project-link-image">
-                  <svgicon name="link" class="link-image small"></svgicon
+                  <svgicon
+                    name="link-external"
+                    class="link-image small"
+                  ></svgicon
                   >&nbsp;<a
                     :href="project.webUrl"
                     class="fancytxt"
@@ -110,7 +121,8 @@ import ProjectsAPI from "@/utils/api/projects"
 import ConnectionError from "@/utils/errors/types/connection"
 import ModalsMixin from "@/mixins/Modals"
 import "@/assets/images/icons/generated/github"
-import "@/assets/images/icons/generated/link"
+import "@/assets/images/icons/generated/paragraph"
+import "@/assets/images/icons/generated/link-external"
 import "@/assets/images/icons/generated/play"
 
 export default {
