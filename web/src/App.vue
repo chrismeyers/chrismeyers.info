@@ -154,6 +154,10 @@ h2.top {
   outline: none !important;
 }
 
+.prevent-scroll {
+  overflow: hidden;
+}
+
 .li-filled {
   list-style-type: disc;
 }
