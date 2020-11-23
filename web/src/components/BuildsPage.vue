@@ -45,7 +45,7 @@
                 v-img
                 v-if="build.image"
                 :src="build.image.path"
-                :class="'build-pic-img-' + build.image.orient"
+                :class="`build-pic-img-${build.image.orient}`"
                 :alt="build.image.title"
                 title="Click to enlarge"
               />
@@ -53,8 +53,8 @@
           </div>
         </div>
         <template v-if="index < builds.length - 1">
-          <br :key="build.id + '-br'" />
-          <hr :key="build.id + '-hr'" />
+          <br :key="`${build.id}-br`" />
+          <hr :key="`${build.id}-hr`" />
         </template>
       </template>
     </div>
@@ -129,19 +129,22 @@ export default {
   }
 
   .build-specs {
-    -webkit-flex: 1;
-    flex: 1;
-    padding-right: 10px;
+    -webkit-flex: 3;
+    flex: 3;
+    padding-right: 20px;
+  }
+
+  .build-pic {
+    -webkit-flex: 2;
+    flex: 2;
   }
 
   .build-pic-img-land {
-    height: 260px;
-    width: 415px;
+    max-width: 100%;
   }
 
   .build-pic-img-port {
-    height: 450px;
-    width: 348px;
+    max-width: 100%;
   }
 }
 
