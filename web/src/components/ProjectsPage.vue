@@ -111,19 +111,19 @@
                     <img
                       v-img="{ group: project.id }"
                       :src="image.path"
-                      :class="'projImages-full-img-' + image.orient"
+                      :class="`projImages-full-img-${image.orient}`"
                       :alt="image.title"
-                      :key="image.id + '-full'"
+                      :key="`${image.id}-full`"
                       title="Click to enlarge"
                     />
                   </template>
-                  <br :key="image.id + '-br'" />
+                  <br :key="`${image.id}-br`" />
                 </template>
-                <div v-else class="projImages-small" :key="image.id + '-small'">
+                <div v-else class="projImages-small" :key="`${image.id}-small`">
                   <img
                     v-img="{ group: project.id }"
                     :src="image.path"
-                    :class="'projImages-small-img-' + image.orient"
+                    :class="`projImages-small-img-${image.orient}`"
                     :alt="image.title"
                     title="Click to enlarge"
                   />
@@ -134,8 +134,8 @@
         </div>
 
         <template v-if="index < projects.length - 1">
-          <br :key="project.id + '-br'" />
-          <hr :key="project.id + '-hr'" />
+          <br :key="`${project.id}-br`" />
+          <hr :key="`${project.id}-hr`" />
         </template>
       </template>
     </div>
