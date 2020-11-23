@@ -14,6 +14,10 @@ class _Image {
   @SchemaField()
   String path;
 
+  @Column(nullable: true)
+  @SchemaField(required: false)
+  String thumbnail;
+
   @SchemaField()
   String title;
 
