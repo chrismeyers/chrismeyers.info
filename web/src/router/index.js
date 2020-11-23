@@ -40,7 +40,12 @@ let router = new VueRouter({
   mode: "history",
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
-      document.getElementById(to.hash.replace("#", "")).scrollIntoView(true)
+      return new Promise(resolve => {
+        setTimeout(() => {
+          document.getElementById(to.hash.replace("#", "")).scrollIntoView(true)
+          resolve()
+        }, 100)
+      })
     } else if (savedPosition) {
       return savedPosition
     } else {
