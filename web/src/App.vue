@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <app-navigation />
     <v-dialog />
     <vue-progress-bar />
-    <router-view />
-    <app-footer />
+    <div class="container">
+      <app-navigation />
+      <router-view />
+      <app-footer />
+    </div>
     <app-prompt />
   </div>
 </template>
@@ -94,14 +96,9 @@ export default {
 #app {
   font-family: "Open Sans", sans-serif;
   display: -webkit-flex;
-  display: flex;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+html,
 body {
   margin: 0;
   padding: 0;
@@ -132,10 +129,10 @@ h2.top {
   margin-top: 0px;
 }
 
-.spacer {
-  overflow: hidden;
-  height: 0px;
-  width: 0px;
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 .fancytxt {
@@ -233,6 +230,7 @@ h2.top {
   line-height: 90px;
   font-size: 40px;
   text-align: center;
+  margin-left: 1px;
 }
 
 .dropdown-mod {
@@ -485,8 +483,22 @@ select.select-mod {
 }
 
 @media screen and (max-width: 969px) {
+  body {
+    display: flex;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: auto;
+  }
+
   .content {
-    margin: 60px 0px 80px 0px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
   }
 
   .content-text {
