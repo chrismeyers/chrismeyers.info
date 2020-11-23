@@ -120,11 +120,22 @@ export default {
       menuDisplayed: false
     }
   },
+  mounted() {
+    window.addEventListener("resize", this.onResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize)
+  },
   watch: {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       this.setPath(to.path)
       this.menuDisplayed = false
+    },
+    menuDisplayed(state) {
+      state
+        ? document.body.classList.add("prevent-scroll")
+        : document.body.classList.remove("prevent-scroll")
     }
   },
   methods: {
@@ -134,6 +145,9 @@ export default {
     },
     toggleMenu() {
       this.menuDisplayed = !this.menuDisplayed
+    },
+    onResize() {
+      this.menuDisplayed = false
     }
   }
 }
