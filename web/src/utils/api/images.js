@@ -29,7 +29,7 @@ export default {
       },
       data: {
         path: image.path,
-        thumbnail: image.thumbnail,
+        thumbnail: image.thumbnail === "" ? null : image.thumbnail,
         title: image.title,
         pos: parseInt(image.pos),
         orient: image.orient
@@ -53,7 +53,7 @@ export default {
       },
       data: {
         path: image.path,
-        thumbnail: image.thumbnail,
+        thumbnail: image.thumbnail === "" ? null : image.thumbnail,
         title: image.title,
         pos: parseInt(image.pos),
         orient: image.orient
