@@ -38,8 +38,14 @@ let formatDashboardTitle = name => {
 
 let router = new VueRouter({
   mode: "history",
-  scrollBehavior() {
-    return { x: 0, y: 0 }
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      document.getElementById(to.hash.replace("#", "")).scrollIntoView(true)
+    } else if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
   },
   routes: [
     {

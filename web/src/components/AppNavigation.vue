@@ -262,9 +262,9 @@ nav {
 
 @media screen and (max-width: 969px) {
   nav {
-    position: fixed;
+    top: 0;
+    position: sticky;
     width: 100%;
-    height: 60px;
   }
 
   #full-menu {
