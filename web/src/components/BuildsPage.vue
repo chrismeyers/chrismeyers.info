@@ -4,9 +4,18 @@
 
     <div class="content-text">
       <template v-for="(build, index) in builds">
-        <div class="build" :key="build.id">
+        <div class="build" :key="build.id" :id="`build-${build.id}`">
           <h2 :class="{ 'first-header': index == 0 }">
             {{ build.displayDate }}
+            <router-link
+              :to="`#build-${build.id}`"
+              title="Jump directly to this build"
+            >
+              <svgicon
+                name="paragraph"
+                class="link-image small jump-anchor"
+              ></svgicon>
+            </router-link>
           </h2>
           <div class="build-info">
             <div class="build-specs">
@@ -56,6 +65,7 @@
 import BuildsAPI from "@/utils/api/builds"
 import ConnectionError from "@/utils/errors/types/connection"
 import ModalsMixin from "@/mixins/Modals"
+import "@/assets/images/icons/generated/paragraph"
 
 export default {
   name: "builds-page",
