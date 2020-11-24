@@ -2,198 +2,231 @@
   "images": [
     {
       "path": "/images/builds/mattBuild.jpg",
+      "thumbnail": null,
       "title": "Matt's Computer",
       "pos": 1,
       "orient": "land"
     },
     {
       "path": "/images/builds/myBuild2013.jpg",
+      "thumbnail": null,
       "title": "My Computer 2013",
       "pos": 1,
       "orient": "port"
     },
     {
       "path": "/images/builds/markBuild.jpg",
+      "thumbnail": null,
       "title": "Mark's Computer",
       "pos": 1,
       "orient": "port"
     },
     {
       "path": "/images/builds/myBuild2016_liquid.jpg",
+      "thumbnail": null,
       "title": "My Computer 2016",
       "pos": 1,
       "orient": "port"
     },
     {
       "path": "/images/builds/jamesBuild.jpg",
+      "thumbnail": null,
       "title": "James's computer",
       "pos": 1,
       "orient": "port"
     },
     {
       "path": "/images/projects/genomic/genomic.png",
+      "thumbnail": null,
       "title": "Genomic Solutions Now! Software",
       "pos": 1,
       "orient": "land"
     },
     {
       "path": "/images/projects/pinelands/pinelands_landing.jpg",
+      "thumbnail": null,
       "title": "Pinelands landing page",
       "pos": 1,
       "orient": "land"
     },
     {
       "path": "/images/projects/pinelands/pinelands_tour.jpg",
+      "thumbnail": null,
       "title": "Pinelands tour page",
       "pos": 2,
       "orient": "square"
     },
     {
       "path": "/images/projects/pinelands/pinelands_contact.jpg",
+      "thumbnail": null,
       "title": "Pinelands contact page",
       "pos": 3,
       "orient": "square"
     },
     {
       "path": "/images/projects/ttt/ttt_land.png",
+      "thumbnail": null,
       "title": "Tic Tac Toe Landscape",
       "pos": 1,
       "orient": "land"
     },
     {
       "path": "/images/projects/ttt/ttt_port.png",
+      "thumbnail": null,
       "title": "Tic Tac Toe Portrait",
       "pos": 2,
       "orient": "port"
     },
     {
       "path": "/images/projects/lol_playerdata/loldata_landing.png",
+      "thumbnail": null,
       "title": "LoL player data landing page",
       "pos": 1,
       "orient": "land"
     },
     {
       "path": "/images/projects/lol_playerdata/loldata.png",
+      "thumbnail": null,
       "title": "LoL player data results",
       "pos": 2,
       "orient": "square"
     },
     {
       "path": "/images/projects/lol_playerdata/loldata_small.png",
+      "thumbnail": null,
       "title": "LoL player data results optimized for mobile",
       "pos": 3,
       "orient": "port"
     },
     {
       "path": "/images/projects/pca/scoresPlot.png",
+      "thumbnail": null,
       "title": "A scores plot generated from calculated principal components",
       "pos": 1,
       "orient": "land"
     },
     {
       "path": "/images/projects/pca/scoresData.png",
+      "thumbnail": null,
       "title": "The calculated principal component data",
       "pos": 2,
       "orient": "square"
     },
     {
       "path": "/images/projects/pca/addinBar.PNG",
+      "thumbnail": null,
       "title": "The Excel add-in bar used to add scores and loadings plots",
       "pos": 3,
       "orient": "land"
     },
     {
       "path": "/images/projects/pca/scoresInput-full.png",
+      "thumbnail": null,
       "title": "Input form that is dynamically populated based on the number of principal components",
       "pos": 4,
       "orient": "port"
     },
     {
       "path": "/images/projects/bms/bms_rawData.png",
+      "thumbnail": null,
       "title": "The raw data taken from the lab to be processed",
       "pos": 1,
       "orient": "land"
     },
     {
       "path": "/images/projects/bms/bms_formatForm.png",
+      "thumbnail": null,
       "title": "Input form used to select the worksheet to be processed",
       "pos": 2,
       "orient": "square"
     },
     {
       "path": "/images/projects/bms/bms_formattedData.png",
+      "thumbnail": null,
       "title": "The entire formatted data set",
       "pos": 3,
       "orient": "square"
     },
     {
       "path": "/images/projects/bms/bms_finalData.png",
+      "thumbnail": null,
       "title": "A further refined formatted data set used for plotting",
       "pos": 4,
       "orient": "square"
     },
     {
       "path": "/images/projects/bms/bms_graphForm.png",
+      "thumbnail": null,
       "title": "Input form used to select the variables to be plotted",
       "pos": 5,
       "orient": "square"
     },
     {
       "path": "/images/projects/bms/bms_plot.png",
+      "thumbnail": null,
       "title": "The final plot",
       "pos": 6,
       "orient": "square"
     },
     {
       "path": "/images/projects/lol_status/gui.png",
+      "thumbnail": null,
       "title": "The Java GUI that displays the current status of services in a specified region",
       "pos": 1,
       "orient": "square"
     },
     {
       "path": "/images/projects/lol_status/polling.png",
+      "thumbnail": null,
       "title": "Input form that allows users to specify how often the GUI updates",
       "pos": 2,
       "orient": "square"
     },
     {
       "path": "/images/projects/lol_status/tray.png",
+      "thumbnail": null,
       "title": "Notification area functionality",
       "pos": 3,
       "orient": "square"
     },
     {
       "path": "/images/projects/trumppet/trumppet_landing.png",
+      "thumbnail": null,
       "title": "Trumppet website landing page",
       "pos": 1,
       "orient": "land"
     },
     {
       "path": "/images/projects/trumppet/trumppet_playback.png",
+      "thumbnail": null,
       "title": "Playback screen that displays a list of  previous tweets",
       "pos": 2,
       "orient": "square"
     },
     {
       "path": "/images/projects/trumppet/trumppet_freq.png",
+      "thumbnail": null,
       "title": "Displays a list of unique words and the number of times they're used throughout the tweet database",
       "pos": 3,
       "orient": "square"
     },
     {
       "path": "/images/projects/trumppet/trumppet_search.png",
+      "thumbnail": null,
       "title": "Searches the tweet database for a specified word or phrase",
       "pos": 4,
       "orient": "square"
     },
     {
       "path": "/images/projects/trumppet/trumppet_freestyle.png",
+      "thumbnail": null,
       "title": "Generates a Trumpian-style tweet: Sentance. Sentance. Exclamation! (NOTE: these tweets are not real)",
       "pos": 5,
       "orient": "square"
     },
     {
       "path": "https://raw.githubusercontent.com/chrismeyers/pleasehold/master/examples/pleasehold.gif",
+      "thumbnail": "https://raw.githubusercontent.com/chrismeyers/pleasehold/master/examples/pleasehold-thumbnail.png",
       "title": "Demo of pleasehold",
       "pos": 1,
       "orient": "land"
