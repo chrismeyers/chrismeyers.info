@@ -32,7 +32,8 @@ export default {
   data() {
     return {
       currentNavComponent: "",
-      path: ""
+      path: "",
+      throttledResizeFn: null
     }
   },
   watch: {
@@ -74,10 +75,11 @@ export default {
     }
 
     this.determineNavComponent()
-    window.addEventListener("resize", _throttle(this.onResize, 50))
+    this.throttledResizeFn = _throttle(this.onResize, 50)
+    window.addEventListener("resize", this.throttledResizeFn)
   },
   beforeDestroy() {
-    window.removeEventListener("resize", this.onResize)
+    window.removeEventListener("resize", this.throttledResizeFn)
   },
   methods: {
     determineNavComponent() {
