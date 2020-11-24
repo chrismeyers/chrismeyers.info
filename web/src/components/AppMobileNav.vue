@@ -89,6 +89,9 @@ export default {
       state
         ? document.body.classList.add("prevent-scroll")
         : document.body.classList.remove("prevent-scroll")
+    },
+    path: function() {
+      this.menuDisplayed = false
     }
   },
   methods: {
