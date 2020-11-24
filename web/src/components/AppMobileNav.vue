@@ -67,8 +67,6 @@
 </template>
 
 <script>
-import _debounce from "lodash/debounce"
-
 export default {
   name: "app-mobile-nav",
   props: ["path"],
@@ -77,19 +75,7 @@ export default {
       menuDisplayed: false
     }
   },
-  mounted() {
-    window.addEventListener("resize", this.onResize)
-  },
-  beforeDestroy() {
-    document.body.classList.remove("prevent-scroll")
-    window.removeEventListener("resize", this.onResize)
-  },
   watch: {
-    menuDisplayed(state) {
-      state
-        ? document.body.classList.add("prevent-scroll")
-        : document.body.classList.remove("prevent-scroll")
-    },
     path: function() {
       this.menuDisplayed = false
     }
@@ -97,10 +83,7 @@ export default {
   methods: {
     toggleMenu() {
       this.menuDisplayed = !this.menuDisplayed
-    },
-    onResize: _debounce(function() {
-      this.menuDisplayed = false
-    }, 500)
+    }
   }
 }
 </script>
@@ -160,7 +143,7 @@ nav {
 .menu-items {
   padding: 0;
   list-style: none;
-  position: absolute;
+  position: fixed;
   float: left;
   clear: right;
   left: 0;
