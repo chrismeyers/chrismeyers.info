@@ -112,6 +112,8 @@
 </template>
 
 <script>
+import _debounce from "lodash/debounce"
+
 export default {
   name: "app-navigation",
   data() {
@@ -146,9 +148,9 @@ export default {
     toggleMenu() {
       this.menuDisplayed = !this.menuDisplayed
     },
-    onResize() {
+    onResize: _debounce(function() {
       this.menuDisplayed = false
-    }
+    }, 500)
   }
 }
 </script>

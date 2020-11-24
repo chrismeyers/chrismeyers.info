@@ -34,15 +34,19 @@ This is the codebase for my personal website currently located at <https://chris
 
 ## Credit
 + The site uses a few open source tools and frameworks:
-  + [Vue.js](https://vuejs.org/) as a fontend Javascript framework
+  + [Vue.js](https://vuejs.org/) as a fontend JavaScript framework
+    - [vue-router](https://router.vuejs.org/) for SPA routing
     - [v-img](https://github.com/crowdbotics/v-img) to make viewing images a lot more pleasant
     - [vue-js-modal](https://github.com/euvl/vue-js-modal) to raise modals and dialogs
     - [vue-progressbar](https://github.com/hilongjw/vue-progressbar) to display of the loading state of a page
     - [v-tooltip](https://github.com/Akryum/v-tooltip)/[vue-clipboard2](https://github.com/Inndy/vue-clipboard2) to copy my contact email address to the clipboard
     - [vue-cookie](https://github.com/alfhen/vue-cookie) to handle cookie manipulation
-    - [vuex](https://github.com/vuejs/vuex) for front-end state management
+    - [vuex](https://github.com/vuejs/vuex) for frontend state management
     - [vuex-persist](https://github.com/championswimmer/vuex-persist) to persist vuex state
     - [vue-svgicon](https://github.com/MMF-FE/vue-svgicon) to dynamically change the fill color of SVGs
     - [vue-js-toggle-button](https://github.com/euvl/vue-js-toggle-button) to toggle themes
-  - [Aqueduct](https://aqueduct.io/) as a backend API framework
   - [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon
+  - [axios](https://github.com/axios/axios) as an HTTP client
+  - [qs](https://github.com/ljharb/qs) for querystring parsing
+  - [lodash](https://github.com/lodash/lodash) for convenient helper functions
+  - [Aqueduct](https://aqueduct.io/) as a backend API framework
