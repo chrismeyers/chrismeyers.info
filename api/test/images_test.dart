@@ -23,6 +23,7 @@ Future main() async {
         {
           "id": greaterThan(0),
           "path": "/path/to/image.jpg",
+          "thumbnail": "/path/to/thumbnail.jpg",
           "title": "A cool image",
           "pos": 1,
           "orient": "port",
@@ -41,6 +42,7 @@ Future main() async {
     expectResponse(response, 200, body: {
       "id": 1,
       "path": "/path/to/image.jpg",
+      "thumbnail": "/path/to/thumbnail.jpg",
       "title": "A cool image",
       "pos": 1,
       "orient": "port",
@@ -69,6 +71,7 @@ Future main() async {
     final TestResponse response =
         await harness.publicAgent.post("/admin/images", body: {
       "path": "/path/to/image.jpg",
+      "thumbnail": "/path/to/thumbnail.jpg",
       "title": "A cool image",
       "pos": 1,
       "orient": "port"
@@ -76,6 +79,7 @@ Future main() async {
     expectResponse(response, 200, body: {
       "id": greaterThan(0),
       "path": "/path/to/image.jpg",
+      "thumbnail": "/path/to/thumbnail.jpg",
       "title": "A cool image",
       "pos": 1,
       "orient": "port",
@@ -96,6 +100,7 @@ Future main() async {
     final TestResponse response =
         await harness.publicAgent.put("/admin/images/1", body: {
       "path": "/path/to/another/image.jpg",
+      "thumbnail": "/path/to/thumbnail.jpg",
       "title": "Another cool image",
       "pos": 2,
       "orient": "land"
@@ -103,6 +108,7 @@ Future main() async {
     expectResponse(response, 200, body: {
       "id": 1,
       "path": "/path/to/another/image.jpg",
+      "thumbnail": "/path/to/thumbnail.jpg",
       "title": "Another cool image",
       "pos": 2,
       "orient": "land",

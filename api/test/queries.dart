@@ -23,6 +23,7 @@ class Queries {
     final Query<Image> insertQuery =
         Query<Image>(_harness.application.channel.context)
           ..values.path = "/path/to/image.jpg"
+          ..values.thumbnail = "/path/to/thumbnail.jpg"
           ..values.title = "A cool image"
           ..values.pos = 1
           ..values.orient = "port";

@@ -146,6 +146,7 @@ Future main() async {
         {
           "id": 1,
           "path": "/path/to/image.jpg",
+          "thumbnail": "/path/to/thumbnail.jpg",
           "title": "A cool image",
           "pos": 1,
           "orient": "port",
