@@ -3,7 +3,7 @@
     <v-dialog />
     <vue-progress-bar />
     <div class="container">
-      <app-navigation />
+      <component :is="currentNavComponent" :path="path" />
       <router-view />
       <app-footer />
     </div>
@@ -12,18 +12,33 @@
 </template>
 
 <script>
-import AppNavigation from "@/components/AppNavigation"
+import AppFullNav from "@/components/AppFullNav"
+import AppMobileNav from "@/components/AppMobileNav"
 import AppFooter from "@/components/AppFooter"
 import AppPrompt from "@/components/AppPrompt"
 import ModalsMixin from "@/mixins/Modals"
+import { MOBILE_BREAKPOINT } from "@/store/constants"
 
 export default {
   name: "App",
   mixins: [ModalsMixin],
   components: {
-    AppNavigation,
+    AppFullNav,
+    AppMobileNav,
     AppFooter,
     AppPrompt
+  },
+  data() {
+    return {
+      currentNavComponent: "",
+      path: ""
+    }
+  },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.setPath(to.path)
+    }
   },
   created() {
     // [App.vue specific] When App.vue is first loaded start the progress bar
@@ -55,6 +70,30 @@ export default {
 
     if (this.$store.state.isIE) {
       this.showIEDialog()
+    }
+
+    this.determineNavComponent()
+    window.addEventListener("resize", this.onResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize)
+  },
+  methods: {
+    determineNavComponent() {
+      const width = document.body.clientWidth
+      const newComponent =
+        width < MOBILE_BREAKPOINT ? "app-mobile-nav" : "app-full-nav"
+
+      if (newComponent !== this.currentNavComponent) {
+        this.currentNavComponent = newComponent
+      }
+    },
+    onResize() {
+      this.determineNavComponent()
+    },
+    setPath(rawPath) {
+      let cleanedPath = rawPath.replace(/\//g, "")
+      this.path = cleanedPath === "" ? "about" : cleanedPath
     }
   }
 }
@@ -194,6 +233,22 @@ h2.top {
 
 .jump-anchor:hover {
   fill: var(--main-theme-color);
+}
+
+/******************** COMMON NAV *******************/
+.banner img {
+  width: 100%;
+  display: inline-block;
+  padding-top: 10px;
+}
+
+.nav-link {
+  color: var(--font-color);
+  text-decoration: none;
+}
+
+.nav-selected {
+  color: var(--main-theme-color);
 }
 
 /********************* CONTENT *********************/
