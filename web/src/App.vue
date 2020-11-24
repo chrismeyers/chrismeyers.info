@@ -3,7 +3,10 @@
     <v-dialog />
     <vue-progress-bar />
     <div class="container">
-      <component :is="currentNavComponent" :path="path" />
+      <template>
+        <app-mobile-nav v-if="isMobile" :path="path" />
+        <app-full-nav v-else :path="path" />
+      </template>
       <router-view />
       <app-footer />
     </div>
@@ -31,7 +34,7 @@ export default {
   },
   data() {
     return {
-      currentNavComponent: "",
+      isMobile: false,
       path: "",
       throttledResizeFn: null
     }
@@ -74,7 +77,7 @@ export default {
       this.showIEDialog()
     }
 
-    this.determineNavComponent()
+    this.onResize()
     this.throttledResizeFn = _throttle(this.onResize, 50)
     window.addEventListener("resize", this.throttledResizeFn)
   },
@@ -82,17 +85,9 @@ export default {
     window.removeEventListener("resize", this.throttledResizeFn)
   },
   methods: {
-    determineNavComponent() {
-      const width = document.body.clientWidth
-      const newComponent =
-        width < MOBILE_BREAKPOINT ? "app-mobile-nav" : "app-full-nav"
-
-      if (newComponent !== this.currentNavComponent) {
-        this.currentNavComponent = newComponent
-      }
-    },
     onResize() {
-      this.determineNavComponent()
+      const width = document.body.clientWidth
+      this.isMobile = width < MOBILE_BREAKPOINT
     },
     setPath(rawPath) {
       let cleanedPath = rawPath.replace(/\//g, "")
