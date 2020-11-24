@@ -47,7 +47,8 @@ export default {
       command: "",
       info: "",
       history: [],
-      historyIndex: -1
+      historyIndex: -1,
+      keydownFn: null
     }
   },
   mounted() {
@@ -57,7 +58,7 @@ export default {
       "font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: 'Courier New', Courier, monospace;"
     )
 
-    window.addEventListener("keydown", e => {
+    this.keydownFn = e => {
       if (e.code === "Backquote") {
         e.preventDefault() // Prevents adding ` when opening the prompt
         this.showPrompt()
@@ -76,7 +77,13 @@ export default {
           this.next()
         }
       }
-    })
+    }
+  },
+  activated() {
+    window.addEventListener("keydown", this.keydownFn)
+  },
+  deactivated() {
+    window.removeEventListener("keydown", this.keydownFn)
   },
   methods: {
     togglePrompt() {

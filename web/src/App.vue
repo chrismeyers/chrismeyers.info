@@ -10,7 +10,9 @@
       <router-view />
       <app-footer />
     </div>
-    <app-prompt />
+    <keep-alive>
+      <app-prompt v-if="!isMobile" />
+    </keep-alive>
   </div>
 </template>
 
@@ -34,7 +36,7 @@ export default {
   },
   data() {
     return {
-      isMobile: false,
+      isMobile: true,
       path: "",
       throttledResizeFn: null
     }
