@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
     "css-vars-ponyfill": "^2.4.2",
+    "lodash": "^4.17.20",
     "qs": "^6.9.4",
     "v-img": "github:chrismeyers/v-img#close_on_scroll",
     "v-tooltip": "^2.0.3",

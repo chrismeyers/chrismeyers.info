@@ -18,6 +18,7 @@ import AppFooter from "@/components/AppFooter"
 import AppPrompt from "@/components/AppPrompt"
 import ModalsMixin from "@/mixins/Modals"
 import { MOBILE_BREAKPOINT } from "@/store/constants"
+import _throttle from "lodash/throttle"
 
 export default {
   name: "App",
@@ -73,7 +74,7 @@ export default {
     }
 
     this.determineNavComponent()
-    window.addEventListener("resize", this.onResize)
+    window.addEventListener("resize", _throttle(this.onResize, 50))
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize)
