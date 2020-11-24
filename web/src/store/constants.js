@@ -6,3 +6,4 @@ export const THEMES = {
   DARK: "dark"
 }
 export const API_TOKEN_KEY = "chrismeyers_info_apiToken"
+export const MOBILE_BREAKPOINT = 970
