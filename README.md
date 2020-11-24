@@ -48,5 +48,4 @@ This is the codebase for my personal website currently located at <https://chris
   - [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon
   - [axios](https://github.com/axios/axios) as an HTTP client
   - [qs](https://github.com/ljharb/qs) for querystring parsing
-  - [lodash](https://github.com/lodash/lodash) for convenient helper functions
   - [Aqueduct](https://aqueduct.io/) as a backend API framework
