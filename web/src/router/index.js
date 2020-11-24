@@ -43,7 +43,7 @@ let router = new VueRouter({
       return new Promise(resolve => {
         setTimeout(() => {
           document.getElementById(to.hash.replace("#", "")).scrollIntoView(true)
-          resolve()
+          resolve(true)
         }, 100)
       })
     } else if (savedPosition) {

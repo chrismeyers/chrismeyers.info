@@ -1,50 +1,5 @@
 <template>
   <nav>
-    <div id="full-menu">
-      <div class="side-nav-logo">
-        <router-link class="nav-link banner" to="/"
-          ><img
-            src="@/assets/images/logos/meyers-logo-green.svg"
-            alt="Chris Meyers. Developer, Tech enthusiast."
-            class="banner-img"
-            title="Home"
-        /></router-link>
-      </div>
-      <ul class="side-nav-items">
-        <li>
-          <router-link
-            class="nav-link"
-            :class="{ 'nav-selected': path == 'about' }"
-            to="/"
-            >About</router-link
-          >
-        </li>
-        <li>
-          <router-link
-            class="nav-link"
-            :class="{ 'nav-selected': path == 'resume' }"
-            to="/resume"
-            >Résumé</router-link
-          >
-        </li>
-        <li>
-          <router-link
-            class="nav-link"
-            :class="{ 'nav-selected': path == 'projects' }"
-            to="/projects"
-            >Projects</router-link
-          >
-        </li>
-        <li>
-          <router-link
-            class="nav-link"
-            :class="{ 'nav-selected': path == 'builds' }"
-            to="/builds"
-            >Builds</router-link
-          >
-        </li>
-      </ul>
-    </div>
     <div id="hamburger-menu">
       <div class="banner-icon">
         <router-link to="/" class="small-nav-logo">
@@ -112,76 +67,32 @@
 </template>
 
 <script>
-import _debounce from "lodash/debounce"
-
 export default {
-  name: "app-navigation",
+  name: "app-mobile-nav",
+  props: ["path"],
   data() {
     return {
-      path: "",
       menuDisplayed: false
     }
   },
-  mounted() {
-    window.addEventListener("resize", this.onResize)
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.onResize)
-  },
   watch: {
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.setPath(to.path)
+    path: function() {
       this.menuDisplayed = false
-    },
-    menuDisplayed(state) {
-      state
-        ? document.body.classList.add("prevent-scroll")
-        : document.body.classList.remove("prevent-scroll")
     }
   },
   methods: {
-    setPath(rawPath) {
-      let cleanedPath = rawPath.replace(/\//g, "")
-      this.path = cleanedPath === "" ? "about" : cleanedPath
-    },
     toggleMenu() {
       this.menuDisplayed = !this.menuDisplayed
-    },
-    onResize: _debounce(function() {
-      this.menuDisplayed = false
-    }, 500)
+    }
   }
 }
 </script>
 
 <style scoped>
 nav {
-  width: 300px;
-}
-
-.nav-link {
-  color: var(--font-color);
-  text-decoration: none;
-}
-
-.nav-selected {
-  color: var(--main-theme-color);
-}
-
-.banner img {
-  width: 100%;
-  display: inline-block;
-  padding-top: 10px;
-}
-
-#full-menu {
-  position: fixed;
   top: 0;
-  left: 0;
-  width: 300px;
-  height: 100%;
-  border-right: 1px solid var(--border-color);
+  position: sticky;
+  width: 100%;
 }
 
 #hamburger-menu {
@@ -190,32 +101,9 @@ nav {
   height: 60px;
 }
 
-.header-link {
-  margin-left: 20px;
-}
-
-.side-nav-logo {
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-  height: 90px;
-}
-
-.side-nav-items {
-  list-style: none;
-  text-align: right;
-  padding-left: 0;
-  padding-right: 10px;
-  padding-top: 20px;
-  margin-top: 0;
-  border-top: 1px solid var(--border-color);
-}
-.side-nav-items > li {
-  height: 70px;
-  font-size: 33px;
-}
-.side-nav-items > li > a:hover {
-  color: var(--main-theme-color);
+.banner-icon {
+  float: right;
+  margin-right: 0px;
 }
 
 .small-nav-logo img {
@@ -224,11 +112,6 @@ nav {
   left: 10px;
   position: absolute;
   padding-top: 15px;
-}
-
-.banner-icon {
-  float: right;
-  margin-right: 0px;
 }
 
 .section-title-menu {
@@ -260,7 +143,7 @@ nav {
 .menu-items {
   padding: 0;
   list-style: none;
-  position: absolute;
+  position: fixed;
   float: left;
   clear: right;
   left: 0;
@@ -268,23 +151,5 @@ nav {
   z-index: 1;
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
-}
-
-@media screen and (min-width: 970px) {
-  #hamburger-menu {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 969px) {
-  nav {
-    top: 0;
-    position: sticky;
-    width: 100%;
-  }
-
-  #full-menu {
-    display: none;
-  }
 }
 </style>
