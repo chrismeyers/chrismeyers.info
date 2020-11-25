@@ -15,6 +15,7 @@
           style="outline: none;"
           class="hamburger hamburger--collapse"
           :class="{ 'is-active': menuDisplayed }"
+          ref="hamburger-button"
           type="button"
           @click="toggleMenu()"
         >
@@ -23,42 +24,41 @@
           </span>
         </button>
 
-        <div v-if="menuDisplayed" class="section-title-menu">
-          <ul class="menu-dropdown">
-            <li>
-              <ul class="menu-items">
-                <router-link
-                  class="nav-link"
-                  :class="{ 'nav-selected': path == 'about' }"
-                  tag="a"
-                  to="/"
-                  ><li class="section-title-small-txt">About</li></router-link
-                >
-                <router-link
-                  class="nav-link"
-                  :class="{ 'nav-selected': path == 'resume' }"
-                  tag="a"
-                  to="/resume"
-                  ><li class="section-title-small-txt">Résumé</li></router-link
-                >
-                <router-link
-                  class="nav-link"
-                  :class="{ 'nav-selected': path == 'projects' }"
-                  tag="a"
-                  to="/projects"
-                  ><li class="section-title-small-txt">
-                    Projects
-                  </li></router-link
-                >
-                <router-link
-                  class="nav-link"
-                  :class="{ 'nav-selected': path == 'builds' }"
-                  tag="a"
-                  to="/builds"
-                  ><li class="section-title-small-txt">Builds</li></router-link
-                >
-              </ul>
-            </li>
+        <div class="menu-overlay" v-show="menuDisplayed"></div>
+        <div
+          v-click-outside="toggleMenu"
+          v-if="menuDisplayed"
+          class="section-title-menu"
+        >
+          <ul class=" menu-dropdown menu-items">
+            <router-link
+              class="nav-link section-title-small-txt"
+              :class="{ 'nav-selected': path == 'about' }"
+              tag="li"
+              to="/"
+              >About</router-link
+            >
+            <router-link
+              class="nav-link section-title-small-txt"
+              :class="{ 'nav-selected': path == 'resume' }"
+              tag="li"
+              to="/resume"
+              >Résumé</router-link
+            >
+            <router-link
+              class="nav-link section-title-small-txt"
+              :class="{ 'nav-selected': path == 'projects' }"
+              tag="li"
+              to="/projects"
+              >Projects</router-link
+            >
+            <router-link
+              class="nav-link section-title-small-txt"
+              :class="{ 'nav-selected': path == 'builds' }"
+              tag="li"
+              to="/builds"
+              >Builds</router-link
+            >
           </ul>
         </div>
       </div>
@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import ClickOutside from "vue-click-outside"
+
 export default {
   name: "app-mobile-nav",
   props: ["path"],
@@ -80,10 +82,17 @@ export default {
       this.menuDisplayed = false
     }
   },
+  mounted() {
+    // Prevents click-outside event on specific element
+    this.popupItem = this.$refs["hamburger-button"]
+  },
   methods: {
     toggleMenu() {
       this.menuDisplayed = !this.menuDisplayed
     }
+  },
+  directives: {
+    ClickOutside
   }
 }
 </script>
@@ -149,7 +158,13 @@ nav {
   left: 0;
   right: 0;
   z-index: 1;
+}
+
+.menu-overlay {
+  position: fixed;
   height: 100vh;
+  width: 100vh;
+  left: 0;
   background: rgba(0, 0, 0, 0.3);
 }
 </style>
