@@ -162,8 +162,8 @@ nav {
 
 .menu-overlay {
   position: fixed;
-  height: 100vh;
-  width: 100vh;
+  height: 100%;
+  width: 100%;
   left: 0;
   background: rgba(0, 0, 0, 0.3);
 }
