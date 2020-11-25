@@ -93,7 +93,7 @@ export default {
     }
   },
   async beforeRouteEnter(to, from, next) {
-    let projects = await ProjectsAPI.get({ schema: null })
+    let projects = await ProjectsAPI.get({ schema: null, inactive: null })
     let images = await ImagesAPI.get()
     next(vm => {
       vm.setData(projects)

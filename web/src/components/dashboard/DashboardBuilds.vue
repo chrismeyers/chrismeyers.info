@@ -84,7 +84,7 @@ export default {
     }
   },
   async beforeRouteEnter(to, from, next) {
-    let builds = await BuildsAPI.get({ schema: null })
+    let builds = await BuildsAPI.get({ schema: null, inactive: null })
     let images = await ImagesAPI.get()
     next(vm => {
       vm.setData(builds)
