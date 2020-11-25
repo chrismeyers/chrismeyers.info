@@ -13,11 +13,13 @@
 
         <button
           style="outline: none;"
-          class="hamburger hamburger--collapse"
+          class="hamburger hamburger--spin"
           :class="{ 'is-active': menuDisplayed }"
           ref="hamburger-button"
           type="button"
           @click="toggleMenu()"
+          aria-label="Menu"
+          aria-controls="navigation"
         >
           <span class="hamburger-box" style="height: 26px;">
             <span class="hamburger-inner"></span>
