@@ -39,6 +39,38 @@ Future main() async {
     });
   });
 
+  test("GET /public/projects returns 200 - inactive project excluded",
+      () async {
+    await queries.insertProject();
+    await queries.insertInactiveProject();
+
+    final TestResponse response =
+        await harness.publicAgent.get("/public/projects");
+    expectResponse(response, 200, body: {"items": hasLength(1)});
+  });
+
+  test("GET /public/projects returns 200 - inactive project included",
+      () async {
+    await queries.insertProject();
+    await queries.insertInactiveProject();
+
+    final TestResponse response =
+        await harness.publicAgent.get("/public/projects?inactive");
+    expectResponse(response, 200, body: {"items": hasLength(2)});
+  });
+
+  test(
+      "GET /public/projects returns 200 - inactive project included with schema",
+      () async {
+    await queries.insertProject();
+    await queries.insertInactiveProject();
+
+    final TestResponse response =
+        await harness.publicAgent.get("/public/projects?inactive&schema");
+    expectResponse(response, 200,
+        body: {"items": hasLength(2), "schema": isList});
+  });
+
   test("GET /public/projects/:id returns 200 - matching ID", () async {
     await queries.insertProject();
 
@@ -58,6 +90,24 @@ Future main() async {
       "images": [],
       "active": true
     });
+  });
+
+  test("GET /public/projects/:id returns 404 - inactive project excluded",
+      () async {
+    await queries.insertInactiveProject();
+
+    final TestResponse response =
+        await harness.publicAgent.get("/public/projects/1");
+    expectResponse(response, 404, body: {"message": isString});
+  });
+
+  test("GET /public/projects/:id returns 200 - inactive project included",
+      () async {
+    await queries.insertInactiveProject();
+
+    final TestResponse response =
+        await harness.publicAgent.get("/public/projects/1?inactive");
+    expectResponse(response, 200, body: isMap);
   });
 
   test("GET /public/projects/:id returns 404 - no matching ID", () async {
