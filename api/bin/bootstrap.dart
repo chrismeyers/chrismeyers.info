@@ -3,7 +3,6 @@
 /// bootstrap.dart
 ///   -m, --mode                   Specifies the API that should be bootstrapped
 ///                                [dev (default), prod]
-///
 ///   -u, --username               Specifies the admin username (required for POST)
 ///   -p, --password               Specifies the admin password (required for POST)
 ///   -c, --client                 Specifies the OAuth 2.0 client (required for POST)
@@ -18,9 +17,9 @@
 /// this script.
 ///
 /// Examples:
-///   dart bootstrap.dart -u USER -p PASS -c SOME.CLIENT.NAME -m dev|prod
-///   ./bootstrap.dart --backup -m dev|prod
-///   bin/bootstrap.dart -r -u USER -p PASS --registration-secret SECRET
+///   Register user:          dart bootstrap.dart -r -u USER -p PASS --registration-secret SECRET
+///   Restore from seed.json: dart bootstrap.dart -u USER -p PASS -c SOME.CLIENT.NAME -m dev|prod
+///   Backup to seed.json:    dart bootstrap.dart --backup -m dev|prod
 
 import "dart:async";
 import "dart:convert";

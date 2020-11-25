@@ -85,10 +85,7 @@ export default {
       if (builds instanceof ConnectionError) {
         this.showDialog(builds.title, builds.message)
       } else if (builds.status === 200) {
-        // Only display builds that are set to active.
-        this.builds = builds.data.items.filter(b => {
-          return b.active
-        })
+        this.builds = builds.data.items
       } else {
         this.showDialog(builds.statusText, builds.data.error)
       }
