@@ -169,10 +169,7 @@ export default {
       if (projects instanceof ConnectionError) {
         this.showDialog(projects.title, projects.message)
       } else if (projects.status === 200) {
-        // Only display projects that are set to active.
-        this.projects = projects.data.items.filter(p => {
-          return p.active
-        })
+        this.projects = projects.data.items
       } else {
         this.showDialog(projects.statusText, projects.data.error)
       }
