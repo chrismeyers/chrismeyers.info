@@ -10,10 +10,14 @@ class BuildsPublicController extends ResourceController {
 
   @Operation.get()
   Future<Response> getBuilds(
-      {@Bind.query("schema") bool schema = false}) async {
+      {@Bind.query("schema") bool schema = false,
+      @Bind.query("inactive") bool inactive = false}) async {
     final Query<Build> query = Query<Build>(context)
       ..join(object: (b) => b.image)
       ..sortBy((b) => b.startedDate, QuerySortOrder.ascending);
+    if (!inactive) {
+      query.where((b) => b.active).equalTo(true);
+    }
     final List<Build> allBuilds = await query.fetch();
 
     final Map<String, dynamic> response = {};
@@ -27,10 +31,14 @@ class BuildsPublicController extends ResourceController {
   }
 
   @Operation.get("id")
-  Future<Response> getBuild(@Bind.path("id") int id) async {
+  Future<Response> getBuild(@Bind.path("id") int id,
+      {@Bind.query("inactive") bool inactive = false}) async {
     final Query<Build> query = Query<Build>(context)
       ..where((b) => b.id).equalTo(id)
       ..join(object: (b) => b.image);
+    if (!inactive) {
+      query.where((b) => b.active).equalTo(true);
+    }
     final Build build = await query.fetchOne();
 
     if (build == null) {

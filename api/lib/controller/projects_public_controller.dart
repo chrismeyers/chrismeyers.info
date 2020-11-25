@@ -10,10 +10,14 @@ class ProjectsPublicController extends ResourceController {
 
   @Operation.get()
   Future<Response> getProjects(
-      {@Bind.query("schema") bool schema = false}) async {
+      {@Bind.query("schema") bool schema = false,
+      @Bind.query("inactive") bool inactive = false}) async {
     final Query<Project> query = Query<Project>(context)
       ..join(set: (p) => p.images)
       ..sortBy((p) => p.startedDate, QuerySortOrder.ascending);
+    if (!inactive) {
+      query.where((p) => p.active).equalTo(true);
+    }
     final List<Project> allProjects = await query.fetch();
 
     for (final Project project in allProjects) {
@@ -31,15 +35,19 @@ class ProjectsPublicController extends ResourceController {
   }
 
   @Operation.get("id")
-  Future<Response> getProject(@Bind.path("id") int id) async {
+  Future<Response> getProject(@Bind.path("id") int id,
+      {@Bind.query("inactive") bool inactive = false}) async {
     final Query<Project> query = Query<Project>(context)
       ..where((p) => p.id).equalTo(id)
       ..join(set: (p) => p.images);
+    if (!inactive) {
+      query.where((p) => p.active).equalTo(true);
+    }
     final Project project = await query.fetchOne();
 
     if (project == null) {
       return Response.notFound(
-          body: {"message": "project id $id does not exist"});
+          body: {"message": "project id $id does not exist or is inactive"});
     }
 
     return Response.ok(project);

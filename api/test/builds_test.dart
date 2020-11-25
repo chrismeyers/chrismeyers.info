@@ -39,6 +39,36 @@ Future main() async {
     });
   });
 
+  test("GET /public/builds returns 200 - inactive build excluded", () async {
+    await queries.insertBuild();
+    await queries.insertInactiveBuild();
+
+    final TestResponse response =
+        await harness.publicAgent.get("/public/builds");
+    expectResponse(response, 200, body: {"items": hasLength(1)});
+  });
+
+  test("GET /public/builds returns 200 - inactive build included", () async {
+    await queries.insertBuild();
+    await queries.insertInactiveBuild();
+    ;
+
+    final TestResponse response =
+        await harness.publicAgent.get("/public/builds?inactive");
+    expectResponse(response, 200, body: {"items": hasLength(2)});
+  });
+
+  test("GET /public/builds returns 200 - inactive build included with schema",
+      () async {
+    await queries.insertBuild();
+    await queries.insertInactiveBuild();
+
+    final TestResponse response =
+        await harness.publicAgent.get("/public/builds?inactive&schema");
+    expectResponse(response, 200,
+        body: {"items": hasLength(2), "schema": isList});
+  });
+
   test("GET /public/builds/:id returns 200 - matching ID", () async {
     await queries.insertBuild();
 
@@ -64,6 +94,24 @@ Future main() async {
     final TestResponse response =
         await harness.publicAgent.get("/public/builds/1234");
     expectResponse(response, 404);
+  });
+
+  test("GET /public/builds/:id returns 404 - inactive build excluded",
+      () async {
+    await queries.insertInactiveBuild();
+
+    final TestResponse response =
+        await harness.publicAgent.get("/public/builds/1");
+    expectResponse(response, 404, body: {"message": isString});
+  });
+
+  test("GET /public/builds/:id returns 200 - inactive build included",
+      () async {
+    await queries.insertInactiveBuild();
+
+    final TestResponse response =
+        await harness.publicAgent.get("/public/builds/1?inactive");
+    expectResponse(response, 200, body: isMap);
   });
 
   test("POST /admin/builds returns 400 - invalid_authorization_header",
