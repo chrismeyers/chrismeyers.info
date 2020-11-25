@@ -1,31 +1,38 @@
 <template>
   <nav>
-    <div id="hamburger-menu">
-      <div class="banner-icon">
-        <router-link to="/" class="small-nav-logo">
-          <img
-            src="@/assets/images/logos/meyers-logo-green.svg"
-            alt="Chris Meyers. Developer, Tech enthusiast."
-            class="banner-img"
-            title="Home"
-          />
-        </router-link>
+    <div id="mobile-menu">
+      <div class="header">
+        <div class="logo">
+          <router-link to="/" class="small-nav-logo">
+            <img
+              src="@/assets/images/logos/meyers-logo-green.svg"
+              alt="Chris Meyers. Developer, Tech enthusiast."
+              class="banner-img"
+              title="Home"
+            />
+          </router-link>
+        </div>
+        <div class="menu-icon">
+          <div>
+            <button
+              style="outline: none;"
+              class="hamburger hamburger--spin"
+              :class="{ 'is-active': menuDisplayed }"
+              ref="hamburger-button"
+              type="button"
+              @click="toggleMenu()"
+              aria-label="Menu"
+              aria-controls="navigation"
+            >
+              <span class="hamburger-box" style="height: 26px;">
+                <span class="hamburger-inner"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
 
-        <button
-          style="outline: none;"
-          class="hamburger hamburger--spin"
-          :class="{ 'is-active': menuDisplayed }"
-          ref="hamburger-button"
-          type="button"
-          @click="toggleMenu()"
-          aria-label="Menu"
-          aria-controls="navigation"
-        >
-          <span class="hamburger-box" style="height: 26px;">
-            <span class="hamburger-inner"></span>
-          </span>
-        </button>
-
+      <div>
         <div class="menu-overlay" v-show="menuDisplayed"></div>
         <div
           v-click-outside="toggleMenu"
@@ -106,15 +113,43 @@ nav {
   width: 100%;
 }
 
-#hamburger-menu {
+#mobile-menu {
   border-bottom: 1px solid var(--border-color);
   background-color: var(--bg-color);
   height: 60px;
 }
 
-.banner-icon {
-  float: right;
-  margin-right: 0px;
+.header {
+  display: flex;
+}
+
+.menu-icon {
+  margin-left: auto;
+}
+
+.menu-dropdown {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-items {
+  padding: 0;
+  list-style: none;
+  position: fixed;
+  float: left;
+  clear: right;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.menu-overlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .small-nav-logo img {
@@ -143,30 +178,5 @@ nav {
   line-height: 50px;
   text-align: center;
   vertical-align: middle;
-}
-
-.menu-dropdown {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.menu-items {
-  padding: 0;
-  list-style: none;
-  position: fixed;
-  float: left;
-  clear: right;
-  left: 0;
-  right: 0;
-  z-index: 1;
-}
-
-.menu-overlay {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  background: rgba(0, 0, 0, 0.3);
 }
 </style>
