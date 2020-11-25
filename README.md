@@ -45,6 +45,7 @@ This is the codebase for my personal website currently located at <https://chris
     - [vuex-persist](https://github.com/championswimmer/vuex-persist) to persist vuex state
     - [vue-svgicon](https://github.com/MMF-FE/vue-svgicon) to dynamically change the fill color of SVGs
     - [vue-js-toggle-button](https://github.com/euvl/vue-js-toggle-button) to toggle themes
+    - [vue-click-outside](https://github.com/vue-bulma/click-outside) to automatically close elements
   - [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon
   - [axios](https://github.com/axios/axios) as an HTTP client
   - [qs](https://github.com/ljharb/qs) for querystring parsing
