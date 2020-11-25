@@ -58,7 +58,7 @@
               </dl>
             </div>
 
-            <div class="projImages">
+            <div v-if="project.images.length > 0" class="projImages">
               <template v-for="(image, index) in project.images">
                 <template v-if="index == 0">
                   <template v-if="image.path.toLowerCase().endsWith('.gif')">
@@ -287,12 +287,12 @@ export default {
   .projDesc {
     -webkit-flex: 3;
     flex: 3;
-    padding-right: 20px;
   }
 
   .projImages {
     -webkit-flex: 2;
     flex: 2;
+    padding-left: 20px;
   }
 
   .projImages-full-img-square {
