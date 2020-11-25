@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     onResize() {
-      const width = document.body.clientWidth
+      const width = window.innerWidth
       this.isMobile = width < MOBILE_BREAKPOINT
     },
     setPath(rawPath) {
