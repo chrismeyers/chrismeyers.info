@@ -43,7 +43,7 @@ class BuildsPublicController extends ResourceController {
 
     if (build == null) {
       return Response.notFound(
-          body: {"message": "build id $id does not exist"});
+          body: {"message": "build id $id does not exist or is inactive"});
     }
 
     return Response.ok(build);
