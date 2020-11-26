@@ -1,11 +1,13 @@
 <template>
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
-      <option v-for="project in items" :key="project.id" :value="project">{{
-        project.id > 0
-          ? `Edit ${project.id}: ${project.title}`
-          : "Add new project"
-      }}</option>
+      <option v-for="project in items" :key="project.id" :value="project">
+        {{
+          project.id > 0
+            ? `Edit ${project.id}: ${project.title}`
+            : 'Add new project'
+        }}
+      </option>
     </select>
 
     <br />
@@ -52,9 +54,9 @@
             :multiple="field.multiple"
             v-model="selected.images"
           >
-            <option v-for="image in images" :key="image.id" :value="image.id">{{
-              `Image ${image.id}: ${image.path}`
-            }}</option>
+            <option v-for="image in images" :key="image.id" :value="image.id">
+              {{ `Image ${image.id}: ${image.path}` }}
+            </option>
           </select>
         </template>
       </template>
@@ -79,26 +81,26 @@
 </template>
 
 <script>
-import ProjectsAPI from "@/utils/api/projects"
-import ImagesAPI from "@/utils/api/images"
-import DashboardBaseMixin from "@/mixins/DashboardBase"
+import ProjectsAPI from '@/utils/api/projects';
+import ImagesAPI from '@/utils/api/images';
+import DashboardBaseMixin from '@/mixins/DashboardBase';
 
 export default {
-  name: "dashboard-projects",
+  name: 'dashboard-projects',
   mixins: [DashboardBaseMixin],
   data() {
     return {
-      type: { singular: "project", plural: "projects" },
-      api: ProjectsAPI
-    }
+      type: { singular: 'project', plural: 'projects' },
+      api: ProjectsAPI,
+    };
   },
   async beforeRouteEnter(to, from, next) {
-    let projects = await ProjectsAPI.get({ schema: null, inactive: null })
-    let images = await ImagesAPI.get()
-    next(vm => {
-      vm.setData(projects)
-      vm.setImages(images)
-    })
+    const projects = await ProjectsAPI.get({ schema: null, inactive: null });
+    const images = await ImagesAPI.get();
+    next((vm) => {
+      vm.setData(projects);
+      vm.setImages(images);
+    });
   },
   methods: {
     flattenData(projects) {
@@ -109,24 +111,24 @@ export default {
       //
       // The API returns startedDate as a timestamp. The HTML date input type
       // only works if given a date, so the time is trimmed off.
-      let flatProjects = []
-      for (let project of projects.data.items) {
+      const flatProjects = [];
+      for (const project of projects.data.items) {
         if (project.images) {
-          let imageIds = []
-          for (let image of project.images) {
-            imageIds.push(image.id)
+          const imageIds = [];
+          for (const image of project.images) {
+            imageIds.push(image.id);
           }
-          project.images = imageIds
+          project.images = imageIds;
         }
-        project.startedDate = project.startedDate.split("T")[0]
-        flatProjects.push(project)
+        project.startedDate = project.startedDate.split('T')[0];
+        flatProjects.push(project);
       }
 
       // The images select requires the model to be an array, not null
-      let blank = this.createBlankEntry(projects.data.items[0])
-      blank.images = []
-      return [blank, ...flatProjects]
-    }
-  }
-}
+      const blank = this.createBlankEntry(projects.data.items[0]);
+      blank.images = [];
+      return [blank, ...flatProjects];
+    },
+  },
+};
 </script>

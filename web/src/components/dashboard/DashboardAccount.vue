@@ -30,56 +30,56 @@
 </template>
 
 <script>
-import AccountAPI from "@/utils/api/account"
-import DashboardMessagesMixin from "@/mixins/DashboardMessages"
-import ModalsMixin from "@/mixins/Modals"
-import { API_TOKEN_KEY } from "@/store/constants"
+import AccountAPI from '@/utils/api/account';
+import DashboardMessagesMixin from '@/mixins/DashboardMessages';
+import ModalsMixin from '@/mixins/Modals';
+import { API_TOKEN_KEY } from '@/store/constants';
 
 export default {
-  name: "dashboard-account",
+  name: 'dashboard-account',
   mixins: [DashboardMessagesMixin, ModalsMixin],
   data() {
     return {
       passwords: {
-        initial: "",
-        confirm: ""
+        initial: '',
+        confirm: '',
       },
       error: null,
-      lastResponse: {}
-    }
+      lastResponse: {},
+    };
   },
   methods: {
     async updatePassword() {
-      if (this.passwords["initial"] !== this.passwords["confirm"]) {
-        this.error = "Passwords do not match"
+      if (this.passwords['initial'] !== this.passwords['confirm']) {
+        this.error = 'Passwords do not match';
       } else if (
-        this.passwords["initial"] !== "" &&
-        this.passwords["confirm"] !== ""
+        this.passwords['initial'] !== '' &&
+        this.passwords['confirm'] !== ''
       ) {
-        this.error = null
+        this.error = null;
         this.lastResponse = await AccountAPI.updatePassword(
           this.$cookie.get(API_TOKEN_KEY),
-          this.passwords["initial"]
-        )
+          this.passwords['initial'],
+        );
 
-        let result = {}
+        let result = {};
         if (this.lastResponse.status === 200) {
-          result = this.success("password", false)
+          result = this.success('password', false);
         } else {
-          result = this.modificationError("password", false)
+          result = this.modificationError('password', false);
         }
 
         // Prevent closing the dialog by pressing enter to submit form.
-        setTimeout(() => this.showDialog(result.title, result.body), 100)
+        setTimeout(() => this.showDialog(result.title, result.body), 100);
       }
 
       this.passwords = {
-        initial: "",
-        confirm: ""
-      }
-    }
-  }
-}
+        initial: '',
+        confirm: '',
+      };
+    },
+  },
+};
 </script>
 
 <style scoped>

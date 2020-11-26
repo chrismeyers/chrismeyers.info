@@ -1,11 +1,13 @@
 <template>
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
-      <option v-for="build in items" :key="build.id" :value="build">{{
-        build.id > 0
-          ? `Edit ${build.id}: ${build.displayDate}`
-          : "Add new build"
-      }}</option>
+      <option v-for="build in items" :key="build.id" :value="build">
+        {{
+          build.id > 0
+            ? `Edit ${build.id}: ${build.displayDate}`
+            : 'Add new build'
+        }}
+      </option>
     </select>
 
     <br />
@@ -43,9 +45,9 @@
             :multiple="field.multiple"
             v-model="selected.image"
           >
-            <option v-for="image in images" :key="image.id" :value="image.id">{{
-              `Image ${image.id}: ${image.path}`
-            }}</option>
+            <option v-for="image in images" :key="image.id" :value="image.id">
+              {{ `Image ${image.id}: ${image.path}` }}
+            </option>
           </select>
         </template>
       </template>
@@ -70,26 +72,26 @@
 </template>
 
 <script>
-import BuildsAPI from "@/utils/api/builds"
-import ImagesAPI from "@/utils/api/images"
-import DashboardBaseMixin from "@/mixins/DashboardBase"
+import BuildsAPI from '@/utils/api/builds';
+import ImagesAPI from '@/utils/api/images';
+import DashboardBaseMixin from '@/mixins/DashboardBase';
 
 export default {
-  name: "dashboard-builds",
+  name: 'dashboard-builds',
   mixins: [DashboardBaseMixin],
   data() {
     return {
-      type: { singular: "build", plural: "builds" },
-      api: BuildsAPI
-    }
+      type: { singular: 'build', plural: 'builds' },
+      api: BuildsAPI,
+    };
   },
   async beforeRouteEnter(to, from, next) {
-    let builds = await BuildsAPI.get({ schema: null, inactive: null })
-    let images = await ImagesAPI.get()
-    next(vm => {
-      vm.setData(builds)
-      vm.setImages(images)
-    })
+    const builds = await BuildsAPI.get({ schema: null, inactive: null });
+    const images = await ImagesAPI.get();
+    next((vm) => {
+      vm.setData(builds);
+      vm.setImages(images);
+    });
   },
   methods: {
     flattenData(builds) {
@@ -100,17 +102,17 @@ export default {
       //
       // The API returns startedDate as a timestamp. The HTML date input type
       // only works if given a date, so the time is trimmed off.
-      let flatBuilds = []
-      for (let build of builds.data.items) {
+      const flatBuilds = [];
+      for (const build of builds.data.items) {
         if (build.image) {
-          build.image = build.image.id
+          build.image = build.image.id;
         }
-        build.startedDate = build.startedDate.split("T")[0]
-        flatBuilds.push(build)
+        build.startedDate = build.startedDate.split('T')[0];
+        flatBuilds.push(build);
       }
 
-      return [this.createBlankEntry(builds.data.items[0]), ...flatBuilds]
-    }
-  }
-}
+      return [this.createBlankEntry(builds.data.items[0]), ...flatBuilds];
+    },
+  },
+};
 </script>

@@ -68,7 +68,7 @@
                       :alt="image.title"
                       :key="`${image.id}-full`"
                       :ref="`project-${project.id}-${index}-gif`"
-                      style="display:none;"
+                      style="display: none"
                     />
                     <template v-if="image.thumbnail">
                       <div
@@ -143,50 +143,50 @@
 </template>
 
 <script>
-import ProjectsAPI from "@/utils/api/projects"
-import ConnectionError from "@/utils/errors/types/connection"
-import ModalsMixin from "@/mixins/Modals"
-import "@/assets/images/icons/generated/github"
-import "@/assets/images/icons/generated/paragraph"
-import "@/assets/images/icons/generated/link-external"
-import "@/assets/images/icons/generated/play"
+import ProjectsAPI from '@/utils/api/projects';
+import ConnectionError from '@/utils/errors/types/connection';
+import ModalsMixin from '@/mixins/Modals';
+import '@/assets/images/icons/generated/github';
+import '@/assets/images/icons/generated/paragraph';
+import '@/assets/images/icons/generated/link-external';
+import '@/assets/images/icons/generated/play';
 
 export default {
-  name: "projects-page",
+  name: 'projects-page',
   mixins: [ModalsMixin],
   data() {
     return {
-      projects: null
-    }
+      projects: null,
+    };
   },
   beforeRouteEnter(to, from, next) {
-    ProjectsAPI.get().then(projects => {
-      next(vm => vm.setData(projects))
-    })
+    ProjectsAPI.get().then((projects) => {
+      next((vm) => vm.setData(projects));
+    });
   },
   methods: {
     setData(projects) {
       if (projects instanceof ConnectionError) {
-        this.showDialog(projects.title, projects.message)
+        this.showDialog(projects.title, projects.message);
       } else if (projects.status === 200) {
-        this.projects = projects.data.items
+        this.projects = projects.data.items;
       } else {
-        this.showDialog(projects.statusText, projects.data.error)
+        this.showDialog(projects.statusText, projects.data.error);
       }
     },
     showGIF(which) {
-      const gif = this.$refs[which][0]
+      const gif = this.$refs[which][0];
 
-      gif.click()
+      gif.click();
 
       // Restart the GIF each time it's opened
       setTimeout(() => {
-        const img = document.querySelectorAll(".content-v-img > img")[0]
-        img.src = gif.src
-      }, 100)
-    }
-  }
-}
+        const img = document.querySelectorAll('.content-v-img > img')[0];
+        img.src = gif.src;
+      }, 100);
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -24,34 +24,34 @@
 </template>
 
 <script>
-import AuthAPI from "@/utils/api/auth"
-import ConnectionError from "@/utils/errors/types/connection"
-import ModalsMixin from "@/mixins/Modals"
-import { API_TOKEN_KEY } from "@/store/constants"
+import AuthAPI from '@/utils/api/auth';
+import ConnectionError from '@/utils/errors/types/connection';
+import ModalsMixin from '@/mixins/Modals';
+import { API_TOKEN_KEY } from '@/store/constants';
 
 export default {
-  name: "dashboard-home",
+  name: 'dashboard-home',
   mixins: [ModalsMixin],
   methods: {
     getTitle() {
-      return document.title
+      return document.title;
     },
     async logout() {
-      let logout = await AuthAPI.logout(this.$cookie.get(API_TOKEN_KEY))
+      const logout = await AuthAPI.logout(this.$cookie.get(API_TOKEN_KEY));
 
       if (logout instanceof ConnectionError) {
-        this.showDialog(logout.title, logout.message)
+        this.showDialog(logout.title, logout.message);
       } else if (logout.status === 200) {
-        this.$cookie.delete(API_TOKEN_KEY)
+        this.$cookie.delete(API_TOKEN_KEY);
         this.$router.push({
-          path: "/login"
-        })
+          path: '/login',
+        });
       } else {
-        this.showDialog(logout.statusText, logout.data.error)
+        this.showDialog(logout.statusText, logout.data.error);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
@@ -72,12 +72,12 @@ export default {
   margin-bottom: 20px;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   -webkit-appearance: checkbox;
 }
 
 .required-star:after {
-  content: " *";
+  content: ' *';
   color: red;
 }
 

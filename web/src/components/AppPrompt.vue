@@ -31,207 +31,207 @@
 </template>
 
 <script>
-import { THEMES } from "@/store/constants"
+import { THEMES } from '@/store/constants';
 
 export default {
-  name: "app-prompt",
+  name: 'app-prompt',
   data() {
     return {
       promptVisible: false,
       textareaVisible: false,
       arrows: {
-        up: "&#9650;",
-        down: "&#9660;"
+        up: '&#9650;',
+        down: '&#9660;',
       },
-      arrowDirection: "up",
-      command: "",
-      info: "",
+      arrowDirection: 'up',
+      command: '',
+      info: '',
       history: [],
       historyIndex: -1,
-      keydownFn: null
-    }
+      keydownFn: null,
+    };
   },
   mounted() {
     // eslint-disable-next-line no-console
     console.info(
       `%c[${window.location.host}] Prefer a CLI? Press the tilde (~) key and type \`help\` for usage.`,
-      "font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: 'Courier New', Courier, monospace;"
-    )
+      "font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: 'Courier New', Courier, monospace;",
+    );
 
-    this.keydownFn = e => {
-      if (e.code === "Backquote") {
-        e.preventDefault() // Prevents adding ` when opening the prompt
-        this.showPrompt()
-      } else if (e.code === "Escape") {
-        this.hidePrompt()
-      } else if (e.code === "Enter") {
+    this.keydownFn = (e) => {
+      if (e.code === 'Backquote') {
+        e.preventDefault(); // Prevents adding ` when opening the prompt
+        this.showPrompt();
+      } else if (e.code === 'Escape') {
+        this.hidePrompt();
+      } else if (e.code === 'Enter') {
         if (this.promptVisible) {
-          this.run()
+          this.run();
         }
-      } else if (e.code === "ArrowUp") {
+      } else if (e.code === 'ArrowUp') {
         if (this.promptVisible) {
-          this.prev()
+          this.prev();
         }
-      } else if (e.code === "ArrowDown") {
+      } else if (e.code === 'ArrowDown') {
         if (this.promptVisible) {
-          this.next()
+          this.next();
         }
       }
-    }
+    };
   },
   activated() {
-    window.addEventListener("keydown", this.keydownFn)
+    window.addEventListener('keydown', this.keydownFn);
   },
   deactivated() {
-    window.removeEventListener("keydown", this.keydownFn)
+    window.removeEventListener('keydown', this.keydownFn);
   },
   methods: {
     togglePrompt() {
       if (this.promptVisible) {
-        this.hidePrompt()
+        this.hidePrompt();
       } else {
-        this.showPrompt()
+        this.showPrompt();
       }
     },
     showPrompt() {
-      this.promptVisible = true
-      this.focusPrompt()
+      this.promptVisible = true;
+      this.focusPrompt();
     },
     hidePrompt() {
-      this.promptVisible = false
-      this.historyIndex = -1
-      this.hideTextarea()
-      this.clearCommand()
+      this.promptVisible = false;
+      this.historyIndex = -1;
+      this.hideTextarea();
+      this.clearCommand();
     },
     focusPrompt() {
       this.$nextTick(() => {
-        this.$refs.prompt.focus()
-      })
+        this.$refs.prompt.focus();
+      });
     },
     toggleTextarea() {
       if (this.textareaVisible) {
-        this.hideTextarea()
+        this.hideTextarea();
       } else {
-        this.showTextarea()
+        this.showTextarea();
       }
     },
     showTextarea() {
-      this.textareaVisible = true
-      this.arrowDirection = "down"
+      this.textareaVisible = true;
+      this.arrowDirection = 'down';
     },
     hideTextarea() {
-      this.textareaVisible = false
-      this.arrowDirection = "up"
+      this.textareaVisible = false;
+      this.arrowDirection = 'up';
     },
     toggleTheme(which) {
-      this.$store.commit("setTheme", which)
+      this.$store.commit('setTheme', which);
     },
     scrollTextareaToBottom() {
-      let textarea = this.$el.querySelector("#prompt-textarea")
-      textarea.scrollTop = textarea.scrollHeight
+      const textarea = this.$el.querySelector('#prompt-textarea');
+      textarea.scrollTop = textarea.scrollHeight;
     },
     clearCommand() {
-      this.command = ""
+      this.command = '';
     },
     setCommand(cmd) {
-      this.command = cmd
+      this.command = cmd;
       // Force the model to update even if the adjacent command is the same
       // as the current command.
-      this.$forceUpdate()
+      this.$forceUpdate();
     },
     clearTextarea() {
-      this.info = ""
+      this.info = '';
     },
     moveCursorToEnd() {
-      const pos = this.command.length
+      const pos = this.command.length;
 
       // NOTE: this.$nextTick doesn't work here...
       setTimeout(() => {
-        this.$refs.prompt.selectionStart = pos
-        this.$refs.prompt.selectionEnd = pos
-      }, 10)
+        this.$refs.prompt.selectionStart = pos;
+        this.$refs.prompt.selectionEnd = pos;
+      }, 10);
     },
     prev() {
       if (this.historyIndex < this.history.length - 1) {
-        this.historyIndex++
-        this.setCommand(this.history[this.historyIndex])
+        this.historyIndex++;
+        this.setCommand(this.history[this.historyIndex]);
       }
 
-      this.moveCursorToEnd()
+      this.moveCursorToEnd();
     },
     next() {
       if (this.historyIndex >= 0) {
-        this.historyIndex--
+        this.historyIndex--;
         if (this.historyIndex < 0) {
-          this.setCommand("")
+          this.setCommand('');
         } else {
-          this.setCommand(this.history[this.historyIndex])
+          this.setCommand(this.history[this.historyIndex]);
         }
       }
     },
     run(command = null) {
       if (command) {
         // Only store user entered commands
-        this.command = command
+        this.command = command;
       } else {
         // Push to top of history stack
-        this.history.unshift(this.command)
+        this.history.unshift(this.command);
       }
 
       const parts = this.command
         .toLowerCase()
-        .split(" ")
-        .filter(p => {
-          return p !== ""
+        .split(' ')
+        .filter((p) => {
+          return p !== '';
         })
-        .map(p => p.trim())
-      const cmd = parts[0].trim()
-      const args = parts.slice(1)
-      let refreshHistory = true
+        .map((p) => p.trim());
+      const cmd = parts[0].trim();
+      const args = parts.slice(1);
+      let refreshHistory = true;
 
-      if (cmd === "echo") {
-        this.echo(args)
-      } else if (cmd === "cd") {
-        this.cd(args)
-      } else if (cmd === "login") {
-        this.cd(["login"])
-      } else if (cmd === "toggle") {
-        this.toggleTextarea()
-      } else if (cmd === "theme") {
-        this.toggleTheme(args[0])
-      } else if (cmd === "exit") {
-        this.exit()
-      } else if (cmd === "help") {
-        this.help()
-        refreshHistory = false
+      if (cmd === 'echo') {
+        this.echo(args);
+      } else if (cmd === 'cd') {
+        this.cd(args);
+      } else if (cmd === 'login') {
+        this.cd(['login']);
+      } else if (cmd === 'toggle') {
+        this.toggleTextarea();
+      } else if (cmd === 'theme') {
+        this.toggleTheme(args[0]);
+      } else if (cmd === 'exit') {
+        this.exit();
+      } else if (cmd === 'help') {
+        this.help();
+        refreshHistory = false;
       }
 
-      this.historyIndex = -1
-      this.clearCommand()
+      this.historyIndex = -1;
+      this.clearCommand();
 
       if (refreshHistory && this.textareaVisible) {
-        this.printHistory()
+        this.printHistory();
       }
     },
     echo(args) {
-      alert(args.join(" "))
+      alert(args.join(' '));
     },
     cd(args) {
-      let path = args[0]
+      let path = args[0];
       if (args.length < 1) {
-        path = ""
+        path = '';
       }
 
-      this.$router.push({ path: `/${path}` })
+      this.$router.push({ path: `/${path}` });
     },
     exit() {
-      this.hidePrompt()
+      this.hidePrompt();
     },
     help() {
-      this.clearTextarea()
-      let themeList = Object.values(THEMES).reduce(
-        (acc, cur) => `${acc}, ${cur}`
-      )
+      this.clearTextarea();
+      const themeList = Object.values(THEMES).reduce(
+        (acc, cur) => `${acc}, ${cur}`,
+      );
       this.info = `usage: command [arg1] [arg2] ...
 Available commands:
   echo   - prints args to alert() box
@@ -240,32 +240,32 @@ Available commands:
   theme  - sets the theme to the arg (options: ${themeList})
   exit   - closes the command prompt
   help   - prints this message
-`
+`;
       if (!this.textareaVisible) {
-        this.showTextarea()
+        this.showTextarea();
       }
     },
     printHistory() {
-      this.clearTextarea()
+      this.clearTextarea();
 
-      let gutter = this.history.length.toString().length + 1
+      const gutter = this.history.length.toString().length + 1;
       this.history
         .slice()
         .reverse()
         .forEach((item, i) => {
-          this.info += `${(i + 1).toString().padStart(gutter, " ")} ${item} \n`
-        })
+          this.info += `${(i + 1).toString().padStart(gutter, ' ')} ${item} \n`;
+        });
 
       if (!this.textareaVisible) {
-        this.showTextarea()
+        this.showTextarea();
       }
 
       this.$nextTick(() => {
-        this.scrollTextareaToBottom()
-      })
-    }
-  }
-}
+        this.scrollTextareaToBottom();
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -273,7 +273,7 @@ Available commands:
   height: 25px;
   background-color: rgba(0, 0, 0, 0.85);
   color: #00cc00;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
   border: 0;
   font-weight: bold;
 }

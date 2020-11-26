@@ -26,47 +26,47 @@
 </template>
 
 <script>
-import AuthAPI from "@/utils/api/auth"
-import ConnectionError from "@/utils/errors/types/connection"
-import { API_TOKEN_KEY } from "@/store/constants"
+import AuthAPI from '@/utils/api/auth';
+import ConnectionError from '@/utils/errors/types/connection';
+import { API_TOKEN_KEY } from '@/store/constants';
 
 export default {
-  name: "login-page",
+  name: 'login-page',
   data() {
     return {
-      username: "",
-      password: "",
-      error: ""
-    }
+      username: '',
+      password: '',
+      error: '',
+    };
   },
   methods: {
     login() {
-      AuthAPI.login(this.username, this.password).then(auth => {
+      AuthAPI.login(this.username, this.password).then((auth) => {
         if (auth instanceof ConnectionError) {
-          this.error = auth.message
+          this.error = auth.message;
         } else if (auth.status === 200) {
-          this.error = ""
-          this.$cookie.set(API_TOKEN_KEY, auth.data["access_token"], {
-            expires: "1D"
-          })
+          this.error = '';
+          this.$cookie.set(API_TOKEN_KEY, auth.data['access_token'], {
+            expires: '1D',
+          });
           this.$router.push({
-            path: "/dashboard"
-          })
+            path: '/dashboard',
+          });
         } else if (auth.status >= 500) {
           this.error =
-            auth.data.error.charAt(0).toUpperCase() + auth.data.error.slice(1)
+            auth.data.error.charAt(0).toUpperCase() + auth.data.error.slice(1);
         } else {
-          this.error = "Invalid Username or Password"
+          this.error = 'Invalid Username or Password';
         }
-      })
-    }
-  }
-}
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
-input.login-text[type="text"],
-input.login-text[type="password"] {
+input.login-text[type='text'],
+input.login-text[type='password'] {
   width: 200px;
   margin-bottom: 10px;
   display: block;

@@ -62,36 +62,36 @@
 </template>
 
 <script>
-import BuildsAPI from "@/utils/api/builds"
-import ConnectionError from "@/utils/errors/types/connection"
-import ModalsMixin from "@/mixins/Modals"
-import "@/assets/images/icons/generated/paragraph"
+import BuildsAPI from '@/utils/api/builds';
+import ConnectionError from '@/utils/errors/types/connection';
+import ModalsMixin from '@/mixins/Modals';
+import '@/assets/images/icons/generated/paragraph';
 
 export default {
-  name: "builds-page",
+  name: 'builds-page',
   mixins: [ModalsMixin],
   data() {
     return {
-      builds: null
-    }
+      builds: null,
+    };
   },
   beforeRouteEnter(to, from, next) {
-    BuildsAPI.get().then(builds => {
-      next(vm => vm.setData(builds))
-    })
+    BuildsAPI.get().then((builds) => {
+      next((vm) => vm.setData(builds));
+    });
   },
   methods: {
     setData(builds) {
       if (builds instanceof ConnectionError) {
-        this.showDialog(builds.title, builds.message)
+        this.showDialog(builds.title, builds.message);
       } else if (builds.status === 200) {
-        this.builds = builds.data.items
+        this.builds = builds.data.items;
       } else {
-        this.showDialog(builds.statusText, builds.data.error)
+        this.showDialog(builds.statusText, builds.data.error);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

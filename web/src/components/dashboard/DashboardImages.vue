@@ -1,9 +1,9 @@
 <template>
   <div>
     <select class="dropdown-mod dashboard-dropdown" v-model="selected">
-      <option v-for="image in items" :key="image.id" :value="image">{{
-        image.id > 0 ? `Edit ${image.id}: ${image.path}` : "Add new image"
-      }}</option>
+      <option v-for="image in items" :key="image.id" :value="image">
+        {{ image.id > 0 ? `Edit ${image.id}: ${image.path}` : 'Add new image' }}
+      </option>
     </select>
 
     <br />
@@ -41,8 +41,9 @@
               v-for="option in field.options"
               :key="option + '-option'"
               :value="option"
-              >{{ option }}</option
             >
+              {{ option }}
+            </option>
           </select>
         </template>
       </template>
@@ -67,25 +68,25 @@
 </template>
 
 <script>
-import ImagesAPI from "@/utils/api/images"
-import DashboardBaseMixin from "@/mixins/DashboardBase"
+import ImagesAPI from '@/utils/api/images';
+import DashboardBaseMixin from '@/mixins/DashboardBase';
 
 export default {
-  name: "dashboard-images",
+  name: 'dashboard-images',
   mixins: [DashboardBaseMixin],
   data() {
     return {
-      type: { singular: "image", plural: "images" },
-      api: ImagesAPI
-    }
+      type: { singular: 'image', plural: 'images' },
+      api: ImagesAPI,
+    };
   },
   beforeRouteEnter(to, from, next) {
-    ImagesAPI.get({ schema: null }).then(images => {
-      next(vm => vm.setData(images))
-    })
+    ImagesAPI.get({ schema: null }).then((images) => {
+      next((vm) => vm.setData(images));
+    });
   },
-  methods: {}
-}
+  methods: {},
+};
 </script>
 
 <style scoped>

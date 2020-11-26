@@ -50,9 +50,9 @@
 
 <script>
 export default {
-  name: "app-full-nav",
-  props: ["path"]
-}
+  name: 'app-full-nav',
+  props: ['path'],
+};
 </script>
 
 <style scoped>

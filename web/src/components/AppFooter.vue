@@ -5,7 +5,7 @@
         <a
           href="https://github.com/chrismeyers"
           target="_blank"
-          style="text-decoration: none;"
+          style="text-decoration: none"
         >
           <svgicon
             name="github"
@@ -22,7 +22,7 @@
         <a
           href="https://www.linkedin.com/in/chris-meyers"
           target="_blank"
-          style="text-decoration: none;"
+          style="text-decoration: none"
         >
           <svgicon
             name="linkedin"
@@ -68,26 +68,26 @@
 </template>
 
 <script>
-import "@/assets/images/icons/generated/github"
-import "@/assets/images/icons/generated/linkedin"
-import "@/assets/images/icons/generated/mail"
-import { THEMES, CONTACT_EMAIL } from "@/store/constants"
+import '@/assets/images/icons/generated/github';
+import '@/assets/images/icons/generated/linkedin';
+import '@/assets/images/icons/generated/mail';
+import { THEMES, CONTACT_EMAIL } from '@/store/constants';
 
 export default {
-  name: "app-footer",
+  name: 'app-footer',
   data() {
     return {
       THEMES,
-      CONTACT_EMAIL
-    }
+      CONTACT_EMAIL,
+    };
   },
   computed: {
     mainThemeColor: () =>
       getComputedStyle(document.documentElement).getPropertyValue(
-        "--main-theme-color"
-      )
-  }
-}
+        '--main-theme-color',
+      ),
+  },
+};
 </script>
 
 <style scoped>
