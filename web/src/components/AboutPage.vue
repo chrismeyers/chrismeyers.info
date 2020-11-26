@@ -134,13 +134,15 @@ export default {
     },
     setData(summary) {
       if (summary instanceof ConnectionError) {
-        this.showDialog(summary.title, summary.message);
+        this.showDialog(summary.message, summary.title, { capitalized: true });
       } else if (summary.status === 200) {
         this.languages = summary.data.languages;
         this.mostRecentJob = summary.data.mostRecentJob;
         this.employed = summary.data.mostRecentJob.employed;
       } else {
-        this.showDialog(summary.statusText, summary.data.error);
+        this.showDialog(summary.data.error, summary.statusText, {
+          capitalized: true,
+        });
       }
     },
   },

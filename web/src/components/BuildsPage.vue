@@ -83,11 +83,13 @@ export default {
   methods: {
     setData(builds) {
       if (builds instanceof ConnectionError) {
-        this.showDialog(builds.title, builds.message);
+        this.showDialog(builds.message, builds.title, { capitalized: true });
       } else if (builds.status === 200) {
         this.builds = builds.data.items;
       } else {
-        this.showDialog(builds.statusText, builds.data.error);
+        this.showDialog(builds.data.error, builds.statusText, {
+          capitalized: true,
+        });
       }
     },
   },

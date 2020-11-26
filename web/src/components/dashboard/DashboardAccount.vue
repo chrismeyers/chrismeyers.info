@@ -70,7 +70,9 @@ export default {
         }
 
         // Prevent closing the dialog by pressing enter to submit form.
-        setTimeout(() => this.showDialog(result.title, result.body), 100);
+        setTimeout(() => {
+          this.showDialog(result.body, result.title, { capitalized: true });
+        }, 100);
       }
 
       this.passwords = {

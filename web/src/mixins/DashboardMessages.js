@@ -33,8 +33,17 @@ export default {
           : type;
       let msg = `Unable to ${actions.present.toLowerCase()} ${item}`;
 
-      if (error && detail) {
-        msg += `<ul><li>Error: ${error}</li><li>Detail: ${detail}</li></ul>`;
+      if (error || detail) {
+        msg += '<ul>';
+
+        if (error) {
+          msg += `<li>Error: ${error}</li>`;
+        }
+        if (detail) {
+          msg += `<li>Detail: ${detail}</li>`;
+        }
+
+        msg += '</ul>';
       }
 
       return { title: 'Error', body: msg };

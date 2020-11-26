@@ -167,11 +167,15 @@ export default {
   methods: {
     setData(projects) {
       if (projects instanceof ConnectionError) {
-        this.showDialog(projects.title, projects.message);
+        this.showDialog(projects.message, projects.title, {
+          capitalized: true,
+        });
       } else if (projects.status === 200) {
         this.projects = projects.data.items;
       } else {
-        this.showDialog(projects.statusText, projects.data.error);
+        this.showDialog(projects.data.error, projects.statusText, {
+          capitalized: true,
+        });
       }
     },
     showGIF(which) {

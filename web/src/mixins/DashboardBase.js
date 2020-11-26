@@ -81,8 +81,10 @@ export default {
         result = this.modificationError(this.type.singular);
       }
 
-      // Prevent closing the dialog by pressing enter to submit form.
-      setTimeout(() => this.showDialog(result.title, result.body), 100);
+      // Prevent closing the dialog when pressing enter to submit form
+      setTimeout(() => {
+        this.showDialog(result.body, result.title, { capitalized: true });
+      }, 100);
     },
     deleteEntry() {
       const handler = async () => {
@@ -110,7 +112,9 @@ export default {
           }
 
           // Prevent closing the dialog by pressing enter to submit form.
-          setTimeout(() => this.showDialog(result.title, result.body), 100);
+          setTimeout(() => {
+            this.showDialog(result.body, result.title, { capitalized: true });
+          }, 100);
         }
       };
 

@@ -31,10 +31,12 @@
 </template>
 
 <script>
+import ModalsMixin from '@/mixins/Modals';
 import { THEMES } from '@/store/constants';
 
 export default {
   name: 'app-prompt',
+  mixins: [ModalsMixin],
   data() {
     return {
       promptVisible: false,
@@ -173,37 +175,46 @@ export default {
       if (command) {
         // Only store user entered commands
         this.command = command;
-      } else {
+      } else if (this.command !== '') {
         // Push to top of history stack
         this.history.unshift(this.command);
+      } else {
+        return;
       }
 
       const parts = this.command
-        .toLowerCase()
         .split(' ')
         .filter((p) => {
           return p !== '';
         })
         .map((p) => p.trim());
-      const cmd = parts[0].trim();
+      const cmd = parts[0].trim().toLowerCase();
       const args = parts.slice(1);
       let refreshHistory = true;
 
-      if (cmd === 'echo') {
-        this.echo(args);
-      } else if (cmd === 'cd') {
-        this.cd(args);
-      } else if (cmd === 'login') {
-        this.cd(['login']);
-      } else if (cmd === 'toggle') {
-        this.toggleTextarea();
-      } else if (cmd === 'theme') {
-        this.toggleTheme(args[0]);
-      } else if (cmd === 'exit') {
-        this.exit();
-      } else if (cmd === 'help') {
-        this.help();
-        refreshHistory = false;
+      switch (cmd) {
+        case 'echo':
+          this.echo(args);
+          break;
+        case 'cd':
+          this.cd(args);
+          break;
+        case 'login':
+          this.cd(['login']);
+          break;
+        case 'toggle':
+          this.toggleTextarea();
+          break;
+        case 'theme':
+          this.toggleTheme(args[0]);
+          break;
+        case 'exit':
+          this.exit();
+          break;
+        case 'help':
+          this.help();
+          refreshHistory = false;
+          break;
       }
 
       this.historyIndex = -1;
@@ -214,8 +225,11 @@ export default {
       }
     },
     echo(args) {
-      // TODO: use custom modal
-      alert(args.join(' '));
+      // Prevent closing the dialog when pressing enter to submit the command
+      setTimeout(() => {
+        this.showDialog(args.join(' '));
+        this.focusPrompt();
+      }, 100);
     },
     cd(args) {
       let path = args[0];
@@ -235,7 +249,7 @@ export default {
       );
       this.info = `usage: command [arg1] [arg2] ...
 Available commands:
-  echo   - prints args to alert() box
+  echo   - prints args to dialog modal
   cd     - navigates to the given arg
   toggle - toggles the info box
   theme  - sets the theme to the arg (options: ${themeList})
