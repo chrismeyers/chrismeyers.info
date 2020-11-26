@@ -98,8 +98,8 @@
         usable applications that solve problems. If you have any questions,
         comments, or would like to work together on a project, please
         <a class="fancytxt" :href="`mailto:${CONTACT_EMAIL}`" target="_blank"
-          >send me a message.</a
-        ></span
+          >send me a message</a
+        >.</span
       >
     </div>
   </div>
