@@ -12,7 +12,7 @@
             <li
               class="left-column sub-left-column job-title"
               :class="{
-                'same-company-spacing': i > 0 && job.info[i - 1].length > 0
+                'same-company-spacing': i > 0 && job.info[i - 1].length > 0,
               }"
               :key="secondLine.id"
               v-html="secondLine[0]"
@@ -20,7 +20,7 @@
             <li
               class="right-column tenure"
               :class="{
-                'same-company-spacing': i > 0 && job.info[i - 1].length > 0
+                'same-company-spacing': i > 0 && job.info[i - 1].length > 0,
               }"
               :key="secondLine.id"
               v-html="secondLine[1]"
@@ -94,39 +94,39 @@
 </template>
 
 <script>
-import ResumeAPI from "@/utils/api/resume"
-import ConnectionError from "@/utils/errors/types/connection"
-import ModalsMixin from "@/mixins/Modals"
+import ResumeAPI from '@/utils/api/resume';
+import ConnectionError from '@/utils/errors/types/connection';
+import ModalsMixin from '@/mixins/Modals';
 
 export default {
-  name: "resume-page",
+  name: 'resume-page',
   mixins: [ModalsMixin],
   data() {
     return {
       experience: [],
       education: [],
-      skills: []
-    }
+      skills: [],
+    };
   },
   beforeRouteEnter(to, from, next) {
-    ResumeAPI.get().then(resume => {
-      next(vm => vm.setData(resume))
-    })
+    ResumeAPI.get().then((resume) => {
+      next((vm) => vm.setData(resume));
+    });
   },
   methods: {
     setData(resume) {
       if (resume instanceof ConnectionError) {
-        this.showDialog(resume.title, resume.message)
+        this.showDialog(resume.title, resume.message);
       } else if (resume.status === 200) {
-        this.experience = resume.data.experience
-        this.education = resume.data.education
-        this.skills = resume.data.skills
+        this.experience = resume.data.experience;
+        this.education = resume.data.education;
+        this.skills = resume.data.skills;
       } else {
-        this.showDialog(resume.statusText, resume.data.error)
+        this.showDialog(resume.statusText, resume.data.error);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

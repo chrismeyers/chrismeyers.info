@@ -1,191 +1,193 @@
-import Vue from "vue"
-import VueRouter from "vue-router"
-import AuthAPI from "@/utils/api/auth"
-import AboutPage from "@/components/AboutPage"
-import ResumePage from "@/components/ResumePage"
-import ProjectsPage from "@/components/ProjectsPage"
-import BuildsPage from "@/components/BuildsPage"
-import LoginPage from "@/components/LoginPage"
-import DashboardHome from "@/components/dashboard/DashboardHome"
-import DashboardImages from "@/components/dashboard/DashboardImages"
-import DashboardBuilds from "@/components/dashboard/DashboardBuilds"
-import DashboardProjects from "@/components/dashboard/DashboardProjects"
-import DashboardAccount from "@/components/dashboard/DashboardAccount"
-import NotFoundPage from "@/components/NotFoundPage"
-import { API_TOKEN_KEY } from "@/store/constants"
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import AuthAPI from '@/utils/api/auth';
+import AboutPage from '@/components/AboutPage';
+import ResumePage from '@/components/ResumePage';
+import ProjectsPage from '@/components/ProjectsPage';
+import BuildsPage from '@/components/BuildsPage';
+import LoginPage from '@/components/LoginPage';
+import DashboardHome from '@/components/dashboard/DashboardHome';
+import DashboardImages from '@/components/dashboard/DashboardImages';
+import DashboardBuilds from '@/components/dashboard/DashboardBuilds';
+import DashboardProjects from '@/components/dashboard/DashboardProjects';
+import DashboardAccount from '@/components/dashboard/DashboardAccount';
+import NotFoundPage from '@/components/NotFoundPage';
+import { API_TOKEN_KEY } from '@/store/constants';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-let defaultTitle = "Chris Meyers - Developer, Tech Enthusiast"
+const defaultTitle = 'Chris Meyers - Developer, Tech Enthusiast';
 
-let formatPageTitle = name => {
+const formatPageTitle = (name) => {
   // Remove hyphens and "page"
   return name
     .toLowerCase()
-    .split("-")
-    .filter(s => s !== "page")
-    .map(s => s.charAt(0).toUpperCase() + s.substring(1))
-}
+    .split('-')
+    .filter((s) => s !== 'page')
+    .map((s) => s.charAt(0).toUpperCase() + s.substring(1));
+};
 
-let formatDashboardTitle = name => {
+const formatDashboardTitle = (name) => {
   // Capitalize each word and surround hyphens with spaces
   return name
     .toLowerCase()
-    .split("-")
-    .map(s => s.charAt(0).toUpperCase() + s.substring(1))
-    .join(" - ")
-}
+    .split('-')
+    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+    .join(' - ');
+};
 
-let router = new VueRouter({
-  mode: "history",
+const router = new VueRouter({
+  mode: 'history',
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         setTimeout(() => {
-          document.getElementById(to.hash.replace("#", "")).scrollIntoView(true)
-          resolve(true)
-        }, 100)
-      })
+          document
+            .getElementById(to.hash.replace('#', ''))
+            .scrollIntoView(true);
+          resolve(true);
+        }, 100);
+      });
     } else if (savedPosition) {
-      return savedPosition
+      return savedPosition;
     } else {
-      return { x: 0, y: 0 }
+      return { x: 0, y: 0 };
     }
   },
   routes: [
     {
-      path: "/",
+      path: '/',
       component: AboutPage,
       meta: {
         secure: false,
-        title: defaultTitle
-      }
+        title: defaultTitle,
+      },
     },
     {
-      path: "/resume",
+      path: '/resume',
       component: ResumePage,
       meta: {
         secure: false,
-        title: defaultTitle
-      }
+        title: defaultTitle,
+      },
     },
     {
-      path: "/builds",
+      path: '/builds',
       component: BuildsPage,
       meta: {
         secure: false,
-        title: defaultTitle
-      }
+        title: defaultTitle,
+      },
     },
     {
-      path: "/projects",
+      path: '/projects',
       component: ProjectsPage,
       meta: {
         secure: false,
-        title: defaultTitle
-      }
+        title: defaultTitle,
+      },
     },
     {
-      path: "/login",
+      path: '/login',
       component: LoginPage,
       meta: {
         secure: false,
-        title: formatPageTitle(LoginPage.name)
-      }
+        title: formatPageTitle(LoginPage.name),
+      },
     },
     {
-      path: "/dashboard",
+      path: '/dashboard',
       component: DashboardHome,
       meta: {
         secure: true,
-        title: formatDashboardTitle(DashboardHome.name)
+        title: formatDashboardTitle(DashboardHome.name),
       },
       children: [
         {
-          path: "images",
+          path: 'images',
           component: DashboardImages,
           meta: {
             secure: true,
-            title: formatDashboardTitle(DashboardImages.name)
-          }
+            title: formatDashboardTitle(DashboardImages.name),
+          },
         },
         {
-          path: "builds",
+          path: 'builds',
           component: DashboardBuilds,
           meta: {
             secure: true,
-            title: formatDashboardTitle(DashboardBuilds.name)
-          }
+            title: formatDashboardTitle(DashboardBuilds.name),
+          },
         },
         {
-          path: "projects",
+          path: 'projects',
           component: DashboardProjects,
           meta: {
             secure: true,
-            title: formatDashboardTitle(DashboardProjects.name)
-          }
+            title: formatDashboardTitle(DashboardProjects.name),
+          },
         },
         {
-          path: "account",
+          path: 'account',
           component: DashboardAccount,
           meta: {
             secure: true,
-            title: formatDashboardTitle(DashboardAccount.name)
-          }
-        }
-      ]
+            title: formatDashboardTitle(DashboardAccount.name),
+          },
+        },
+      ],
     },
     {
-      path: "*",
+      path: '*',
       component: NotFoundPage,
       meta: {
         secure: false,
-        title: defaultTitle
-      }
-    }
-  ]
-})
+        title: defaultTitle,
+      },
+    },
+  ],
+});
 
 router.beforeEach(async (to, from, next) => {
-  let match, authorized
+  let match, authorized;
 
   // Update the HTML title
-  document.title = to.meta.title
+  document.title = to.meta.title;
 
   // Checking if valid cookie exists, skips login if true
-  if (to.fullPath === "/login") {
-    match = document.cookie.match(new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`))
+  if (to.fullPath === '/login') {
+    match = document.cookie.match(new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`));
 
     if (match === null) {
-      return next()
+      return next();
     }
 
-    authorized = await AuthAPI.checkLoggedIn(document.cookie.match(match[2]))
+    authorized = await AuthAPI.checkLoggedIn(document.cookie.match(match[2]));
 
     // Checking if valid cookie exists before going to secure page.
     // Redirects to login if false, continues if true.
     if (!authorized) {
-      next()
+      next();
     } else {
-      next("/dashboard")
+      next('/dashboard');
     }
-  } else if (to.matched.some(record => record.meta.secure)) {
-    match = document.cookie.match(new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`))
+  } else if (to.matched.some((record) => record.meta.secure)) {
+    match = document.cookie.match(new RegExp(`(^| )${API_TOKEN_KEY}=([^]+)`));
 
     if (match === null) {
-      return next("/login")
+      return next('/login');
     }
 
-    authorized = await AuthAPI.checkLoggedIn(document.cookie.match(match[2]))
+    authorized = await AuthAPI.checkLoggedIn(document.cookie.match(match[2]));
 
     if (!authorized) {
-      next("/login")
+      next('/login');
     } else {
-      next()
+      next();
     }
   } else {
-    next()
+    next();
   }
-})
+});
 
-export default router
+export default router;

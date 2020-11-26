@@ -17,86 +17,86 @@
 </template>
 
 <script>
-import AppFullNav from "@/components/AppFullNav"
-import AppMobileNav from "@/components/AppMobileNav"
-import AppFooter from "@/components/AppFooter"
-import AppPrompt from "@/components/AppPrompt"
-import ModalsMixin from "@/mixins/Modals"
-import { MOBILE_BREAKPOINT } from "@/store/constants"
-import _throttle from "lodash/throttle"
+import AppFullNav from '@/components/AppFullNav';
+import AppMobileNav from '@/components/AppMobileNav';
+import AppFooter from '@/components/AppFooter';
+import AppPrompt from '@/components/AppPrompt';
+import ModalsMixin from '@/mixins/Modals';
+import { MOBILE_BREAKPOINT } from '@/store/constants';
+import _throttle from 'lodash/throttle';
 
 export default {
-  name: "App",
+  name: 'App',
   mixins: [ModalsMixin],
   components: {
     AppFullNav,
     AppMobileNav,
     AppFooter,
-    AppPrompt
+    AppPrompt,
   },
   data() {
     return {
       isMobile: true,
-      path: "",
-      throttledResizeFn: null
-    }
+      path: '',
+      throttledResizeFn: null,
+    };
   },
   watch: {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
-      this.setPath(to.path)
-    }
+      this.setPath(to.path);
+    },
   },
   created() {
     // [App.vue specific] When App.vue is first loaded start the progress bar
-    this.$Progress.start()
+    this.$Progress.start();
     // hook the progress bar to start before we move router-view
     this.$router.beforeEach((to, from, next) => {
       // does the page we want to go to have a meta.progress object
       if (to.meta.progress !== undefined) {
-        let meta = to.meta.progress
+        const meta = to.meta.progress;
         // parse meta tags
-        this.$Progress.parseMeta(meta)
+        this.$Progress.parseMeta(meta);
       }
       // start the progress bar
-      this.$Progress.start()
+      this.$Progress.start();
       // continue to next page
-      next()
-    })
+      next();
+    });
     // hook the progress bar to finish after we've finished moving router-view
     this.$router.afterEach(() => {
       // finish the progress bar
-      this.$Progress.finish()
-    })
+      this.$Progress.finish();
+    });
   },
   mounted() {
-    this.$store.commit("applyTheme")
+    this.$store.commit('applyTheme');
 
     // [App.vue specific] When App.vue is finish loading finish the progress bar
-    this.$Progress.finish()
+    this.$Progress.finish();
 
     if (this.$store.state.isIE) {
-      this.showIEDialog()
+      this.showIEDialog();
     }
 
-    this.onResize()
-    this.throttledResizeFn = _throttle(this.onResize, 50)
-    window.addEventListener("resize", this.throttledResizeFn)
+    this.onResize();
+    this.throttledResizeFn = _throttle(this.onResize, 50);
+    window.addEventListener('resize', this.throttledResizeFn);
   },
   beforeDestroy() {
-    window.removeEventListener("resize", this.throttledResizeFn)
+    window.removeEventListener('resize', this.throttledResizeFn);
   },
   methods: {
     onResize() {
-      const width = window.innerWidth
-      this.isMobile = width < MOBILE_BREAKPOINT
+      const width = window.innerWidth;
+      this.isMobile = width < MOBILE_BREAKPOINT;
     },
     setPath(rawPath) {
-      let cleanedPath = rawPath.replace(/\//g, "")
-      this.path = cleanedPath === "" ? "about" : cleanedPath
-    }
-  }
-}
+      const cleanedPath = rawPath.replace(/\//g, '');
+      this.path = cleanedPath === '' ? 'about' : cleanedPath;
+    },
+  },
+};
 </script>
 
 <style>
@@ -115,7 +115,7 @@ export default {
   --page-not-found-path-bg: #eaeaea;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --font-color: #e9e9e9;
   --bg-color: #202020;
   --border-color: rgba(255, 255, 255, 0.3);
@@ -127,7 +127,7 @@ export default {
 }
 
 #app {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   flex: 1;
 }
 
@@ -244,7 +244,7 @@ h2.top {
 /********************* CONTENT *********************/
 .section-header {
   text-align: center;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -252,7 +252,7 @@ h2.top {
   -webkit-flex: 1;
   flex: 1;
   -webkit-margin-bottom-collapse: separate; /* Fixes margin-bottom for non-chrome browsers */
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
 
@@ -288,7 +288,7 @@ h2.top {
   padding-right: 5px;
   font-size: 13px;
   border: 1px solid #000000;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background-color: #ffffff;
   border-radius: 0;
 }
@@ -297,11 +297,11 @@ h2.top {
   border-color: var(--main-theme-color);
 }
 
-input.inputbox-mod[type="text"],
-input.inputbox-mod[type="password"],
-input.inputbox-mod[type="url"],
-input.inputbox-mod[type="number"],
-input.inputbox-mod[type="date"],
+input.inputbox-mod[type='text'],
+input.inputbox-mod[type='password'],
+input.inputbox-mod[type='url'],
+input.inputbox-mod[type='number'],
+input.inputbox-mod[type='date'],
 textarea.textarea-mod,
 select.select-scroll-mod,
 select.select-mod {
@@ -313,19 +313,19 @@ select.select-mod {
   padding-right: 5px;
   font-size: 13px;
   border: 1px solid #000000;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
-input.inputbox-mod:focus[type="text"],
-input.inputbox-mod:focus[type="password"],
-input.inputbox-mod:focus[type="url"],
-input.inputbox-mod:focus[type="number"],
+input.inputbox-mod:focus[type='text'],
+input.inputbox-mod:focus[type='password'],
+input.inputbox-mod:focus[type='url'],
+input.inputbox-mod:focus[type='number'],
 textarea.textarea-mod:focus,
 select.select-scroll-mod:focus {
   outline: none;
   border-color: var(--main-theme-color);
 }
 
-input.inputbox-mod[type="checkbox"] {
+input.inputbox-mod[type='checkbox'] {
   display: block;
 }
 
@@ -355,7 +355,7 @@ select.select-mod {
   text-indent: 0;
   border: 1px solid #000000;
   display: inline-block;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   height: 40px;
   line-height: 30px;
@@ -416,7 +416,7 @@ select.select-mod {
 .buttons-v-img,
 .prev-v-img,
 .next-v-img {
-  font-family: "Open Sans", sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 .fullscreen-v-img {
@@ -465,7 +465,7 @@ select.select-mod {
 
 @media print {
   html {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
 
   nav,

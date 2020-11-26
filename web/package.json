@@ -32,30 +32,14 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.3",
+    "prettier": "^2.2.0",
     "vue-svgicon": "^3.2.9",
     "vue-template-compiler": "^2.6.12"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
   },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
     }
-  },
-  "prettier": {
-    "semi": false
   },
   "browserslist": [
     "> 1%",

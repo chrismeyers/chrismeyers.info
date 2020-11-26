@@ -15,7 +15,7 @@
         <div class="menu-icon">
           <div>
             <button
-              style="outline: none;"
+              style="outline: none"
               class="hamburger hamburger--spin"
               :class="{ 'is-active': menuDisplayed }"
               ref="hamburger-button"
@@ -24,7 +24,7 @@
               aria-label="Menu"
               aria-controls="navigation"
             >
-              <span class="hamburger-box" style="height: 26px;">
+              <span class="hamburger-box" style="height: 26px">
                 <span class="hamburger-inner"></span>
               </span>
             </button>
@@ -39,7 +39,7 @@
           v-if="menuDisplayed"
           class="section-title-menu"
         >
-          <ul class=" menu-dropdown menu-items">
+          <ul class="menu-dropdown menu-items">
             <router-link
               class="nav-link section-title-small-txt"
               :class="{ 'nav-selected': path == 'about' }"
@@ -76,34 +76,34 @@
 </template>
 
 <script>
-import ClickOutside from "vue-click-outside"
+import ClickOutside from 'vue-click-outside';
 
 export default {
-  name: "app-mobile-nav",
-  props: ["path"],
+  name: 'app-mobile-nav',
+  props: ['path'],
   data() {
     return {
-      menuDisplayed: false
-    }
+      menuDisplayed: false,
+    };
   },
   watch: {
-    path: function() {
-      this.menuDisplayed = false
-    }
+    path: function () {
+      this.menuDisplayed = false;
+    },
   },
   mounted() {
     // Prevents click-outside event on specific element
-    this.popupItem = this.$refs["hamburger-button"]
+    this.popupItem = this.$refs['hamburger-button'];
   },
   methods: {
     toggleMenu() {
-      this.menuDisplayed = !this.menuDisplayed
-    }
+      this.menuDisplayed = !this.menuDisplayed;
+    },
   },
   directives: {
-    ClickOutside
-  }
-}
+    ClickOutside,
+  },
+};
 </script>
 
 <style scoped>
@@ -165,7 +165,7 @@ nav {
   display: table-cell;
   color: white;
   font-size: x-large;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
 }
 .section-title-menu:hover {

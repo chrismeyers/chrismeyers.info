@@ -1,3 +1,3 @@
 module.exports = {
-  transpileDependencies: ["vuex-persist"]
-}
+  transpileDependencies: ['vuex-persist'],
+};

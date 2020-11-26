@@ -19,12 +19,12 @@
         </li>
         <li v-if="employed">
           Currently, I am employed as a
-          {{ mostRecentJob ? mostRecentJob.title : "" }} at
+          {{ mostRecentJob ? mostRecentJob.title : '' }} at
           <a
             class="fancytxt"
             :href="mostRecentJob ? mostRecentJob.url : ''"
             target="_blank"
-            >{{ mostRecentJob ? mostRecentJob.company : "" }}</a
+            >{{ mostRecentJob ? mostRecentJob.company : '' }}</a
           >
         </li>
         <li>
@@ -64,7 +64,7 @@
           ref="clarkImg"
           alt="Clark the Corgi"
           src="/images/clark/DSC_1564-6.jpg"
-          style="display:none;"
+          style="display: none"
         />
       </ul>
 
@@ -106,43 +106,43 @@
 </template>
 
 <script>
-import ResumeAPI from "@/utils/api/resume"
-import ConnectionError from "@/utils/errors/types/connection"
-import ModalsMixin from "@/mixins/Modals"
-import { CONTACT_EMAIL } from "@/store/constants"
+import ResumeAPI from '@/utils/api/resume';
+import ConnectionError from '@/utils/errors/types/connection';
+import ModalsMixin from '@/mixins/Modals';
+import { CONTACT_EMAIL } from '@/store/constants';
 
 export default {
-  name: "about-page",
+  name: 'about-page',
   mixins: [ModalsMixin],
   data() {
     return {
       CONTACT_EMAIL,
       languages: {},
       mostRecentJob: {},
-      employed: false
-    }
+      employed: false,
+    };
   },
   beforeRouteEnter(to, from, next) {
-    ResumeAPI.getSummary().then(summary => {
-      next(vm => vm.setData(summary))
-    })
+    ResumeAPI.getSummary().then((summary) => {
+      next((vm) => vm.setData(summary));
+    });
   },
   methods: {
     showImage(which) {
-      const img = this.$refs[which]
-      img.click()
+      const img = this.$refs[which];
+      img.click();
     },
     setData(summary) {
       if (summary instanceof ConnectionError) {
-        this.showDialog(summary.title, summary.message)
+        this.showDialog(summary.title, summary.message);
       } else if (summary.status === 200) {
-        this.languages = summary.data.languages
-        this.mostRecentJob = summary.data.mostRecentJob
-        this.employed = summary.data.mostRecentJob.employed
+        this.languages = summary.data.languages;
+        this.mostRecentJob = summary.data.mostRecentJob;
+        this.employed = summary.data.mostRecentJob.employed;
       } else {
-        this.showDialog(summary.statusText, summary.data.error)
+        this.showDialog(summary.statusText, summary.data.error);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

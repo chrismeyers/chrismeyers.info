@@ -5,9 +5,9 @@
     <div class="content-text">
       <p class="center">
         The path
-        <span
-          ><pre class="path">{{ path }}</pre></span
-        >
+        <span>
+          <pre class="path">{{ path }}</pre>
+        </span>
         does not exist
       </p>
       <p class="center">
@@ -19,21 +19,21 @@
 
 <script>
 export default {
-  name: "not-found-page",
+  name: 'not-found-page',
   data() {
     return {
-      path: ""
-    }
+      path: '',
+    };
   },
   beforeRouteEnter(to, from, next) {
-    next(vm => vm.setPath(to.path))
+    next((vm) => vm.setPath(to.path));
   },
   methods: {
     setPath(path) {
-      this.path = path
-    }
-  }
-}
+      this.path = path;
+    },
+  },
+};
 </script>
 
 <style>

@@ -2,9 +2,9 @@
 // prettier-ignore
 export const IS_IE = /*@cc_on!@*/false || !!document.documentMode
 export const THEMES = {
-  LIGHT: "light",
-  DARK: "dark"
-}
-export const API_TOKEN_KEY = "chrismeyers_info_apiToken"
-export const MOBILE_BREAKPOINT = 970
-export const CONTACT_EMAIL = "chris@chrismeyers.info"
+  LIGHT: 'light',
+  DARK: 'dark',
+};
+export const API_TOKEN_KEY = 'chrismeyers_info_apiToken';
+export const MOBILE_BREAKPOINT = 970;
+export const CONTACT_EMAIL = 'chris@chrismeyers.info';
