@@ -1,25 +1,19 @@
 export default {
   methods: {
     showIEDialog() {
-      this.$modal.show('dialog', {
-        title: 'Internet Explorer Detected',
-        text: `For a better browsing experience, please visit this website on
-               a different browser, if possible.<br/><br/><i>Some functionality
-               may not work as expected on Internet Explorer.</i>`,
-        buttons: [
-          {
-            title: 'Proceed',
-            handler: () => {
-              this.$modal.hide('dialog');
-            },
-          },
-        ],
-      });
+      const title = 'Internet Explorer Detected';
+      const text = `For a better browsing experience, please visit this website on
+        a different browser, if possible.<br/><br/><i>Some functionality
+        may not work as expected on Internet Explorer.</i>`;
+
+      this.showDialog(text, title);
     },
-    showDialog(title, body) {
-      this.$modal.show('dialog', {
+    showDialog(text, title = null, args = {}) {
+      const options = {
         title: title,
-        text: body.charAt(0).toUpperCase() + body.slice(1),
+        text: args.capitalized
+          ? text.charAt(0).toUpperCase() + text.slice(1)
+          : text,
         buttons: [
           {
             title: 'Proceed',
@@ -28,7 +22,13 @@ export default {
             },
           },
         ],
-      });
+      };
+
+      if (title) {
+        options.title = title;
+      }
+
+      this.$modal.show('dialog', options);
     },
     showConfirm(text, handler, title = null) {
       const options = {

@@ -116,13 +116,15 @@ export default {
   methods: {
     setData(resume) {
       if (resume instanceof ConnectionError) {
-        this.showDialog(resume.title, resume.message);
+        this.showDialog(resume.message, resume.title, { capitalized: true });
       } else if (resume.status === 200) {
         this.experience = resume.data.experience;
         this.education = resume.data.education;
         this.skills = resume.data.skills;
       } else {
-        this.showDialog(resume.statusText, resume.data.error);
+        this.showDialog(resume.data.error, resume.statusText, {
+          capitalized: true,
+        });
       }
     },
   },
