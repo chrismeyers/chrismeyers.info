@@ -7,6 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint --no-fix || true",
     "lint:fix": "vue-cli-service lint",
+    "prettier": "prettier --check './*.{js,vue}' '**/!(generated)/*.{js,vue}' || true",
+    "prettier:fix": "prettier --write './*.{js,vue}' '**/!(generated)/*.{js,vue}'",
     "svg": "vsvg -s src/assets/images/icons/raw -t src/assets/images/icons/generated"
   },
   "dependencies": {
