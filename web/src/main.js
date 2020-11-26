@@ -8,8 +8,6 @@ import Axios from "axios"
 import VModal from "vue-js-modal"
 import VueProgressBar from "vue-progressbar"
 import VueImg from "v-img"
-import VTooltip from "v-tooltip"
-import VueClipboard from "vue-clipboard2"
 import SvgIcon from "vue-svgicon"
 import ToggleButton from "vue-js-toggle-button"
 
@@ -35,8 +33,6 @@ Vue.use(VueImg, {
   closeOnScroll: false
 })
 Vue.use(VueCookie)
-Vue.use(VTooltip)
-Vue.use(VueClipboard)
 Vue.use(SvgIcon)
 Vue.use(ToggleButton)
 

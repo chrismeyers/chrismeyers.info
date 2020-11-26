@@ -7,3 +7,4 @@ export const THEMES = {
 }
 export const API_TOKEN_KEY = "chrismeyers_info_apiToken"
 export const MOBILE_BREAKPOINT = 970
+export const CONTACT_EMAIL = "chris@chrismeyers.info"

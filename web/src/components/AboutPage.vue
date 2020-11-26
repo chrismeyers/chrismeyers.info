@@ -97,12 +97,7 @@
         and maintainable code. My primary goal is to create innovative and
         usable applications that solve problems. If you have any questions,
         comments, or would like to work together on a project, please
-        <a
-          class="fancytxt"
-          v-tooltip.bottom="copyMessageOptions"
-          v-clipboard:copy="email"
-          v-clipboard:success="onCopyEmail"
-          @mouseleave="resetCopyMessage"
+        <a class="fancytxt" :href="`mailto:${CONTACT_EMAIL}`" target="_blank"
           >send me a message.</a
         ></span
       >
@@ -113,14 +108,15 @@
 <script>
 import ResumeAPI from "@/utils/api/resume"
 import ConnectionError from "@/utils/errors/types/connection"
-import EmailTooltipMixin from "@/mixins/EmailTooltip"
 import ModalsMixin from "@/mixins/Modals"
+import { CONTACT_EMAIL } from "@/store/constants"
 
 export default {
   name: "about-page",
-  mixins: [EmailTooltipMixin, ModalsMixin],
+  mixins: [ModalsMixin],
   data() {
     return {
+      CONTACT_EMAIL,
       languages: {},
       mostRecentJob: {},
       employed: false
