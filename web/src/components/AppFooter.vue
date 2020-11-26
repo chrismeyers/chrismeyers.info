@@ -37,12 +37,9 @@
 
       <div class="footer-social">
         <a
-          v-tooltip="copyMessageOptions"
-          alt="Send Message"
-          style="cursor: pointer;"
-          v-clipboard:copy="email"
-          v-clipboard:success="onCopyEmail"
-          @mouseleave="resetCopyMessage"
+          :href="`mailto:${CONTACT_EMAIL}`"
+          title="Send Message"
+          target="_blank"
         >
           <svgicon name="mail" class="link-image large"></svgicon>
         </a>
@@ -71,18 +68,17 @@
 </template>
 
 <script>
-import EmailTooltipMixin from "@/mixins/EmailTooltip"
 import "@/assets/images/icons/generated/github"
 import "@/assets/images/icons/generated/linkedin"
 import "@/assets/images/icons/generated/mail"
-import { THEMES } from "@/store/constants"
+import { THEMES, CONTACT_EMAIL } from "@/store/constants"
 
 export default {
   name: "app-footer",
-  mixins: [EmailTooltipMixin],
   data() {
     return {
-      THEMES: THEMES
+      THEMES,
+      CONTACT_EMAIL
     }
   },
   computed: {
