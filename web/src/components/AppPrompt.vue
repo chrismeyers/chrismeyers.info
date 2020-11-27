@@ -24,7 +24,7 @@
     <button
       class="prompt-style"
       id="prompt-textarea-btn"
-      @click="run('toggle')"
+      @click="run({ command: 'toggle' })"
       v-html="arrows[arrowDirection]"
     ></button>
   </div>
@@ -68,7 +68,7 @@ export default {
         this.hidePrompt();
       } else if (e.code === 'Enter') {
         if (this.promptVisible) {
-          this.run();
+          this.run({ event: e });
         }
       } else if (e.code === 'ArrowUp') {
         if (this.promptVisible) {
@@ -82,10 +82,10 @@ export default {
     };
   },
   activated() {
-    window.addEventListener('keydown', this.keydownFn);
+    window.addEventListener('keyup', this.keydownFn);
   },
   deactivated() {
-    window.removeEventListener('keydown', this.keydownFn);
+    window.removeEventListener('keyup', this.keydownFn);
   },
   methods: {
     togglePrompt() {
@@ -171,7 +171,7 @@ export default {
         }
       }
     },
-    run(command = null) {
+    run({ command = null, event = null }) {
       if (command) {
         // Only store user entered commands
         this.command = command;
@@ -194,6 +194,9 @@ export default {
 
       switch (cmd) {
         case 'echo':
+          if (event) {
+            event.stopPropagation();
+          }
           this.echo(args);
           break;
         case 'cd':
@@ -225,11 +228,8 @@ export default {
       }
     },
     echo(args) {
-      // Prevent closing the dialog when pressing enter to submit the command
-      setTimeout(() => {
-        this.showDialog(args.join(' '));
-        this.focusPrompt();
-      }, 100);
+      this.showDialog(args.join(' '));
+      this.focusPrompt();
     },
     cd(args) {
       let path = args[0];
