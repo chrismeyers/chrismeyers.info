@@ -33,7 +33,11 @@
       </div>
 
       <div>
-        <div class="menu-overlay" v-show="menuDisplayed"></div>
+        <div
+          @touchend.prevent
+          class="menu-overlay"
+          v-show="menuDisplayed"
+        ></div>
         <div v-click-outside="toggleMenu" v-if="menuDisplayed" class="menu">
           <router-link
             class="nav-link menu-item"
