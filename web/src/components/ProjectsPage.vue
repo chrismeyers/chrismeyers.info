@@ -266,9 +266,6 @@ export default {
 
 .link-image.play-overlay {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
