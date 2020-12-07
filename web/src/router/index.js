@@ -46,7 +46,7 @@ const router = new VueRouter({
             .getElementById(to.hash.replace('#', ''))
             .scrollIntoView(true);
           resolve(true);
-        }, 250);
+        }, 400);
       });
     } else if (savedPosition) {
       return savedPosition;
