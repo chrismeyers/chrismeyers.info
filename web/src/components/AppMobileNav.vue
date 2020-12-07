@@ -34,41 +34,35 @@
 
       <div>
         <div class="menu-overlay" v-show="menuDisplayed"></div>
-        <div
-          v-click-outside="toggleMenu"
-          v-if="menuDisplayed"
-          class="section-title-menu"
-        >
-          <ul class="menu-dropdown menu-items">
-            <router-link
-              class="nav-link section-title-small-txt"
-              :class="{ 'nav-selected': path == 'about' }"
-              tag="li"
-              to="/"
-              >About</router-link
-            >
-            <router-link
-              class="nav-link section-title-small-txt"
-              :class="{ 'nav-selected': path == 'resume' }"
-              tag="li"
-              to="/resume"
-              >Résumé</router-link
-            >
-            <router-link
-              class="nav-link section-title-small-txt"
-              :class="{ 'nav-selected': path == 'projects' }"
-              tag="li"
-              to="/projects"
-              >Projects</router-link
-            >
-            <router-link
-              class="nav-link section-title-small-txt"
-              :class="{ 'nav-selected': path == 'builds' }"
-              tag="li"
-              to="/builds"
-              >Builds</router-link
-            >
-          </ul>
+        <div v-click-outside="toggleMenu" v-if="menuDisplayed" class="menu">
+          <router-link
+            class="nav-link menu-item"
+            :class="{ 'nav-selected': path == 'about' }"
+            tag="div"
+            to="/"
+            >About</router-link
+          >
+          <router-link
+            class="nav-link menu-item"
+            :class="{ 'nav-selected': path == 'resume' }"
+            tag="div"
+            to="/resume"
+            >Résumé</router-link
+          >
+          <router-link
+            class="nav-link menu-item"
+            :class="{ 'nav-selected': path == 'projects' }"
+            tag="div"
+            to="/projects"
+            >Projects</router-link
+          >
+          <router-link
+            class="nav-link menu-item"
+            :class="{ 'nav-selected': path == 'builds' }"
+            tag="div"
+            to="/builds"
+            >Builds</router-link
+          >
         </div>
       </div>
     </div>
@@ -111,6 +105,7 @@ nav {
   top: 0;
   position: sticky;
   width: 100%;
+  z-index: 1;
 }
 
 #mobile-menu {
@@ -123,35 +118,6 @@ nav {
   display: flex;
 }
 
-.menu-icon {
-  margin-left: auto;
-}
-
-.menu-dropdown {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.menu-items {
-  padding: 0;
-  list-style: none;
-  position: fixed;
-  float: left;
-  clear: right;
-  left: 0;
-  right: 0;
-  z-index: 1;
-}
-
-.menu-overlay {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  background: rgba(0, 0, 0, 0.3);
-}
-
 .small-nav-logo img {
   height: 30px;
   width: 113px;
@@ -160,19 +126,30 @@ nav {
   padding-top: 15px;
 }
 
-.section-title-menu {
+.menu-icon {
+  margin-left: auto;
+}
+
+.menu-overlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.menu {
   background-color: var(--bg-color);
-  display: table-cell;
   color: white;
   font-size: x-large;
-  font-family: 'Open Sans', sans-serif;
-  text-align: center;
+  position: fixed;
+  width: 100%;
 }
-.section-title-menu:hover {
+.menu:hover {
   cursor: pointer;
 }
 
-.section-title-small-txt {
+.menu-item {
   border-bottom: 1px solid var(--border-color);
   background-color: var(--bg-color);
   line-height: 50px;

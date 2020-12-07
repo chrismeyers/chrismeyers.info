@@ -139,6 +139,7 @@ footer {
     position: sticky;
     width: 100%;
     background-color: var(--bg-color);
+    z-index: 2;
   }
 }
 </style>
