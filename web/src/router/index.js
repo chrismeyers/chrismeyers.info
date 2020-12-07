@@ -42,11 +42,10 @@ const router = new VueRouter({
     if (to.hash) {
       return new Promise((resolve) => {
         setTimeout(() => {
-          document
-            .getElementById(to.hash.replace('#', ''))
-            .scrollIntoView(true);
-          resolve(true);
-        }, 100);
+          resolve({
+            selector: to.hash,
+          });
+        }, 250);
       });
     } else if (savedPosition) {
       return savedPosition;
