@@ -8,6 +8,7 @@ This is the codebase for my personal website currently located at <https://chris
 
 ## Setup
 1. Setup a git remote on the production server by following the instructions in `bin/git/hooks/post-receive`
+    - Assuming a git remote named `production` exists, the following command can be run from the root of the repository to deploy: `git push production master`
 1. Configure apache virtual hosts by copying the files in `config/apache` into `/etc/apache2/sites-available` and running `a2ensite` for each virtual host
 1. Install and configure LetsEncrypt
 1. Follow the `Setup` instructions in `api/README.md`
