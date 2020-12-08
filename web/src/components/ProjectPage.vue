@@ -145,7 +145,6 @@ import ProjectsAPI from '@/utils/api/projects';
 import ConnectionError from '@/utils/errors/types/connection';
 import ModalsMixin from '@/mixins/Modals';
 import '@/assets/images/icons/generated/github';
-import '@/assets/images/icons/generated/paragraph';
 import '@/assets/images/icons/generated/link-external';
 import '@/assets/images/icons/generated/play';
 
