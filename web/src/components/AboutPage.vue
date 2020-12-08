@@ -28,14 +28,6 @@
           >
         </li>
         <li>
-          Some of my professional interests include:
-          <ul>
-            <li>Software development</li>
-            <li>Web development</li>
-            <li>Computer networking</li>
-          </ul>
-        </li>
-        <li>
           Some of my hobbies include:
           <ul>
             <li>
