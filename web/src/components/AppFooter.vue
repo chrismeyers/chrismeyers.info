@@ -135,11 +135,13 @@ footer {
 
 @media screen and (max-width: 969px) {
   footer {
-    bottom: 0;
-    position: sticky;
     width: 100%;
-    background-color: var(--bg-color);
+    position: absolute;
     z-index: 2;
+  }
+
+  .footer-years {
+    padding-bottom: 15px;
   }
 }
 </style>

@@ -2,14 +2,12 @@
   <div id="app">
     <v-dialog />
     <vue-progress-bar />
-    <div class="container">
-      <template>
-        <app-mobile-nav v-if="isMobile" :path="path" />
-        <app-full-nav v-else :path="path" />
-      </template>
-      <router-view />
-      <app-footer />
-    </div>
+    <template>
+      <app-mobile-nav v-if="isMobile" :path="path" />
+      <app-full-nav v-else :path="path" />
+    </template>
+    <router-view />
+    <app-footer />
     <keep-alive>
       <app-prompt v-if="!isMobile" />
     </keep-alive>
@@ -129,9 +127,15 @@ export default {
 #app {
   font-family: 'Open Sans', sans-serif;
   flex: 1;
+  display: -webkit-flex;
+  display: flex;
 }
 
-html,
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -160,12 +164,6 @@ textarea {
 
 h2.top {
   margin-top: 0px;
-}
-
-.container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
 }
 
 .fancytxt {
@@ -434,23 +432,8 @@ select.select-mod {
 }
 
 @media screen and (max-width: 969px) {
-  body {
-    /* TODO: this causes savedPosition in scrollBehavior to always be 0, 0! */
-    display: flex;
-  }
-
-  .container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    margin: auto;
-  }
-
   .content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
+    margin: 60px 0px 80px 0px;
   }
 
   .content-text {
