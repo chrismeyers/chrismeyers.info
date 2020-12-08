@@ -82,6 +82,6 @@ export default {
 }
 
 .project-overview {
-  margin-left: 50px;
+  margin-left: 40px;
 }
 </style>

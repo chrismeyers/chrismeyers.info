@@ -85,6 +85,6 @@ export default {
 }
 
 .build-overview {
-  margin-left: 50px;
+  margin-left: 40px;
 }
 </style>
