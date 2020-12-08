@@ -76,10 +76,6 @@ export default {
 </script>
 
 <style scoped>
-.content-text {
-  max-width: 1000px;
-}
-
 .build {
   margin-bottom: 10px;
 }

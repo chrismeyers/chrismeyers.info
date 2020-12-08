@@ -73,10 +73,6 @@ export default {
 </script>
 
 <style scoped>
-.content-text {
-  max-width: 1000px;
-}
-
 .project {
   height: auto;
 }
