@@ -6,7 +6,7 @@
       <p class="center">
         The path
         <span>
-          <pre class="path">{{ path }}</pre>
+          <pre class="highlighted">{{ path }}</pre>
         </span>
         does not exist
       </p>

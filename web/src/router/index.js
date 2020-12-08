@@ -5,6 +5,7 @@ import AboutPage from '@/components/AboutPage';
 import ResumePage from '@/components/ResumePage';
 import ProjectPage from '@/components/ProjectPage';
 import ProjectsPage from '@/components/ProjectsPage';
+import BuildPage from '@/components/BuildPage';
 import BuildsPage from '@/components/BuildsPage';
 import LoginPage from '@/components/LoginPage';
 import DashboardHome from '@/components/dashboard/DashboardHome';
@@ -82,6 +83,14 @@ const router = new VueRouter({
     {
       path: '/builds',
       component: BuildsPage,
+      meta: {
+        secure: false,
+        title: defaultTitle,
+      },
+    },
+    {
+      path: '/builds/:id',
+      component: BuildPage,
       meta: {
         secure: false,
         title: defaultTitle,
