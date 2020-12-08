@@ -225,6 +225,16 @@ h2.top {
   fill: var(--main-theme-color);
 }
 
+.center {
+  text-align: center;
+}
+
+.path {
+  display: inline;
+  background: var(--page-not-found-path-bg);
+  padding: 3px;
+}
+
 /******************** COMMON NAV *******************/
 .banner img {
   width: 100%;
@@ -425,6 +435,7 @@ select.select-mod {
 
 @media screen and (max-width: 969px) {
   body {
+    /* TODO: this causes savedPosition in scrollBehavior to always be 0, 0! */
     display: flex;
   }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="section-header section-header-size">404 Page not found</div>
+    <div class="section-header section-header-size">404 Page Not Found</div>
 
     <div class="content-text">
       <p class="center">
@@ -35,15 +35,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.center {
-  text-align: center;
-}
-
-.path {
-  display: inline;
-  background: var(--page-not-found-path-bg);
-  padding: 3px;
-}
-</style>
