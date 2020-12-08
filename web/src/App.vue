@@ -433,7 +433,7 @@ select.select-mod {
 
 @media screen and (max-width: 969px) {
   .content {
-    margin: 60px 0px 80px 0px;
+    margin: 60px 0px 90px 0px;
   }
 
   .content-text {
