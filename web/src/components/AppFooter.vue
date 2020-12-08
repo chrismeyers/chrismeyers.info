@@ -137,11 +137,6 @@ footer {
   footer {
     width: 100%;
     position: absolute;
-    z-index: 2;
-  }
-
-  .footer-years {
-    padding-bottom: 15px;
   }
 }
 </style>
