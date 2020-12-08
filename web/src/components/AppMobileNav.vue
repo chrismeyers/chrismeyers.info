@@ -67,6 +67,7 @@
             to="/builds"
             >Builds</router-link
           >
+          <app-footer />
         </div>
       </div>
     </div>
@@ -74,9 +75,13 @@
 </template>
 
 <script>
+import AppFooter from './AppFooter.vue';
 import ClickOutside from 'vue-click-outside';
 
 export default {
+  components: {
+    AppFooter,
+  },
   name: 'app-mobile-nav',
   props: ['path'],
   data() {
@@ -109,7 +114,14 @@ nav {
   position: fixed;
   width: 100%;
   height: 60px;
-  z-index: 1;
+  z-index: 3;
+}
+
+footer {
+  bottom: 0;
+  position: fixed;
+  background-color: var(--bg-color);
+  color: var(--font-color);
 }
 
 #mobile-menu {
