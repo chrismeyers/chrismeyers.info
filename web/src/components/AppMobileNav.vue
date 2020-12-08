@@ -122,6 +122,7 @@ footer {
   position: fixed;
   background-color: var(--bg-color);
   color: var(--font-color);
+  cursor: auto;
 }
 
 #mobile-menu {
