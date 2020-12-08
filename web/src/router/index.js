@@ -16,6 +16,7 @@ import { API_TOKEN_KEY } from '@/store/constants';
 
 Vue.use(VueRouter);
 
+let initialPageLoad = null;
 const defaultTitle = 'Chris Meyers - Developer, Tech Enthusiast';
 
 const formatPageTitle = (name) => {
@@ -41,12 +42,13 @@ const router = new VueRouter({
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return new Promise((resolve) => {
+        const timeout = initialPageLoad ? 400 : 100;
         setTimeout(() => {
           document
             .getElementById(to.hash.replace('#', ''))
             .scrollIntoView(true);
           resolve(true);
-        }, 400);
+        }, timeout);
       });
     } else if (savedPosition) {
       return savedPosition;
@@ -149,6 +151,12 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+  if (initialPageLoad === null) {
+    initialPageLoad = true;
+  } else if (initialPageLoad === true) {
+    initialPageLoad = false;
+  }
+
   let match, authorized;
 
   // Update the HTML title
