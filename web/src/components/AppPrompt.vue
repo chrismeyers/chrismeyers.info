@@ -236,8 +236,20 @@ export default {
       if (args.length < 1) {
         path = '';
       }
+      if (path.startsWith('/')) {
+        path = path.substring(1);
+      }
+      if (path.endsWith('/')) {
+        path = path.slice(0, -1);
+      }
 
-      this.$router.push({ path: `/${path}` });
+      path = `/${path}`;
+
+      if (this.$route.path === path) {
+        return;
+      }
+
+      this.$router.push({ path });
     },
     exit() {
       this.hidePrompt();

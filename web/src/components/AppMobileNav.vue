@@ -41,32 +41,33 @@
         <div v-click-outside="toggleMenu" v-if="menuDisplayed" class="menu">
           <router-link
             class="nav-link menu-item"
-            :class="{ 'nav-selected': path == 'about' }"
+            :class="{ 'nav-selected': path === 'about' }"
             tag="div"
             to="/"
             >About</router-link
           >
           <router-link
             class="nav-link menu-item"
-            :class="{ 'nav-selected': path == 'resume' }"
+            :class="{ 'nav-selected': path === 'resume' }"
             tag="div"
             to="/resume"
             >Résumé</router-link
           >
           <router-link
             class="nav-link menu-item"
-            :class="{ 'nav-selected': path == 'projects' }"
+            :class="{ 'nav-selected': path.includes('projects') }"
             tag="div"
             to="/projects"
             >Projects</router-link
           >
           <router-link
             class="nav-link menu-item"
-            :class="{ 'nav-selected': path == 'builds' }"
+            :class="{ 'nav-selected': path.includes('builds') }"
             tag="div"
             to="/builds"
             >Builds</router-link
           >
+          <app-footer />
         </div>
       </div>
     </div>
@@ -74,9 +75,13 @@
 </template>
 
 <script>
+import AppFooter from './AppFooter.vue';
 import ClickOutside from 'vue-click-outside';
 
 export default {
+  components: {
+    AppFooter,
+  },
   name: 'app-mobile-nav',
   props: ['path'],
   data() {
@@ -106,10 +111,17 @@ export default {
 
 <style scoped>
 nav {
-  top: 0;
-  position: sticky;
+  position: fixed;
   width: 100%;
-  z-index: 1;
+  height: 60px;
+  z-index: 3;
+}
+
+footer {
+  bottom: 0;
+  position: fixed;
+  background-color: var(--bg-color);
+  color: var(--font-color);
 }
 
 #mobile-menu {

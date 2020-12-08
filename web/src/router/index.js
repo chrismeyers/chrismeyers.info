@@ -3,7 +3,9 @@ import VueRouter from 'vue-router';
 import AuthAPI from '@/utils/api/auth';
 import AboutPage from '@/components/AboutPage';
 import ResumePage from '@/components/ResumePage';
+import ProjectPage from '@/components/ProjectPage';
 import ProjectsPage from '@/components/ProjectsPage';
+import BuildPage from '@/components/BuildPage';
 import BuildsPage from '@/components/BuildsPage';
 import LoginPage from '@/components/LoginPage';
 import DashboardHome from '@/components/dashboard/DashboardHome';
@@ -16,7 +18,6 @@ import { API_TOKEN_KEY } from '@/store/constants';
 
 Vue.use(VueRouter);
 
-let initialPageLoad = null;
 const defaultTitle = 'Chris Meyers - Developer, Tech Enthusiast';
 
 const formatPageTitle = (name) => {
@@ -40,17 +41,7 @@ const formatDashboardTitle = (name) => {
 const router = new VueRouter({
   mode: 'history',
   scrollBehavior(to, from, savedPosition) {
-    if (to.hash) {
-      return new Promise((resolve) => {
-        const timeout = initialPageLoad ? 400 : 100;
-        setTimeout(() => {
-          document
-            .getElementById(to.hash.replace('#', ''))
-            .scrollIntoView(true);
-          resolve(true);
-        }, timeout);
-      });
-    } else if (savedPosition) {
+    if (savedPosition) {
       return savedPosition;
     } else {
       return { x: 0, y: 0 };
@@ -74,6 +65,22 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/projects',
+      component: ProjectsPage,
+      meta: {
+        secure: false,
+        title: defaultTitle,
+      },
+    },
+    {
+      path: '/projects/:id',
+      component: ProjectPage,
+      meta: {
+        secure: false,
+        title: defaultTitle,
+      },
+    },
+    {
       path: '/builds',
       component: BuildsPage,
       meta: {
@@ -82,8 +89,8 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/projects',
-      component: ProjectsPage,
+      path: '/builds/:id',
+      component: BuildPage,
       meta: {
         secure: false,
         title: defaultTitle,
@@ -151,12 +158,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  if (initialPageLoad === null) {
-    initialPageLoad = true;
-  } else if (initialPageLoad === true) {
-    initialPageLoad = false;
-  }
-
   let match, authorized;
 
   // Update the HTML title

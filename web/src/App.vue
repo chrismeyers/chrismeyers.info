@@ -2,14 +2,12 @@
   <div id="app">
     <v-dialog />
     <vue-progress-bar />
-    <div class="container">
-      <template>
-        <app-mobile-nav v-if="isMobile" :path="path" />
-        <app-full-nav v-else :path="path" />
-      </template>
-      <router-view />
-      <app-footer />
-    </div>
+    <template>
+      <app-mobile-nav v-if="isMobile" :path="path" />
+      <app-full-nav v-else :path="path" />
+    </template>
+    <router-view />
+    <app-footer />
     <keep-alive>
       <app-prompt v-if="!isMobile" />
     </keep-alive>
@@ -112,7 +110,7 @@ export default {
   --icon-color: #000000;
   --modal-bg-color: #ffffff;
   --modal-button-text-color: #ffffff;
-  --page-not-found-path-bg: #eaeaea;
+  --highlighted-text-bg: #eaeaea;
 }
 
 [data-theme='dark'] {
@@ -123,15 +121,21 @@ export default {
   --icon-color: #e9e9e9;
   --modal-bg-color: #303030;
   --modal-button-text-color: #ffffff;
-  --page-not-found-path-bg: #444444;
+  --highlighted-text-bg: #444444;
 }
 
 #app {
   font-family: 'Open Sans', sans-serif;
   flex: 1;
+  display: -webkit-flex;
+  display: flex;
 }
 
-html,
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -160,12 +164,6 @@ textarea {
 
 h2.top {
   margin-top: 0px;
-}
-
-.container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
 }
 
 .fancytxt {
@@ -223,6 +221,16 @@ h2.top {
 
 .jump-anchor:hover {
   fill: var(--main-theme-color);
+}
+
+.center {
+  text-align: center;
+}
+
+.highlighted {
+  display: inline;
+  background: var(--highlighted-text-bg);
+  padding: 3px;
 }
 
 /******************** COMMON NAV *******************/
@@ -424,22 +432,8 @@ select.select-mod {
 }
 
 @media screen and (max-width: 969px) {
-  body {
-    display: flex;
-  }
-
-  .container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    margin: auto;
-  }
-
   .content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
+    margin: 60px 0px 90px 0px;
   }
 
   .content-text {
