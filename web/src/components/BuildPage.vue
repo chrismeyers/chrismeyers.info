@@ -1,8 +1,6 @@
 <template>
   <div class="content">
-    <div class="section-header section-header-size">
-      {{ build ? build.displayDate : `Unknown Build` }}
-    </div>
+    <div class="section-header section-header-size">Build Details</div>
 
     <div class="content-text">
       <template v-if="error">
@@ -16,6 +14,7 @@
       </template>
       <template v-else-if="build">
         <div class="build" :key="build.id">
+          <h2>{{ build.displayDate }}</h2>
           <div class="build-info">
             <div class="build-specs">
               <dl>

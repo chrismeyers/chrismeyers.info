@@ -1,8 +1,6 @@
 <template>
   <div class="content">
-    <div class="section-header section-header-size">
-      {{ project ? project.title : `Unknown Project` }}
-    </div>
+    <div class="section-header section-header-size">Project Details</div>
 
     <div class="content-text">
       <template v-if="error">
@@ -16,6 +14,7 @@
       </template>
       <template v-else-if="project">
         <div class="project" :key="project.id">
+          <h2>{{ project.title }}</h2>
           <h3>{{ project.displayDate }}</h3>
           <div class="project-wrapper">
             <div class="project-description">
