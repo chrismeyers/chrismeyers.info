@@ -106,9 +106,9 @@ export default {
 
 <style scoped>
 nav {
-  top: 0;
-  position: sticky;
+  position: fixed;
   width: 100%;
+  height: 60px;
   z-index: 1;
 }
 
