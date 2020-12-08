@@ -28,6 +28,10 @@ export default {
   beforeRouteEnter(to, from, next) {
     next((vm) => vm.setPath(to.path));
   },
+  beforeRouteUpdate(to, from, next) {
+    this.setPath(to.path);
+    next();
+  },
   methods: {
     setPath(path) {
       this.path = path;

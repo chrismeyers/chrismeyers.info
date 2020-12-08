@@ -161,6 +161,12 @@ export default {
       next((vm) => vm.setData(project));
     });
   },
+  beforeRouteUpdate(to, from, next) {
+    ProjectsAPI.getById(to.params.id).then((project) => {
+      this.setData(project);
+      next();
+    });
+  },
   methods: {
     setData(project) {
       if (project instanceof ConnectionError) {
@@ -169,6 +175,7 @@ export default {
         });
       } else if (project.status === 200) {
         this.project = project.data;
+        this.error = false;
       } else if ([400, 404].includes(project.status)) {
         this.error = true;
       } else {
