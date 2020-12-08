@@ -50,6 +50,8 @@ class ProjectsPublicController extends ResourceController {
           body: {"message": "project id $id does not exist or is inactive"});
     }
 
+    project.images.sort((a, b) => a.pos.compareTo(b.pos));
+
     return Response.ok(project);
   }
 }
