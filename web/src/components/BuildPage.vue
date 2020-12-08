@@ -74,12 +74,19 @@ export default {
       next((vm) => vm.setData(build));
     });
   },
+  beforeRouteUpdate(to, from, next) {
+    BuildsAPI.getById(to.params.id).then((build) => {
+      this.setData(build);
+      next();
+    });
+  },
   methods: {
     setData(build) {
       if (build instanceof ConnectionError) {
         this.showDialog(build.message, build.title, { capitalized: true });
       } else if (build.status === 200) {
         this.build = build.data;
+        this.error = false;
       } else if ([400, 404].includes(build.status)) {
         this.error = true;
       } else {
