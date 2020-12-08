@@ -9,7 +9,7 @@
         <p class="center">
           Project
           <span>
-            <pre class="path">{{ $route.params.id }}</pre>
+            <pre class="highlighted">{{ $route.params.id }}</pre>
           </span>
           does not exist
         </p>

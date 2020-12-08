@@ -112,7 +112,7 @@ export default {
   --icon-color: #000000;
   --modal-bg-color: #ffffff;
   --modal-button-text-color: #ffffff;
-  --page-not-found-path-bg: #eaeaea;
+  --highlighted-text-bg: #eaeaea;
 }
 
 [data-theme='dark'] {
@@ -123,7 +123,7 @@ export default {
   --icon-color: #e9e9e9;
   --modal-bg-color: #303030;
   --modal-button-text-color: #ffffff;
-  --page-not-found-path-bg: #444444;
+  --highlighted-text-bg: #444444;
 }
 
 #app {
@@ -229,9 +229,9 @@ h2.top {
   text-align: center;
 }
 
-.path {
+.highlighted {
   display: inline;
-  background: var(--page-not-found-path-bg);
+  background: var(--highlighted-text-bg);
   padding: 3px;
 }
 

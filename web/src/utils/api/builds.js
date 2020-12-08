@@ -19,6 +19,21 @@ export default {
       });
   },
 
+  getById(id, params = {}) {
+    const queryString = qs.stringify(params, {
+      addQueryPrefix: true,
+      strictNullHandling: true,
+    });
+    return axios
+      .get(`/public/builds/${id}${queryString}`)
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return ErrorHandler.handle(error);
+      });
+  },
+
   // POST Methods
   add(token, build) {
     return axios({
