@@ -83,7 +83,7 @@
       </ul>
 
       <a
-        class="faded"
+        class="faded fancytxt"
         href="https://github.com/chrismeyers/chrismeyers.info/blob/master/resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.pdf"
         target="_blank"
       >
