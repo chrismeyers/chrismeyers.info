@@ -41,6 +41,7 @@ export default {
       isMobile: true,
       path: '',
       throttledResizeFn: null,
+      systemThemeChangeFn: null,
     };
   },
   watch: {
@@ -74,9 +75,14 @@ export default {
   mounted() {
     this.$store.commit('applyTheme');
     if (window.matchMedia) {
+      this.systemThemeChangeFn = (e) => {
+        const which = e.matches ? THEMES.DARK : THEMES.LIGHT;
+        this.$store.commit('setTheme', which);
+      };
+
       window
         .matchMedia(SYSTEM_THEME_DARK_MEDIA_QUERY)
-        .addEventListener('change', this.systemThemeChange);
+        .addEventListener('change', this.systemThemeChangeFn);
     }
 
     // [App.vue specific] When App.vue is finish loading finish the progress bar
@@ -94,7 +100,7 @@ export default {
     if (window.matchMedia) {
       window
         .matchMedia(SYSTEM_THEME_DARK_MEDIA_QUERY)
-        .removeEventListener('change', this.systemThemeChange);
+        .removeEventListener('change', this.systemThemeChangeFn);
     }
 
     window.removeEventListener('resize', this.throttledResizeFn);
@@ -103,10 +109,6 @@ export default {
     onResize() {
       const width = window.innerWidth;
       this.isMobile = width < MOBILE_BREAKPOINT;
-    },
-    systemThemeChange(e) {
-      const which = e.matches ? THEMES.DARK : THEMES.LIGHT;
-      this.$store.commit('setTheme', which);
     },
   },
 };
