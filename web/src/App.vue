@@ -20,7 +20,11 @@ import AppMobileNav from '@/components/AppMobileNav';
 import AppFooter from '@/components/AppFooter';
 import AppPrompt from '@/components/AppPrompt';
 import ModalsMixin from '@/mixins/Modals';
-import { MOBILE_BREAKPOINT } from '@/store/constants';
+import {
+  MOBILE_BREAKPOINT,
+  THEMES,
+  SYSTEM_THEME_DARK_MEDIA_QUERY,
+} from '@/store/constants';
 import _throttle from 'lodash/throttle';
 
 export default {
@@ -37,6 +41,7 @@ export default {
       isMobile: true,
       path: '',
       throttledResizeFn: null,
+      systemThemeChangeFn: null,
     };
   },
   watch: {
@@ -69,6 +74,16 @@ export default {
   },
   mounted() {
     this.$store.commit('applyTheme');
+    if (window.matchMedia) {
+      this.systemThemeChangeFn = (e) => {
+        const which = e.matches ? THEMES.DARK : THEMES.LIGHT;
+        this.$store.commit('setTheme', which);
+      };
+
+      window
+        .matchMedia(SYSTEM_THEME_DARK_MEDIA_QUERY)
+        .addEventListener('change', this.systemThemeChangeFn);
+    }
 
     // [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish();
@@ -82,6 +97,12 @@ export default {
     window.addEventListener('resize', this.throttledResizeFn);
   },
   beforeDestroy() {
+    if (window.matchMedia) {
+      window
+        .matchMedia(SYSTEM_THEME_DARK_MEDIA_QUERY)
+        .removeEventListener('change', this.systemThemeChangeFn);
+    }
+
     window.removeEventListener('resize', this.throttledResizeFn);
   },
   methods: {
@@ -96,7 +117,7 @@ export default {
 <style>
 /********************* GENERAL *********************/
 :root {
-  --main-theme-color: rgb(91, 183, 91);
+  --main-theme-color: #5bb75b;
   --warning-color: #d9534f;
 
   --font-color: #444444;
@@ -107,6 +128,7 @@ export default {
   --modal-bg-color: #ffffff;
   --modal-button-text-color: #ffffff;
   --highlighted-text-bg: #eaeaea;
+  --faded-text-color: #909090;
 }
 
 [data-theme='dark'] {
@@ -118,6 +140,7 @@ export default {
   --modal-bg-color: #303030;
   --modal-button-text-color: #ffffff;
   --highlighted-text-bg: #444444;
+  --faded-text-color: #a9a9a9;
 }
 
 #app {
@@ -188,7 +211,7 @@ h2.top {
 .timestamp,
 .faded {
   font-size: 0.75em;
-  color: #a9a9a9;
+  color: var(--faded-text-color);
 }
 
 .link-image {
