@@ -347,13 +347,13 @@
     },
     {
       "active": true,
-      "title": "Tic Tac Toe Android App",
+      "title": "Tic-Tac-Toe Android App",
       "webUrl": null,
       "codeUrl": "https://github.com/chrismeyers/Android-TicTacToe",
       "displayDate": "Intro to Android Programming, Rowan University, Summer 2014",
       "startedDate": "2014-06-01T00:00:00.000Z",
       "lang": "Java",
-      "info": "An android version of tic tac toe",
+      "info": "An Android version of Tic-Tac-Toe.",
       "role": "Solo Project",
       "stat": "Complete",
       "images": [
