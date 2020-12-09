@@ -41,28 +41,28 @@
         <div v-click-outside="toggleMenu" v-if="menuDisplayed" class="menu">
           <router-link
             class="nav-link menu-item"
-            :class="{ 'nav-selected': path === 'about' }"
+            :class="{ 'nav-selected': path === '/' }"
             tag="div"
             to="/"
             >About</router-link
           >
           <router-link
             class="nav-link menu-item"
-            :class="{ 'nav-selected': path === 'resume' }"
+            :class="{ 'nav-selected': path === '/resume' }"
             tag="div"
             to="/resume"
             >Résumé</router-link
           >
           <router-link
             class="nav-link menu-item"
-            :class="{ 'nav-selected': path.includes('projects') }"
+            :class="{ 'nav-selected': path.startsWith('/projects') }"
             tag="div"
             to="/projects"
             >Projects</router-link
           >
           <router-link
             class="nav-link menu-item"
-            :class="{ 'nav-selected': path.includes('builds') }"
+            :class="{ 'nav-selected': path.startsWith('/builds') }"
             tag="div"
             to="/builds"
             >Builds</router-link
