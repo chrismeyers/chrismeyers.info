@@ -20,7 +20,11 @@ import AppMobileNav from '@/components/AppMobileNav';
 import AppFooter from '@/components/AppFooter';
 import AppPrompt from '@/components/AppPrompt';
 import ModalsMixin from '@/mixins/Modals';
-import { MOBILE_BREAKPOINT, THEMES } from '@/store/constants';
+import {
+  MOBILE_BREAKPOINT,
+  THEMES,
+  SYSTEM_THEME_DARK_MEDIA_QUERY,
+} from '@/store/constants';
 import _throttle from 'lodash/throttle';
 
 export default {
@@ -71,7 +75,7 @@ export default {
     this.$store.commit('applyTheme');
     if (window.matchMedia) {
       window
-        .matchMedia('(prefers-color-scheme: dark)')
+        .matchMedia(SYSTEM_THEME_DARK_MEDIA_QUERY)
         .addEventListener('change', this.systemThemeChange);
     }
 
@@ -89,7 +93,7 @@ export default {
   beforeDestroy() {
     if (window.matchMedia) {
       window
-        .matchMedia('(prefers-color-scheme: dark)')
+        .matchMedia(SYSTEM_THEME_DARK_MEDIA_QUERY)
         .removeEventListener('change', this.systemThemeChange);
     }
 
