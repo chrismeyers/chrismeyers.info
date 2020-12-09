@@ -2,11 +2,7 @@
   <footer>
     <div class="footer-links">
       <div class="footer-social">
-        <a
-          href="https://github.com/chrismeyers"
-          target="_blank"
-          style="text-decoration: none"
-        >
+        <a href="https://github.com/chrismeyers" class="no-decoration">
           <svgicon
             name="github"
             class="link-image large"
@@ -21,8 +17,7 @@
       <div class="footer-social">
         <a
           href="https://www.linkedin.com/in/chris-meyers"
-          target="_blank"
-          style="text-decoration: none"
+          class="no-decoration"
         >
           <svgicon
             name="linkedin"
@@ -40,6 +35,7 @@
           :href="`mailto:${CONTACT_EMAIL}`"
           title="Send Message"
           target="_blank"
+          rel="noopener noreferrer"
         >
           <svgicon name="mail" class="link-image large"></svgicon>
         </a>

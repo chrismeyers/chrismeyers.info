@@ -12,29 +12,21 @@
       <ul>
         <li>
           I studied computer science at
-          <a class="fancytxt" href="https://www.rowan.edu" target="_blank"
-            >Rowan University</a
-          >
+          <a class="fancytxt" href="https://www.rowan.edu">Rowan University</a>
           in Glassboro, NJ and earned a Bachelor of Science in Computer Science
         </li>
         <li v-if="employed">
           Currently, I am employed as a
           {{ mostRecentJob ? mostRecentJob.title : '' }} at
-          <a
-            class="fancytxt"
-            :href="mostRecentJob ? mostRecentJob.url : ''"
-            target="_blank"
-            >{{ mostRecentJob ? mostRecentJob.company : '' }}</a
-          >
+          <a class="fancytxt" :href="mostRecentJob ? mostRecentJob.url : ''">{{
+            mostRecentJob ? mostRecentJob.company : ''
+          }}</a>
         </li>
         <li>
           Some of my hobbies include:
           <ul>
             <li>
-              <a
-                class="fancytxt"
-                href="https://www.goodreads.com/chrismeyers"
-                target="_blank"
+              <a class="fancytxt" href="https://www.goodreads.com/chrismeyers"
                 >Reading</a
               >
             </li>
@@ -89,7 +81,11 @@
         and maintainable code. My primary goal is to create innovative and
         usable applications that solve problems. If you have any questions,
         comments, or would like to work together on a project, please
-        <a class="fancytxt" :href="`mailto:${CONTACT_EMAIL}`" target="_blank"
+        <a
+          class="fancytxt"
+          :href="`mailto:${CONTACT_EMAIL}`"
+          target="_blank"
+          rel="noopener noreferrer"
           >send me a message</a
         >.</span
       >

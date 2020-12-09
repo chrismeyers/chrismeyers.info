@@ -37,21 +37,11 @@
                     name="link-external"
                     class="link-image small"
                   ></svgicon
-                  >&nbsp;<a
-                    :href="project.webUrl"
-                    class="fancytxt"
-                    target="_blank"
-                    >Website</a
-                  >
+                  >&nbsp;<a :href="project.webUrl" class="fancytxt">Website</a>
                 </dd>
                 <dd class="project-link-image">
                   <svgicon name="github" class="link-image small"></svgicon
-                  >&nbsp;<a
-                    :href="project.codeUrl"
-                    class="fancytxt"
-                    target="_blank"
-                    >Code</a
-                  >
+                  >&nbsp;<a :href="project.codeUrl" class="fancytxt">Code</a>
                 </dd>
               </dl>
             </div>
