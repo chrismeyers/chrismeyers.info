@@ -117,7 +117,7 @@ export default {
 <style>
 /********************* GENERAL *********************/
 :root {
-  --main-theme-color: rgb(91, 183, 91);
+  --main-theme-color: #5bb75b;
   --warning-color: #d9534f;
 
   --font-color: #444444;
