@@ -85,7 +85,6 @@
       <a
         class="faded fancytxt"
         href="https://github.com/chrismeyers/chrismeyers.info/blob/master/resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.pdf"
-        target="_blank"
       >
         View or download the PDF version of my résumé
       </a>
