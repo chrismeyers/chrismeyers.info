@@ -128,6 +128,7 @@ export default {
   --modal-bg-color: #ffffff;
   --modal-button-text-color: #ffffff;
   --highlighted-text-bg: #eaeaea;
+  --faded-text-color: #909090;
 }
 
 [data-theme='dark'] {
@@ -139,6 +140,7 @@ export default {
   --modal-bg-color: #303030;
   --modal-button-text-color: #ffffff;
   --highlighted-text-bg: #444444;
+  --faded-text-color: #a9a9a9;
 }
 
 #app {
@@ -209,7 +211,7 @@ h2.top {
 .timestamp,
 .faded {
   font-size: 0.75em;
-  color: #a9a9a9;
+  color: var(--faded-text-color);
 }
 
 .link-image {
