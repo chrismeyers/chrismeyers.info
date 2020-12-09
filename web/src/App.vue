@@ -20,7 +20,7 @@ import AppMobileNav from '@/components/AppMobileNav';
 import AppFooter from '@/components/AppFooter';
 import AppPrompt from '@/components/AppPrompt';
 import ModalsMixin from '@/mixins/Modals';
-import { MOBILE_BREAKPOINT } from '@/store/constants';
+import { MOBILE_BREAKPOINT, THEMES } from '@/store/constants';
 import _throttle from 'lodash/throttle';
 
 export default {
@@ -69,6 +69,11 @@ export default {
   },
   mounted() {
     this.$store.commit('applyTheme');
+    if (window.matchMedia) {
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', this.systemThemeChange);
+    }
 
     // [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish();
@@ -82,12 +87,22 @@ export default {
     window.addEventListener('resize', this.throttledResizeFn);
   },
   beforeDestroy() {
+    if (window.matchMedia) {
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .removeEventListener('change', this.systemThemeChange);
+    }
+
     window.removeEventListener('resize', this.throttledResizeFn);
   },
   methods: {
     onResize() {
       const width = window.innerWidth;
       this.isMobile = width < MOBILE_BREAKPOINT;
+    },
+    systemThemeChange(e) {
+      const which = e.matches ? THEMES.DARK : THEMES.LIGHT;
+      this.$store.commit('setTheme', which);
     },
   },
 };
