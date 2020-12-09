@@ -14,7 +14,7 @@
         <li>
           <router-link
             class="nav-link"
-            :class="{ 'nav-selected': path === 'about' }"
+            :class="{ 'nav-selected': path === '/' }"
             to="/"
             >About</router-link
           >
@@ -22,7 +22,7 @@
         <li>
           <router-link
             class="nav-link"
-            :class="{ 'nav-selected': path === 'resume' }"
+            :class="{ 'nav-selected': path === '/resume' }"
             to="/resume"
             >Résumé</router-link
           >
@@ -30,7 +30,7 @@
         <li>
           <router-link
             class="nav-link"
-            :class="{ 'nav-selected': path.includes('projects') }"
+            :class="{ 'nav-selected': path.startsWith('/projects') }"
             to="/projects"
             >Projects</router-link
           >
@@ -38,7 +38,7 @@
         <li>
           <router-link
             class="nav-link"
-            :class="{ 'nav-selected': path.includes('builds') }"
+            :class="{ 'nav-selected': path.startsWith('/builds') }"
             to="/builds"
             >Builds</router-link
           >

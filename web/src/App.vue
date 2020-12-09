@@ -42,7 +42,7 @@ export default {
   watch: {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
-      this.setPath(to.path);
+      this.path = to.path;
     },
   },
   created() {
@@ -88,10 +88,6 @@ export default {
     onResize() {
       const width = window.innerWidth;
       this.isMobile = width < MOBILE_BREAKPOINT;
-    },
-    setPath(rawPath) {
-      const cleanedPath = rawPath.replace(/\//g, '');
-      this.path = cleanedPath === '' ? 'about' : cleanedPath;
     },
   },
 };
