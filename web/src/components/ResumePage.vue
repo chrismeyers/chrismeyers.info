@@ -6,7 +6,9 @@
       <h2 class="top">Experience</h2>
       <template v-for="job in experience">
         <ul :key="job.id" class="italic-spacer">
-          <li class="left-column company" v-html="job.firstLine[0]"></li>
+          <li class="left-column company">
+            <a class="fancytxt" :href="job.url" v-html="job.firstLine[0]"></a>
+          </li>
           <li class="right-column location" v-html="job.firstLine[1]"></li>
           <template v-for="(secondLine, i) in job.secondLine">
             <li
@@ -49,11 +51,9 @@
           <li class="left-column degree" v-html="school.firstLine[0]"></li>
           <li class="right-column location" v-html="school.firstLine[1]"></li>
           <template v-for="secondLine in school.secondLine">
-            <li
-              class="left-column sub-left-column school"
-              :key="secondLine.id"
-              v-html="secondLine[0]"
-            ></li>
+            <li class="left-column sub-left-column school" :key="secondLine.id">
+              <a class="fancytxt" :href="school.url" v-html="secondLine[0]"></a>
+            </li>
             <li
               class="right-column tenure"
               :key="secondLine.id"
