@@ -187,7 +187,6 @@ h2.top {
 
 .timestamp,
 .faded {
-  font-style: italic;
   font-size: 0.75em;
   color: #a9a9a9;
 }
@@ -221,6 +220,10 @@ h2.top {
 
 .center {
   text-align: center;
+}
+
+.right {
+  text-align: right;
 }
 
 .highlighted {

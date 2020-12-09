@@ -8,7 +8,7 @@
           <h2 :class="{ 'first-header': index == 0 }">
             <router-link
               :to="`/projects/${project.id}`"
-              title="More info about to this project"
+              :title="`Click for details of ${project.title}`"
               class="fancytxt"
               >{{ project.title }}</router-link
             >
@@ -16,12 +16,12 @@
           <h3>{{ project.displayDate }}</h3>
           <div class="project-overview">
             <p v-html="project.info"></p>
-            <p>
+            <p class="right">
               <router-link
                 :to="`/projects/${project.id}`"
-                title="More info about to this project"
+                :title="`Click for details of ${project.title}`"
                 class="faded fancytxt"
-                >More info...</router-link
+                >Project Details &gt;</router-link
               >
             </p>
           </div>
