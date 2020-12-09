@@ -83,7 +83,7 @@
         comments, or would like to work together on a project, please
         <a
           class="fancytxt"
-          :href="`mailto:${CONTACT_EMAIL}`"
+          :href="MAILTO_HREF"
           target="_blank"
           rel="noopener noreferrer"
           >send me a message</a
@@ -97,14 +97,14 @@
 import ResumeAPI from '@/utils/api/resume';
 import ConnectionError from '@/utils/errors/types/connection';
 import ModalsMixin from '@/mixins/Modals';
-import { CONTACT_EMAIL } from '@/store/constants';
+import { MAILTO_HREF } from '@/store/constants';
 
 export default {
   name: 'about-page',
   mixins: [ModalsMixin],
   data() {
     return {
-      CONTACT_EMAIL,
+      MAILTO_HREF,
       languages: {},
       mostRecentJob: {},
       employed: false,

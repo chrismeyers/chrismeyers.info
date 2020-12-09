@@ -32,7 +32,7 @@
 
       <div class="footer-social">
         <a
-          :href="`mailto:${CONTACT_EMAIL}`"
+          :href="MAILTO_HREF"
           title="Send Message"
           target="_blank"
           rel="noopener noreferrer"
@@ -67,14 +67,14 @@
 import '@/assets/images/icons/generated/github';
 import '@/assets/images/icons/generated/linkedin';
 import '@/assets/images/icons/generated/mail';
-import { THEMES, CONTACT_EMAIL } from '@/store/constants';
+import { THEMES, MAILTO_HREF } from '@/store/constants';
 
 export default {
   name: 'app-footer',
   data() {
     return {
       THEMES,
-      CONTACT_EMAIL,
+      MAILTO_HREF,
     };
   },
   computed: {
