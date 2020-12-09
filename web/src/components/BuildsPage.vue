@@ -8,7 +8,7 @@
           <h2 :class="{ 'first-header': index == 0 }">
             <router-link
               :to="`/builds/${build.id}`"
-              title="More info about to this build"
+              :title="`Click for details of ${build.displayDate}`"
               class="fancytxt"
               >{{ build.displayDate }}</router-link
             >
@@ -19,12 +19,12 @@
               <span class="highlighted">{{ cleanCPU(build.cpu) }}</span>
               based system
             </p>
-            <p>
+            <p class="right">
               <router-link
                 :to="`/builds/${build.id}`"
-                title="More info about to this build"
+                :title="`Click for details of ${build.displayDate}`"
                 class="faded fancytxt"
-                >More info...</router-link
+                >Build Details &gt;</router-link
               >
             </p>
           </div>
