@@ -167,7 +167,7 @@ Future<void> postItems(String which, List items) async {
 }
 
 Future<String> getItems(String which) async {
-  final items = await http.get("$apiBaseUrl/public/$which", headers: {
+  final items = await http.get("$apiBaseUrl/public/$which?inactive", headers: {
     "Content-Type": "application/json",
   });
 
