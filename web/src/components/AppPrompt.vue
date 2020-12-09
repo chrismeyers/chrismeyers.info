@@ -50,7 +50,7 @@ export default {
       info: '',
       history: [],
       historyIndex: -1,
-      keydownFn: null,
+      keyupFn: null,
     };
   },
   mounted() {
@@ -60,7 +60,7 @@ export default {
       'font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: "Courier New", Courier, monospace;',
     );
 
-    this.keydownFn = (e) => {
+    this.keyupFn = (e) => {
       if (e.code === 'Backquote') {
         e.preventDefault(); // Prevents adding ` when opening the prompt
         this.showPrompt();
@@ -82,10 +82,10 @@ export default {
     };
   },
   activated() {
-    window.addEventListener('keyup', this.keydownFn);
+    window.addEventListener('keyup', this.keyupFn);
   },
   deactivated() {
-    window.removeEventListener('keyup', this.keydownFn);
+    window.removeEventListener('keyup', this.keyupFn);
   },
   methods: {
     togglePrompt() {
