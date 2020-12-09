@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VuexPersist from 'vuex-persist';
-import { IS_IE, THEMES } from './constants';
+import { IS_IE, THEMES, SYSTEM_THEME_DARK_MEDIA_QUERY } from './constants';
 
 Vue.use(Vuex);
 
@@ -25,8 +25,7 @@ export const Store = new Vuex.Store({
     applyTheme(state) {
       if (state.theme === null) {
         if (window.matchMedia) {
-          state.theme = window.matchMedia('(prefers-color-scheme: dark)')
-            .matches
+          state.theme = window.matchMedia(SYSTEM_THEME_DARK_MEDIA_QUERY).matches
             ? THEMES.DARK
             : THEMES.LIGHT;
         } else {
