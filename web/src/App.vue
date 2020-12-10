@@ -74,7 +74,7 @@ export default {
   },
   mounted() {
     this.$store.commit('applyTheme');
-    if (window.matchMedia) {
+    if (this.systemThemeAvailable) {
       this.systemThemeChangeFn = (e) => {
         const which = e.matches ? THEMES.DARK : THEMES.LIGHT;
         this.$store.commit('setTheme', which);
@@ -97,13 +97,21 @@ export default {
     window.addEventListener('resize', this.throttledResizeFn);
   },
   beforeDestroy() {
-    if (window.matchMedia) {
+    if (this.systemThemeAvailable) {
       window
         .matchMedia(SYSTEM_THEME_DARK_MEDIA_QUERY)
         .removeEventListener('change', this.systemThemeChangeFn);
     }
 
     window.removeEventListener('resize', this.throttledResizeFn);
+  },
+  computed: {
+    systemThemeAvailable: () =>
+      window.matchMedia &&
+      typeof window.matchMedia(SYSTEM_THEME_DARK_MEDIA_QUERY)
+        .addEventListener === 'function' &&
+      typeof window.matchMedia(SYSTEM_THEME_DARK_MEDIA_QUERY)
+        .removeEventListener === 'function',
   },
   methods: {
     onResize() {
