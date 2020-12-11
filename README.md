@@ -3,6 +3,7 @@ This is the codebase for my personal website currently located at <https://chris
 
 ## Requirements
 1. Install the Dart SDK (see [instructions](https://dart.dev/get-dart))
+    - Specific versions of the Dart SDK can be downloaded [here](https://dart.dev/tools/sdk/archive)
 1. Install Aqueduct (see [documentation](https://aqueduct.io/docs/tut/getting-started))
 1. Install Node.js (see [nodesource](https://github.com/nodesource/distributions) or [nvm](https://github.com/nvm-sh/nvm))
 

@@ -23,7 +23,7 @@ See the documentation for [Deployment](https://aqueduct.io/docs/deploy/).
 ---
 
 ## Setup
-NOTE: `aqueduct` commands may need to be run within the docker container (`docker exec -it {CONTAINER_NAME} sh`)
+NOTE: `aqueduct` commands may need to be run within the docker container (`docker exec -it {CONTAINER_NAME} sh`) or by using `pub run aqueduct ...`
 1. Create a database, add a database user, then grant database permissions to this user (see https://aqueduct.io/docs/db/connecting/)
     ```
     CREATE DATABASE my_app_name;
