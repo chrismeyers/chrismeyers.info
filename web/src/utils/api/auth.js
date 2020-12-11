@@ -27,7 +27,7 @@ export default {
   },
   logout(token) {
     return axios({
-      method: 'post',
+      method: 'delete',
       url: '/auth/logout',
       headers: {
         Authorization: `Bearer ${token}`,

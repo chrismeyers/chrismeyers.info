@@ -8,7 +8,7 @@ class LogoutController extends ResourceController {
 
   ManagedContext context;
 
-  @Operation.post()
+  @Operation.delete()
   Future<Response> logout() async {
     // For more info see: https://stackoverflow.com/a/56258100
     final int userId = request.authorization.ownerID;
