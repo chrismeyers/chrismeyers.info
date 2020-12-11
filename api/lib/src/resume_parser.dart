@@ -1,4 +1,4 @@
-import "dart:io";
+import 'dart:io';
 
 class ListItem {
   ListItem(this._mainItem) : _subItems = [];
@@ -14,7 +14,7 @@ class ListItem {
   List<String> get subItems => _subItems;
 
   Map<String, dynamic> toJson() =>
-      {"mainItem": _mainItem, "subItems": _subItems};
+      {'mainItem': _mainItem, 'subItems': _subItems};
 }
 
 class ResumeParser {
@@ -32,14 +32,14 @@ class ResumeParser {
   DateTime get lastModified => _lastModified;
 
   void loadLatexFile() {
-    const String beginPattern = r"% BEGIN";
-    const String endPattern = r"% END";
-    const String commentPattern = r"\begin{comment}";
-    String section = "";
+    const String beginPattern = r'% BEGIN';
+    const String endPattern = r'% END';
+    const String commentPattern = r'\begin{comment}';
+    String section = '';
 
     for (String line in _lines) {
       line = line.trim();
-      if (line == "" || line.contains(commentPattern)) {
+      if (line == '' || line.contains(commentPattern)) {
         continue;
       } else if (line.contains(beginPattern)) {
         // New section
@@ -53,7 +53,7 @@ class ResumeParser {
         }
       } else {
         // Between end and begin
-        section = "";
+        section = '';
         continue;
       }
     }
@@ -61,13 +61,13 @@ class ResumeParser {
 
   List<Map<String, dynamic>> parseComplexSection(String section,
       {bool removeInlineComments = true}) {
-    const String urlPattern = r"% URL";
-    const String firstLinePattern = r"{\textbf{";
-    const String secondLinePattern = r"{\emph{";
-    const String endPattern = r"}}";
-    const String infoPattern = r"\item";
-    const String circleInfoPattern = r"\item[$\circ$]";
-    const String sameCompanyPattern = r"% Same Company";
+    const String urlPattern = r'% URL';
+    const String firstLinePattern = r'{\textbf{';
+    const String secondLinePattern = r'{\emph{';
+    const String endPattern = r'}}';
+    const String infoPattern = r'\item';
+    const String circleInfoPattern = r'\item[$\circ$]';
+    const String sameCompanyPattern = r'% Same Company';
 
     final List<Map<String, dynamic>> items = [];
 
@@ -94,7 +94,7 @@ class ResumeParser {
         final String cleaned = _cleanString(
             line
                 .substring(beginPatternIndex, endPatternIndex)
-                .replaceAll(endPattern, ""),
+                .replaceAll(endPattern, ''),
             removeInlineComments);
 
         firstLine.add(cleaned);
@@ -105,7 +105,7 @@ class ResumeParser {
         final String cleaned = _cleanString(
             line
                 .substring(beginPatternIndex, endPatternIndex)
-                .replaceAll(endPattern, ""),
+                .replaceAll(endPattern, ''),
             removeInlineComments);
 
         currentSecondLine.add(cleaned);
@@ -124,10 +124,10 @@ class ResumeParser {
           info.add(List<String>.from(currentInfo));
 
           items.add({
-            "url": url,
-            "firstLine": List<String>.from(firstLine),
-            "secondLine": List<List<String>>.from(secondLine),
-            "info": List<List<String>>.from(info)
+            'url': url,
+            'firstLine': List<String>.from(firstLine),
+            'secondLine': List<List<String>>.from(secondLine),
+            'info': List<List<String>>.from(info)
           });
 
           url = null;
@@ -149,10 +149,10 @@ class ResumeParser {
     secondLine.add(List<String>.from(currentSecondLine));
     info.add(List<String>.from(currentInfo));
     items.add({
-      "url": url,
-      "firstLine": List<String>.from(firstLine),
-      "secondLine": List<List<String>>.from(secondLine),
-      "info": List<List<String>>.from(info)
+      'url': url,
+      'firstLine': List<String>.from(firstLine),
+      'secondLine': List<List<String>>.from(secondLine),
+      'info': List<List<String>>.from(info)
     });
 
     return items;
@@ -160,10 +160,10 @@ class ResumeParser {
 
   List<ListItem> parseListSection(String section,
       {bool removeInlineComments = true}) {
-    const String itemPattern = r"\item";
-    const String circleItemPattern = r"\item[$\circ$]";
-    const String beginSubPattern = r"\begin{itemize*}";
-    const String endSubPattern = r"\end{itemize*}";
+    const String itemPattern = r'\item';
+    const String circleItemPattern = r'\item[$\circ$]';
+    const String beginSubPattern = r'\begin{itemize*}';
+    const String endSubPattern = r'\end{itemize*}';
 
     final List<ListItem> items = [];
     bool subItem = false;
@@ -194,12 +194,12 @@ class ResumeParser {
   }
 
   Map<String, List<String>> getLanguages() {
-    const String languagesPattern = r"% LANGUAGES";
+    const String languagesPattern = r'% LANGUAGES';
     // Splits the language lists on commas, except within parentheses
-    final RegExp regexp = RegExp(r"(?!\(.*),(?![^(]*?\))");
+    final RegExp regexp = RegExp(r'(?!\(.*),(?![^(]*?\))');
     final Map<String, List<String>> langMap = {};
     final List<ListItem> skills =
-        parseListSection("TechnicalSkills", removeInlineComments: false);
+        parseListSection('TechnicalSkills', removeInlineComments: false);
 
     for (final skill in skills) {
       if (skill.mainItem.contains(languagesPattern)) {
@@ -213,19 +213,19 @@ class ResumeParser {
   }
 
   Map<String, dynamic> getMostRecentJob() {
-    final Map<String, dynamic> job = parseComplexSection("Experience")[0];
+    final Map<String, dynamic> job = parseComplexSection('Experience')[0];
 
-    final List<String> dates = (job["secondLine"][0][1] as String)
-        .split("&ndash;")
+    final List<String> dates = (job['secondLine'][0][1] as String)
+        .split('&ndash;')
         .map((d) => d.trim())
         .toList();
 
     return {
-      "employed": dates[1].toLowerCase() == "present",
-      "company": job["firstLine"][0],
-      "url": job["url"],
-      "title": job["secondLine"][0][0].split(",")[0],
-      "dates": dates
+      'employed': dates[1].toLowerCase() == 'present',
+      'company': job['firstLine'][0],
+      'url': job['url'],
+      'title': job['secondLine'][0][0].split(',')[0],
+      'dates': dates
     };
   }
 
@@ -234,13 +234,13 @@ class ResumeParser {
 
     if (removeInlineComments) {
       // This regex skips escaped percent signs by using negative lookbehind
-      output = output.split(RegExp(r"(?<!\\)%"))[0].trim();
+      output = output.split(RegExp(r'(?<!\\)%'))[0].trim();
     }
 
-    output = output.replaceAll(r"\CPP", r"C++");
-    output = output.replaceAll(r"\break", r"");
-    output = output.replaceAll(r"--", r"&ndash;");
-    output = output.replaceAll(r"\", r"");
+    output = output.replaceAll(r'\CPP', r'C++');
+    output = output.replaceAll(r'\break', r'');
+    output = output.replaceAll(r'--', r'&ndash;');
+    output = output.replaceAll(r'\', r'');
 
     return output;
   }

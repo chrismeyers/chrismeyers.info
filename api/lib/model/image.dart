@@ -1,7 +1,7 @@
-import "package:api/api.dart";
-import "package:api/src/schema_field.dart";
-import "build.dart";
-import "project.dart";
+import 'package:api/api.dart';
+import 'package:api/src/schema_field.dart';
+import 'build.dart';
+import 'project.dart';
 
 class Image extends ManagedObject<_Image> implements _Image {
   static Type get interface => _Image;
@@ -21,14 +21,14 @@ class _Image {
   @SchemaField()
   String title;
 
-  @SchemaField(type: "number")
+  @SchemaField(type: 'number')
   int pos;
 
   @SchemaField(
-      tag: "select",
+      tag: 'select',
       type: null,
       multiple: false,
-      options: ["square", "port", "land"])
+      options: ['square', 'port', 'land'])
   String orient;
 
   @Relate(#image)

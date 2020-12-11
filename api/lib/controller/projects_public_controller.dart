@@ -1,7 +1,7 @@
 import 'package:api/src/schema_maker.dart';
-import "package:aqueduct/aqueduct.dart";
-import "package:api/api.dart";
-import "package:api/model/project.dart";
+import 'package:aqueduct/aqueduct.dart';
+import 'package:api/api.dart';
+import 'package:api/model/project.dart';
 
 class ProjectsPublicController extends ResourceController {
   ProjectsPublicController(this.context);
@@ -10,8 +10,8 @@ class ProjectsPublicController extends ResourceController {
 
   @Operation.get()
   Future<Response> getProjects(
-      {@Bind.query("schema") bool schema = false,
-      @Bind.query("inactive") bool inactive = false}) async {
+      {@Bind.query('schema') bool schema = false,
+      @Bind.query('inactive') bool inactive = false}) async {
     final Query<Project> query = Query<Project>(context)
       ..join(set: (p) => p.images)
       ..sortBy((p) => p.startedDate, QuerySortOrder.ascending);
@@ -25,18 +25,18 @@ class ProjectsPublicController extends ResourceController {
     }
 
     final Map<String, dynamic> response = {};
-    response["items"] = allProjects.map((value) => value.asMap()).toList();
+    response['items'] = allProjects.map((value) => value.asMap()).toList();
 
     if (schema) {
-      response["schema"] = SchemaMaker.build(Project.interface);
+      response['schema'] = SchemaMaker.build(Project.interface);
     }
 
     return Response.ok(response);
   }
 
-  @Operation.get("id")
-  Future<Response> getProject(@Bind.path("id") int id,
-      {@Bind.query("inactive") bool inactive = false}) async {
+  @Operation.get('id')
+  Future<Response> getProject(@Bind.path('id') int id,
+      {@Bind.query('inactive') bool inactive = false}) async {
     final Query<Project> query = Query<Project>(context)
       ..where((p) => p.id).equalTo(id)
       ..join(set: (p) => p.images);
@@ -47,7 +47,7 @@ class ProjectsPublicController extends ResourceController {
 
     if (project == null) {
       return Response.notFound(
-          body: {"message": "project id $id does not exist or is inactive"});
+          body: {'message': 'project id $id does not exist or is inactive'});
     }
 
     project.images.sort((a, b) => a.pos.compareTo(b.pos));

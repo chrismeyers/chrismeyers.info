@@ -1,11 +1,11 @@
-import "package:api/api.dart";
-import "package:api/model/user.dart";
-import "package:aqueduct_test/aqueduct_test.dart";
+import 'package:api/api.dart';
+import 'package:api/model/user.dart';
+import 'package:aqueduct_test/aqueduct_test.dart';
 
-export "package:api/api.dart";
-export "package:aqueduct_test/aqueduct_test.dart";
-export "package:test/test.dart";
-export "package:aqueduct/aqueduct.dart";
+export 'package:api/api.dart';
+export 'package:aqueduct_test/aqueduct_test.dart';
+export 'package:test/test.dart';
+export 'package:aqueduct/aqueduct.dart';
 
 /// A testing harness for api.
 ///
@@ -28,7 +28,7 @@ class Harness extends TestHarness<ApiChannel>
   @override
   AuthServer get authServer => channel.authServer;
 
-  String client = "com.aqueduct.public";
+  String client = 'com.aqueduct.public';
   Agent publicAgent;
 
   @override
@@ -44,11 +44,11 @@ class Harness extends TestHarness<ApiChannel>
   Future<Agent> registerUser(User user, {Agent withClient}) async {
     withClient ??= publicAgent;
 
-    final TestRequest req = withClient.request("/auth/register")
+    final TestRequest req = withClient.request('/auth/register')
       ..body = {
-        "username": user.username,
-        "password": user.password,
-        "secret": "secret"
+        'username': user.username,
+        'password': user.password,
+        'secret': 'secret'
       };
     await req.post();
 
