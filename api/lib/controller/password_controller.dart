@@ -1,7 +1,7 @@
-import "dart:async";
+import 'dart:async';
 
-import "package:aqueduct/aqueduct.dart";
-import "package:api/model/user.dart";
+import 'package:aqueduct/aqueduct.dart';
+import 'package:api/model/user.dart';
 
 class PasswordController extends ResourceController {
   PasswordController(this.context, this.authServer);
@@ -14,8 +14,8 @@ class PasswordController extends ResourceController {
     final Map<String, String> body = await request.body.decode();
 
     // Check for required parameters before we spend time hashing
-    if (body["password"] == null) {
-      return Response.badRequest(body: {"error": "password required."});
+    if (body['password'] == null) {
+      return Response.badRequest(body: {'error': 'password required.'});
     }
 
     // Get the user based on the auth token.
@@ -24,7 +24,7 @@ class PasswordController extends ResourceController {
     final String salt = AuthUtility.generateRandomSalt();
     final Query<User> query = Query<User>(context)
       ..values.salt = salt
-      ..values.hashedPassword = authServer.hashPassword(body["password"], salt)
+      ..values.hashedPassword = authServer.hashPassword(body['password'], salt)
       ..where((u) => u.id).equalTo(userId);
 
     return Response.ok(await query.updateOne());

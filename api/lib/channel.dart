@@ -1,8 +1,8 @@
-import "package:aqueduct/managed_auth.dart";
-import "package:api/model/user.dart";
-import "./controller/controller.dart";
-import "./src/api_config.dart";
-import "api.dart";
+import 'package:aqueduct/managed_auth.dart';
+import 'package:api/model/user.dart';
+import './controller/controller.dart';
+import './src/api_config.dart';
+import 'api.dart';
 
 /// This type initializes an application.
 ///
@@ -54,53 +54,53 @@ class ApiChannel extends ApplicationChannel {
     final Router router = Router();
 
     router
-        .route("/auth/register")
+        .route('/auth/register')
         .link(() => RegisterController(context, authServer, config));
 
-    router.route("/auth/token").link(() => AuthController(authServer));
+    router.route('/auth/token').link(() => AuthController(authServer));
 
     router
-        .route("/auth/authorize")
+        .route('/auth/authorize')
         .link(() => Authorizer.bearer(authServer))
         .link(() => AuthAuthorizedController());
 
     router
-        .route("/auth/logout")
+        .route('/auth/logout')
         .link(() => Authorizer.bearer(authServer))
         .link(() => LogoutController(context));
 
     router
-        .route("/account/password")
+        .route('/account/password')
         .link(() => Authorizer.bearer(authServer))
         .link(() => PasswordController(context, authServer));
 
-    router.route("/public/resume[/summary]").link(() => ResumeController());
+    router.route('/public/resume[/summary]').link(() => ResumeController());
 
     router
-        .route("/admin/images/[:id]")
+        .route('/admin/images/[:id]')
         .link(() => Authorizer.bearer(authServer))
         .link(() => ImagesAdminController(context));
 
     router
-        .route("/public/images/[:id]")
+        .route('/public/images/[:id]')
         .link(() => ImagesPublicController(context));
 
     router
-        .route("/admin/builds/[:id]")
+        .route('/admin/builds/[:id]')
         .link(() => Authorizer.bearer(authServer))
         .link(() => BuildsAdminController(context));
 
     router
-        .route("/public/builds/[:id]")
+        .route('/public/builds/[:id]')
         .link(() => BuildsPublicController(context));
 
     router
-        .route("/admin/projects/[:id]")
+        .route('/admin/projects/[:id]')
         .link(() => Authorizer.bearer(authServer))
         .link(() => ProjectsAdminController(context));
 
     router
-        .route("/public/projects/[:id]")
+        .route('/public/projects/[:id]')
         .link(() => ProjectsPublicController(context));
 
     return router;

@@ -1,7 +1,7 @@
-import "package:aqueduct/aqueduct.dart";
-import "package:aqueduct/managed_auth.dart";
-import "package:api/api.dart";
-import "package:api/model/user.dart";
+import 'package:aqueduct/aqueduct.dart';
+import 'package:aqueduct/managed_auth.dart';
+import 'package:api/api.dart';
+import 'package:api/model/user.dart';
 
 class LogoutController extends ResourceController {
   LogoutController(this.context);
@@ -13,7 +13,7 @@ class LogoutController extends ResourceController {
     // For more info see: https://stackoverflow.com/a/56258100
     final int userId = request.authorization.ownerID;
     final String token =
-        request.raw.headers.value("authorization").split(' ')[1];
+        request.raw.headers.value('authorization').split(' ')[1];
 
     // Delete the token from the database.
     final Query<ManagedAuthToken> tokenQuery = Query<ManagedAuthToken>(context)
@@ -26,6 +26,6 @@ class LogoutController extends ResourceController {
     final User user = await userQuery.fetchOne();
 
     return Response.ok(
-        {"id": userId, "username": user.username, "message": "logged out"});
+        {'id': userId, 'username': user.username, 'message': 'logged out'});
   }
 }

@@ -21,12 +21,12 @@
 ///   Restore from seed.json: dart bootstrap.dart -u USER -p PASS -c SOME.CLIENT.NAME -m dev|prod
 ///   Backup to seed.json:    dart bootstrap.dart --backup -m dev|prod
 
-import "dart:async";
-import "dart:convert";
-import "dart:io";
-import "package:args/args.dart";
-import "package:http/http.dart" as http;
-import "package:path/path.dart" show dirname, join;
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'package:args/args.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' show dirname, join;
 
 String apiBaseUrl;
 String accessToken;
@@ -35,71 +35,71 @@ ArgResults args;
 void main(List<String> arguments) async {
   handleArgs(arguments);
 
-  if (args["backup"] == true) {
-    final String images = await getItems("images");
-    final String builds = await getItems("builds");
-    final String projects = await getItems("projects");
+  if (args['backup'] == true) {
+    final String images = await getItems('images');
+    final String builds = await getItems('builds');
+    final String projects = await getItems('projects');
 
     const JsonDecoder decoder = JsonDecoder();
     const JsonEncoder encoder = JsonEncoder.withIndent('  ');
 
     final Map json = {
-      "images": cleanImagesJson(decoder.convert(images)["items"] as List),
-      "builds": cleanBuildsJson(decoder.convert(builds)["items"] as List),
-      "projects": cleanProjectsJson(decoder.convert(projects)["items"] as List)
+      'images': cleanImagesJson(decoder.convert(images)['items'] as List),
+      'builds': cleanBuildsJson(decoder.convert(builds)['items'] as List),
+      'projects': cleanProjectsJson(decoder.convert(projects)['items'] as List)
     };
 
-    await File(join(dirname(Platform.script.path), "seed.json"))
+    await File(join(dirname(Platform.script.path), 'seed.json'))
         .writeAsString(encoder.convert(json));
-  } else if (args["register"] == true) {
-    final resp = await http.post("$apiBaseUrl/auth/register",
-        headers: {"Content-Type": "application/json"},
+  } else if (args['register'] == true) {
+    final resp = await http.post('$apiBaseUrl/auth/register',
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          "username": args["username"],
-          "password": args["password"],
-          "secret": args["registration-secret"]
+          'username': args['username'],
+          'password': args['password'],
+          'secret': args['registration-secret']
         }));
 
     print(
         "POST /auth/register ${resp.statusCode} - created user \"${args["username"]}\"");
   } else {
     final String seedStr =
-        File(join(dirname(Platform.script.path), "seed.json"))
+        File(join(dirname(Platform.script.path), 'seed.json'))
             .readAsStringSync();
     final seed = jsonDecode(seedStr);
 
     final http.Response tokenResponse = await getAccessToken();
-    accessToken = jsonDecode(tokenResponse.body)["access_token"] as String;
+    accessToken = jsonDecode(tokenResponse.body)['access_token'] as String;
 
-    await postItems("images", seed["images"] as List);
-    await postItems("builds", seed["builds"] as List);
-    await postItems("projects", seed["projects"] as List);
+    await postItems('images', seed['images'] as List);
+    await postItems('builds', seed['builds'] as List);
+    await postItems('projects', seed['projects'] as List);
   }
 }
 
 void handleArgs(List<String> arguments) {
   final ArgParser argParser = ArgParser()
-    ..addOption("mode",
-        abbr: "m",
-        defaultsTo: "dev",
-        allowed: ["dev", "prod"],
-        help: "Specifies the API that should be bootstrapped")
-    ..addOption("username",
-        abbr: "u", help: "Specifies the admin username (required for POST)")
-    ..addOption("password",
-        abbr: "p", help: "Specifies the admin password (required for POST)")
-    ..addOption("client",
-        abbr: "c", help: "Specifies the OAuth 2.0 client (required for POST)")
-    ..addFlag("backup",
-        abbr: "b",
+    ..addOption('mode',
+        abbr: 'm',
+        defaultsTo: 'dev',
+        allowed: ['dev', 'prod'],
+        help: 'Specifies the API that should be bootstrapped')
+    ..addOption('username',
+        abbr: 'u', help: 'Specifies the admin username (required for POST)')
+    ..addOption('password',
+        abbr: 'p', help: 'Specifies the admin password (required for POST)')
+    ..addOption('client',
+        abbr: 'c', help: 'Specifies the OAuth 2.0 client (required for POST)')
+    ..addFlag('backup',
+        abbr: 'b',
         negatable: false,
-        help: "Updates seed.json with current data")
-    ..addFlag("register",
-        abbr: "r", negatable: false, help: "Creates a new user")
-    ..addOption("registration-secret",
-        help: "The secret required to create a user")
-    ..addFlag("help",
-        abbr: "h", negatable: false, help: "Displays this help information");
+        help: 'Updates seed.json with current data')
+    ..addFlag('register',
+        abbr: 'r', negatable: false, help: 'Creates a new user')
+    ..addOption('registration-secret',
+        help: 'The secret required to create a user')
+    ..addFlag('help',
+        abbr: 'h', negatable: false, help: 'Displays this help information');
 
   try {
     args = argParser.parse(arguments);
@@ -109,33 +109,33 @@ void handleArgs(List<String> arguments) {
     exit(1);
   }
 
-  if (args["help"] == true) {
+  if (args['help'] == true) {
     print(argParser.usage);
     exit(0);
   }
 
-  if ((args["backup"] == false && args["register"] == false) &&
-      (args["username"] == null ||
-          args["password"] == null ||
-          args["client"] == null)) {
-    print("Error: Missing auth credentials.");
+  if ((args['backup'] == false && args['register'] == false) &&
+      (args['username'] == null ||
+          args['password'] == null ||
+          args['client'] == null)) {
+    print('Error: Missing auth credentials.');
     print(argParser.usage);
     exit(1);
   }
 
-  if (args["register"] == true &&
-      (args["username"] == null ||
-          args["password"] == null ||
-          args["registration-secret"] == null)) {
-    print("Error: Missing username, password, or registration secret.");
+  if (args['register'] == true &&
+      (args['username'] == null ||
+          args['password'] == null ||
+          args['registration-secret'] == null)) {
+    print('Error: Missing username, password, or registration secret.');
     print(argParser.usage);
     exit(1);
   }
 
-  if (args["mode"] == "dev") {
-    apiBaseUrl = "http://localhost:8888";
-  } else if (args["mode"] == "prod") {
-    apiBaseUrl = "https://api.chrismeyers.info";
+  if (args['mode'] == 'dev') {
+    apiBaseUrl = 'http://localhost:8888';
+  } else if (args['mode'] == 'prod') {
+    apiBaseUrl = 'https://api.chrismeyers.info';
   }
 }
 
@@ -145,33 +145,33 @@ Future<http.Response> getAccessToken() async {
   final clientCredentials =
       Base64Encoder().convert("${args["client"]}:".codeUnits);
 
-  return await http.post("$apiBaseUrl/auth/token",
+  return await http.post('$apiBaseUrl/auth/token',
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Basic $clientCredentials"
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic $clientCredentials'
       },
       body: body);
 }
 
 Future<void> postItems(String which, List items) async {
   for (final item in items) {
-    final resp = await http.post("$apiBaseUrl/admin/$which",
+    final resp = await http.post('$apiBaseUrl/admin/$which',
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $accessToken"
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken'
         },
         body: jsonEncode(item));
 
-    print("POST /admin/$which ${resp.statusCode}");
+    print('POST /admin/$which ${resp.statusCode}');
   }
 }
 
 Future<String> getItems(String which) async {
-  final items = await http.get("$apiBaseUrl/public/$which?inactive", headers: {
-    "Content-Type": "application/json",
+  final items = await http.get('$apiBaseUrl/public/$which?inactive', headers: {
+    'Content-Type': 'application/json',
   });
 
-  print("GET /public/$which ${items.statusCode}");
+  print('GET /public/$which ${items.statusCode}');
   return items.body;
 }
 
@@ -179,9 +179,9 @@ List cleanImagesJson(List images) {
   final List cleaned = [];
 
   for (final image in images) {
-    image.remove("id");
-    image.remove("build");
-    image.remove("project");
+    image.remove('id');
+    image.remove('build');
+    image.remove('project');
     cleaned.add(image);
   }
 
@@ -192,8 +192,8 @@ List cleanBuildsJson(List builds) {
   final List cleaned = [];
 
   for (final build in builds) {
-    build.remove("id");
-    build["image"] = build["image"]["id"];
+    build.remove('id');
+    build['image'] = build['image']['id'];
     cleaned.add(build);
   }
 
@@ -204,12 +204,12 @@ List cleanProjectsJson(dynamic projects) {
   final List cleaned = [];
 
   for (final project in projects) {
-    project.remove("id");
+    project.remove('id');
     final List imageIds = [];
-    for (final image in project["images"]) {
-      imageIds.add(image["id"]);
+    for (final image in project['images']) {
+      imageIds.add(image['id']);
     }
-    project["images"] = imageIds;
+    project['images'] = imageIds;
     cleaned.add(project);
   }
 

@@ -1,7 +1,7 @@
-import "package:aqueduct/aqueduct.dart";
-import "package:api/api.dart";
-import "package:api/model/build.dart";
-import "package:api/model/image.dart";
+import 'package:aqueduct/aqueduct.dart';
+import 'package:api/api.dart';
+import 'package:api/model/build.dart';
+import 'package:api/model/image.dart';
 
 class BuildsAdminController extends ResourceController {
   BuildsAdminController(this.context);
@@ -11,20 +11,20 @@ class BuildsAdminController extends ResourceController {
   @Operation.post()
   Future<Response> addBuild() async {
     final Map<String, dynamic> body = await request.body.decode();
-    final int imageId = body["image"] as int;
+    final int imageId = body['image'] as int;
 
     final Build build = await context.transaction((transaction) async {
       final Query<Build> queryAddData = Query<Build>(transaction)
-        ..values.displayDate = body["displayDate"] as String
-        ..values.startedDate = DateTime.parse(body["startedDate"] as String)
-        ..values.cpu = body["cpu"] as String
-        ..values.cool = body["cool"] as String
-        ..values.mobo = body["mobo"] as String
-        ..values.ram = body["ram"] as String
-        ..values.hdd = body["hdd"] as String
-        ..values.ssd = body["ssd"] as String
-        ..values.gpu = body["gpu"] as String
-        ..values.active = body["active"] as bool;
+        ..values.displayDate = body['displayDate'] as String
+        ..values.startedDate = DateTime.parse(body['startedDate'] as String)
+        ..values.cpu = body['cpu'] as String
+        ..values.cool = body['cool'] as String
+        ..values.mobo = body['mobo'] as String
+        ..values.ram = body['ram'] as String
+        ..values.hdd = body['hdd'] as String
+        ..values.ssd = body['ssd'] as String
+        ..values.gpu = body['gpu'] as String
+        ..values.active = body['active'] as bool;
       final Build build = await queryAddData.insert();
 
       final Query<Image> queryRelateImage = Query<Image>(transaction)
@@ -42,23 +42,23 @@ class BuildsAdminController extends ResourceController {
     return Response.ok(build);
   }
 
-  @Operation.put("id")
-  Future<Response> updateBuild(@Bind.path("id") int id) async {
+  @Operation.put('id')
+  Future<Response> updateBuild(@Bind.path('id') int id) async {
     final Map<String, dynamic> body = await request.body.decode();
-    final int imageId = body["image"] as int;
+    final int imageId = body['image'] as int;
 
     final build = await context.transaction((transaction) async {
       final Query<Build> queryUpdateData = Query<Build>(transaction)
-        ..values.displayDate = body["displayDate"] as String
-        ..values.startedDate = DateTime.parse(body["startedDate"] as String)
-        ..values.cpu = body["cpu"] as String
-        ..values.cool = body["cool"] as String
-        ..values.mobo = body["mobo"] as String
-        ..values.ram = body["ram"] as String
-        ..values.hdd = body["hdd"] as String
-        ..values.ssd = body["ssd"] as String
-        ..values.gpu = body["gpu"] as String
-        ..values.active = body["active"] as bool
+        ..values.displayDate = body['displayDate'] as String
+        ..values.startedDate = DateTime.parse(body['startedDate'] as String)
+        ..values.cpu = body['cpu'] as String
+        ..values.cool = body['cool'] as String
+        ..values.mobo = body['mobo'] as String
+        ..values.ram = body['ram'] as String
+        ..values.hdd = body['hdd'] as String
+        ..values.ssd = body['ssd'] as String
+        ..values.gpu = body['gpu'] as String
+        ..values.active = body['active'] as bool
         ..where((b) => b.id).equalTo(id);
       final Build build = await queryUpdateData.updateOne();
 
@@ -91,14 +91,14 @@ class BuildsAdminController extends ResourceController {
 
     if (build == null) {
       return Response.notFound(
-          body: {"message": "build id $id does not exist"});
+          body: {'message': 'build id $id does not exist'});
     }
 
     return Response.ok(build);
   }
 
-  @Operation.delete("id")
-  Future<Response> deleteBuild(@Bind.path("id") int id) async {
+  @Operation.delete('id')
+  Future<Response> deleteBuild(@Bind.path('id') int id) async {
     final Query<Build> query = Query<Build>(context)
       ..where((b) => b.id).equalTo(id);
 
@@ -106,9 +106,9 @@ class BuildsAdminController extends ResourceController {
 
     if (numDeleted == 0) {
       return Response.notFound(
-          body: {"message": "build id $id does not exist"});
+          body: {'message': 'build id $id does not exist'});
     }
 
-    return Response.ok({"id": id});
+    return Response.ok({'id': id});
   }
 }

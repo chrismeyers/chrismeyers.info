@@ -1,7 +1,7 @@
 class SchemaField {
   const SchemaField(
-      {String tag = "input",
-      String type = "text",
+      {String tag = 'input',
+      String type = 'text',
       bool required = true,
       bool multiple,
       List<String> options})
