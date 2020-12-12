@@ -3,8 +3,18 @@ name: API
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'api/**'
+      - '!api/scripts/**'
+      - '!api/README.md'
+      - '!api/bin/seed.json'
   pull_request:
     branches: [ master ]
+    paths:
+      - 'api/**'
+      - '!api/scripts/**'
+      - '!api/README.md'
+      - '!api/bin/seed.json'
 
 jobs:
   build:
