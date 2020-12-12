@@ -12,6 +12,7 @@ jobs:
 
     defaults:
       run:
+        shell: bash
         working-directory: ./api
 
     container:
@@ -42,7 +43,7 @@ jobs:
         run: pub get
 
       - name: Run database migrations
-        run: pub run aqueduct db upgrade --connect postgres://dart:dart@localhost:5432/dart_test
+        run: pub run aqueduct db upgrade --connect postgres://dart:dart@127.0.0.1:5432/dart_test
 
       - name: Run tests
         run: pub run test
