@@ -17,9 +17,9 @@
         </li>
         <li v-if="employed">
           Currently, I am employed as a
-          {{ mostRecentJob ? mostRecentJob.title : '' }} at
-          <a class="fancytxt" :href="mostRecentJob ? mostRecentJob.url : ''">{{
-            mostRecentJob ? mostRecentJob.company : ''
+          {{ mostRecentJob.title }} at
+          <a class="fancytxt" :href="mostRecentJob.url">{{
+            mostRecentJob.company
           }}</a>
         </li>
         <li>
