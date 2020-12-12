@@ -1,0 +1,48 @@
+name: API
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./api
+        
+    container:
+      image:  google/dart:2.7.2
+
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: dart
+          POSTGRES_PASSWORD: dart
+          POSTGRES_DB: dart_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+           
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Print Dart SDK version
+        run: dart --version
+
+      - name: Install dependencies
+        run: pub get
+        
+      - name: Run database migrations
+        run: pub run aqueduct db upgrade
+        
+      - name: Run tests
+        run: pub run test
