@@ -14,10 +14,10 @@
 
     <form @submit.prevent="routeFormSubmission">
       <template v-for="(field, index) in schema">
-        <span :key="index + '-span'"
+        <span :key="`${index}-span`"
           ><b>{{ field.field }}:</b></span
         ><span
-          :key="index + '-req'"
+          :key="`${index}-req`"
           v-if="field.required"
           class="required-star"
         ></span>
@@ -27,7 +27,7 @@
             :type="field.type"
             v-model="selected[field.field]"
             :placeholder="field.field"
-            :key="index + '-input'"
+            :key="`${index}-input`"
             :required="field.required"
           />
         </template>
@@ -36,21 +36,21 @@
             class="textarea-mod dashboard-text"
             v-model="selected[field.field]"
             :placeholder="field.field"
-            :key="index + '-textarea'"
+            :key="`${index}-textarea`"
             :required="field.required"
           ></textarea>
         </template>
         <template v-else-if="field.tag === 'select'">
           <a
             class="fancytxt clear-button"
-            :key="index - '-clear'"
+            :key="`${index}-clear`"
             @click="selected.images = []"
             >clear</a
           >
           <select
             class="select-scroll-mod"
             size="10"
-            :key="index + '-select'"
+            :key="`${index}-select`"
             :multiple="field.multiple"
             v-model="selected.images"
           >
