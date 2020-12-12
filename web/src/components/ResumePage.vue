@@ -83,7 +83,7 @@
       </ul>
 
       <a
-        class="faded fancytxt"
+        class="subtle fancytxt"
         href="https://github.com/chrismeyers/chrismeyers.info/blob/master/resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.pdf"
       >
         View or download the PDF version of my résumé

@@ -20,7 +20,7 @@
               <router-link
                 :to="`/projects/${project.id}`"
                 :title="`Click for details of ${project.title}`"
-                class="faded fancytxt"
+                class="subtle fancytxt"
                 >Project Details &gt;</router-link
               >
             </p>

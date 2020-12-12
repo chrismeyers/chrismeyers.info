@@ -23,7 +23,7 @@
               <router-link
                 :to="`/builds/${build.id}`"
                 :title="`Click for details of ${build.displayDate}`"
-                class="faded fancytxt"
+                class="subtle fancytxt"
                 >Build Details &gt;</router-link
               >
             </p>

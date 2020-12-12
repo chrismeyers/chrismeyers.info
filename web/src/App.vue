@@ -217,7 +217,7 @@ h2.top {
 }
 
 .timestamp,
-.faded {
+.subtle {
   font-size: 0.75em;
   color: var(--faded-text-color);
 }
