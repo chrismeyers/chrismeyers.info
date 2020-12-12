@@ -6,4 +6,5 @@ class ApiConfig extends Configuration {
 
   DatabaseConfiguration database;
   String registrationSecret;
+  List<String> corsAllowedOrigins;
 }

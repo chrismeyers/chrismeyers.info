@@ -5,3 +5,6 @@ database:
   password: dart
   databaseName: dart_test
 registrationSecret: secret
+corsAllowedOrigins:
+  - http://localhost:8080
+  - https://chrismeyers.info
