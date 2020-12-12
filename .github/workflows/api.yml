@@ -42,7 +42,7 @@ jobs:
         run: pub get
 
       - name: Run database migrations
-        run: pub run aqueduct db upgrade
+        run: pub run aqueduct db upgrade --connect postgres://dart:dart@localhost:5432/dart_test
 
       - name: Run tests
         run: pub run test
