@@ -25,8 +25,6 @@ jobs:
           POSTGRES_USER: dart
           POSTGRES_PASSWORD: dart
           POSTGRES_DB: dart_test
-        ports:
-          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -43,7 +41,7 @@ jobs:
         run: pub get
 
       - name: Run database migrations
-        run: pub run aqueduct db upgrade --connect postgres://dart:dart@127.0.0.1:5432/dart_test
+        run: pub run aqueduct db upgrade --connect postgres://dart:dart@localhost:5432/dart_test
 
       - name: Run tests
         run: pub run test
