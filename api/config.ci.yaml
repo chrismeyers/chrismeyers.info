@@ -1,0 +1,9 @@
+database:
+  host: postgres
+  port: 5432
+  username: dart
+  password: dart
+  databaseName: dart_test
+registrationSecret: secret
+corsAllowedOrigins:
+  - http://localhost

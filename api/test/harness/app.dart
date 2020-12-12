@@ -32,6 +32,13 @@ class Harness extends TestHarness<ApiChannel>
   Agent publicAgent;
 
   @override
+  Future beforeStart() async {
+    if (Platform.environment['CI'] == 'true') {
+      options.configurationFilePath = 'config.ci.yaml';
+    }
+  }
+
+  @override
   Future onSetUp() async {
     await resetData();
   }
