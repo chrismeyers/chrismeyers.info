@@ -146,32 +146,34 @@ export default {
       error: false,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    ProjectsAPI.getById(to.params.id).then((project) => {
-      next((vm) => vm.setData(project));
-    });
+  async beforeRouteEnter(to, from, next) {
+    await ProjectsAPI.getById(to.params.id, (project, error) =>
+      next((vm) => vm.setData(project, error)),
+    );
   },
-  beforeRouteUpdate(to, from, next) {
-    ProjectsAPI.getById(to.params.id).then((project) => {
-      this.setData(project);
+  async beforeRouteUpdate(to, from, next) {
+    await ProjectsAPI.getById(to.params.id, (project, error) => {
+      this.setData(project, error);
       next();
     });
   },
   methods: {
-    setData(project) {
-      if (project instanceof ConnectionError) {
-        this.showDialog(project.message, project.title, {
-          capitalized: true,
-        });
-      } else if (project.status === 200) {
+    setData(project, error) {
+      if (error) {
+        if (error instanceof ConnectionError) {
+          this.showDialog(error.message, error.title, {
+            capitalized: true,
+          });
+        } else if ([400, 404].includes(error.status)) {
+          this.error = true;
+        } else {
+          this.showDialog(error.data.error, error.statusText, {
+            capitalized: true,
+          });
+        }
+      } else {
         this.project = project.data;
         this.error = false;
-      } else if ([400, 404].includes(project.status)) {
-        this.error = true;
-      } else {
-        this.showDialog(project.data.error, project.statusText, {
-          capitalized: true,
-        });
       }
     },
     showGIF(which) {

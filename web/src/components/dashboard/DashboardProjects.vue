@@ -94,12 +94,14 @@ export default {
       api: ProjectsAPI,
     };
   },
-  async beforeRouteEnter(to, from, next) {
-    const projects = await ProjectsAPI.get({ schema: null, inactive: null });
-    const images = await ImagesAPI.get();
-    next((vm) => {
-      vm.setData(projects);
-      vm.setImages(images);
+  beforeRouteEnter(to, from, next) {
+    next(async (vm) => {
+      await ProjectsAPI.get((projects, error) => vm.setData(projects, error), {
+        schema: null,
+        inactive: null,
+      });
+
+      await ImagesAPI.get((images, error) => vm.setImages(images, error));
     });
   },
   methods: {
