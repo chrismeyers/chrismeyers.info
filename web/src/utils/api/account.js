@@ -1,5 +1,5 @@
 import axios from 'axios';
-import ErrorHandler from '../errors/handler';
+import { handleAxiosError } from '../errors/handler';
 
 export default {
   // PUT Methods
@@ -16,7 +16,7 @@ export default {
         },
       })
         .then((response) => resolve(response))
-        .catch((error) => reject(ErrorHandler.handle(error)));
+        .catch((error) => reject(handleAxiosError(error)));
     });
   },
 };

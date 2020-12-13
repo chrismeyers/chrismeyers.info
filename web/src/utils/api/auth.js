@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import ErrorHandler from '../errors/handler';
+import { handleAxiosError } from '../errors/handler';
 
 export default {
   // POST Methods
@@ -21,7 +21,7 @@ export default {
         }),
       })
         .then((response) => resolve(response))
-        .catch((error) => reject(ErrorHandler.handle(error)));
+        .catch((error) => reject(handleAxiosError(error)));
     });
   },
 
@@ -35,7 +35,7 @@ export default {
         },
       })
         .then((response) => resolve(response))
-        .catch((error) => reject(ErrorHandler.handle(error)));
+        .catch((error) => reject(handleAxiosError(error)));
     });
   },
 

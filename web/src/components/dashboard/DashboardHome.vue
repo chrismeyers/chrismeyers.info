@@ -25,13 +25,12 @@
 
 <script>
 import AuthAPI from '@/utils/api/auth';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 import { API_TOKEN_KEY } from '@/store/constants';
 
 export default {
   name: 'dashboard-home',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   methods: {
     getTitle() {
       return document.title;
@@ -43,15 +42,7 @@ export default {
           this.$router.push({ path: '/login' });
         })
         .catch((error) => {
-          if (error instanceof ConnectionError) {
-            this.showDialog(error.message, error.title, {
-              capitalized: true,
-            });
-          } else {
-            this.showDialog(error.data.error, error.statusText, {
-              capitalized: true,
-            });
-          }
+          this.handleCommonErrors(error);
         });
     },
   },

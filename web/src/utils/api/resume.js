@@ -1,5 +1,5 @@
 import axios from 'axios';
-import ErrorHandler from '../errors/handler';
+import { handleAxiosError } from '../errors/handler';
 
 export default {
   // GET Methods
@@ -8,7 +8,7 @@ export default {
       return axios
         .get('/public/resume')
         .then((response) => resolve(response))
-        .catch((error) => reject(ErrorHandler.handle(error)));
+        .catch((error) => reject(handleAxiosError(error)));
     });
   },
 
@@ -17,7 +17,7 @@ export default {
       return axios
         .get('/public/resume/summary')
         .then((response) => resolve(response))
-        .catch((error) => reject(ErrorHandler.handle(error)));
+        .catch((error) => reject(handleAxiosError(error)));
     });
   },
 };
