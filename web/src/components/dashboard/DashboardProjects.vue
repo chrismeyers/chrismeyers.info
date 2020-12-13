@@ -95,18 +95,17 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      ProjectsAPI.get({
-        schema: null,
-        inactive: null,
-      })
-        .then((response) => vm.setData({ response }))
-        .catch((error) => vm.setData({ error }));
+    const projectsPromise = ProjectsAPI.get({ schema: null, inactive: null });
+    const imagesPromise = ImagesAPI.get();
 
-      ImagesAPI.get()
-        .then((response) => vm.setImages({ response }))
-        .catch((error) => vm.setImages({ error }));
-    });
+    Promise.all([projectsPromise, imagesPromise])
+      .then((values) =>
+        next((vm) => {
+          vm.setData({ response: values[0] });
+          vm.setImages({ response: values[1] });
+        }),
+      )
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   methods: {
     flattenData(projects) {

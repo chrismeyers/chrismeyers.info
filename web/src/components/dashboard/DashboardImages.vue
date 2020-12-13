@@ -81,11 +81,9 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      ImagesAPI.get({ schema: null })
-        .then((response) => vm.setData({ response }))
-        .catch((error) => vm.setData({ error }));
-    });
+    ImagesAPI.get({ schema: null })
+      .then((response) => next((vm) => vm.setData({ response })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   methods: {},
 };

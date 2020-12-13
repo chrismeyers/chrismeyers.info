@@ -86,18 +86,17 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      BuildsAPI.get({
-        schema: null,
-        inactive: null,
-      })
-        .then((response) => vm.setData({ response }))
-        .catch((error) => vm.setData({ error }));
+    const buildsPromise = BuildsAPI.get({ schema: null, inactive: null });
+    const imagesPromise = ImagesAPI.get();
 
-      ImagesAPI.get()
-        .then((response) => vm.setImages({ response }))
-        .catch((error) => vm.setImages({ error }));
-    });
+    Promise.all([buildsPromise, imagesPromise])
+      .then((values) =>
+        next((vm) => {
+          vm.setData({ response: values[0] });
+          vm.setImages({ response: values[1] });
+        }),
+      )
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   methods: {
     flattenData(builds) {
