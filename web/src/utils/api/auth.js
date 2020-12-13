@@ -4,9 +4,9 @@ import ErrorHandler from '../errors/handler';
 
 export default {
   // POST Methods
-  async login(username, password, cb) {
-    try {
-      const response = await axios({
+  login(username, password) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'post',
         url: '/auth/token',
         headers: {
@@ -19,45 +19,36 @@ export default {
           password: password,
           grant_type: 'password',
         }),
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
-  async logout(token, cb) {
-    try {
-      const response = await axios({
+  logout(token) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'delete',
         url: '/auth/logout',
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
   // GET Methods
-  async checkLoggedIn(token) {
-    try {
-      const response = await axios({
-        method: 'get',
-        url: '/auth/authorize',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.data.logged_in === true) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (error) {
-      return false;
-    }
+  checkLoggedIn(token) {
+    return axios({
+      method: 'get',
+      url: '/auth/authorize',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.data.logged_in === true)
+      .catch(() => false);
   },
 };
