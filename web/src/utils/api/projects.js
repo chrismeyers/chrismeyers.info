@@ -4,38 +4,38 @@ import ErrorHandler from '../errors/handler';
 
 export default {
   // GET Methods
-  async get(cb, params = {}) {
+  get(params = {}) {
     const queryString = qs.stringify(params, {
       addQueryPrefix: true,
       strictNullHandling: true,
     });
 
-    try {
-      const response = await axios.get(`/public/projects${queryString}`);
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+    return new Promise((resolve, reject) => {
+      return axios
+        .get(`/public/projects${queryString}`)
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
-  async getById(id, cb, params = {}) {
+  getById(id, params = {}) {
     const queryString = qs.stringify(params, {
       addQueryPrefix: true,
       strictNullHandling: true,
     });
 
-    try {
-      const response = await axios.get(`/public/projects/${id}${queryString}`);
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+    return new Promise((resolve, reject) => {
+      return axios
+        .get(`/public/projects/${id}${queryString}`)
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
   // POST Methods
-  async add(token, project, cb) {
-    try {
-      const response = await axios({
+  add(token, project) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'post',
         url: '/admin/projects',
         headers: {
@@ -54,17 +54,16 @@ export default {
           images: project.images,
           active: 'active' in project && project.active ? true : false,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
   // PUT Methods
-  async update(token, project, cb) {
-    try {
-      const response = await axios({
+  update(token, project) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'put',
         url: `/admin/projects/${project.id}`,
         headers: {
@@ -83,26 +82,24 @@ export default {
           images: project.images,
           active: 'active' in project && project.active ? true : false,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
   // DELETE Methods
-  async delete(token, project, cb) {
-    try {
-      const response = await axios({
+  delete(token, project) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'delete',
         url: `/admin/projects/${project.id}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 };

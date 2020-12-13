@@ -95,13 +95,17 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    next(async (vm) => {
-      await ProjectsAPI.get((projects, error) => vm.setData(projects, error), {
+    next((vm) => {
+      ProjectsAPI.get({
         schema: null,
         inactive: null,
-      });
+      })
+        .then((response) => vm.setData({ response }))
+        .catch((error) => vm.setData({ error }));
 
-      await ImagesAPI.get((images, error) => vm.setImages(images, error));
+      ImagesAPI.get()
+        .then((response) => vm.setImages({ response }))
+        .catch((error) => vm.setImages({ error }));
     });
   },
   methods: {

@@ -146,19 +146,25 @@ export default {
       error: false,
     };
   },
-  async beforeRouteEnter(to, from, next) {
-    await ProjectsAPI.getById(to.params.id, (project, error) =>
-      next((vm) => vm.setData(project, error)),
-    );
+  beforeRouteEnter(to, from, next) {
+    ProjectsAPI.getById(to.params.id)
+      .then((project) => next((vm) => vm.setData({ project })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
-  async beforeRouteUpdate(to, from, next) {
-    await ProjectsAPI.getById(to.params.id, (project, error) => {
-      this.setData(project, error);
-      next();
-    });
+  beforeRouteUpdate(to, from, next) {
+    ProjectsAPI.getById(to.params.id)
+      .then((project) => {
+        this.setData({ project });
+      })
+      .catch((error) => {
+        this.setData({ error });
+      })
+      .finally(() => {
+        next();
+      });
   },
   methods: {
-    setData(project, error) {
+    setData({ project = null, error = null }) {
       if (error) {
         if (error instanceof ConnectionError) {
           this.showDialog(error.message, error.title, {
