@@ -153,15 +153,9 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     ProjectsAPI.getById(to.params.id)
-      .then((project) => {
-        this.setData({ project });
-      })
-      .catch((error) => {
-        this.setData({ error });
-      })
-      .finally(() => {
-        next();
-      });
+      .then((project) => this.setData({ project }))
+      .catch((error) => this.setData({ error }))
+      .finally(() => next());
   },
   methods: {
     setData({ project = null, error = null }) {
