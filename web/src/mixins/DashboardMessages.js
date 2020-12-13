@@ -17,10 +17,16 @@ export default {
 
       return { title: 'Success', body: `${actions.past} ${item}` };
     },
-    retrievalError(type, showId = true) {
+    retrievalError(type, showId = true, error = null) {
       const item = showId ? `${type} ${this.lastResponse.data.id}` : type;
 
-      return { title: 'Error', body: `Unable to retrieve ${item}` };
+      let msg = `Unable to retrieve ${item}`;
+
+      if (error) {
+        msg += `<p>${error}</p>`;
+      }
+
+      return { title: 'Error', body: msg };
     },
     modificationError(type, showId = true) {
       const actions = this.determineActions();

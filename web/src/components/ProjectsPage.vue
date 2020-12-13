@@ -49,23 +49,25 @@ export default {
       projects: null,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    ProjectsAPI.get().then((projects) => {
-      next((vm) => vm.setData(projects));
-    });
+  async beforeRouteEnter(to, from, next) {
+    await ProjectsAPI.get((projects, error) =>
+      next((vm) => vm.setData(projects, error)),
+    );
   },
   methods: {
-    setData(projects) {
-      if (projects instanceof ConnectionError) {
-        this.showDialog(projects.message, projects.title, {
-          capitalized: true,
-        });
-      } else if (projects.status === 200) {
-        this.projects = projects.data.items;
+    setData(projects, error) {
+      if (error) {
+        if (error instanceof ConnectionError) {
+          this.showDialog(error.message, error.title, {
+            capitalized: true,
+          });
+        } else {
+          this.showDialog(error.data.error, error.statusText, {
+            capitalized: true,
+          });
+        }
       } else {
-        this.showDialog(projects.data.error, projects.statusText, {
-          capitalized: true,
-        });
+        this.projects = projects.data.items;
       }
     },
   },
