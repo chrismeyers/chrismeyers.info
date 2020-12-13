@@ -47,6 +47,12 @@ jobs:
       - name: Print Dart SDK version
         run: dart --version
 
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+
       - name: Install dependencies
         run: pub get
 
