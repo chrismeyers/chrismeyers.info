@@ -3,9 +3,9 @@ import ErrorHandler from '../errors/handler';
 
 export default {
   // PUT Methods
-  async updatePassword(token, password, cb) {
-    try {
-      const response = await axios({
+  updatePassword(token, password) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'put',
         url: '/account/password',
         headers: {
@@ -14,10 +14,9 @@ export default {
         data: {
           password: password,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 };
