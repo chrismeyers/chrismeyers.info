@@ -47,9 +47,7 @@ export default {
           this.$cookie.set(API_TOKEN_KEY, response.data.access_token, {
             expires: '1D',
           });
-          this.$router.push({
-            path: '/dashboard',
-          });
+          this.$router.push({ path: '/dashboard' });
         })
         .catch((error) => {
           if (error instanceof ConnectionError) {
