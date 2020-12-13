@@ -38,12 +38,11 @@
 
 <script>
 import ProjectsAPI from '@/utils/api/projects';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 
 export default {
   name: 'projects-page',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   data() {
     return {
       projects: null,
@@ -57,15 +56,7 @@ export default {
   methods: {
     setData({ projects = null, error = null }) {
       if (error) {
-        if (error instanceof ConnectionError) {
-          this.showDialog(error.message, error.title, {
-            capitalized: true,
-          });
-        } else {
-          this.showDialog(error.data.error, error.statusText, {
-            capitalized: true,
-          });
-        }
+        this.handleCommonErrors(error);
       } else {
         this.projects = projects.data.items;
       }

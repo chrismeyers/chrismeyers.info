@@ -94,12 +94,11 @@
 
 <script>
 import ResumeAPI from '@/utils/api/resume';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 
 export default {
   name: 'resume-page',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   data() {
     return {
       experience: [],
@@ -115,13 +114,7 @@ export default {
   methods: {
     setData({ resume = null, error = null }) {
       if (error) {
-        if (error instanceof ConnectionError) {
-          this.showDialog(error.message, error.title, { capitalized: true });
-        } else {
-          this.showDialog(error.data.error, error.statusText, {
-            capitalized: true,
-          });
-        }
+        this.handleCommonErrors(error);
       } else {
         this.experience = resume.data.experience;
         this.education = resume.data.education;

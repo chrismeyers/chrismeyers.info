@@ -57,12 +57,11 @@
 
 <script>
 import BuildsAPI from '@/utils/api/builds';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 
 export default {
   name: 'build-page',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   data() {
     return {
       build: null,
@@ -83,16 +82,10 @@ export default {
   methods: {
     setData({ build = null, error = null }) {
       if (error) {
-        if (error instanceof ConnectionError) {
-          this.showDialog(error.message, error.title, {
-            capitalized: true,
-          });
-        } else if ([400, 404].includes(error.status)) {
+        if ([400, 404].includes(error.statusCode)) {
           this.error = true;
         } else {
-          this.showDialog(error.data.error, error.statusText, {
-            capitalized: true,
-          });
+          this.handleCommonErrors(error);
         }
       } else {
         this.build = build.data;

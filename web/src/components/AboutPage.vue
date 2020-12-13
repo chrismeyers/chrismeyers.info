@@ -98,13 +98,12 @@
 
 <script>
 import ResumeAPI from '@/utils/api/resume';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 import { MAILTO_HREF } from '@/store/constants';
 
 export default {
   name: 'about-page',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   data() {
     return {
       MAILTO_HREF,
@@ -125,13 +124,7 @@ export default {
     },
     setData({ summary = null, error = null }) {
       if (error) {
-        if (error instanceof ConnectionError) {
-          this.showDialog(error.message, error.title, { capitalized: true });
-        } else {
-          this.showDialog(error.data.error, error.statusText, {
-            capitalized: true,
-          });
-        }
+        this.handleCommonErrors(error);
       } else {
         this.languages = summary.data.languages;
         this.mostRecentJob = summary.data.mostRecentJob;

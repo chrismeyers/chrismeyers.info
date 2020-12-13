@@ -131,15 +131,14 @@
 
 <script>
 import ProjectsAPI from '@/utils/api/projects';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 import '@/assets/images/icons/generated/github';
 import '@/assets/images/icons/generated/link-external';
 import '@/assets/images/icons/generated/play';
 
 export default {
   name: 'project-page',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   data() {
     return {
       project: null,
@@ -160,16 +159,10 @@ export default {
   methods: {
     setData({ project = null, error = null }) {
       if (error) {
-        if (error instanceof ConnectionError) {
-          this.showDialog(error.message, error.title, {
-            capitalized: true,
-          });
-        } else if ([400, 404].includes(error.status)) {
+        if ([400, 404].includes(error.statusCode)) {
           this.error = true;
         } else {
-          this.showDialog(error.data.error, error.statusText, {
-            capitalized: true,
-          });
+          this.handleCommonErrors(error);
         }
       } else {
         this.project = project.data;
