@@ -37,20 +37,25 @@ export default {
       return document.title;
     },
     async logout() {
-      const logout = await AuthAPI.logout(this.$cookie.get(API_TOKEN_KEY));
-
-      if (logout instanceof ConnectionError) {
-        this.showDialog(logout.message, logout.title, { capitalized: true });
-      } else if (logout.status === 200) {
-        this.$cookie.delete(API_TOKEN_KEY);
-        this.$router.push({
-          path: '/login',
-        });
-      } else {
-        this.showDialog(logout.data.error, logout.statusText, {
-          capitalized: true,
-        });
-      }
+      await AuthAPI.logout(
+        this.$cookie.get(API_TOKEN_KEY),
+        (response, error) => {
+          if (error) {
+            if (error instanceof ConnectionError) {
+              this.showDialog(error.message, error.title, {
+                capitalized: true,
+              });
+            } else {
+              this.showDialog(error.data.error, error.statusText, {
+                capitalized: true,
+              });
+            }
+          } else {
+            this.$cookie.delete(API_TOKEN_KEY);
+            this.$router.push({ path: '/login' });
+          }
+        },
+      );
     },
   },
 };
