@@ -3,22 +3,21 @@ import ErrorHandler from '../errors/handler';
 
 export default {
   // PUT Methods
-  updatePassword(token, password) {
-    return axios({
-      method: 'put',
-      url: '/account/password',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: {
-        password: password,
-      },
-    })
-      .then((response) => {
-        return response;
-      })
-      .catch((error) => {
-        return ErrorHandler.handle(error);
+  async updatePassword(token, password, cb) {
+    try {
+      const response = await axios({
+        method: 'put',
+        url: '/account/password',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          password: password,
+        },
       });
+      return cb(response, null);
+    } catch (error) {
+      return cb(null, ErrorHandler.handle(error));
+    }
   },
 };
