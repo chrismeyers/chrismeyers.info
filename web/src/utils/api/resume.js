@@ -3,21 +3,21 @@ import ErrorHandler from '../errors/handler';
 
 export default {
   // GET Methods
-  async get(cb) {
-    try {
-      const response = await axios.get('/public/resume');
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+  get() {
+    return new Promise((resolve, reject) => {
+      return axios
+        .get('/public/resume')
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
-  async getSummary(cb) {
-    try {
-      const response = await axios.get('/public/resume/summary');
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+  async getSummary() {
+    return new Promise((resolve, reject) => {
+      return axios
+        .get('/public/resume/summary')
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 };

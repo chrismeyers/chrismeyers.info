@@ -113,17 +113,17 @@ export default {
       employed: false,
     };
   },
-  async beforeRouteEnter(to, from, next) {
-    await ResumeAPI.getSummary((summary, error) =>
-      next((vm) => vm.setData(summary, error)),
-    );
+  beforeRouteEnter(to, from, next) {
+    ResumeAPI.getSummary()
+      .then((summary) => next((vm) => vm.setData({ summary })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   methods: {
     showImage(which) {
       const img = this.$refs[which];
       img.click();
     },
-    setData(summary, error) {
+    setData({ summary = null, error = null }) {
       if (error) {
         if (error instanceof ConnectionError) {
           this.showDialog(error.message, error.title, { capitalized: true });
