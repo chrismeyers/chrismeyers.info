@@ -12,7 +12,7 @@ export default {
     });
   },
 
-  async getSummary() {
+  getSummary() {
     return new Promise((resolve, reject) => {
       return axios
         .get('/public/resume/summary')

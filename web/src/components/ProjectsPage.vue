@@ -49,7 +49,7 @@ export default {
       projects: null,
     };
   },
-  async beforeRouteEnter(to, from, next) {
+  beforeRouteEnter(to, from, next) {
     ProjectsAPI.get()
       .then((projects) => next((vm) => vm.setData({ projects })))
       .catch((error) => next((vm) => vm.setData({ error })));
