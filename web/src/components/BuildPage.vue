@@ -74,7 +74,7 @@ export default {
       .then((build) => next((vm) => vm.setData({ build })))
       .catch((error) => next((vm) => vm.setData({ error })));
   },
-  async beforeRouteUpdate(to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     BuildsAPI.getById(to.params.id)
       .then((build) => this.setData({ build }))
       .catch((error) => this.setData({ error }))
