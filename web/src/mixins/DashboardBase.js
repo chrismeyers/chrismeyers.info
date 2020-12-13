@@ -88,10 +88,7 @@ export default {
         result = this.modificationError(this.type.singular);
       } else {
         try {
-          const response = await this.api.get({
-            schema: null,
-            inactive: null,
-          });
+          const response = await this.api.get({ schema: null, inactive: null });
           this.items = this.flattenData(response);
           this.selected = (() => {
             for (const [i, item] of this.items.entries()) {
