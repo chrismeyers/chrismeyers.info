@@ -107,13 +107,13 @@ export default {
       skills: [],
     };
   },
-  async beforeRouteEnter(to, from, next) {
-    await ResumeAPI.get((resume, error) =>
-      next((vm) => vm.setData(resume, error)),
-    );
+  beforeRouteEnter(to, from, next) {
+    ResumeAPI.get()
+      .then((resume) => next((vm) => vm.setData({ resume })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   methods: {
-    setData(resume, error) {
+    setData({ resume = null, error = null }) {
       if (error) {
         if (error instanceof ConnectionError) {
           this.showDialog(error.message, error.title, { capitalized: true });
