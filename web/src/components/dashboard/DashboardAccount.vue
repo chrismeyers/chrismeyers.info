@@ -47,20 +47,22 @@ export default {
   },
   methods: {
     async updatePassword() {
+      this.lastError = null;
+
       if (this.passwords.initial !== this.passwords.confirm) {
         this.lastError = 'Passwords do not match';
       } else if (
         this.passwords.initial !== '' &&
         this.passwords.confirm !== ''
       ) {
-        await AccountAPI.updatePassword(
-          this.$cookie.get(API_TOKEN_KEY),
-          this.passwords.initial,
-          (response, error) => {
-            this.lastResponse = response;
-            this.lastError = error;
-          },
-        );
+        try {
+          this.lastResponse = await AccountAPI.updatePassword(
+            this.$cookie.get(API_TOKEN_KEY),
+            this.passwords.initial,
+          );
+        } catch (error) {
+          this.lastError = error;
+        }
 
         let result = {};
         if (this.lastError) {
