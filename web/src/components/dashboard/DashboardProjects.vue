@@ -94,13 +94,18 @@ export default {
       api: ProjectsAPI,
     };
   },
-  async beforeRouteEnter(to, from, next) {
-    const projects = await ProjectsAPI.get({ schema: null, inactive: null });
-    const images = await ImagesAPI.get();
-    next((vm) => {
-      vm.setData(projects);
-      vm.setImages(images);
-    });
+  beforeRouteEnter(to, from, next) {
+    const projectsPromise = ProjectsAPI.get({ schema: null, inactive: null });
+    const imagesPromise = ImagesAPI.get();
+
+    Promise.all([projectsPromise, imagesPromise])
+      .then((values) =>
+        next((vm) => {
+          vm.setData({ response: values[0] });
+          vm.setImages({ response: values[1] });
+        }),
+      )
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   methods: {
     flattenData(projects) {

@@ -53,7 +53,9 @@ class ApiChannel extends ApplicationChannel {
   /// This method is invoked after [prepare].
   @override
   Controller get entryPoint {
-    final Router router = Router();
+    final Router router = Router(
+        notFoundHandler: (Request req) async =>
+            NotFoundController().notFound(req));
 
     router
         .route('/auth/register')

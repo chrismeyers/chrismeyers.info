@@ -2,7 +2,7 @@
   <div>
     <div>
       <h3>Change Password</h3>
-      <p v-if="error !== null" style="color: red">{{ error }}</p>
+      <p v-if="lastError !== null" style="color: red">{{ lastError }}</p>
       <form @submit.prevent="updatePassword">
         <input
           class="inputbox-mod dashboard-text"
@@ -31,48 +31,47 @@
 
 <script>
 import AccountAPI from '@/utils/api/account';
-import DashboardMessagesMixin from '@/mixins/DashboardMessages';
-import ModalsMixin from '@/mixins/Modals';
+import DashboardBaseMixin from '@/mixins/DashboardBase';
 import { API_TOKEN_KEY } from '@/store/constants';
 
 export default {
   name: 'dashboard-account',
-  mixins: [DashboardMessagesMixin, ModalsMixin],
+  mixins: [DashboardBaseMixin],
   data() {
     return {
       passwords: {
         initial: '',
         confirm: '',
       },
-      error: null,
-      lastResponse: {},
     };
   },
   methods: {
     async updatePassword() {
-      if (this.passwords['initial'] !== this.passwords['confirm']) {
-        this.error = 'Passwords do not match';
-      } else if (
-        this.passwords['initial'] !== '' &&
-        this.passwords['confirm'] !== ''
-      ) {
-        this.error = null;
-        this.lastResponse = await AccountAPI.updatePassword(
-          this.$cookie.get(API_TOKEN_KEY),
-          this.passwords['initial'],
-        );
+      this.lastError = null;
 
-        let result = {};
-        if (this.lastResponse.status === 200) {
-          result = this.success('password', false);
-        } else {
-          result = this.modificationError('password', false);
+      if (this.passwords.initial !== this.passwords.confirm) {
+        this.lastError = 'Passwords do not match';
+      } else if (
+        this.passwords.initial !== '' &&
+        this.passwords.confirm !== ''
+      ) {
+        try {
+          this.lastResponse = await AccountAPI.updatePassword(
+            this.$cookie.get(API_TOKEN_KEY),
+            this.passwords.initial,
+          );
+        } catch (error) {
+          this.lastError = error;
         }
 
-        // Prevent closing the dialog by pressing enter to submit form.
-        setTimeout(() => {
-          this.showDialog(result.body, result.title, { capitalized: true });
-        }, 100);
+        let result = {};
+        if (this.lastError) {
+          result = this.modificationError('password', false);
+        } else {
+          result = this.success('password', false);
+        }
+
+        this.displayResult(result, { capitalized: true });
       }
 
       this.passwords = {

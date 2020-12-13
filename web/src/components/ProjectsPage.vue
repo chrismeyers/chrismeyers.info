@@ -38,34 +38,27 @@
 
 <script>
 import ProjectsAPI from '@/utils/api/projects';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 
 export default {
   name: 'projects-page',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   data() {
     return {
       projects: null,
     };
   },
   beforeRouteEnter(to, from, next) {
-    ProjectsAPI.get().then((projects) => {
-      next((vm) => vm.setData(projects));
-    });
+    ProjectsAPI.get()
+      .then((projects) => next((vm) => vm.setData({ projects })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   methods: {
-    setData(projects) {
-      if (projects instanceof ConnectionError) {
-        this.showDialog(projects.message, projects.title, {
-          capitalized: true,
-        });
-      } else if (projects.status === 200) {
-        this.projects = projects.data.items;
+    setData({ projects = null, error = null }) {
+      if (error) {
+        this.handleCommonErrors(error);
       } else {
-        this.showDialog(projects.data.error, projects.statusText, {
-          capitalized: true,
-        });
+        this.projects = projects.data.items;
       }
     },
   },
