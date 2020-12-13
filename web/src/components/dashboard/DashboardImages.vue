@@ -81,10 +81,10 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    next(async (vm) => {
-      await ImagesAPI.get((images, error) => vm.setData(images, error), {
-        schema: null,
-      });
+    next((vm) => {
+      ImagesAPI.get({ schema: null })
+        .then((response) => vm.setData({ response }))
+        .catch((error) => vm.setData({ error }));
     });
   },
   methods: {},
