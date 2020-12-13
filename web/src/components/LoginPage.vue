@@ -41,24 +41,25 @@ export default {
   },
   methods: {
     login() {
-      AuthAPI.login(this.username, this.password).then((auth) => {
-        if (auth instanceof ConnectionError) {
-          this.error = auth.message;
-        } else if (auth.status === 200) {
+      AuthAPI.login(this.username, this.password)
+        .then((response) => {
           this.error = '';
-          this.$cookie.set(API_TOKEN_KEY, auth.data['access_token'], {
+          this.$cookie.set(API_TOKEN_KEY, response.data.access_token, {
             expires: '1D',
           });
-          this.$router.push({
-            path: '/dashboard',
-          });
-        } else if (auth.status >= 500) {
-          this.error =
-            auth.data.error.charAt(0).toUpperCase() + auth.data.error.slice(1);
-        } else {
-          this.error = 'Invalid Username or Password';
-        }
-      });
+          this.$router.push({ path: '/dashboard' });
+        })
+        .catch((error) => {
+          if (error instanceof ConnectionError) {
+            this.error = error.message;
+          } else if (error.status >= 500) {
+            this.error =
+              error.data.error.charAt(0).toUpperCase() +
+              error.data.error.slice(1);
+          } else {
+            this.error = 'Invalid Username or Password';
+          }
+        });
     },
   },
 };

@@ -25,32 +25,25 @@
 
 <script>
 import AuthAPI from '@/utils/api/auth';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 import { API_TOKEN_KEY } from '@/store/constants';
 
 export default {
   name: 'dashboard-home',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   methods: {
     getTitle() {
       return document.title;
     },
-    async logout() {
-      const logout = await AuthAPI.logout(this.$cookie.get(API_TOKEN_KEY));
-
-      if (logout instanceof ConnectionError) {
-        this.showDialog(logout.message, logout.title, { capitalized: true });
-      } else if (logout.status === 200) {
-        this.$cookie.delete(API_TOKEN_KEY);
-        this.$router.push({
-          path: '/login',
+    logout() {
+      AuthAPI.logout(this.$cookie.get(API_TOKEN_KEY))
+        .then(() => {
+          this.$cookie.delete(API_TOKEN_KEY);
+          this.$router.push({ path: '/login' });
+        })
+        .catch((error) => {
+          this.handleCommonErrors(error);
         });
-      } else {
-        this.showDialog(logout.data.error, logout.statusText, {
-          capitalized: true,
-        });
-      }
     },
   },
 };

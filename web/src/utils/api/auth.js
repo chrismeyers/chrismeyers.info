@@ -1,44 +1,42 @@
 import axios from 'axios';
 import qs from 'qs';
-import ErrorHandler from '../errors/handler';
+import { handleAxiosError } from '../errors/handler';
 
 export default {
   // POST Methods
   login(username, password) {
-    return axios({
-      method: 'post',
-      url: '/auth/token',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: 'Basic ' + btoa(process.env.VUE_APP_API_CLIENT_ID + ':'),
-      },
-      data: qs.stringify({
-        username: username,
-        password: password,
-        grant_type: 'password',
-      }),
-    })
-      .then((response) => {
-        return response;
+    return new Promise((resolve, reject) => {
+      return axios({
+        method: 'post',
+        url: '/auth/token',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization:
+            'Basic ' + btoa(process.env.VUE_APP_API_CLIENT_ID + ':'),
+        },
+        data: qs.stringify({
+          username: username,
+          password: password,
+          grant_type: 'password',
+        }),
       })
-      .catch((error) => {
-        return ErrorHandler.handle(error);
-      });
+        .then((response) => resolve(response))
+        .catch((error) => reject(handleAxiosError(error)));
+    });
   },
+
   logout(token) {
-    return axios({
-      method: 'delete',
-      url: '/auth/logout',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        return response;
+    return new Promise((resolve, reject) => {
+      return axios({
+        method: 'delete',
+        url: '/auth/logout',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch((error) => {
-        return ErrorHandler.handle(error);
-      });
+        .then((response) => resolve(response))
+        .catch((error) => reject(handleAxiosError(error)));
+    });
   },
 
   // GET Methods
@@ -50,15 +48,7 @@ export default {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((response) => {
-        if (response.status < 400) {
-          return true;
-        } else {
-          return false;
-        }
-      })
-      .catch(() => {
-        return false;
-      });
+      .then((response) => response.data.logged_in === true)
+      .catch(() => false);
   },
 };

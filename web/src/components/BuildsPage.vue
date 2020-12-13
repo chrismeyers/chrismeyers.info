@@ -40,32 +40,27 @@
 
 <script>
 import BuildsAPI from '@/utils/api/builds';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 
 export default {
   name: 'builds-page',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   data() {
     return {
       builds: null,
     };
   },
   beforeRouteEnter(to, from, next) {
-    BuildsAPI.get().then((builds) => {
-      next((vm) => vm.setData(builds));
-    });
+    BuildsAPI.get()
+      .then((builds) => next((vm) => vm.setData({ builds })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   methods: {
-    setData(builds) {
-      if (builds instanceof ConnectionError) {
-        this.showDialog(builds.message, builds.title, { capitalized: true });
-      } else if (builds.status === 200) {
-        this.builds = builds.data.items;
+    setData({ builds = null, error = null }) {
+      if (error) {
+        this.handleCommonErrors(error);
       } else {
-        this.showDialog(builds.data.error, builds.statusText, {
-          capitalized: true,
-        });
+        this.builds = builds.data.items;
       }
     },
     cleanCPU(cpu) {

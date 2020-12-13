@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import ErrorHandler from '../errors/handler';
+import { handleAxiosError } from '../errors/handler';
 
 export default {
   // GET Methods
@@ -9,78 +9,71 @@ export default {
       addQueryPrefix: true,
       strictNullHandling: true,
     });
-    return axios
-      .get(`/public/images${queryString}`)
-      .then((response) => {
-        return response;
-      })
-      .catch((error) => {
-        return ErrorHandler.handle(error);
-      });
+
+    return new Promise((resolve, reject) => {
+      return axios
+        .get(`/public/images${queryString}`)
+        .then((response) => resolve(response))
+        .catch((error) => reject(handleAxiosError(error)));
+    });
   },
 
   // POST Methods
   add(token, image) {
-    return axios({
-      method: 'post',
-      url: '/admin/images',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: {
-        path: image.path,
-        thumbnail: image.thumbnail === '' ? null : image.thumbnail,
-        title: image.title,
-        pos: parseInt(image.pos),
-        orient: image.orient,
-      },
-    })
-      .then((response) => {
-        return response;
+    return new Promise((resolve, reject) => {
+      return axios({
+        method: 'post',
+        url: '/admin/images',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          path: image.path,
+          thumbnail: image.thumbnail === '' ? null : image.thumbnail,
+          title: image.title,
+          pos: parseInt(image.pos),
+          orient: image.orient,
+        },
       })
-      .catch((error) => {
-        return ErrorHandler.handle(error);
-      });
+        .then((response) => resolve(response))
+        .catch((error) => reject(handleAxiosError(error)));
+    });
   },
 
   // PUT Methods
   update(token, image) {
-    return axios({
-      method: 'put',
-      url: `/admin/images/${image.id}`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: {
-        path: image.path,
-        thumbnail: image.thumbnail === '' ? null : image.thumbnail,
-        title: image.title,
-        pos: parseInt(image.pos),
-        orient: image.orient,
-      },
-    })
-      .then((response) => {
-        return response;
+    return new Promise((resolve, reject) => {
+      return axios({
+        method: 'put',
+        url: `/admin/images/${image.id}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          path: image.path,
+          thumbnail: image.thumbnail === '' ? null : image.thumbnail,
+          title: image.title,
+          pos: parseInt(image.pos),
+          orient: image.orient,
+        },
       })
-      .catch((error) => {
-        return ErrorHandler.handle(error);
-      });
+        .then((response) => resolve(response))
+        .catch((error) => reject(handleAxiosError(error)));
+    });
   },
 
   // DELETE Methods
   delete(token, image) {
-    return axios({
-      method: 'delete',
-      url: `/admin/images/${image.id}`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        return response;
+    return new Promise((resolve, reject) => {
+      return axios({
+        method: 'delete',
+        url: `/admin/images/${image.id}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch((error) => {
-        return ErrorHandler.handle(error);
-      });
+        .then((response) => resolve(response))
+        .catch((error) => reject(handleAxiosError(error)));
+    });
   },
 };

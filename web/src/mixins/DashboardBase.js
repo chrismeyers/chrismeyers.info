@@ -12,16 +12,31 @@ export default {
       images: [],
       selected: {},
       lastResponse: {},
+      lastError: null,
     };
   },
   methods: {
-    setData(response) {
-      this.items = this.flattenData(response);
-      this.schema = response.data.schema;
-      this.selected = this.items[0];
+    setData({ response = null, error = null }) {
+      if (error) {
+        this.displayResult(
+          this.retrievalError(this.type.plural, false, error),
+          { capitalized: true },
+        );
+      } else {
+        this.items = this.flattenData(response);
+        this.schema = response.data.schema;
+        this.selected = this.items[0];
+      }
     },
-    setImages(response) {
-      this.images = response.data.items;
+    setImages({ response = null, error = null }) {
+      if (error) {
+        this.displayResult(
+          this.retrievalError(this.type.plural, false, error),
+          { capitalized: true },
+        );
+      } else {
+        this.images = response.data.items;
+      }
     },
     flattenData(response) {
       return [
@@ -48,23 +63,33 @@ export default {
     async addUpdateEntry() {
       if (this.selected.id > 0) {
         // Update existing (PUT)
-        this.lastResponse = await this.api.update(
-          this.$cookie.get(API_TOKEN_KEY),
-          this.selected,
-        );
+        try {
+          this.lastResponse = await this.api.update(
+            this.$cookie.get(API_TOKEN_KEY),
+            this.selected,
+          );
+        } catch (error) {
+          this.lastError = error;
+        }
       } else {
         // Add new (POST)
-        this.lastResponse = await this.api.add(
-          this.$cookie.get(API_TOKEN_KEY),
-          this.selected,
-        );
+        try {
+          this.lastResponse = await this.api.add(
+            this.$cookie.get(API_TOKEN_KEY),
+            this.selected,
+          );
+        } catch (error) {
+          this.lastError = error;
+        }
       }
 
       let result = {};
-      if (this.lastResponse.status === 200) {
-        const updated = await this.api.get({ schema: null, inactive: null });
-        if (updated.status === 200) {
-          this.items = this.flattenData(updated);
+      if (this.lastError) {
+        result = this.modificationError(this.type.singular);
+      } else {
+        try {
+          const response = await this.api.get({ schema: null, inactive: null });
+          this.items = this.flattenData(response);
           this.selected = (() => {
             for (const [i, item] of this.items.entries()) {
               if (item.id === this.lastResponse.data.id) {
@@ -74,47 +99,43 @@ export default {
             return this.items[0];
           })();
           result = this.success(this.type.singular);
-        } else {
+        } catch (error) {
           result = this.retrievalError(this.type.plural, false);
         }
-      } else {
-        result = this.modificationError(this.type.singular);
       }
 
-      // Prevent closing the dialog when pressing enter to submit form
-      setTimeout(() => {
-        this.showDialog(result.body, result.title, { capitalized: true });
-      }, 100);
+      this.displayResult(result, { capitalized: true });
     },
     deleteEntry() {
       const handler = async () => {
         if (this.selected.id) {
-          this.lastResponse = await this.api.delete(
-            this.$cookie.get(API_TOKEN_KEY),
-            this.selected,
-          );
-
-          let result = {};
-          if (this.lastResponse.status === 200) {
-            const updated = await this.api.get({
-              schema: null,
-              inactive: null,
-            });
-            if (updated.status === 200) {
-              this.items = this.flattenData(updated);
-              this.selected = this.items[0];
-              result = this.success(this.type.singular);
-            } else {
-              result = this.retrievalError(this.type.plural, false);
-            }
-          } else {
-            result = this.modificationError(this.type.singular);
+          try {
+            this.lastResponse = await this.api.delete(
+              this.$cookie.get(API_TOKEN_KEY),
+              this.selected,
+            );
+          } catch (error) {
+            this.lastError = error;
           }
 
-          // Prevent closing the dialog by pressing enter to submit form.
-          setTimeout(() => {
-            this.showDialog(result.body, result.title, { capitalized: true });
-          }, 100);
+          let result = {};
+          if (this.lastError) {
+            result = this.modificationError(this.type.singular);
+          } else {
+            try {
+              const response = await this.api.get({
+                schema: null,
+                inactive: null,
+              });
+              this.items = this.flattenData(response);
+              this.selected = this.items[0];
+              result = this.success(this.type.singular);
+            } catch (error) {
+              result = this.retrievalError(this.type.plural, false);
+            }
+          }
+
+          this.displayResult(result, { capitalized: true });
         }
       };
 
@@ -122,6 +143,12 @@ export default {
         `Are you sure you want to delete ${this.type.singular} ${this.selected.id}?`,
         handler,
       );
+    },
+    displayResult(result, options = {}, timeout = 100) {
+      // Prevent closing the dialog when pressing enter to submit form
+      setTimeout(() => {
+        this.showDialog(result.body, result.title, options);
+      }, timeout);
     },
   },
 };

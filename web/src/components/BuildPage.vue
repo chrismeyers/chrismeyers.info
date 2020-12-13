@@ -57,12 +57,11 @@
 
 <script>
 import BuildsAPI from '@/utils/api/builds';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 
 export default {
   name: 'build-page',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   data() {
     return {
       build: null,
@@ -70,29 +69,27 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    BuildsAPI.getById(to.params.id).then((build) => {
-      next((vm) => vm.setData(build));
-    });
+    BuildsAPI.getById(to.params.id)
+      .then((build) => next((vm) => vm.setData({ build })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   beforeRouteUpdate(to, from, next) {
-    BuildsAPI.getById(to.params.id).then((build) => {
-      this.setData(build);
-      next();
-    });
+    BuildsAPI.getById(to.params.id)
+      .then((build) => this.setData({ build }))
+      .catch((error) => this.setData({ error }))
+      .finally(() => next());
   },
   methods: {
-    setData(build) {
-      if (build instanceof ConnectionError) {
-        this.showDialog(build.message, build.title, { capitalized: true });
-      } else if (build.status === 200) {
+    setData({ build = null, error = null }) {
+      if (error) {
+        if ([400, 404].includes(error.statusCode)) {
+          this.error = true;
+        } else {
+          this.handleCommonErrors(error);
+        }
+      } else {
         this.build = build.data;
         this.error = false;
-      } else if ([400, 404].includes(build.status)) {
-        this.error = true;
-      } else {
-        this.showDialog(build.data.error, build.statusText, {
-          capitalized: true,
-        });
       }
     },
   },

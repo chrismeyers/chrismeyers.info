@@ -131,15 +131,14 @@
 
 <script>
 import ProjectsAPI from '@/utils/api/projects';
-import ConnectionError from '@/utils/errors/types/connection';
-import ModalsMixin from '@/mixins/Modals';
+import ErrorsMixin from '@/mixins/Errors';
 import '@/assets/images/icons/generated/github';
 import '@/assets/images/icons/generated/link-external';
 import '@/assets/images/icons/generated/play';
 
 export default {
   name: 'project-page',
-  mixins: [ModalsMixin],
+  mixins: [ErrorsMixin],
   data() {
     return {
       project: null,
@@ -147,31 +146,27 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    ProjectsAPI.getById(to.params.id).then((project) => {
-      next((vm) => vm.setData(project));
-    });
+    ProjectsAPI.getById(to.params.id)
+      .then((project) => next((vm) => vm.setData({ project })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   beforeRouteUpdate(to, from, next) {
-    ProjectsAPI.getById(to.params.id).then((project) => {
-      this.setData(project);
-      next();
-    });
+    ProjectsAPI.getById(to.params.id)
+      .then((project) => this.setData({ project }))
+      .catch((error) => this.setData({ error }))
+      .finally(() => next());
   },
   methods: {
-    setData(project) {
-      if (project instanceof ConnectionError) {
-        this.showDialog(project.message, project.title, {
-          capitalized: true,
-        });
-      } else if (project.status === 200) {
+    setData({ project = null, error = null }) {
+      if (error) {
+        if ([400, 404].includes(error.statusCode)) {
+          this.error = true;
+        } else {
+          this.handleCommonErrors(error);
+        }
+      } else {
         this.project = project.data;
         this.error = false;
-      } else if ([400, 404].includes(project.status)) {
-        this.error = true;
-      } else {
-        this.showDialog(project.data.error, project.statusText, {
-          capitalized: true,
-        });
       }
     },
     showGIF(which) {

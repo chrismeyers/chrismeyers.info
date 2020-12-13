@@ -1,26 +1,23 @@
 import axios from 'axios';
-import ErrorHandler from '../errors/handler';
+import { handleAxiosError } from '../errors/handler';
 
 export default {
   // GET Methods
   get() {
-    return axios
-      .get('/public/resume')
-      .then((response) => {
-        return response;
-      })
-      .catch((error) => {
-        return ErrorHandler.handle(error);
-      });
+    return new Promise((resolve, reject) => {
+      return axios
+        .get('/public/resume')
+        .then((response) => resolve(response))
+        .catch((error) => reject(handleAxiosError(error)));
+    });
   },
+
   getSummary() {
-    return axios
-      .get('/public/resume/summary')
-      .then((response) => {
-        return response;
-      })
-      .catch((error) => {
-        return ErrorHandler.handle(error);
-      });
+    return new Promise((resolve, reject) => {
+      return axios
+        .get('/public/resume/summary')
+        .then((response) => resolve(response))
+        .catch((error) => reject(handleAxiosError(error)));
+    });
   },
 };
