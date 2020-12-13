@@ -107,23 +107,25 @@ export default {
       skills: [],
     };
   },
-  beforeRouteEnter(to, from, next) {
-    ResumeAPI.get().then((resume) => {
-      next((vm) => vm.setData(resume));
-    });
+  async beforeRouteEnter(to, from, next) {
+    await ResumeAPI.get((resume, error) =>
+      next((vm) => vm.setData(resume, error)),
+    );
   },
   methods: {
-    setData(resume) {
-      if (resume instanceof ConnectionError) {
-        this.showDialog(resume.message, resume.title, { capitalized: true });
-      } else if (resume.status === 200) {
+    setData(resume, error) {
+      if (error) {
+        if (error instanceof ConnectionError) {
+          this.showDialog(error.message, error.title, { capitalized: true });
+        } else {
+          this.showDialog(error.data.error, error.statusText, {
+            capitalized: true,
+          });
+        }
+      } else {
         this.experience = resume.data.experience;
         this.education = resume.data.education;
         this.skills = resume.data.skills;
-      } else {
-        this.showDialog(resume.data.error, resume.statusText, {
-          capitalized: true,
-        });
       }
     },
   },

@@ -113,27 +113,29 @@ export default {
       employed: false,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    ResumeAPI.getSummary().then((summary) => {
-      next((vm) => vm.setData(summary));
-    });
+  async beforeRouteEnter(to, from, next) {
+    await ResumeAPI.getSummary((summary, error) =>
+      next((vm) => vm.setData(summary, error)),
+    );
   },
   methods: {
     showImage(which) {
       const img = this.$refs[which];
       img.click();
     },
-    setData(summary) {
-      if (summary instanceof ConnectionError) {
-        this.showDialog(summary.message, summary.title, { capitalized: true });
-      } else if (summary.status === 200) {
+    setData(summary, error) {
+      if (error) {
+        if (error instanceof ConnectionError) {
+          this.showDialog(error.message, error.title, { capitalized: true });
+        } else {
+          this.showDialog(error.data.error, error.statusText, {
+            capitalized: true,
+          });
+        }
+      } else {
         this.languages = summary.data.languages;
         this.mostRecentJob = summary.data.mostRecentJob;
         this.employed = summary.data.mostRecentJob.employed;
-      } else {
-        this.showDialog(summary.data.error, summary.statusText, {
-          capitalized: true,
-        });
       }
     },
   },
