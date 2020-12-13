@@ -16,7 +16,7 @@ export default {
     };
   },
   methods: {
-    setData(response, error) {
+    setData({ response = null, error = null }) {
       if (error) {
         this.displayResult(
           this.retrievalError(this.type.plural, false, error),
@@ -28,7 +28,7 @@ export default {
         this.selected = this.items[0];
       }
     },
-    setImages(response, error) {
+    setImages({ response = null, error = null }) {
       if (error) {
         this.displayResult(
           this.retrievalError(this.type.plural, false, error),
@@ -63,52 +63,48 @@ export default {
     async addUpdateEntry() {
       if (this.selected.id > 0) {
         // Update existing (PUT)
-        await this.api.update(
-          this.$cookie.get(API_TOKEN_KEY),
-          this.selected,
-          (response, error) => {
-            this.lastResponse = response;
-            this.lastError = error;
-          },
-        );
+        try {
+          this.lastResponse = await this.api.update(
+            this.$cookie.get(API_TOKEN_KEY),
+            this.selected,
+          );
+        } catch (error) {
+          this.lastError = error;
+        }
       } else {
         // Add new (POST)
-        await this.api.add(
-          this.$cookie.get(API_TOKEN_KEY),
-          this.selected,
-          (response, error) => {
-            this.lastResponse = response;
-            this.lastError = error;
-          },
-        );
+        try {
+          this.lastResponse = await this.api.add(
+            this.$cookie.get(API_TOKEN_KEY),
+            this.selected,
+          );
+        } catch (error) {
+          this.lastError = error;
+        }
       }
 
       let result = {};
       if (this.lastError) {
         result = this.modificationError(this.type.singular);
       } else {
-        await this.api.get(
-          (response, error) => {
-            if (error) {
-              result = this.retrievalError(this.type.plural, false);
-            } else {
-              this.items = this.flattenData(response);
-              this.selected = (() => {
-                for (const [i, item] of this.items.entries()) {
-                  if (item.id === this.lastResponse.data.id) {
-                    return this.items[i];
-                  }
-                }
-                return this.items[0];
-              })();
-              result = this.success(this.type.singular);
-            }
-          },
-          {
+        try {
+          const response = await this.api.get({
             schema: null,
             inactive: null,
-          },
-        );
+          });
+          this.items = this.flattenData(response);
+          this.selected = (() => {
+            for (const [i, item] of this.items.entries()) {
+              if (item.id === this.lastResponse.data.id) {
+                return this.items[i];
+              }
+            }
+            return this.items[0];
+          })();
+          result = this.success(this.type.singular);
+        } catch (error) {
+          result = this.retrievalError(this.type.plural, false);
+        }
       }
 
       this.displayResult(result, { capitalized: true });
@@ -116,34 +112,30 @@ export default {
     deleteEntry() {
       const handler = async () => {
         if (this.selected.id) {
-          await this.api.delete(
-            this.$cookie.get(API_TOKEN_KEY),
-            this.selected,
-            (response, error) => {
-              this.lastResponse = response;
-              this.lastError = error;
-            },
-          );
+          try {
+            this.lastResponse = await this.api.delete(
+              this.$cookie.get(API_TOKEN_KEY),
+              this.selected,
+            );
+          } catch (error) {
+            this.lastError = error;
+          }
 
           let result = {};
           if (this.lastError) {
             result = this.modificationError(this.type.singular);
           } else {
-            await this.api.get(
-              (response, error) => {
-                if (error) {
-                  result = this.retrievalError(this.type.plural, false);
-                } else {
-                  this.items = this.flattenData(response);
-                  this.selected = this.items[0];
-                  result = this.success(this.type.singular);
-                }
-              },
-              {
+            try {
+              const response = await this.api.get({
                 schema: null,
                 inactive: null,
-              },
-            );
+              });
+              this.items = this.flattenData(response);
+              this.selected = this.items[0];
+              result = this.success(this.type.singular);
+            } catch (error) {
+              result = this.retrievalError(this.type.plural, false);
+            }
           }
 
           this.displayResult(result, { capitalized: true });

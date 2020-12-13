@@ -50,12 +50,12 @@ export default {
     };
   },
   async beforeRouteEnter(to, from, next) {
-    await ProjectsAPI.get((projects, error) =>
-      next((vm) => vm.setData(projects, error)),
-    );
+    ProjectsAPI.get()
+      .then((projects) => next((vm) => vm.setData({ projects })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   methods: {
-    setData(projects, error) {
+    setData({ projects = null, error = null }) {
       if (error) {
         if (error instanceof ConnectionError) {
           this.showDialog(error.message, error.title, {

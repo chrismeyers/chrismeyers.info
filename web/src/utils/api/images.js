@@ -4,24 +4,24 @@ import ErrorHandler from '../errors/handler';
 
 export default {
   // GET Methods
-  async get(cb, params = {}) {
+  get(params = {}) {
     const queryString = qs.stringify(params, {
       addQueryPrefix: true,
       strictNullHandling: true,
     });
 
-    try {
-      const response = await axios.get(`/public/images${queryString}`);
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+    return new Promise((resolve, reject) => {
+      return axios
+        .get(`/public/images${queryString}`)
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
   // POST Methods
-  async add(token, image, cb) {
-    try {
-      const response = await axios({
+  add(token, image) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'post',
         url: '/admin/images',
         headers: {
@@ -34,17 +34,16 @@ export default {
           pos: parseInt(image.pos),
           orient: image.orient,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
   // PUT Methods
-  async update(token, image, cb) {
-    try {
-      const response = await axios({
+  update(token, image) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'put',
         url: `/admin/images/${image.id}`,
         headers: {
@@ -57,26 +56,24 @@ export default {
           pos: parseInt(image.pos),
           orient: image.orient,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
   // DELETE Methods
-  async delete(token, image, cb) {
-    try {
-      const response = await axios({
+  delete(token, image) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'delete',
         url: `/admin/images/${image.id}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 };
