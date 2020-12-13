@@ -36,26 +36,23 @@ export default {
     getTitle() {
       return document.title;
     },
-    async logout() {
-      await AuthAPI.logout(
-        this.$cookie.get(API_TOKEN_KEY),
-        (response, error) => {
-          if (error) {
-            if (error instanceof ConnectionError) {
-              this.showDialog(error.message, error.title, {
-                capitalized: true,
-              });
-            } else {
-              this.showDialog(error.data.error, error.statusText, {
-                capitalized: true,
-              });
-            }
+    logout() {
+      AuthAPI.logout(this.$cookie.get(API_TOKEN_KEY))
+        .then(() => {
+          this.$cookie.delete(API_TOKEN_KEY);
+          this.$router.push({ path: '/login' });
+        })
+        .catch((error) => {
+          if (error instanceof ConnectionError) {
+            this.showDialog(error.message, error.title, {
+              capitalized: true,
+            });
           } else {
-            this.$cookie.delete(API_TOKEN_KEY);
-            this.$router.push({ path: '/login' });
+            this.showDialog(error.data.error, error.statusText, {
+              capitalized: true,
+            });
           }
-        },
-      );
+        });
     },
   },
 };

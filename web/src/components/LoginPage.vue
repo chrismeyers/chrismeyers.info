@@ -40,9 +40,18 @@ export default {
     };
   },
   methods: {
-    async login() {
-      await AuthAPI.login(this.username, this.password, (response, error) => {
-        if (error) {
+    login() {
+      AuthAPI.login(this.username, this.password)
+        .then((response) => {
+          this.error = '';
+          this.$cookie.set(API_TOKEN_KEY, response.data.access_token, {
+            expires: '1D',
+          });
+          this.$router.push({
+            path: '/dashboard',
+          });
+        })
+        .catch((error) => {
           if (error instanceof ConnectionError) {
             this.error = error.message;
           } else if (error.status >= 500) {
@@ -52,16 +61,7 @@ export default {
           } else {
             this.error = 'Invalid Username or Password';
           }
-        } else {
-          this.error = '';
-          this.$cookie.set(API_TOKEN_KEY, response.data.access_token, {
-            expires: '1D',
-          });
-          this.$router.push({
-            path: '/dashboard',
-          });
-        }
-      });
+        });
     },
   },
 };
