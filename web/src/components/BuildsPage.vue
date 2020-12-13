@@ -51,13 +51,13 @@ export default {
       builds: null,
     };
   },
-  async beforeRouteEnter(to, from, next) {
-    await BuildsAPI.get((builds, error) =>
-      next((vm) => vm.setData(builds, error)),
-    );
+  beforeRouteEnter(to, from, next) {
+    BuildsAPI.get()
+      .then((builds) => next((vm) => vm.setData({ builds })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   methods: {
-    setData(builds, error) {
+    setData({ builds = null, error = null }) {
       if (error) {
         if (error instanceof ConnectionError) {
           this.showDialog(error.message, error.title, {

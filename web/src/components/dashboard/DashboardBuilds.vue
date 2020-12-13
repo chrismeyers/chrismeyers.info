@@ -85,14 +85,18 @@ export default {
       api: BuildsAPI,
     };
   },
-  async beforeRouteEnter(to, from, next) {
-    next(async (vm) => {
-      await BuildsAPI.get((builds, error) => vm.setData(builds, error), {
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      BuildsAPI.get({
         schema: null,
         inactive: null,
-      });
+      })
+        .then((response) => vm.setData({ response }))
+        .catch((error) => vm.setData({ error }));
 
-      await ImagesAPI.get((images, error) => vm.setImages(images, error));
+      ImagesAPI.get()
+        .then((response) => vm.setImages({ response }))
+        .catch((error) => vm.setImages({ error }));
     });
   },
   methods: {
