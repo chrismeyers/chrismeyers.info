@@ -4,38 +4,38 @@ import ErrorHandler from '../errors/handler';
 
 export default {
   // GET Methods
-  async get(cb, params = {}) {
+  get(params = {}) {
     const queryString = qs.stringify(params, {
       addQueryPrefix: true,
       strictNullHandling: true,
     });
 
-    try {
-      const response = await axios.get(`/public/builds${queryString}`);
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+    return new Promise((resolve, reject) => {
+      return axios
+        .get(`/public/builds${queryString}`)
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
-  async getById(id, cb, params = {}) {
+  getById(id, params = {}) {
     const queryString = qs.stringify(params, {
       addQueryPrefix: true,
       strictNullHandling: true,
     });
 
-    try {
-      const response = await axios.get(`/public/builds/${id}${queryString}`);
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+    return new Promise((resolve, reject) => {
+      return axios
+        .get(`/public/builds/${id}${queryString}`)
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
   // POST Methods
-  async add(token, build, cb) {
-    try {
-      const response = await axios({
+  add(token, build) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'post',
         url: '/admin/builds',
         headers: {
@@ -54,17 +54,16 @@ export default {
           image: build.image === '' ? null : parseInt(build.image),
           active: 'active' in build && build.active ? true : false,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
   // PUT Methods
-  async update(token, build, cb) {
-    try {
-      const response = await axios({
+  update(token, build) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'put',
         url: `/admin/builds/${build.id}`,
         headers: {
@@ -83,26 +82,24 @@ export default {
           image: build.image === '' ? null : parseInt(build.image),
           active: 'active' in build && build.active ? true : false,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 
   // DELETE Methods
-  async delete(token, build, cb) {
-    try {
-      const response = await axios({
+  delete(token, build) {
+    return new Promise((resolve, reject) => {
+      return axios({
         method: 'delete',
         url: `/admin/builds/${build.id}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
-      return cb(response, null);
-    } catch (error) {
-      return cb(null, ErrorHandler.handle(error));
-    }
+      })
+        .then((response) => resolve(response))
+        .catch((error) => reject(ErrorHandler.handle(error)));
+    });
   },
 };

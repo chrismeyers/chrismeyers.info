@@ -69,19 +69,19 @@ export default {
       error: false,
     };
   },
-  async beforeRouteEnter(to, from, next) {
-    await BuildsAPI.getById(to.params.id, (build, error) =>
-      next((vm) => vm.setData(build, error)),
-    );
+  beforeRouteEnter(to, from, next) {
+    BuildsAPI.getById(to.params.id)
+      .then((build) => next((vm) => vm.setData({ build })))
+      .catch((error) => next((vm) => vm.setData({ error })));
   },
   async beforeRouteUpdate(to, from, next) {
-    await BuildsAPI.getById(to.params.id, (build, error) => {
-      this.setData(build, error);
-      next();
-    });
+    BuildsAPI.getById(to.params.id)
+      .then((build) => this.setData({ build }))
+      .catch((error) => this.setData({ error }))
+      .finally(() => next());
   },
   methods: {
-    setData(build, error) {
+    setData({ build = null, error = null }) {
       if (error) {
         if (error instanceof ConnectionError) {
           this.showDialog(error.message, error.title, {
