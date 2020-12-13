@@ -12,10 +12,10 @@
 
     <form @submit.prevent="routeFormSubmission">
       <template v-for="(field, index) in schema">
-        <span :key="index + '-span'"
+        <span :key="`${index}-span`"
           ><b>{{ field.field }}:</b></span
         ><span
-          :key="index + '-req'"
+          :key="`${index}-req`"
           v-if="field.required"
           class="required-star"
         ></span>
@@ -25,7 +25,7 @@
             :type="field.type"
             v-model="selected[field.field]"
             :placeholder="field.field"
-            :key="index + '-input'"
+            :key="`${index}-input`"
             :required="field.required"
           />
         </template>
@@ -34,12 +34,12 @@
             class="select-mod"
             v-model="selected[field.field]"
             :placeholder="field.field"
-            :key="index + '-select'"
+            :key="`${index}-select`"
             :required="field.required"
           >
             <option
               v-for="option in field.options"
-              :key="option + '-option'"
+              :key="`${option}-option`"
               :value="option"
             >
               {{ option }}
