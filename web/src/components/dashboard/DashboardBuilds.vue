@@ -86,11 +86,13 @@ export default {
     };
   },
   async beforeRouteEnter(to, from, next) {
-    const builds = await BuildsAPI.get({ schema: null, inactive: null });
-    const images = await ImagesAPI.get();
-    next((vm) => {
-      vm.setData(builds);
-      vm.setImages(images);
+    next(async (vm) => {
+      await BuildsAPI.get((builds, error) => vm.setData(builds, error), {
+        schema: null,
+        inactive: null,
+      });
+
+      await ImagesAPI.get((images, error) => vm.setImages(images, error));
     });
   },
   methods: {

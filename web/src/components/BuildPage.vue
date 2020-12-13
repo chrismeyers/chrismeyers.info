@@ -69,30 +69,34 @@ export default {
       error: false,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    BuildsAPI.getById(to.params.id).then((build) => {
-      next((vm) => vm.setData(build));
-    });
+  async beforeRouteEnter(to, from, next) {
+    await BuildsAPI.getById(to.params.id, (build, error) =>
+      next((vm) => vm.setData(build, error)),
+    );
   },
-  beforeRouteUpdate(to, from, next) {
-    BuildsAPI.getById(to.params.id).then((build) => {
-      this.setData(build);
+  async beforeRouteUpdate(to, from, next) {
+    await BuildsAPI.getById(to.params.id, (build, error) => {
+      this.setData(build, error);
       next();
     });
   },
   methods: {
-    setData(build) {
-      if (build instanceof ConnectionError) {
-        this.showDialog(build.message, build.title, { capitalized: true });
-      } else if (build.status === 200) {
+    setData(build, error) {
+      if (error) {
+        if (error instanceof ConnectionError) {
+          this.showDialog(error.message, error.title, {
+            capitalized: true,
+          });
+        } else if ([400, 404].includes(error.status)) {
+          this.error = true;
+        } else {
+          this.showDialog(error.data.error, error.statusText, {
+            capitalized: true,
+          });
+        }
+      } else {
         this.build = build.data;
         this.error = false;
-      } else if ([400, 404].includes(build.status)) {
-        this.error = true;
-      } else {
-        this.showDialog(build.data.error, build.statusText, {
-          capitalized: true,
-        });
       }
     },
   },

@@ -51,21 +51,25 @@ export default {
       builds: null,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    BuildsAPI.get().then((builds) => {
-      next((vm) => vm.setData(builds));
-    });
+  async beforeRouteEnter(to, from, next) {
+    await BuildsAPI.get((builds, error) =>
+      next((vm) => vm.setData(builds, error)),
+    );
   },
   methods: {
-    setData(builds) {
-      if (builds instanceof ConnectionError) {
-        this.showDialog(builds.message, builds.title, { capitalized: true });
-      } else if (builds.status === 200) {
-        this.builds = builds.data.items;
+    setData(builds, error) {
+      if (error) {
+        if (error instanceof ConnectionError) {
+          this.showDialog(error.message, error.title, {
+            capitalized: true,
+          });
+        } else {
+          this.showDialog(error.data.error, error.statusText, {
+            capitalized: true,
+          });
+        }
       } else {
-        this.showDialog(builds.data.error, builds.statusText, {
-          capitalized: true,
-        });
+        this.builds = builds.data.items;
       }
     },
     cleanCPU(cpu) {
