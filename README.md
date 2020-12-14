@@ -27,7 +27,7 @@ This is the codebase for my personal website currently located at [https://chris
 ```sh
 # Additional docker build arguments can be passed through such as:
 #   --no-cache (do not use cache when building image)
-{api|web}/scripts/build.sh
+$ {api|web}/scripts/build.sh
 ```
 
 ### Run
@@ -35,7 +35,7 @@ This is the codebase for my personal website currently located at [https://chris
 # Additional docker run arguments can be passed through such as:
 #   -it (allow for signals such as SIGINT <ctrl-c>)
 #   -d  (detached - run container in background)
-{api|web}/scripts/run.sh
+$ {api|web}/scripts/run.sh
 ```
 
 ### Troubleshooting
