@@ -1,7 +1,7 @@
 # chrismeyers.info
 [![Actions Status](https://github.com/chrismeyers/chrismeyers.info/workflows/API/badge.svg)](https://github.com/chrismeyers/chrismeyers.info/actions)
 
-This is the codebase for my personal website currently located at <https://chrismeyers.info>
+This is the codebase for my personal website currently located at [https://chrismeyers.info](https://chrismeyers.info)
 
 ## Requirements
 1. Install the Dart SDK (see [instructions](https://dart.dev/get-dart))
@@ -19,8 +19,8 @@ This is the codebase for my personal website currently located at <https://chris
     + Add a `deploy-hook` to `/etc/letsencrypt/cli.ini` to reload proxy server after certificate update ([more info](https://blog.arnonerba.com/2019/01/lets-encrypt-how-to-automatically-restart-nginx-with-certbot))
         - **Nginx**: `deploy-hook = systemctl reload nginx`
         - **Apache**: `deploy-hook = systemctl reload apache2`
-1. Follow the `Setup` instructions in `api/README.md`
-1. Follow the `Setup` instructions in `web/README.md`
+1. Follow the `Setup` instructions in [api/README.md](api/README.md#setup)
+1. Follow the `Setup` instructions in [web/README.md](web/README.md#setup)
 
 ## Docker
 ### Build
