@@ -23,7 +23,7 @@ See the documentation for [Deployment](https://aqueduct.io/docs/deploy/).
 ---
 
 ## Setup
-1. Create a database, add a database user, then grant database permissions to this user (see https://aqueduct.io/docs/db/connecting/)
+1. Create a database, add a database user, then grant database permissions to this user ([more info](https://aqueduct.io/docs/db/connecting/))
     ```sql
     CREATE DATABASE my_app_name;
     CREATE USER my_app_name_user WITH PASSWORD 'password';
