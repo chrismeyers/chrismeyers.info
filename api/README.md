@@ -43,7 +43,7 @@ See the documentation for [Deployment](https://aqueduct.io/docs/deploy/).
     ```
 1. (Optional) Configure a `systemd` service only if docker is **not** being used
     ```sh
-    $ cp ../bin/systemd/chrismeyers-info-api.service /etc/systemd/system
+    $ cp ../config/systemd/chrismeyers-info-api.service /etc/systemd/system
     $ sudo systemctl daemon-reload
     $ sudo systemctl enable chrismeyers-info-api.service
     $ sudo systemctl start chrismeyers-info-api.service
