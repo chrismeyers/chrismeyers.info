@@ -1,4 +1,6 @@
 # chrismeyers.info
+[![Actions Status](https://github.com/chrismeyers/chrismeyers.info/workflows/API/badge.svg)](https://github.com/chrismeyers/chrismeyers.info/actions)
+
 This is the codebase for my personal website currently located at <https://chrismeyers.info>
 
 ## Requirements
