@@ -1,10 +1,10 @@
-FROM google/dart:2.7.2
+FROM google/dart:2.10.4
 
 WORKDIR /app
 ADD pubspec.* ./
 RUN pub get --no-precompile
-RUN pub global activate aqueduct
 ADD . ./
+RUN pub get --offline --no-precompile
 
 WORKDIR /resume
 ADD resume/ ./
