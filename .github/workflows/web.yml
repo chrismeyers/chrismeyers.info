@@ -4,12 +4,14 @@ on:
   push:
     branches: [ master ]
     paths:
+      - '.github/workflows/web.yml'
       - 'web/src/**'
       - '!web/src/assets/**'
       - 'web/tests/**'
   pull_request:
     branches: [ master ]
     paths:
+      - '.github/workflows/web.yml'
       - 'web/src/**'
       - '!web/src/assets/**'
       - 'web/tests/**'
