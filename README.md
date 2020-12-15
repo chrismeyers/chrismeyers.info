@@ -1,5 +1,5 @@
 # chrismeyers.info
-[![Actions Status](https://github.com/chrismeyers/chrismeyers.info/workflows/API/badge.svg)](https://github.com/chrismeyers/chrismeyers.info/actions)
+[![Actions Status](https://github.com/chrismeyers/chrismeyers.info/workflows/API/badge.svg)](https://github.com/chrismeyers/chrismeyers.info/actions?query=workflow%3AAPI) [![Actions Status](https://github.com/chrismeyers/chrismeyers.info/workflows/Web/badge.svg)](https://github.com/chrismeyers/chrismeyers.info/actions?query=workflow%3AWeb)
 
 This is the codebase for my personal website currently located at [https://chrismeyers.info](https://chrismeyers.info)
 
