@@ -15,7 +15,7 @@
           <a class="fancytxt" href="https://www.rowan.edu">Rowan University</a>
           in Glassboro, NJ and earned a Bachelor of Science in Computer Science
         </li>
-        <li v-if="employed">
+        <li ref="employment" v-if="employed">
           Currently, I am employed as a
           {{ mostRecentJob.title }} at
           <a class="fancytxt" :href="mostRecentJob.url">{{
@@ -60,10 +60,10 @@
       <ul>
         <li>
           Desktop and CLI applications:
-          <ul>
+          <ul ref="desktop-languages">
             <li
               v-for="language in languages.desktop"
-              :key="`${language}-dt-li`"
+              :key="`${language}-desktop-li`"
             >
               {{ language }}
             </li>
@@ -71,7 +71,7 @@
         </li>
         <li>
           Websites, Web Apps, and APIs:
-          <ul>
+          <ul ref="web-languages">
             <li v-for="language in languages.web" :key="`${language}-web-li`">
               {{ language }}
             </li>
