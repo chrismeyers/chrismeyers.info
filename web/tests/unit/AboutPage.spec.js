@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import AboutPage from '@/components/AboutPage';
+import { compress } from '../utils';
 
 describe('AboutPage', () => {
   let wrapper;
@@ -31,8 +32,8 @@ describe('AboutPage', () => {
 
     const el = wrapper.findComponent({ ref: 'employment' });
 
-    expect(el.text().replace(/\s/g, '')).toMatch(
-      'Currently, I am employed as a Wizard at Somewhere'.replace(/\s/g, ''),
+    expect(compress(el.text())).toMatch(
+      compress('Currently, I am employed as a Wizard at Somewhere'),
     );
 
     expect(el.html()).toContain('href="https://company.com"');
@@ -47,24 +48,25 @@ describe('AboutPage', () => {
     });
 
     expect(
-      wrapper
-        .findComponent({ ref: 'desktop-languages' })
-        .html()
-        .replace(/\s/g, ''),
+      compress(wrapper.findComponent({ ref: 'desktop-languages' }).html()),
     ).toMatch(
-      `<ul>
-        <li>Language 1</li>
-        <li>Language 2</li>
-      </ul>`.replace(/\s/g, ''),
+      compress(
+        `<ul>
+          <li>Language 1</li>
+          <li>Language 2</li>
+        </ul>`,
+      ),
     );
 
     expect(
-      wrapper.findComponent({ ref: 'web-languages' }).html().replace(/\s/g, ''),
+      compress(wrapper.findComponent({ ref: 'web-languages' }).html()),
     ).toMatch(
-      `<ul>
-        <li>Language 3</li>
-        <li>Language 4</li>
-      </ul>`.replace(/\s/g, ''),
+      compress(
+        `<ul>
+          <li>Language 3</li>
+          <li>Language 4</li>
+        </ul>`,
+      ),
     );
   });
 });
