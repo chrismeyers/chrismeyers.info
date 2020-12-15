@@ -4,17 +4,11 @@ on:
   push:
     branches: [ master ]
     paths:
-      - 'api/**'
-      - '!api/scripts/**'
-      - '!api/README.md'
-      - '!api/bin/seed.json'
+      - 'api/lib/**'
   pull_request:
     branches: [ master ]
     paths:
-      - 'api/**'
-      - '!api/scripts/**'
-      - '!api/README.md'
-      - '!api/bin/seed.json'
+      - 'api/lib/**'
 
 jobs:
   build:
