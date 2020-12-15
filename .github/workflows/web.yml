@@ -1,0 +1,40 @@
+name: Web
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'web/src/**'
+      - '!web/src/assets/**'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'web/src/**'
+      - '!web/src/assets/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./web
+
+    container:
+      image: node:14.15.1
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:unit
