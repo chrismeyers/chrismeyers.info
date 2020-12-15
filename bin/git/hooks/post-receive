@@ -27,10 +27,10 @@ do
     cp -r /home/chris/creds/chrismeyers.info/web/. web/
 
     web/scripts/build.sh
-    web/scripts/run.sh "-d --restart always"
+    web/scripts/run.sh -d --restart always
 
     api/scripts/build.sh
-    api/scripts/run.sh "-d --restart always"
+    api/scripts/run.sh -d --restart always
   else
     echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server."
   fi

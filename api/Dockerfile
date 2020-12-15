@@ -12,4 +12,4 @@ ADD resume/ ./
 WORKDIR /app
 EXPOSE 8888
 
-CMD dart bin/main.dart
+ENTRYPOINT ["dart", "bin/main.dart"]
