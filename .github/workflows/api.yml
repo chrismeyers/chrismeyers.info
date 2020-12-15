@@ -4,11 +4,13 @@ on:
   push:
     branches: [ master ]
     paths:
+      - '.github/workflows/api.yml'
       - 'api/lib/**'
       - 'api/test/**'
   pull_request:
     branches: [ master ]
     paths:
+      - '.github/workflows/api.yml'
       - 'api/lib/**'
       - 'api/test/**'
 
