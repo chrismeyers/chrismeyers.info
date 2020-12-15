@@ -33,13 +33,10 @@ $ {api|web}/scripts/build.sh
 ### Run
 ```sh
 # Additional docker run arguments can be passed through such as:
-#   -it (allow for signals such as SIGINT <ctrl-c>)
-#   -d  (detached - run container in background)
+#   -it --init (allow for signals such as SIGINT <ctrl-c>)
+#   -d         (detached - run container in background)
 $ {api|web}/scripts/run.sh
 ```
-
-### Troubleshooting
-- Make sure that multiple arguments are surrounded by quotes when passed into the build or run scripts
 
 ## Credit
 + The site uses a few open source tools and frameworks:
