@@ -5,10 +5,12 @@ on:
     branches: [ master ]
     paths:
       - 'api/lib/**'
+      - 'api/test/**'
   pull_request:
     branches: [ master ]
     paths:
       - 'api/lib/**'
+      - 'api/test/**'
 
 jobs:
   build:
@@ -20,7 +22,7 @@ jobs:
         working-directory: ./api
 
     container:
-      image:  google/dart:2.10.4
+      image: google/dart:2.10.4
 
     services:
       postgres:
