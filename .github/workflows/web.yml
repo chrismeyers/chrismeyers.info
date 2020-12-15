@@ -6,11 +6,13 @@ on:
     paths:
       - 'web/src/**'
       - '!web/src/assets/**'
+      - 'web/tests/**'
   pull_request:
     branches: [ master ]
     paths:
       - 'web/src/**'
       - '!web/src/assets/**'
+      - 'web/tests/**'
 
 jobs:
   build:
