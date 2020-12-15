@@ -67,9 +67,9 @@
       <hr />
 
       <h2>Technical Skills</h2>
-      <ul>
+      <ul ref="skills">
         <template v-for="skill in skills">
-          <li :key="skill.id">
+          <li class="skill-wrapper" :key="skill.id">
             {{ skill.mainItem }}
             <template v-if="skill.subItems.length > 0">
               <ul>
