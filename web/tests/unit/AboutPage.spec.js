@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import AboutPage from '@/components/AboutPage';
-import { compress } from '../utils';
 
 describe('AboutPage', () => {
   let wrapper;
@@ -32,41 +31,23 @@ describe('AboutPage', () => {
 
     const el = wrapper.findComponent({ ref: 'employment' });
 
-    expect(compress(el.text())).toMatch(
-      compress('Currently, I am employed as a Wizard at Somewhere'),
-    );
-
+    expect(el.exists()).toBe(true);
+    expect(el.text()).toContain('Wizard');
+    expect(el.text()).toContain('Somewhere');
     expect(el.html()).toContain('href="https://company.com"');
   });
 
   it('displays language experience', async () => {
-    await wrapper.setData({
-      languages: {
-        desktop: ['Language 1', 'Language 2'],
-        web: ['Language 3', 'Language 4'],
-      },
-    });
+    const desktop = ['Language 1', 'Language 2'];
+    const web = ['Language 3', 'Language 4'];
+    await wrapper.setData({ languages: { desktop, web } });
 
-    expect(
-      compress(wrapper.findComponent({ ref: 'desktop-languages' }).html()),
-    ).toMatch(
-      compress(
-        `<ul>
-          <li>Language 1</li>
-          <li>Language 2</li>
-        </ul>`,
-      ),
-    );
+    let el = wrapper.findComponent({ ref: 'desktop-languages' });
 
-    expect(
-      compress(wrapper.findComponent({ ref: 'web-languages' }).html()),
-    ).toMatch(
-      compress(
-        `<ul>
-          <li>Language 3</li>
-          <li>Language 4</li>
-        </ul>`,
-      ),
-    );
+    expect(el.findAll('li').wrappers.map((li) => li.text())).toEqual(desktop);
+
+    el = wrapper.findComponent({ ref: 'web-languages' });
+
+    expect(el.findAll('li').wrappers.map((li) => li.text())).toEqual(web);
   });
 });
