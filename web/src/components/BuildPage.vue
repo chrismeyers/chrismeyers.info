@@ -38,7 +38,7 @@
                 <dd>{{ build.gpu }}</dd>
               </dl>
             </div>
-            <div class="build-pic">
+            <div v-if="build.image" class="build-pic">
               <img
                 v-img
                 v-if="build.image"
