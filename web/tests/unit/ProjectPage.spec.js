@@ -64,7 +64,7 @@ describe('ProjectPage', () => {
     const id = 1;
     const active = true;
     const title = 'Project Name';
-    const webUrl = null;
+    const webUrl = 'https://web.site';
     const codeUrl = 'https://hosted.code';
     const displayDate = 'Test Project, Always and Forever';
     const startedDate = '9999-01-01T00:00:00.000Z';
@@ -122,9 +122,10 @@ describe('ProjectPage', () => {
     expect(dd.at(1).text()).toEqual(info);
     expect(dd.at(2).text()).toEqual(role);
     expect(dd.at(3).text()).toEqual(stat);
-    expect(dd.at(4).html()).toContain(`href="${codeUrl}"`);
-    expect(dd.at(4).text()).toContain('Code');
-    expect(dd.at(4).text()).not.toContain('Website');
+    expect(dd.at(4).html()).toContain(`href="${webUrl}"`);
+    expect(dd.at(4).text()).toContain('Website');
+    expect(dd.at(5).html()).toContain(`href="${codeUrl}"`);
+    expect(dd.at(5).text()).toContain('Code');
 
     const imageWrapper = el.find('div.project-images');
     expect(imageWrapper.exists()).toBe(true);
