@@ -2,7 +2,8 @@
 
 pushd "$(dirname "$0")" > /dev/null 2>&1
 
-docker rm -f chrismeyers-info-api
+docker stop chrismeyers-info-api
+docker rm chrismeyers-info-api
 docker run \
     "$@" \
     --net=host \
