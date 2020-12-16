@@ -2,10 +2,9 @@
 
 pushd "$(dirname "$0")" > /dev/null 2>&1
 
-docker stop chrismeyers-info-web
+docker rm -f chrismeyers-info-web
 docker run \
     "$@" \
-    --rm \
     -p 8080:80 \
     --log-opt max-size=25m \
     --log-opt max-file=2 \
