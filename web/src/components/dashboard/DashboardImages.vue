@@ -33,7 +33,6 @@
           <select
             class="select-mod"
             v-model="selected[field.field]"
-            :placeholder="field.field"
             :key="`${index}-select`"
             :required="field.required"
           >
