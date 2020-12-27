@@ -8,3 +8,4 @@ registrationSecret: secret
 corsAllowedOrigins:
   - http://localhost:8080
   - https://chrismeyers.info
+  - https://www.chrismeyers.info
