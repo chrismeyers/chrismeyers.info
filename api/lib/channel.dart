@@ -42,7 +42,7 @@ class ApiChannel extends ApplicationChannel {
         ManagedAuthDelegate<User>(context, tokenLimit: 10);
     authServer = AuthServer(authStorage);
 
-    CORSPolicy.defaultPolicy.allowedOrigins = config.corsAllowedOrigins;
+    CORSPolicy.defaultPolicy.allowedOrigins = config.cors.allowedOrigins;
   }
 
   /// Construct the request channel.
