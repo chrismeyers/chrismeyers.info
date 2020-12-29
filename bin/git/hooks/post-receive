@@ -23,8 +23,8 @@ do
 
     cd /home/chris/www/chrismeyers.info
 
-    cp -r /home/chris/creds/chrismeyers.info/api/. api/
-    cp -r /home/chris/creds/chrismeyers.info/web/. web/
+    rsync -av /home/chris/creds/chrismeyers.info/api/ api/
+    rsync -av /home/chris/creds/chrismeyers.info/web/ web/
 
     web/scripts/build.sh
     web/scripts/run.sh -d --restart always
