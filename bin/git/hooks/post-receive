@@ -21,17 +21,21 @@ do
     echo "Deploying $ref branch to production..."
     git --work-tree=/home/chris/www/chrismeyers.info --git-dir=/home/chris/repo/chrismeyers.info.git checkout -f
 
+    echo "Moving to project work tree root..."
     cd /home/chris/www/chrismeyers.info
 
+    echo "Syncing credentials..."
     rsync -av /home/chris/creds/chrismeyers.info/web/ web/
     rsync -av /home/chris/creds/chrismeyers.info/api/ api/
 
+    echo "Building 'web' image and running container..."
     web/scripts/build.sh
     web/scripts/run.sh -d --restart always
 
+    echo "Building 'api' image and running container..."
     api/scripts/build.sh
     api/scripts/run.sh -d --restart always
   else
-    echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server."
+    echo "Ref $ref successfully received. Doing nothing: only the master branch may be deployed on this server."
   fi
 done
