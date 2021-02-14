@@ -58,10 +58,12 @@
 <script>
 import BuildsAPI from '@/utils/api/builds';
 import ErrorsMixin from '@/mixins/Errors';
+import BuildsMixin from '@/mixins/Builds';
+import { DEFAULT_DOCUMENT_TITLE } from '@/store/constants';
 
 export default {
   name: 'build-page',
-  mixins: [ErrorsMixin],
+  mixins: [ErrorsMixin, BuildsMixin],
   data() {
     return {
       build: null,
@@ -90,7 +92,12 @@ export default {
       } else {
         this.build = build.data;
         this.error = false;
+        this.updateDocumentTitle();
       }
+    },
+    updateDocumentTitle() {
+      const cpu = this.cleanCPU(this.build.cpu);
+      document.title = `Build Details - ${cpu} - ${DEFAULT_DOCUMENT_TITLE}`;
     },
   },
 };
