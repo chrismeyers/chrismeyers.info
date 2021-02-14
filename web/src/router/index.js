@@ -77,7 +77,8 @@ const router = new VueRouter({
       component: ProjectPage,
       meta: {
         secure: false,
-        title: `Project Details - ${defaultTitle}`,
+        title: (route) =>
+          `Project ${route.params.id} Details - ${defaultTitle}`,
       },
     },
     {
@@ -93,7 +94,7 @@ const router = new VueRouter({
       component: BuildPage,
       meta: {
         secure: false,
-        title: `Build Details - ${defaultTitle}`,
+        title: (route) => `Build ${route.params.id} Details - ${defaultTitle}`,
       },
     },
     {
@@ -151,7 +152,7 @@ const router = new VueRouter({
       component: NotFoundPage,
       meta: {
         secure: false,
-        title: defaultTitle,
+        title: `404 - ${defaultTitle}`,
       },
     },
   ],
@@ -159,9 +160,6 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
   let match, authorized;
-
-  // Update the HTML title
-  document.title = to.meta.title;
 
   // Checking if valid cookie exists, skips login if true
   if (to.fullPath === '/login') {
@@ -197,6 +195,13 @@ router.beforeEach(async (to, from, next) => {
   } else {
     next();
   }
+});
+
+router.afterEach((to) => {
+  Vue.nextTick(() => {
+    document.title =
+      typeof to.meta.title === 'function' ? to.meta.title(to) : to.meta.title;
+  });
 });
 
 export default router;
