@@ -135,6 +135,7 @@ import ErrorsMixin from '@/mixins/Errors';
 import '@/assets/images/icons/generated/github';
 import '@/assets/images/icons/generated/link-external';
 import '@/assets/images/icons/generated/play';
+import { DEFAULT_DOCUMENT_TITLE } from '@/store/constants';
 
 export default {
   name: 'project-page',
@@ -167,7 +168,11 @@ export default {
       } else {
         this.project = project.data;
         this.error = false;
+        this.updateDocumentTitle();
       }
+    },
+    updateDocumentTitle() {
+      document.title = `Project Details | ${this.project.title} | ${DEFAULT_DOCUMENT_TITLE}`;
     },
     showGIF(which) {
       const gif = this.$refs[which][0];

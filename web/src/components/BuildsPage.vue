@@ -41,10 +41,11 @@
 <script>
 import BuildsAPI from '@/utils/api/builds';
 import ErrorsMixin from '@/mixins/Errors';
+import BuildsMixin from '@/mixins/Builds';
 
 export default {
   name: 'builds-page',
-  mixins: [ErrorsMixin],
+  mixins: [ErrorsMixin, BuildsMixin],
   data() {
     return {
       builds: null,
@@ -62,9 +63,6 @@ export default {
       } else {
         this.builds = builds.data.items;
       }
-    },
-    cleanCPU(cpu) {
-      return cpu.split('@')[0].trim();
     },
   },
 };
