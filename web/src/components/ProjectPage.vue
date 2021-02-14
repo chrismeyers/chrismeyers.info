@@ -172,7 +172,7 @@ export default {
       }
     },
     updateDocumentTitle() {
-      document.title = `Project Details - ${this.project.title} - ${DEFAULT_DOCUMENT_TITLE}`;
+      document.title = `Project Details | ${this.project.title} | ${DEFAULT_DOCUMENT_TITLE}`;
     },
     showGIF(which) {
       const gif = this.$refs[which][0];

@@ -97,7 +97,7 @@ export default {
     },
     updateDocumentTitle() {
       const cpu = this.cleanCPU(this.build.cpu);
-      document.title = `Build Details - ${cpu} - ${DEFAULT_DOCUMENT_TITLE}`;
+      document.title = `Build Details | ${cpu} | ${DEFAULT_DOCUMENT_TITLE}`;
     },
   },
 };

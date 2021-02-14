@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="section-header section-header-size">{{ getTitle() }}</div>
+    <div class="section-header section-header-size">{{ title }}</div>
 
     <div class="content-text">
       <div class="dashboard-nav">
@@ -31,10 +31,23 @@ import { API_TOKEN_KEY } from '@/store/constants';
 export default {
   name: 'dashboard-home',
   mixins: [ErrorsMixin],
-  methods: {
-    getTitle() {
-      return document.title;
+  data() {
+    return {
+      title: null,
+    };
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to) {
+        const parts = to.meta.title.split('|');
+        parts.pop();
+
+        this.title = parts.map((s) => s.trim()).join(' - ');
+      },
     },
+  },
+  methods: {
     logout() {
       AuthAPI.logout(this.$cookie.get(API_TOKEN_KEY))
         .then(() => {

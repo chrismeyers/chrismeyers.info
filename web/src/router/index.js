@@ -28,12 +28,12 @@ const formatPageTitle = (name) => {
 };
 
 const formatDashboardTitle = (name) => {
-  // Capitalize each word and surround hyphens with spaces
+  // Capitalize each word and surround pipes with spaces
   return name
     .toLowerCase()
     .split('-')
     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-    .join(' - ');
+    .join(' | ');
 };
 
 const router = new VueRouter({
@@ -59,7 +59,7 @@ const router = new VueRouter({
       component: ResumePage,
       meta: {
         secure: false,
-        title: `Résumé - ${DEFAULT_DOCUMENT_TITLE}`,
+        title: `Résumé | ${DEFAULT_DOCUMENT_TITLE}`,
       },
     },
     {
@@ -67,7 +67,7 @@ const router = new VueRouter({
       component: ProjectsPage,
       meta: {
         secure: false,
-        title: `Projects - ${DEFAULT_DOCUMENT_TITLE}`,
+        title: `Projects | ${DEFAULT_DOCUMENT_TITLE}`,
       },
     },
     {
@@ -83,7 +83,7 @@ const router = new VueRouter({
       component: BuildsPage,
       meta: {
         secure: false,
-        title: `Builds - ${DEFAULT_DOCUMENT_TITLE}`,
+        title: `Builds | ${DEFAULT_DOCUMENT_TITLE}`,
       },
     },
     {
@@ -99,7 +99,7 @@ const router = new VueRouter({
       component: LoginPage,
       meta: {
         secure: false,
-        title: formatPageTitle(LoginPage.name),
+        title: `${formatPageTitle(LoginPage.name)} | ${DEFAULT_DOCUMENT_TITLE}`,
       },
     },
     {
@@ -107,7 +107,9 @@ const router = new VueRouter({
       component: DashboardHome,
       meta: {
         secure: true,
-        title: formatDashboardTitle(DashboardHome.name),
+        title: `${formatDashboardTitle(
+          DashboardHome.name,
+        )} | ${DEFAULT_DOCUMENT_TITLE}`,
       },
       children: [
         {
@@ -115,7 +117,9 @@ const router = new VueRouter({
           component: DashboardImages,
           meta: {
             secure: true,
-            title: formatDashboardTitle(DashboardImages.name),
+            title: `${formatDashboardTitle(
+              DashboardImages.name,
+            )} | ${DEFAULT_DOCUMENT_TITLE}`,
           },
         },
         {
@@ -123,7 +127,9 @@ const router = new VueRouter({
           component: DashboardBuilds,
           meta: {
             secure: true,
-            title: formatDashboardTitle(DashboardBuilds.name),
+            title: `${formatDashboardTitle(
+              DashboardBuilds.name,
+            )} | ${DEFAULT_DOCUMENT_TITLE}`,
           },
         },
         {
@@ -131,7 +137,9 @@ const router = new VueRouter({
           component: DashboardProjects,
           meta: {
             secure: true,
-            title: formatDashboardTitle(DashboardProjects.name),
+            title: `${formatDashboardTitle(
+              DashboardProjects.name,
+            )} | ${DEFAULT_DOCUMENT_TITLE}`,
           },
         },
         {
@@ -139,7 +147,9 @@ const router = new VueRouter({
           component: DashboardAccount,
           meta: {
             secure: true,
-            title: formatDashboardTitle(DashboardAccount.name),
+            title: `${formatDashboardTitle(
+              DashboardAccount.name,
+            )} | ${DEFAULT_DOCUMENT_TITLE}`,
           },
         },
       ],
@@ -149,7 +159,7 @@ const router = new VueRouter({
       component: NotFoundPage,
       meta: {
         secure: false,
-        title: `404 - ${DEFAULT_DOCUMENT_TITLE}`,
+        title: `404 | ${DEFAULT_DOCUMENT_TITLE}`,
       },
     },
   ],
