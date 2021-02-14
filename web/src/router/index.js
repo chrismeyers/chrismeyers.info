@@ -61,7 +61,7 @@ const router = new VueRouter({
       component: ResumePage,
       meta: {
         secure: false,
-        title: defaultTitle,
+        title: `Résumé - ${defaultTitle}`,
       },
     },
     {
@@ -69,7 +69,7 @@ const router = new VueRouter({
       component: ProjectsPage,
       meta: {
         secure: false,
-        title: defaultTitle,
+        title: `Projects - ${defaultTitle}`,
       },
     },
     {
@@ -77,7 +77,7 @@ const router = new VueRouter({
       component: ProjectPage,
       meta: {
         secure: false,
-        title: defaultTitle,
+        title: `Project Details - ${defaultTitle}`,
       },
     },
     {
@@ -85,7 +85,7 @@ const router = new VueRouter({
       component: BuildsPage,
       meta: {
         secure: false,
-        title: defaultTitle,
+        title: `Builds - ${defaultTitle}`,
       },
     },
     {
@@ -93,7 +93,7 @@ const router = new VueRouter({
       component: BuildPage,
       meta: {
         secure: false,
-        title: defaultTitle,
+        title: `Build Details - ${defaultTitle}`,
       },
     },
     {
