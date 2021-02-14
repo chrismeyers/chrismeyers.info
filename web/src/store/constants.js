@@ -8,3 +8,5 @@ export const MOBILE_BREAKPOINT = 970; // px
 export const MAILTO_HREF =
   'mailto:chris@chrismeyers.info?subject=Message%20from%20chrismeyers.info';
 export const SYSTEM_THEME_DARK_MEDIA_QUERY = '(prefers-color-scheme: dark)';
+export const DEFAULT_DOCUMENT_TITLE =
+  'Chris Meyers - Developer, Tech Enthusiast';
