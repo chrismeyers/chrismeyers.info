@@ -14,11 +14,9 @@ import DashboardBuilds from '@/components/dashboard/DashboardBuilds';
 import DashboardProjects from '@/components/dashboard/DashboardProjects';
 import DashboardAccount from '@/components/dashboard/DashboardAccount';
 import NotFoundPage from '@/components/NotFoundPage';
-import { API_TOKEN_KEY } from '@/store/constants';
+import { API_TOKEN_KEY, DEFAULT_DOCUMENT_TITLE } from '@/store/constants';
 
 Vue.use(VueRouter);
-
-const defaultTitle = 'Chris Meyers - Developer, Tech Enthusiast';
 
 const formatPageTitle = (name) => {
   // Remove hyphens and "page"
@@ -53,7 +51,7 @@ const router = new VueRouter({
       component: AboutPage,
       meta: {
         secure: false,
-        title: defaultTitle,
+        title: DEFAULT_DOCUMENT_TITLE,
       },
     },
     {
@@ -61,7 +59,7 @@ const router = new VueRouter({
       component: ResumePage,
       meta: {
         secure: false,
-        title: `Résumé - ${defaultTitle}`,
+        title: `Résumé - ${DEFAULT_DOCUMENT_TITLE}`,
       },
     },
     {
@@ -69,7 +67,7 @@ const router = new VueRouter({
       component: ProjectsPage,
       meta: {
         secure: false,
-        title: `Projects - ${defaultTitle}`,
+        title: `Projects - ${DEFAULT_DOCUMENT_TITLE}`,
       },
     },
     {
@@ -77,8 +75,7 @@ const router = new VueRouter({
       component: ProjectPage,
       meta: {
         secure: false,
-        title: (route) =>
-          `Project ${route.params.id} Details - ${defaultTitle}`,
+        title: false,
       },
     },
     {
@@ -86,7 +83,7 @@ const router = new VueRouter({
       component: BuildsPage,
       meta: {
         secure: false,
-        title: `Builds - ${defaultTitle}`,
+        title: `Builds - ${DEFAULT_DOCUMENT_TITLE}`,
       },
     },
     {
@@ -94,7 +91,7 @@ const router = new VueRouter({
       component: BuildPage,
       meta: {
         secure: false,
-        title: (route) => `Build ${route.params.id} Details - ${defaultTitle}`,
+        title: false,
       },
     },
     {
@@ -152,7 +149,7 @@ const router = new VueRouter({
       component: NotFoundPage,
       meta: {
         secure: false,
-        title: `404 - ${defaultTitle}`,
+        title: `404 - ${DEFAULT_DOCUMENT_TITLE}`,
       },
     },
   ],
@@ -199,8 +196,9 @@ router.beforeEach(async (to, from, next) => {
 
 router.afterEach((to) => {
   Vue.nextTick(() => {
-    document.title =
-      typeof to.meta.title === 'function' ? to.meta.title(to) : to.meta.title;
+    if (to.meta.title !== false) {
+      document.title = to.meta.title;
+    }
   });
 });
 
