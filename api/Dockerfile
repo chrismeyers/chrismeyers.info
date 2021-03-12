@@ -1,15 +1,10 @@
-FROM google/dart:2.10.4
+FROM node:15.11.0
 
 WORKDIR /app
-ADD pubspec.* ./
-RUN pub get --no-precompile
-ADD . ./
-RUN pub get --offline --no-precompile
+COPY package*.json ./
+RUN npm ci
+COPY ./ .
+RUN npm run build
 
-WORKDIR /resume
-ADD resume/ ./
-
-WORKDIR /app
 EXPOSE 8888
-
-ENTRYPOINT ["dart", "bin/main.dart"]
+ENTRYPOINT ["node", "src/server.js"]

@@ -1,239 +1,7 @@
 {
-  "images": [
-    {
-      "path": "/images/builds/mattBuild.jpg",
-      "thumbnail": null,
-      "title": "Matt's Computer",
-      "pos": 1,
-      "orient": "land"
-    },
-    {
-      "path": "/images/builds/myBuild2013.jpg",
-      "thumbnail": null,
-      "title": "My Computer 2013",
-      "pos": 1,
-      "orient": "port"
-    },
-    {
-      "path": "/images/builds/markBuild.jpg",
-      "thumbnail": null,
-      "title": "Mark's Computer",
-      "pos": 1,
-      "orient": "port"
-    },
-    {
-      "path": "/images/builds/myBuild2016_liquid.jpg",
-      "thumbnail": null,
-      "title": "My Computer 2016",
-      "pos": 1,
-      "orient": "port"
-    },
-    {
-      "path": "/images/builds/jamesBuild.jpg",
-      "thumbnail": null,
-      "title": "James's computer",
-      "pos": 1,
-      "orient": "port"
-    },
-    {
-      "path": "/images/projects/genomic/genomic.png",
-      "thumbnail": null,
-      "title": "Genomic Solutions Now! Software",
-      "pos": 1,
-      "orient": "land"
-    },
-    {
-      "path": "/images/projects/pinelands/pinelands_landing.jpg",
-      "thumbnail": null,
-      "title": "Pinelands landing page",
-      "pos": 1,
-      "orient": "land"
-    },
-    {
-      "path": "/images/projects/pinelands/pinelands_tour.jpg",
-      "thumbnail": null,
-      "title": "Pinelands tour page",
-      "pos": 2,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/pinelands/pinelands_contact.jpg",
-      "thumbnail": null,
-      "title": "Pinelands contact page",
-      "pos": 3,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/ttt/ttt_land.png",
-      "thumbnail": null,
-      "title": "Tic Tac Toe Landscape",
-      "pos": 1,
-      "orient": "land"
-    },
-    {
-      "path": "/images/projects/ttt/ttt_port.png",
-      "thumbnail": null,
-      "title": "Tic Tac Toe Portrait",
-      "pos": 2,
-      "orient": "port"
-    },
-    {
-      "path": "/images/projects/lol_playerdata/loldata_landing.png",
-      "thumbnail": null,
-      "title": "LoL player data landing page",
-      "pos": 1,
-      "orient": "land"
-    },
-    {
-      "path": "/images/projects/lol_playerdata/loldata.png",
-      "thumbnail": null,
-      "title": "LoL player data results",
-      "pos": 2,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/lol_playerdata/loldata_small.png",
-      "thumbnail": null,
-      "title": "LoL player data results optimized for mobile",
-      "pos": 3,
-      "orient": "port"
-    },
-    {
-      "path": "/images/projects/pca/scoresPlot.png",
-      "thumbnail": null,
-      "title": "A scores plot generated from calculated principal components",
-      "pos": 1,
-      "orient": "land"
-    },
-    {
-      "path": "/images/projects/pca/scoresData.png",
-      "thumbnail": null,
-      "title": "The calculated principal component data",
-      "pos": 2,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/pca/addinBar.PNG",
-      "thumbnail": null,
-      "title": "The Excel add-in bar used to add scores and loadings plots",
-      "pos": 3,
-      "orient": "land"
-    },
-    {
-      "path": "/images/projects/pca/scoresInput-full.png",
-      "thumbnail": null,
-      "title": "Input form that is dynamically populated based on the number of principal components",
-      "pos": 4,
-      "orient": "port"
-    },
-    {
-      "path": "/images/projects/bms/bms_rawData.png",
-      "thumbnail": null,
-      "title": "The raw data taken from the lab to be processed",
-      "pos": 1,
-      "orient": "land"
-    },
-    {
-      "path": "/images/projects/bms/bms_formatForm.png",
-      "thumbnail": null,
-      "title": "Input form used to select the worksheet to be processed",
-      "pos": 2,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/bms/bms_formattedData.png",
-      "thumbnail": null,
-      "title": "The entire formatted data set",
-      "pos": 3,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/bms/bms_finalData.png",
-      "thumbnail": null,
-      "title": "A further refined formatted data set used for plotting",
-      "pos": 4,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/bms/bms_graphForm.png",
-      "thumbnail": null,
-      "title": "Input form used to select the variables to be plotted",
-      "pos": 5,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/bms/bms_plot.png",
-      "thumbnail": null,
-      "title": "The final plot",
-      "pos": 6,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/lol_status/gui.png",
-      "thumbnail": null,
-      "title": "The Java GUI that displays the current status of services in a specified region",
-      "pos": 1,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/lol_status/polling.png",
-      "thumbnail": null,
-      "title": "Input form that allows users to specify how often the GUI updates",
-      "pos": 2,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/lol_status/tray.png",
-      "thumbnail": null,
-      "title": "Notification area functionality",
-      "pos": 3,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/trumppet/trumppet_landing.png",
-      "thumbnail": null,
-      "title": "Trumppet website landing page",
-      "pos": 1,
-      "orient": "land"
-    },
-    {
-      "path": "/images/projects/trumppet/trumppet_playback.png",
-      "thumbnail": null,
-      "title": "Playback screen that displays a list of  previous tweets",
-      "pos": 2,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/trumppet/trumppet_freq.png",
-      "thumbnail": null,
-      "title": "Displays a list of unique words and the number of times they're used throughout the tweet database",
-      "pos": 3,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/trumppet/trumppet_search.png",
-      "thumbnail": null,
-      "title": "Searches the tweet database for a specified word or phrase",
-      "pos": 4,
-      "orient": "square"
-    },
-    {
-      "path": "/images/projects/trumppet/trumppet_freestyle.png",
-      "thumbnail": null,
-      "title": "Generates a Trumpian-style tweet: Sentance. Sentance. Exclamation! (NOTE: these tweets are not real)",
-      "pos": 5,
-      "orient": "square"
-    },
-    {
-      "path": "https://raw.githubusercontent.com/chrismeyers/pleasehold/master/examples/pleasehold.gif",
-      "thumbnail": "https://raw.githubusercontent.com/chrismeyers/pleasehold/master/examples/pleasehold-thumbnail.png",
-      "title": "Demo of pleasehold",
-      "pos": 1,
-      "orient": "land"
-    }
-  ],
   "builds": [
     {
+      "id": 1,
       "active": true,
       "displayDate": "March 2012 - Built for my brother, Matt",
       "startedDate": "2012-03-01T00:00:00.000Z",
@@ -244,9 +12,17 @@
       "hdd": "WD5000AAKX 500GB @ 7200rpm",
       "ssd": null,
       "gpu": "XFX Radeon 6870 1GB",
-      "image": 1
+      "image": {
+        "id": 1,
+        "path": "/images/builds/mattBuild.jpg",
+        "thumbnail": null,
+        "title": "Matt's Computer",
+        "pos": 1,
+        "orient": "land"
+      }
     },
     {
+      "id": 2,
       "active": true,
       "displayDate": "February 2013 - Built for myself",
       "startedDate": "2013-02-01T00:00:00.000Z",
@@ -257,9 +33,17 @@
       "hdd": "WD6400AAKS 640GB @ 7200rpm, ST31000524AS 1TB @ 7200rpm",
       "ssd": "Samsung 850 Pro 256GB",
       "gpu": "EVGA GeForce GTX 670 FTW 2GB",
-      "image": 2
+      "image": {
+        "id": 2,
+        "path": "/images/builds/myBuild2013.jpg",
+        "thumbnail": null,
+        "title": "My Computer 2013",
+        "pos": 1,
+        "orient": "port"
+      }
     },
     {
+      "id": 3,
       "active": true,
       "displayDate": "September 2013 - Built for my Neighbor, Mark",
       "startedDate": "2013-09-01T00:00:00.000Z",
@@ -270,9 +54,17 @@
       "hdd": "ST1000DM003 1TB @ 7200rpm",
       "ssd": "Kingston HyperX 3K 120GB",
       "gpu": "EVGA GeForce GTX 770 SuperClocked 2GB",
-      "image": 3
+      "image": {
+        "id": 3,
+        "path": "/images/builds/markBuild.jpg",
+        "thumbnail": null,
+        "title": "Mark's Computer",
+        "pos": 1,
+        "orient": "port"
+      }
     },
     {
+      "id": 4,
       "active": true,
       "displayDate": "February 2016 - Built for myself",
       "startedDate": "2016-02-01T00:00:00.000Z",
@@ -283,9 +75,17 @@
       "hdd": "Western Digital Blue 1TB @ 7200rpm",
       "ssd": "Samsung 850 EVO 500GB",
       "gpu": "EVGA GeForce GTX 980 Ti 6GB",
-      "image": 4
+      "image": {
+        "id": 4,
+        "path": "/images/builds/myBuild2016_liquid.jpg",
+        "thumbnail": null,
+        "title": "My Computer 2016",
+        "pos": 1,
+        "orient": "port"
+      }
     },
     {
+      "id": 5,
       "active": true,
       "displayDate": "September 2017 - Built for my friend, James",
       "startedDate": "2017-09-01T00:00:00.000Z",
@@ -296,24 +96,33 @@
       "hdd": "Western Digital Blue 1TB @ 7200rpm",
       "ssd": "SAMSUNG 960 EVO M.2 500GB",
       "gpu": "EVGA GeForce GTX 1080 Ti FTW3 11GB",
-      "image": 5
+      "image": {
+        "id": 5,
+        "path": "/images/builds/jamesBuild.jpg",
+        "thumbnail": null,
+        "title": "James's computer",
+        "pos": 1,
+        "orient": "port"
+      }
     }
   ],
   "projects": [
     {
+      "id": 1,
       "active": true,
       "title": "chrismeyers.info, this website",
       "webUrl": null,
       "codeUrl": "https://github.com/chrismeyers/chrismeyers.info",
       "displayDate": "Personal Project, Fall 2013",
       "startedDate": "2013-09-01T00:00:00.000Z",
-      "lang": "Dart (<a href=\"https://aqueduct.io\" class=\"fancytxt\">Aqueduct</a>), JavaScript (<a href=\"https://vuejs.org\" class=\"fancytxt\">Vue.js</a>), PostgreSQL",
-      "info": "A digital representation of myself. A complete rewrite of this website was done in November 2018. The original code can be found <a href=\"https://github.com/chrismeyers/CM_WEBSITE\" class=\"fancytxt\">here</a>.",
+      "lang": "JavaScript (<a href=\"https://nodejs.org\" class=\"fancytxt\">Node.js</a>, <a href=\"https://vuejs.org\" class=\"fancytxt\">Vue.js</a>)",
+      "info": "A digital representation of myself. A complete rewrite of this website was done in November 2018 and the backend API was rewritten in March 2021 due to the abandonment of the <a href=\"https://aqueduct.io\" class=\"fancytxt\">Aqueduct</a> Dart framework. The implementation of this site using Dart can be found <a href=\"https://github.com/chrismeyers/chrismeyers.info/tree/api-dart-aqueduct\" class=\"fancytxt\">here</a>. The original code can be found <a href=\"https://github.com/chrismeyers/CM_WEBSITE\" class=\"fancytxt\">here</a>.",
       "role": "Solo project",
       "stat": "Being maintained",
       "images": []
     },
     {
+      "id": 2,
       "active": true,
       "title": "Genomic Solutions Now! Software",
       "webUrl": null,
@@ -325,10 +134,18 @@
       "role": "Responsible for parsing the input reports. I also handled outputting the simplified reports to an Excel spreadsheet.",
       "stat": "Complete",
       "images": [
-        6
+        {
+          "id": 6,
+          "path": "/images/projects/genomic/genomic.png",
+          "thumbnail": null,
+          "title": "Genomic Solutions Now! Software",
+          "pos": 1,
+          "orient": "land"
+        }
       ]
     },
     {
+      "id": 3,
       "active": true,
       "title": "Pinelands Tour Maker",
       "webUrl": null,
@@ -340,12 +157,34 @@
       "role": "Solo project",
       "stat": "Complete",
       "images": [
-        7,
-        8,
-        9
+        {
+          "id": 7,
+          "path": "/images/projects/pinelands/pinelands_landing.jpg",
+          "thumbnail": null,
+          "title": "Pinelands landing page",
+          "pos": 1,
+          "orient": "land"
+        },
+        {
+          "id": 8,
+          "path": "/images/projects/pinelands/pinelands_tour.jpg",
+          "thumbnail": null,
+          "title": "Pinelands tour page",
+          "pos": 2,
+          "orient": "square"
+        },
+        {
+          "id": 9,
+          "path": "/images/projects/pinelands/pinelands_contact.jpg",
+          "thumbnail": null,
+          "title": "Pinelands contact page",
+          "pos": 3,
+          "orient": "square"
+        }
       ]
     },
     {
+      "id": 4,
       "active": true,
       "title": "Tic-Tac-Toe Android App",
       "webUrl": null,
@@ -357,11 +196,26 @@
       "role": "Solo Project",
       "stat": "Complete",
       "images": [
-        10,
-        11
+        {
+          "id": 10,
+          "path": "/images/projects/ttt/ttt_land.png",
+          "thumbnail": null,
+          "title": "Tic Tac Toe Landscape",
+          "pos": 1,
+          "orient": "land"
+        },
+        {
+          "id": 11,
+          "path": "/images/projects/ttt/ttt_port.png",
+          "thumbnail": null,
+          "title": "Tic Tac Toe Portrait",
+          "pos": 2,
+          "orient": "port"
+        }
       ]
     },
     {
+      "id": 5,
       "active": true,
       "title": "League of Legends Player Data Parser",
       "webUrl": null,
@@ -373,12 +227,34 @@
       "role": "Solo Project",
       "stat": "Complete",
       "images": [
-        12,
-        13,
-        14
+        {
+          "id": 12,
+          "path": "/images/projects/lol_playerdata/loldata_landing.png",
+          "thumbnail": null,
+          "title": "LoL player data landing page",
+          "pos": 1,
+          "orient": "land"
+        },
+        {
+          "id": 13,
+          "path": "/images/projects/lol_playerdata/loldata.png",
+          "thumbnail": null,
+          "title": "LoL player data results",
+          "pos": 2,
+          "orient": "square"
+        },
+        {
+          "id": 14,
+          "path": "/images/projects/lol_playerdata/loldata_small.png",
+          "thumbnail": null,
+          "title": "LoL player data results optimized for mobile",
+          "pos": 3,
+          "orient": "port"
+        }
       ]
     },
     {
+      "id": 6,
       "active": true,
       "title": "PCA Visualization",
       "webUrl": null,
@@ -390,13 +266,42 @@
       "role": "Responsible for parsing the calculated principal component worksheets and storing them in data structures used for plotting.",
       "stat": "Complete",
       "images": [
-        15,
-        16,
-        17,
-        18
+        {
+          "id": 15,
+          "path": "/images/projects/pca/scoresPlot.png",
+          "thumbnail": null,
+          "title": "A scores plot generated from calculated principal components",
+          "pos": 1,
+          "orient": "land"
+        },
+        {
+          "id": 16,
+          "path": "/images/projects/pca/scoresData.png",
+          "thumbnail": null,
+          "title": "The calculated principal component data",
+          "pos": 2,
+          "orient": "square"
+        },
+        {
+          "id": 17,
+          "path": "/images/projects/pca/addinBar.PNG",
+          "thumbnail": null,
+          "title": "The Excel add-in bar used to add scores and loadings plots",
+          "pos": 3,
+          "orient": "land"
+        },
+        {
+          "id": 18,
+          "path": "/images/projects/pca/scoresInput-full.png",
+          "thumbnail": null,
+          "title": "Input form that is dynamically populated based on the number of principal components",
+          "pos": 4,
+          "orient": "port"
+        }
       ]
     },
     {
+      "id": 7,
       "active": true,
       "title": "Cardiomyocyte Data Analysis Automation",
       "webUrl": null,
@@ -408,15 +313,58 @@
       "role": "Solo Project",
       "stat": "Complete",
       "images": [
-        19,
-        20,
-        21,
-        22,
-        23,
-        24
+        {
+          "id": 19,
+          "path": "/images/projects/bms/bms_rawData.png",
+          "thumbnail": null,
+          "title": "The raw data taken from the lab to be processed",
+          "pos": 1,
+          "orient": "land"
+        },
+        {
+          "id": 20,
+          "path": "/images/projects/bms/bms_formatForm.png",
+          "thumbnail": null,
+          "title": "Input form used to select the worksheet to be processed",
+          "pos": 2,
+          "orient": "square"
+        },
+        {
+          "id": 21,
+          "path": "/images/projects/bms/bms_formattedData.png",
+          "thumbnail": null,
+          "title": "The entire formatted data set",
+          "pos": 3,
+          "orient": "square"
+        },
+        {
+          "id": 22,
+          "path": "/images/projects/bms/bms_finalData.png",
+          "thumbnail": null,
+          "title": "A further refined formatted data set used for plotting",
+          "pos": 4,
+          "orient": "square"
+        },
+        {
+          "id": 23,
+          "path": "/images/projects/bms/bms_graphForm.png",
+          "thumbnail": null,
+          "title": "Input form used to select the variables to be plotted",
+          "pos": 5,
+          "orient": "square"
+        },
+        {
+          "id": 24,
+          "path": "/images/projects/bms/bms_plot.png",
+          "thumbnail": null,
+          "title": "The final plot",
+          "pos": 6,
+          "orient": "square"
+        }
       ]
     },
     {
+      "id": 8,
       "active": true,
       "title": "League of Legends Server Status Checker",
       "webUrl": null,
@@ -428,12 +376,34 @@
       "role": "Solo Project",
       "stat": "Complete",
       "images": [
-        25,
-        26,
-        27
+        {
+          "id": 25,
+          "path": "/images/projects/lol_status/gui.png",
+          "thumbnail": null,
+          "title": "The Java GUI that displays the current status of services in a specified region",
+          "pos": 1,
+          "orient": "square"
+        },
+        {
+          "id": 26,
+          "path": "/images/projects/lol_status/polling.png",
+          "thumbnail": null,
+          "title": "Input form that allows users to specify how often the GUI updates",
+          "pos": 2,
+          "orient": "square"
+        },
+        {
+          "id": 27,
+          "path": "/images/projects/lol_status/tray.png",
+          "thumbnail": null,
+          "title": "Notification area functionality",
+          "pos": 3,
+          "orient": "square"
+        }
       ]
     },
     {
+      "id": 9,
       "active": true,
       "title": "GPS Importer",
       "webUrl": null,
@@ -447,6 +417,7 @@
       "images": []
     },
     {
+      "id": 10,
       "active": false,
       "title": "Trumppet",
       "webUrl": null,
@@ -458,14 +429,50 @@
       "role": "Solo Project",
       "stat": "Complete",
       "images": [
-        28,
-        29,
-        30,
-        31,
-        32
+        {
+          "id": 28,
+          "path": "/images/projects/trumppet/trumppet_landing.png",
+          "thumbnail": null,
+          "title": "Trumppet website landing page",
+          "pos": 1,
+          "orient": "land"
+        },
+        {
+          "id": 29,
+          "path": "/images/projects/trumppet/trumppet_playback.png",
+          "thumbnail": null,
+          "title": "Playback screen that displays a list of  previous tweets",
+          "pos": 2,
+          "orient": "square"
+        },
+        {
+          "id": 30,
+          "path": "/images/projects/trumppet/trumppet_freq.png",
+          "thumbnail": null,
+          "title": "Displays a list of unique words and the number of times they're used throughout the tweet database",
+          "pos": 3,
+          "orient": "square"
+        },
+        {
+          "id": 31,
+          "path": "/images/projects/trumppet/trumppet_search.png",
+          "thumbnail": null,
+          "title": "Searches the tweet database for a specified word or phrase",
+          "pos": 4,
+          "orient": "square"
+        },
+        {
+          "id": 32,
+          "path": "/images/projects/trumppet/trumppet_freestyle.png",
+          "thumbnail": null,
+          "title": "Generates a Trumpian-style tweet: Sentance. Sentance. Exclamation! (NOTE: these tweets are not real)",
+          "pos": 5,
+          "orient": "square"
+        }
       ]
     },
     {
+      "id": 11,
       "active": true,
       "title": "pleasehold",
       "webUrl": null,
@@ -477,10 +484,18 @@
       "role": "Solo Project",
       "stat": "In Development",
       "images": [
-        33
+        {
+          "id": 33,
+          "path": "https://raw.githubusercontent.com/chrismeyers/pleasehold/master/examples/pleasehold.gif",
+          "thumbnail": "https://raw.githubusercontent.com/chrismeyers/pleasehold/master/examples/pleasehold-thumbnail.png",
+          "title": "Demo of pleasehold",
+          "pos": 1,
+          "orient": "land"
+        }
       ]
     },
     {
+      "id": 12,
       "active": true,
       "title": "data-shifter",
       "webUrl": "https://www.npmjs.com/package/data-shifter",
