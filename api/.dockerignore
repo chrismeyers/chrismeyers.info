@@ -1,8 +1,6 @@
 .dockerignore
 Dockerfile
 scripts/
-.dart_tool/
-.packages
-.pub/
+**/node_modules
 build/
 README.md
