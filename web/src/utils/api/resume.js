@@ -6,7 +6,7 @@ export default {
   get() {
     return new Promise((resolve, reject) => {
       return axios
-        .get('/public/resume')
+        .get('/resume')
         .then((response) => resolve(response))
         .catch((error) => reject(handleAxiosError(error)));
     });
@@ -15,7 +15,7 @@ export default {
   getSummary() {
     return new Promise((resolve, reject) => {
       return axios
-        .get('/public/resume/summary')
+        .get('/resume/summary')
         .then((response) => resolve(response))
         .catch((error) => reject(handleAxiosError(error)));
     });

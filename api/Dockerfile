@@ -7,4 +7,4 @@ COPY ./ .
 RUN npm run build
 
 EXPOSE 8888
-ENTRYPOINT ["node", "src/server.js"]
+ENTRYPOINT ["npm", "start"]
