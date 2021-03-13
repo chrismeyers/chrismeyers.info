@@ -3,9 +3,11 @@ const path = require('path');
 
 module.exports = async (app) => {
   app.get('/projects', async () => {
-    const { projects } = JSON.parse(
+    let { projects } = JSON.parse(
       await fs.readFile(path.join(__dirname, '..', 'data', 'data.json')),
     );
+
+    projects = projects.filter((p) => p.active);
 
     return { items: projects };
   });
@@ -25,7 +27,7 @@ module.exports = async (app) => {
         await fs.readFile(path.join(__dirname, '..', 'data', 'data.json')),
       );
 
-      const project = projects.find((p) => p.id === id);
+      const project = projects.find((p) => p.id === id && p.active);
 
       if (project) return project;
 
