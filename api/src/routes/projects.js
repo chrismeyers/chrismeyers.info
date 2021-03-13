@@ -1,10 +1,10 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 
 module.exports = async (app) => {
   app.get('/projects', async () => {
     const { projects } = JSON.parse(
-      fs.readFileSync(path.join(__dirname, '..', 'data', 'data.json')),
+      await fs.readFile(path.join(__dirname, '..', 'data', 'data.json')),
     );
 
     return { items: projects };
@@ -22,7 +22,7 @@ module.exports = async (app) => {
     handler: async (request, reply) => {
       const { id } = request.params;
       const { projects } = JSON.parse(
-        fs.readFileSync(path.join(__dirname, '..', 'data', 'data.json')),
+        await fs.readFile(path.join(__dirname, '..', 'data', 'data.json')),
       );
 
       const project = projects.find((p) => p.id === id);
