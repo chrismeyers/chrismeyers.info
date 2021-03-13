@@ -16,7 +16,7 @@
 
 while read oldrev newrev ref
 do
-  if [[ $ref =~ .*/master$ ]];
+  if [[ $ref =~ .*/main$ ]];
   then
     echo "Deploying $ref branch to production..."
     git --work-tree=/home/chris/www/chrismeyers.info --git-dir=/home/chris/repo/chrismeyers.info.git checkout -f
@@ -36,6 +36,6 @@ do
     api/scripts/build.sh
     api/scripts/run.sh -d --restart always
   else
-    echo "Ref $ref successfully received. Doing nothing: only the master branch may be deployed on this server."
+    echo "Ref $ref successfully received. Doing nothing: only the main branch may be deployed on this server."
   fi
 done

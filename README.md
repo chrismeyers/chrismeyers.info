@@ -8,7 +8,7 @@ This is the codebase for my personal website currently located at [https://chris
 
 ## Setup
 1. Setup a git remote on the production server by following the instructions in [bin/git/hooks/post-receive](bin/git/hooks/post-receive)
-    - Assuming a git remote named `production` exists, the following command can be run from the root of the repository to deploy: `git push production master`
+    - Assuming a git remote named `production` exists, the following command can be run from the root of the repository to deploy: `git push production main`
 1. Configure server level reverse proxy (assuming Debian based server)
     - **Nginx**: Copy files from [config/nginx](config/nginx) to `/etc/nginx/sites-available` and symlink each file to `/etc/nginx/sites-enabled`
     - **Apache**: Copy files from [config/apache](config/apache) to `/etc/apache2/sites-available` and run `a2ensite` for each virtual host (disable virtual host with `a2dissite`)

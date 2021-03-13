@@ -2,14 +2,14 @@ name: Web
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '.github/workflows/web.yml'
       - 'web/src/**'
       - '!web/src/assets/**'
       - 'web/tests/**'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '.github/workflows/web.yml'
       - 'web/src/**'
