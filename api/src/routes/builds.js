@@ -1,12 +1,13 @@
 const dataLoader = require('../lib/data-loader');
+const createBuildService = require('../lib/build-service');
 
 module.exports = async (app) => {
   app.get('/builds', async (request, reply) => {
     try {
-      let { builds } = await dataLoader();
-      builds = builds.filter((b) => b.active);
+      const { builds } = await dataLoader();
+      const service = createBuildService(builds);
 
-      return { items: builds };
+      return { items: service.active() };
     } catch (error) {
       return reply.status(500).send({ error: 'Unable to load data file' });
     }
@@ -26,7 +27,8 @@ module.exports = async (app) => {
 
       try {
         const { builds } = await dataLoader();
-        const build = builds.find((b) => b.id === id && b.active);
+        const service = createBuildService(builds);
+        const build = service.findById(id);
 
         if (build) return build;
 
