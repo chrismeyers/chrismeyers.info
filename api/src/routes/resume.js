@@ -2,7 +2,7 @@ const path = require('path');
 const createResumeParser = require('../lib/resume-parser');
 
 module.exports = async (app) => {
-  app.get('/resume', async () => {
+  app.get('/resume', async (request, reply) => {
     const parser = createResumeParser(
       path.join(
         __dirname,
@@ -16,7 +16,11 @@ module.exports = async (app) => {
       ),
     );
 
-    await parser.load();
+    try {
+      await parser.load();
+    } catch (error) {
+      return reply.status(500).send({ error: 'Unable to load resume file' });
+    }
 
     return {
       experience: parser.parseComplexSection('Experience'),
@@ -25,7 +29,7 @@ module.exports = async (app) => {
     };
   });
 
-  app.get('/resume/summary', async () => {
+  app.get('/resume/summary', async (request, reply) => {
     const parser = createResumeParser(
       path.join(
         __dirname,
@@ -39,7 +43,11 @@ module.exports = async (app) => {
       ),
     );
 
-    await parser.load();
+    try {
+      await parser.load();
+    } catch (error) {
+      return reply.status(500).send({ error: 'Unable to load resume file' });
+    }
 
     return {
       languages: parser.getLanguages(),
