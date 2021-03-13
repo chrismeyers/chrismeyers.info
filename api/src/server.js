@@ -15,7 +15,12 @@ const start = async () => {
 
     await app.listen(port);
   } catch (err) {
-    app.log.error(err);
+    if (app) {
+      app.log.error(err);
+    } else {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    }
     process.exit(1);
   }
 };
