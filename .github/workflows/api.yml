@@ -2,7 +2,6 @@ name: API
 
 on:
   push:
-    branches: [ master ]
     paths:
       - '.github/workflows/api.yml'
       - 'api/src/**'
@@ -13,7 +12,6 @@ on:
       - '.github/workflows/api.yml'
       - 'api/src/**'
       - 'api/tests/**'
-  workflow_dispatch
 
 jobs:
   build:
