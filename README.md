@@ -4,10 +4,7 @@
 This is the codebase for my personal website currently located at [https://chrismeyers.info](https://chrismeyers.info)
 
 ## Requirements
-1. Install the Dart SDK (see [instructions](https://dart.dev/get-dart))
-    - Specific versions of the Dart SDK can be downloaded [here](https://dart.dev/tools/sdk/archive)
-1. Install Aqueduct (see [documentation](https://aqueduct.io/docs/tut/getting-started))
-1. Install Node.js (see [nodesource](https://github.com/nodesource/distributions) or [nvm](https://github.com/nvm-sh/nvm))
+1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodesource](https://github.com/nodesource/distributions))
 
 ## Setup
 1. Setup a git remote on the production server by following the instructions in [bin/git/hooks/post-receive](bin/git/hooks/post-receive)
@@ -19,8 +16,8 @@ This is the codebase for my personal website currently located at [https://chris
     + Add a `deploy-hook` to `/etc/letsencrypt/cli.ini` to reload proxy server after certificate update ([more info](https://blog.arnonerba.com/2019/01/lets-encrypt-how-to-automatically-restart-nginx-with-certbot))
         - **Nginx**: `deploy-hook = systemctl reload nginx`
         - **Apache**: `deploy-hook = systemctl reload apache2`
-1. Follow the `Setup` instructions in [api/README.md](api/README.md#setup)
-1. Follow the `Setup` instructions in [web/README.md](web/README.md#setup)
+1. Follow the instructions in [api/README.md](api/README.md)
+1. Follow the instructions in [web/README.md](web/README.md)
 
 ## Docker
 ### Build
@@ -52,7 +49,4 @@ $ {api|web}/scripts/run.sh
     - [vue-js-toggle-button](https://github.com/euvl/vue-js-toggle-button) to toggle themes
     - [vue-click-outside](https://github.com/vue-bulma/click-outside) to automatically close elements
   - [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon
-  - [axios](https://github.com/axios/axios) as an HTTP client
-  - [qs](https://github.com/ljharb/qs) for querystring parsing
-  - [lodash](https://github.com/lodash/lodash) for convenient helper functions
-  - [Aqueduct](https://aqueduct.io/) as a backend API framework
+  - [Fastify](https://www.fastify.io/) as a backend API framework
