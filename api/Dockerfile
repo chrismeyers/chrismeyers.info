@@ -1,10 +1,12 @@
 FROM node:15.11.0
 
+WORKDIR /resume
+ADD resume/ ./
+
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY ./ .
-RUN npm run build
 
 EXPOSE 8888
 ENTRYPOINT ["npm", "start"]
