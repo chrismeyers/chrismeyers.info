@@ -12,8 +12,9 @@ const start = async () => {
       },
     });
     const port = process.env.PORT || 8888;
+    const addr = process.env.ADDR || '127.0.0.1';
 
-    await app.listen(port);
+    await app.listen(port, addr);
   } catch (err) {
     if (app) {
       app.log.error(err);

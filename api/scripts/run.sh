@@ -6,7 +6,7 @@ docker stop chrismeyers-info-api
 docker rm chrismeyers-info-api
 docker run \
     "$@" \
-    --net=host \
+    -p 8888:8888 \
     --log-opt max-size=25m \
     --log-opt max-file=2 \
     --name chrismeyers-info-api \
