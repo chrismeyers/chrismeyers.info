@@ -19,7 +19,7 @@ do
   if [[ $ref =~ .*/main$ ]];
   then
     echo "Deploying $ref branch to production..."
-    git --work-tree=/home/chris/www/chrismeyers.info --git-dir=/home/chris/repo/chrismeyers.info.git checkout -f
+    git --work-tree=/home/chris/www/chrismeyers.info --git-dir=/home/chris/repo/chrismeyers.info.git checkout -f main
 
     echo "Moving to project work tree root..."
     cd /home/chris/www/chrismeyers.info

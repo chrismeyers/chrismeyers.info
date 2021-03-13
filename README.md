@@ -49,4 +49,4 @@ $ {api|web}/scripts/run.sh
     - [vue-js-toggle-button](https://github.com/euvl/vue-js-toggle-button) to toggle themes
     - [vue-click-outside](https://github.com/vue-bulma/click-outside) to automatically close elements
   - [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon
-  - [Fastify](https://www.fastify.io/) as a backend API framework.
+  - [Fastify](https://www.fastify.io/) as a backend API framework
