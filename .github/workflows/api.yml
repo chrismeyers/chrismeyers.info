@@ -2,6 +2,7 @@ name: API
 
 on:
   push:
+    branches: [ master ]
     paths:
       - '.github/workflows/api.yml'
       - 'api/src/**'
