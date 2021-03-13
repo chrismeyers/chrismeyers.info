@@ -13,6 +13,7 @@ on:
       - '.github/workflows/api.yml'
       - 'api/src/**'
       - 'api/tests/**'
+  workflow_dispatch:
 
 jobs:
   build:
