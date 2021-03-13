@@ -6,7 +6,8 @@
   "main": "src/server.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon"
+    "dev": "nodemon .",
+    "start": "node ."
   },
   "devDependencies": {
     "eslint": "^7.21.0",
