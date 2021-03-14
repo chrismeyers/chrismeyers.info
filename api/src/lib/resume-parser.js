@@ -58,9 +58,9 @@ const createResumeParser = (path) => {
     const firstLinePattern = String.raw`{\textbf{`;
     const secondLinePattern = String.raw`{\emph{`;
     const endPattern = '}}';
-    const infoPattern = String.raw`\item`;
-    const circleInfoPattern = String.raw`\item[$\circ$]`;
+    const infoPattern = String.raw`\item[$\circ$]`;
     const sameCompanyPattern = '% Same Company';
+    const blockEndPattern = '% BLOCK End';
 
     const items = [];
 
@@ -72,7 +72,7 @@ const createResumeParser = (path) => {
     let currentSecondLine = [];
     let currentInfo = [];
 
-    rawSections[section].forEach((line, i) => {
+    rawSections[section].forEach((line) => {
       if (line.startsWith(urlPattern)) {
         const beginPatternIndex =
           line.indexOf(urlPattern) + urlPattern.length + 1;
@@ -102,44 +102,32 @@ const createResumeParser = (path) => {
         );
 
         currentSecondLine.push(cleaned);
+      } else if (line.startsWith(infoPattern)) {
+        const cleaned = cleanString(
+          line.substring(infoPattern.length + 1),
+          removeInlineComments,
+        );
+
+        currentInfo.push(cleaned);
       } else if (line.startsWith(sameCompanyPattern)) {
         secondLine.push(currentSecondLine);
         info.push(currentInfo);
 
         currentSecondLine = [];
         currentInfo = [];
-      } else if (line.startsWith(infoPattern)) {
-        if (i === 0) {
-          return;
-        }
+      } else if (line.startsWith(blockEndPattern)) {
+        secondLine.push(currentSecondLine);
+        info.push(currentInfo);
+        items.push({ url, firstLine, secondLine, info });
 
-        if (line.length === infoPattern.length) {
-          // Beginning of new entry (blank infoPattern line)
-          secondLine.push(currentSecondLine);
-          info.push(currentInfo);
-          items.push({ url, firstLine, secondLine, info });
-
-          url = null;
-          firstLine = [];
-          secondLine = [];
-          info = [];
-          currentSecondLine = [];
-          currentInfo = [];
-        } else {
-          const cleaned = cleanString(
-            line.substring(circleInfoPattern.length + 1),
-            removeInlineComments,
-          );
-
-          currentInfo.push(cleaned);
-        }
+        url = null;
+        firstLine = [];
+        secondLine = [];
+        info = [];
+        currentSecondLine = [];
+        currentInfo = [];
       }
     });
-
-    // The loop exits before the last item can be added, add it here
-    secondLine.push(currentSecondLine);
-    info.push(currentInfo);
-    items.push({ url, firstLine, secondLine, info });
 
     return items;
   };
