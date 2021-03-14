@@ -1,10 +1,7 @@
-const dataLoader = require('../lib/data-loader');
-const createBuildService = require('../lib/build-service');
-
 module.exports = async (app) => {
   app.get('/builds', async (request, reply) => {
     try {
-      const service = createBuildService(dataLoader);
+      const service = request.diScope.resolve('buildService');
       return { items: await service.active() };
     } catch (error) {
       return reply.internalServerError('Unable to load data');
@@ -24,7 +21,7 @@ module.exports = async (app) => {
       const { id } = request.params;
 
       try {
-        const service = createBuildService(dataLoader);
+        const service = request.diScope.resolve('buildService');
         const build = await service.findById(id);
 
         if (build) return build;
