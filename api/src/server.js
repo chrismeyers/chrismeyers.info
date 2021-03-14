@@ -1,11 +1,12 @@
 require('dotenv').config();
 const createApp = require('./app');
+const container = require('./container');
 
 const start = async () => {
   let app = null;
 
   try {
-    app = await createApp({
+    app = await createApp(container, {
       logger: {
         level: 'info',
         prettyPrint: process.env.NODE_ENV === 'development',

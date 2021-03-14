@@ -5,9 +5,10 @@ const fastifyHelmet = require('fastify-helmet');
 const fastifyEnv = require('fastify-env');
 const fastifyAutoLoad = require('fastify-autoload');
 const fastifySensible = require('fastify-sensible');
+const { fastifyAwilixPlugin } = require('fastify-awilix');
 const S = require('fluent-json-schema');
 
-module.exports = async (opts = {}) => {
+module.exports = async (container, opts = {}) => {
   const app = fastify(opts);
 
   // Plugins
@@ -28,6 +29,16 @@ module.exports = async (opts = {}) => {
   });
   app.register(fastifyHelmet);
   app.register(fastifySensible);
+  app.register(fastifyAwilixPlugin, {
+    disposeOnClose: true,
+    disposeOnResponse: true,
+  });
+
+  // Hooks
+  app.addHook('onRequest', (request, reply, done) => {
+    request.diScope.register(container);
+    done();
+  });
 
   // Routes
   app.register(fastifyAutoLoad, {
