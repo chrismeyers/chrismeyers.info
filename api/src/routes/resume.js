@@ -19,7 +19,7 @@ module.exports = async (app) => {
     try {
       await parser.load();
     } catch (error) {
-      return reply.status(500).send({ error: 'Unable to load resume file' });
+      return reply.internalServerError('Unable to load resume file');
     }
 
     return {
@@ -46,7 +46,7 @@ module.exports = async (app) => {
     try {
       await parser.load();
     } catch (error) {
-      return reply.status(500).send({ error: 'Unable to load resume file' });
+      return reply.internalServerError('Unable to load resume file');
     }
 
     return {
