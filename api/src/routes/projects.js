@@ -1,10 +1,7 @@
-const dataLoader = require('../lib/data-loader');
-const createProjectService = require('../lib/project-service');
-
 module.exports = async (app) => {
   app.get('/projects', async (request, reply) => {
     try {
-      const service = createProjectService(dataLoader);
+      const service = request.diScope.resolve('projectService');
       return { items: await service.active() };
     } catch (error) {
       return reply.internalServerError('Unable to load data');
@@ -24,7 +21,7 @@ module.exports = async (app) => {
       const { id } = request.params;
 
       try {
-        const service = createProjectService(dataLoader);
+        const service = request.diScope.resolve('projectService');
         const project = await service.findById(id);
 
         if (project) return project;
