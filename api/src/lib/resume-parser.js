@@ -45,10 +45,10 @@ const createResumeParser = (path) => {
       output = output.split(new RegExp(/(?<!\\)%/))[0].trim();
     }
 
-    output = output.replaceAll('\\CPP', 'C++');
-    output = output.replaceAll('\\break', '');
+    output = output.replaceAll(String.raw`\CPP`, 'C++');
+    output = output.replaceAll(String.raw`\break`, '');
     output = output.replaceAll('--', '&ndash;');
-    output = output.replaceAll('\\', '');
+    output = output.replaceAll(String.raw({ raw: '\\' }), '');
 
     return output;
   };
