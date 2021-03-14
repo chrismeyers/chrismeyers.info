@@ -1,15 +1,10 @@
-const dataLoader = require('../lib/data-loader');
-const createProjectService = require('../lib/project-service');
-
 module.exports = async (app) => {
   app.get('/projects', async (request, reply) => {
     try {
-      const { projects } = await dataLoader();
-      const service = createProjectService(projects);
-
-      return { items: service.active() };
+      const service = request.diScope.resolve('projectService');
+      return { items: await service.active() };
     } catch (error) {
-      return reply.internalServerError('Unable to load data file');
+      return reply.internalServerError('Unable to load data');
     }
   });
 
@@ -26,15 +21,14 @@ module.exports = async (app) => {
       const { id } = request.params;
 
       try {
-        const { projects } = await dataLoader();
-        const service = createProjectService(projects);
-        const project = service.findById(id);
+        const service = request.diScope.resolve('projectService');
+        const project = await service.findById(id);
 
         if (project) return project;
 
-        return reply.notFound(`Project \`${id}\` not found`);
+        return reply.notFound(`Project ${id} not found`);
       } catch (error) {
-        return reply.internalServerError('Unable to load data file');
+        return reply.internalServerError('Unable to load data');
       }
     },
   });

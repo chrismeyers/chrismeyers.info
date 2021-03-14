@@ -1,10 +1,11 @@
 const createApp = require('../../app');
+const mockContainer = require('../../__mocks__/mock-container');
 
 describe('API Endpoints', () => {
   let app;
 
   beforeEach(async () => {
-    app = await createApp();
+    app = await createApp(mockContainer);
   });
 
   describe('project endpoints', () => {
@@ -18,6 +19,8 @@ describe('API Endpoints', () => {
 
       const body = JSON.parse(response.body);
       expect(body.items.length).toBeGreaterThan(0);
+
+      expect(body.items[0].title).toBe('Project 1');
 
       const inactive = body.items.filter((p) => !p.active);
       expect(inactive).toHaveLength(0);
@@ -53,6 +56,8 @@ describe('API Endpoints', () => {
 
       const body = JSON.parse(response.body);
       expect(body.items.length).toBeGreaterThan(0);
+
+      expect(body.items[0].displayDate).toBe('Sometime');
 
       const inactive = body.items.filter((b) => !b.active);
       expect(inactive).toHaveLength(0);

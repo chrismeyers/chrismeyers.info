@@ -1,7 +1,13 @@
-const createProjectService = (projects) => {
-  const active = () => projects.filter((p) => p.active);
+const createProjectService = (loader) => {
+  const active = async () => {
+    const data = await loader('projects');
+    return data.filter((p) => p.active);
+  };
 
-  const findById = (id) => projects.find((p) => p.id === id && p.active);
+  const findById = async (id) => {
+    const data = await loader('projects');
+    return data.find((p) => p.id === id && p.active);
+  };
 
   return { active, findById };
 };
