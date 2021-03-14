@@ -11,7 +11,7 @@ describe('Data Loader', () => {
     expect(data).toEqual({ a: 1, b: 2 });
   });
 
-  it('returns parsed JSON', async () => {
+  it('returns parsed JSON sub object', async () => {
     const spy = jest.spyOn(fs, 'readFile').mockReturnValue('{"a":{"b":2}}');
 
     const data = await dataLoader('a');
