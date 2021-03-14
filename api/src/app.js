@@ -4,6 +4,7 @@ const fastifyCors = require('fastify-cors');
 const fastifyHelmet = require('fastify-helmet');
 const fastifyEnv = require('fastify-env');
 const fastifyAutoLoad = require('fastify-autoload');
+const fastifySensible = require('fastify-sensible');
 const S = require('fluent-json-schema');
 
 module.exports = async (opts = {}) => {
@@ -26,6 +27,7 @@ module.exports = async (opts = {}) => {
     origin: app.config.CORS_ALLOWED_ORIGINS,
   });
   app.register(fastifyHelmet);
+  app.register(fastifySensible);
 
   // Routes
   app.register(fastifyAutoLoad, {

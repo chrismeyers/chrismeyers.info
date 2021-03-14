@@ -9,7 +9,7 @@ module.exports = async (app) => {
 
       return { items: service.active() };
     } catch (error) {
-      return reply.status(500).send({ error: 'Unable to load data file' });
+      return reply.internalServerError('Unable to load data file');
     }
   });
 
@@ -32,9 +32,9 @@ module.exports = async (app) => {
 
         if (build) return build;
 
-        return reply.code(404).send({ message: `Build \`${id}\` not found` });
+        return reply.notFound(`Build \`${id}\` not found`);
       } catch (error) {
-        return reply.status(500).send({ error: 'Unable to load data file' });
+        return reply.internalServerError('Unable to load data file');
       }
     },
   });
