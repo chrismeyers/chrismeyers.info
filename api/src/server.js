@@ -5,14 +5,15 @@ const start = async () => {
   let app = null;
 
   try {
-    app = createApp({
+    app = await createApp({
       logger: {
         level: 'info',
         prettyPrint: process.env.NODE_ENV === 'development',
       },
     });
-    const port = process.env.PORT || 8888;
-    const addr = process.env.ADDR || '127.0.0.1';
+
+    const port = app.config.PORT || 8888;
+    const addr = app.config.ADDR || '127.0.0.1';
 
     await app.listen(port, addr);
   } catch (err) {
