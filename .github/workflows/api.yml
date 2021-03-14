@@ -18,6 +18,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      NODE_ENV: ci
+      CORS_ALLOWED_ORIGINS: http://localhost:1337,http://localhost:1234
+
     defaults:
       run:
         shell: bash
