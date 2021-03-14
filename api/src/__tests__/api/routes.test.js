@@ -3,10 +3,6 @@ const createApp = require('../../app');
 describe('API Endpoints', () => {
   let app;
 
-  beforeAll(() => {
-    process.env.CORS_ALLOWED_ORIGINS = 'http://localhost';
-  });
-
   beforeEach(async () => {
     app = await createApp();
   });
