@@ -7,8 +7,8 @@ const createResumeParser = (path) => {
     const data = await fs.readFile(path, 'utf8');
     const lines = data.split('\n');
 
-    const beginPattern = String.raw`% BEGIN`;
-    const endPattern = String.raw`% END`;
+    const beginPattern = '% BEGIN';
+    const endPattern = '% END';
     let section = '';
 
     lines.forEach((line) => {
@@ -42,7 +42,7 @@ const createResumeParser = (path) => {
 
     if (removeInlineComments) {
       // This regex skips escaped percent signs by using negative lookbehind
-      output = output.split(new RegExp(String.raw`(?<!\\)%`))[0].trim();
+      output = output.split(new RegExp(/(?<!\\)%/))[0].trim();
     }
 
     output = output.replaceAll('\\CPP', 'C++');
@@ -54,13 +54,13 @@ const createResumeParser = (path) => {
   };
 
   const parseComplexSection = (section, removeInlineComments = true) => {
-    const urlPattern = String.raw`% URL`;
+    const urlPattern = '% URL';
     const firstLinePattern = String.raw`{\textbf{`;
     const secondLinePattern = String.raw`{\emph{`;
-    const endPattern = String.raw`}}`;
+    const endPattern = '}}';
     const infoPattern = String.raw`\item`;
     const circleInfoPattern = String.raw`\item[$\circ$]`;
-    const sameCompanyPattern = String.raw`% Same Company`;
+    const sameCompanyPattern = '% Same Company';
 
     const items = [];
 
@@ -73,49 +73,47 @@ const createResumeParser = (path) => {
     let currentInfo = [];
 
     rawSections[section].forEach((line, i) => {
-      const trimmedLine = line.trim();
-
-      if (trimmedLine.startsWith(urlPattern)) {
+      if (line.startsWith(urlPattern)) {
         const beginPatternIndex =
-          trimmedLine.indexOf(urlPattern) + urlPattern.length + 1;
+          line.indexOf(urlPattern) + urlPattern.length + 1;
 
-        url = trimmedLine.substring(beginPatternIndex);
-      } else if (trimmedLine.startsWith(firstLinePattern)) {
+        url = line.substring(beginPatternIndex);
+      } else if (line.startsWith(firstLinePattern)) {
         const beginPatternIndex =
-          trimmedLine.indexOf(firstLinePattern) + firstLinePattern.length;
-        const endPatternIndex = trimmedLine.indexOf(endPattern);
+          line.indexOf(firstLinePattern) + firstLinePattern.length;
+        const endPatternIndex = line.indexOf(endPattern);
         const cleaned = cleanString(
-          trimmedLine
+          line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
           removeInlineComments,
         );
 
         firstLine.push(cleaned);
-      } else if (trimmedLine.startsWith(secondLinePattern)) {
+      } else if (line.startsWith(secondLinePattern)) {
         const beginPatternIndex =
-          trimmedLine.indexOf(secondLinePattern) + secondLinePattern.length;
-        const endPatternIndex = trimmedLine.indexOf(endPattern);
+          line.indexOf(secondLinePattern) + secondLinePattern.length;
+        const endPatternIndex = line.indexOf(endPattern);
         const cleaned = cleanString(
-          trimmedLine
+          line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
           removeInlineComments,
         );
 
         currentSecondLine.push(cleaned);
-      } else if (trimmedLine.startsWith(sameCompanyPattern)) {
+      } else if (line.startsWith(sameCompanyPattern)) {
         secondLine.push(currentSecondLine);
         info.push(currentInfo);
 
         currentSecondLine = [];
         currentInfo = [];
-      } else if (trimmedLine.startsWith(infoPattern)) {
+      } else if (line.startsWith(infoPattern)) {
         if (i === 0) {
           return;
         }
 
-        if (trimmedLine.length === infoPattern.length) {
+        if (line.length === infoPattern.length) {
           // Beginning of new entry (blank infoPattern line)
           secondLine.push(currentSecondLine);
           info.push(currentInfo);
@@ -129,7 +127,7 @@ const createResumeParser = (path) => {
           currentInfo = [];
         } else {
           const cleaned = cleanString(
-            trimmedLine.substring(circleInfoPattern.length + 1),
+            line.substring(circleInfoPattern.length + 1),
             removeInlineComments,
           );
 
@@ -185,9 +183,9 @@ const createResumeParser = (path) => {
   };
 
   const getLanguages = () => {
-    const languagesPattern = String.raw`% LANGUAGES`;
+    const languagesPattern = '% LANGUAGES';
     // Splits the language lists on commas, except within parentheses
-    const regexp = new RegExp(String.raw`(?!\(.*),(?![^(]*?\))`);
+    const regexp = new RegExp(/(?!\(.*),(?![^(]*?\))/);
     const langMap = {};
     const skills = parseListSection('TechnicalSkills', false);
 
