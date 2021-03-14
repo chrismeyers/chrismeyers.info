@@ -1,11 +1,10 @@
+const path = require('path');
 const fastify = require('fastify');
 const fastifyCors = require('fastify-cors');
 const fastifyHelmet = require('fastify-helmet');
 const fastifyEnv = require('fastify-env');
+const fastifyAutoLoad = require('fastify-autoload');
 const S = require('fluent-json-schema');
-const projectRoutes = require('./routes/projects');
-const buildRoutes = require('./routes/builds');
-const resumeRoutes = require('./routes/resume');
 
 module.exports = async (opts = {}) => {
   const app = fastify(opts);
@@ -29,9 +28,10 @@ module.exports = async (opts = {}) => {
   app.register(fastifyHelmet);
 
   // Routes
-  app.register(projectRoutes);
-  app.register(buildRoutes);
-  app.register(resumeRoutes);
+  app.register(fastifyAutoLoad, {
+    dir: path.join(__dirname, 'routes'),
+    dirNameRoutePrefix: false,
+  });
 
   return app;
 };
