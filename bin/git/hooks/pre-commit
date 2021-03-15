@@ -1,0 +1,20 @@
+#!/bin/bash
+
+RESUME_PDF="resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.pdf"
+if git diff --cached --name-only | grep --quiet "$RESUME_PDF"
+then
+  echo "Compressing resume PDF..."
+
+  FILE=$RESUME_PDF
+  ORIG=$RESUME_PDF.orig
+
+  cp $FILE $ORIG
+
+  gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH -dPrinted=false -sOutputFile=$FILE $ORIG
+
+  rm $ORIG
+
+  git add $RESUME_PDF
+
+  exit 0
+fi
