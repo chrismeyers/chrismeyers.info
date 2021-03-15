@@ -7,6 +7,7 @@ This is the codebase for my personal website currently located at [https://chris
 1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodesource](https://github.com/nodesource/distributions))
 
 ## Setup
+1. Copy [bin/git/hooks/pre-commit](bin/git/hooks/pre-commit) to the local `.git/hooks` directory and ensure the script is executable
 1. Setup a git remote on the production server by following the instructions in [bin/git/hooks/post-receive](bin/git/hooks/post-receive)
     - Assuming a git remote named `production` exists, the following command can be run from the root of the repository to deploy: `git push production main`
 1. Configure server level reverse proxy (assuming Debian based server)
