@@ -4,7 +4,8 @@
 #   1. Make the directory /path/to/repo/{REPO_NAME}.git
 #   2. git init --bare /path/to/repo/{REPO_NAME}.git
 #   3. Create and edit /path/to/repo/{REPO_NAME}.git/hooks/post-receive
-#     3a. This needs to be updated manually when changes are made!
+#     3a. Ensure the script is executable (chmod 755 post-receive)
+#     3b. This needs to be updated manually when changes are made!
 #   4. Create all directories in the --work-tree path
 #   5. Create all credential directories and files
 #   6. Add new git remote: ssh://USER_NAME@IP/path/to/repo/{REPO_NAME}.git
