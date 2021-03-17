@@ -8,6 +8,8 @@ describe('API Endpoints', () => {
     app = await createApp(mockContainer);
   });
 
+  afterEach(() => app.close());
+
   describe('project endpoints', () => {
     it('gets all active projects', async () => {
       const response = await app.inject({
