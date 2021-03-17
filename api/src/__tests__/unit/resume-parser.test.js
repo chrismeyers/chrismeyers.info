@@ -6,7 +6,15 @@ describe('Resume Parser', () => {
 
   beforeEach(async () => {
     parser = createResumeParser(
-      path.join(__dirname, 'data', 'resume', 'test_resume.tex'),
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        '__mocks__',
+        'data',
+        'resume',
+        'test_resume.tex',
+      ),
     );
     await parser.load();
   });
