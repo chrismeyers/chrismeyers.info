@@ -3,7 +3,8 @@
 RESUME_PDF="resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.pdf"
 if git diff --cached --name-only | grep --quiet "$RESUME_PDF"
 then
-  echo "Compressing resume PDF..."
+  echo "Compressing $RESUME_PDF..."
+  echo "  Before: $(du -h $RESUME_PDF | awk '{print $1}')"
 
   FILE=$RESUME_PDF
   ORIG=$RESUME_PDF.orig
@@ -13,6 +14,8 @@ then
   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH -dPrinted=false -sOutputFile=$FILE $ORIG
 
   rm $ORIG
+
+  echo "  After:  $(du -h $RESUME_PDF | awk '{print $1}')"
 
   git add $RESUME_PDF
 
