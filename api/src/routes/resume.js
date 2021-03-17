@@ -1,20 +1,8 @@
-const path = require('path');
 const createResumeParser = require('../lib/resume-parser');
 
 module.exports = async (app) => {
   app.get('/resume', async (request, reply) => {
-    const parser = createResumeParser(
-      path.join(
-        __dirname,
-        '..',
-        '..',
-        '..',
-        'resume',
-        'LaTeX',
-        'Meyers_Chris',
-        'Meyers_Chris_Resume.tex',
-      ),
-    );
+    const parser = createResumeParser(request.diScope.resolve('resumePath'));
 
     try {
       await parser.load();
@@ -30,18 +18,7 @@ module.exports = async (app) => {
   });
 
   app.get('/resume/summary', async (request, reply) => {
-    const parser = createResumeParser(
-      path.join(
-        __dirname,
-        '..',
-        '..',
-        '..',
-        'resume',
-        'LaTeX',
-        'Meyers_Chris',
-        'Meyers_Chris_Resume.tex',
-      ),
-    );
+    const parser = createResumeParser(request.diScope.resolve('resumePath'));
 
     try {
       await parser.load();
