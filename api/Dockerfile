@@ -9,4 +9,4 @@ RUN npm ci --only=production
 COPY ./ .
 
 EXPOSE 8888
-ENTRYPOINT ["npm", "start"]
+CMD ["node", "src/server.js"]
