@@ -1,8 +1,8 @@
 module.exports = async (app) => {
   app.get('/projects', async (request, reply) => {
     try {
-      const service = request.diScope.resolve('projectService');
-      return { items: await service.active() };
+      const repo = request.diScope.resolve('projectRepository');
+      return { items: await repo.active() };
     } catch (error) {
       return reply.internalServerError('Unable to load data');
     }
@@ -21,8 +21,8 @@ module.exports = async (app) => {
       const { id } = request.params;
 
       try {
-        const service = request.diScope.resolve('projectService');
-        const project = await service.findById(id);
+        const repo = request.diScope.resolve('projectRepository');
+        const project = await repo.findById(id);
 
         if (project) return project;
 
