@@ -1,12 +1,12 @@
 const path = require('path');
 const { asFunction, asValue } = require('awilix');
 const dataLoader = require('./lib/data-loader');
-const createProjectService = require('./lib/project-service');
-const createBuildService = require('./lib/build-service');
+const createProjectRepository = require('./lib/project-repository');
+const createBuildRepository = require('./lib/build-repository');
 
 module.exports = {
-  projectService: asFunction(() => createProjectService(dataLoader)),
-  buildService: asFunction(() => createBuildService(dataLoader)),
+  projectRepository: asFunction(() => createProjectRepository(dataLoader)),
+  buildRepository: asFunction(() => createBuildRepository(dataLoader)),
   resumePath: asValue(
     path.join(
       __dirname,

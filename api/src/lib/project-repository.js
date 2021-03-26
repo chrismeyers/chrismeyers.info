@@ -1,4 +1,4 @@
-const createProjectService = (loader) => {
+const createProjectRepository = (loader) => {
   const active = async () => {
     const data = await loader('projects');
     return data.filter((p) => p.active);
@@ -12,4 +12,4 @@ const createProjectService = (loader) => {
   return { active, findById };
 };
 
-module.exports = createProjectService;
+module.exports = createProjectRepository;

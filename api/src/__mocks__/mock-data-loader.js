@@ -77,5 +77,4 @@ const obj = {
   ],
 };
 
-module.exports = async (type = null) =>
-  new Promise((resolve) => resolve(type ? obj[type] : obj));
+module.exports = async (type = null) => (type ? obj[type] : obj);
