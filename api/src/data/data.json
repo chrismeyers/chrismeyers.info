@@ -116,7 +116,7 @@
       "displayDate": "Personal Project, Fall 2013",
       "startedDate": "2013-09-01T00:00:00.000Z",
       "lang": "JavaScript (<a href=\"https://nodejs.org\" class=\"fancytxt\">Node.js</a>, <a href=\"https://vuejs.org\" class=\"fancytxt\">Vue.js</a>)",
-      "info": "A digital representation of myself. A complete rewrite of this website was done in November 2018 and the backend API was rewritten in March 2021 due to the abandonment of the <a href=\"https://aqueduct.io\" class=\"fancytxt\">Aqueduct</a> Dart framework. The implementation of this site using Dart can be found <a href=\"https://github.com/chrismeyers/chrismeyers.info/tree/api-dart-aqueduct\" class=\"fancytxt\">here</a>. The original code can be found <a href=\"https://github.com/chrismeyers/CM_WEBSITE\" class=\"fancytxt\">here</a>.",
+      "info": "A digital representation of myself. A complete rewrite of this website was done in November 2018 and the backend API was rewritten in March 2021 due to the sunsetting of the <a href=\"https://aqueduct.io\" class=\"fancytxt\">Aqueduct</a> framework. The implementation of this site using Dart can be found <a href=\"https://github.com/chrismeyers/chrismeyers.info/tree/api-dart-aqueduct\" class=\"fancytxt\">here</a>. The original code can be found <a href=\"https://github.com/chrismeyers/CM_WEBSITE\" class=\"fancytxt\">here</a>.",
       "role": "Solo project",
       "stat": "Being maintained",
       "images": []
