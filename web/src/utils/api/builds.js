@@ -4,31 +4,31 @@ import { handleAxiosError } from '../errors/handler';
 
 export default {
   // GET Methods
-  get(params = {}) {
+  async get(params = {}) {
     const queryString = qs.stringify(params, {
       addQueryPrefix: true,
       strictNullHandling: true,
     });
 
-    return new Promise((resolve, reject) => {
-      return axios
-        .get(`/builds${queryString}`)
-        .then((response) => resolve(response))
-        .catch((error) => reject(handleAxiosError(error)));
-    });
+    try {
+      const builds = await axios.get(`/builds${queryString}`);
+      return builds;
+    } catch (error) {
+      throw handleAxiosError(error);
+    }
   },
 
-  getById(id, params = {}) {
+  async getById(id, params = {}) {
     const queryString = qs.stringify(params, {
       addQueryPrefix: true,
       strictNullHandling: true,
     });
 
-    return new Promise((resolve, reject) => {
-      return axios
-        .get(`/builds/${id}${queryString}`)
-        .then((response) => resolve(response))
-        .catch((error) => reject(handleAxiosError(error)));
-    });
+    try {
+      const build = await axios.get(`/builds/${id}${queryString}`);
+      return build;
+    } catch (error) {
+      throw handleAxiosError(error);
+    }
   },
 };

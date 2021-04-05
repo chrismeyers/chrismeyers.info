@@ -112,10 +112,13 @@ export default {
       employed: false,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    ResumeAPI.getSummary()
-      .then((summary) => next((vm) => vm.setData({ summary })))
-      .catch((error) => next((vm) => vm.setData({ error })));
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const summary = await ResumeAPI.summary();
+      next((vm) => vm.setData({ summary }));
+    } catch (error) {
+      next((vm) => vm.setData({ error }));
+    }
   },
   methods: {
     showImage(which) {
