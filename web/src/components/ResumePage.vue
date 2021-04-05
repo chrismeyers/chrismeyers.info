@@ -106,10 +106,13 @@ export default {
       skills: [],
     };
   },
-  beforeRouteEnter(to, from, next) {
-    ResumeAPI.get()
-      .then((resume) => next((vm) => vm.setData({ resume })))
-      .catch((error) => next((vm) => vm.setData({ error })));
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const resume = await ResumeAPI.get();
+      next((vm) => vm.setData({ resume }));
+    } catch (error) {
+      next((vm) => vm.setData({ error }));
+    }
   },
   methods: {
     setData({ resume = null, error = null }) {

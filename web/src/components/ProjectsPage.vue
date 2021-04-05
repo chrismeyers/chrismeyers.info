@@ -48,10 +48,13 @@ export default {
       projects: null,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    ProjectsAPI.get()
-      .then((projects) => next((vm) => vm.setData({ projects })))
-      .catch((error) => next((vm) => vm.setData({ error })));
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const projects = await ProjectsAPI.get();
+      next((vm) => vm.setData({ projects }));
+    } catch (error) {
+      next((vm) => vm.setData({ error }));
+    }
   },
   methods: {
     setData({ projects = null, error = null }) {

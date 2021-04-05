@@ -4,31 +4,31 @@ import { handleAxiosError } from '../errors/handler';
 
 export default {
   // GET Methods
-  get(params = {}) {
+  async get(params = {}) {
     const queryString = qs.stringify(params, {
       addQueryPrefix: true,
       strictNullHandling: true,
     });
 
-    return new Promise((resolve, reject) => {
-      return axios
-        .get(`/projects${queryString}`)
-        .then((response) => resolve(response))
-        .catch((error) => reject(handleAxiosError(error)));
-    });
+    try {
+      const projects = await axios.get(`/projects${queryString}`);
+      return projects;
+    } catch (error) {
+      throw handleAxiosError(error);
+    }
   },
 
-  getById(id, params = {}) {
+  async getById(id, params = {}) {
     const queryString = qs.stringify(params, {
       addQueryPrefix: true,
       strictNullHandling: true,
     });
 
-    return new Promise((resolve, reject) => {
-      return axios
-        .get(`/projects/${id}${queryString}`)
-        .then((response) => resolve(response))
-        .catch((error) => reject(handleAxiosError(error)));
-    });
+    try {
+      const project = await axios.get(`/projects/${id}${queryString}`);
+      return project;
+    } catch (error) {
+      throw handleAxiosError(error);
+    }
   },
 };

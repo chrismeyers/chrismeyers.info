@@ -51,10 +51,13 @@ export default {
       builds: null,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    BuildsAPI.get()
-      .then((builds) => next((vm) => vm.setData({ builds })))
-      .catch((error) => next((vm) => vm.setData({ error })));
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const builds = await BuildsAPI.get();
+      next((vm) => vm.setData({ builds }));
+    } catch (error) {
+      next((vm) => vm.setData({ error }));
+    }
   },
   methods: {
     setData({ builds = null, error = null }) {

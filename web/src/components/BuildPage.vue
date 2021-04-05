@@ -70,16 +70,23 @@ export default {
       error: false,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    BuildsAPI.getById(to.params.id)
-      .then((build) => next((vm) => vm.setData({ build })))
-      .catch((error) => next((vm) => vm.setData({ error })));
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const build = await BuildsAPI.getById(to.params.id);
+      next((vm) => vm.setData({ build }));
+    } catch (error) {
+      next((vm) => vm.setData({ error }));
+    }
   },
-  beforeRouteUpdate(to, from, next) {
-    BuildsAPI.getById(to.params.id)
-      .then((build) => this.setData({ build }))
-      .catch((error) => this.setData({ error }))
-      .finally(() => next());
+  async beforeRouteUpdate(to, from, next) {
+    try {
+      const build = await BuildsAPI.getById(to.params.id);
+      this.setData({ build });
+    } catch (error) {
+      this.setData({ error });
+    } finally {
+      next();
+    }
   },
   methods: {
     setData({ build = null, error = null }) {

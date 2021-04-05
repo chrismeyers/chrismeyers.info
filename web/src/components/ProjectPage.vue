@@ -146,16 +146,23 @@ export default {
       error: false,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    ProjectsAPI.getById(to.params.id)
-      .then((project) => next((vm) => vm.setData({ project })))
-      .catch((error) => next((vm) => vm.setData({ error })));
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const project = await ProjectsAPI.getById(to.params.id);
+      next((vm) => vm.setData({ project }));
+    } catch (error) {
+      next((vm) => vm.setData({ error }));
+    }
   },
-  beforeRouteUpdate(to, from, next) {
-    ProjectsAPI.getById(to.params.id)
-      .then((project) => this.setData({ project }))
-      .catch((error) => this.setData({ error }))
-      .finally(() => next());
+  async beforeRouteUpdate(to, from, next) {
+    try {
+      const project = await ProjectsAPI.getById(to.params.id);
+      this.setData({ project });
+    } catch (error) {
+      this.setData({ error });
+    } finally {
+      next();
+    }
   },
   methods: {
     setData({ project = null, error = null }) {
