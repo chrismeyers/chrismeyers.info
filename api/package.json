@@ -6,6 +6,7 @@
   "main": "src/server.js",
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "dev": "nodemon .",
     "start": "node .",
     "lint": "eslint . --ext .js",
