@@ -42,7 +42,7 @@ describe('Build API Endpoints', () => {
     expect(inactive).toHaveLength(0);
   });
 
-  it('handles data loading errors when attempting to get a single project', async () => {
+  it('handles data loading errors when attempting to get a single build', async () => {
     app = await createApp({
       ...mockContainer,
       buildRepository: asFunction(() => null),
