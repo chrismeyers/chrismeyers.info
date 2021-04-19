@@ -10,6 +10,8 @@
 \usepackage{tgpagella}
 \usepackage[hidelinks]{hyperref}
 \usepackage{comment}
+\usepackage[explicit]{titlesec}
+\usepackage{xhfill}
 \pagestyle{empty}
 \setlength{\tabcolsep}{0em}
 
@@ -40,3 +42,6 @@
 % make "C++" look pretty when used in text by touching up the plus signs
 \newcommand{\CPP}
 {C\nolinebreak[4]\hspace{-.05em}\raisebox{.22ex}{\footnotesize\bf ++}}
+
+\titleformat{\subsection}
+  {\normalfont\Large\bfseries}{}{0em}{#1~\xrfill[0.5ex]{0.5pt}}
