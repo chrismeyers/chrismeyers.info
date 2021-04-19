@@ -59,7 +59,7 @@
 
       <ul>
         <li>
-          Desktop and CLI applications:
+          Desktop and command-line interface (CLI) applications:
           <ul ref="desktop-languages">
             <li
               v-for="language in languages.desktop"
@@ -70,7 +70,7 @@
           </ul>
         </li>
         <li>
-          Websites, Web Apps, and APIs:
+          Websites, web applications, and APIs:
           <ul ref="web-languages">
             <li v-for="language in languages.web" :key="`${language}-web-li`">
               {{ language }}
