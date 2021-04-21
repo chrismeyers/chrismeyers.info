@@ -28,7 +28,7 @@ jobs:
         working-directory: ./web
 
     container:
-      image: node:15.11.0
+      image: node:16.0.0
 
     steps:
       - uses: actions/checkout@v2
