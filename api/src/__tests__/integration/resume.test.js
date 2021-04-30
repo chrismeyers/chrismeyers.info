@@ -24,6 +24,11 @@ describe('Resume API Endpoints', () => {
     });
 
     expect(response.statusCode).toBe(500);
+    expect(JSON.parse(response.body)).toEqual(
+      expect.objectContaining({
+        message: 'Unable to load resume file',
+      }),
+    );
   });
 
   it('gets full resume', async () => {
@@ -33,9 +38,32 @@ describe('Resume API Endpoints', () => {
     });
 
     expect(response.statusCode).toBe(200);
-
-    const body = JSON.parse(response.body);
-    expect(Object.keys(body)).toEqual(['experience', 'education', 'skills']);
+    expect(JSON.parse(response.body)).toEqual(
+      expect.objectContaining({
+        experience: expect.arrayContaining([
+          expect.objectContaining({
+            url: expect.any(String),
+            firstLine: expect.any(Array),
+            secondLine: expect.any(Array),
+            info: expect.any(Array),
+          }),
+        ]),
+        education: expect.arrayContaining([
+          expect.objectContaining({
+            url: expect.any(String),
+            firstLine: expect.any(Array),
+            secondLine: expect.any(Array),
+            info: expect.any(Array),
+          }),
+        ]),
+        skills: expect.arrayContaining([
+          expect.objectContaining({
+            mainItem: expect.any(String),
+            subItems: expect.any(Array),
+          }),
+        ]),
+      }),
+    );
   });
 
   it('handles data loading errors when attempting to get resume summary', async () => {
@@ -50,6 +78,11 @@ describe('Resume API Endpoints', () => {
     });
 
     expect(response.statusCode).toBe(500);
+    expect(JSON.parse(response.body)).toEqual(
+      expect.objectContaining({
+        message: 'Unable to load resume file',
+      }),
+    );
   });
 
   it('gets resume summary', async () => {
@@ -59,8 +92,20 @@ describe('Resume API Endpoints', () => {
     });
 
     expect(response.statusCode).toBe(200);
-
-    const body = JSON.parse(response.body);
-    expect(Object.keys(body)).toEqual(['languages', 'mostRecentJob']);
+    expect(JSON.parse(response.body)).toEqual(
+      expect.objectContaining({
+        languages: expect.objectContaining({
+          desktop: expect.any(Array),
+          web: expect.any(Array),
+        }),
+        mostRecentJob: expect.objectContaining({
+          employed: expect.any(Boolean),
+          company: expect.any(String),
+          url: expect.any(String),
+          title: expect.any(String),
+          dates: expect.any(Array),
+        }),
+      }),
+    );
   });
 });

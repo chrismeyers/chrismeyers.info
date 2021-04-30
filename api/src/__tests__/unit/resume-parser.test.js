@@ -75,7 +75,7 @@ describe('Resume Parser', () => {
     it('parses technical skills section', async () => {
       const items = parser.parseListSection('TechnicalSkills');
 
-      expect(items).toHaveLength(4);
+      expect(items).toHaveLength(5);
 
       expect(items[0].mainItem).toBe('Lanuguage list 100%:');
       expect(items[0].subItems).toHaveLength(1);
@@ -83,9 +83,13 @@ describe('Resume Parser', () => {
         'Language 1 (Something 1, Something 2), Language 2, Language 3',
       );
 
-      expect(items[1].mainItem).toBe('Item 1');
-      expect(items[2].mainItem).toBe('Item 2');
-      expect(items[3].mainItem).toBe('Item 3');
+      expect(items[1].mainItem).toBe('Lanuguage list 2:');
+      expect(items[1].subItems).toHaveLength(1);
+      expect(items[1].subItems[0]).toBe('Language 4, Language 5 (Something 3)');
+
+      expect(items[2].mainItem).toBe('Item 1');
+      expect(items[3].mainItem).toBe('Item 2');
+      expect(items[4].mainItem).toBe('Item 3');
     });
   });
 
@@ -93,11 +97,12 @@ describe('Resume Parser', () => {
     it('parses language summary', async () => {
       const items = parser.getLanguages();
 
-      expect(items.web).toEqual([
+      expect(items.desktop).toEqual([
         'Language 1 (Something 1, Something 2)',
         'Language 2',
         'Language 3',
       ]);
+      expect(items.web).toEqual(['Language 4', 'Language 5 (Something 3)']);
     });
 
     it('parses most recent job', async () => {
