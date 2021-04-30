@@ -23,6 +23,11 @@ describe('Build API Endpoints', () => {
     });
 
     expect(response.statusCode).toBe(500);
+    expect(JSON.parse(response.body)).toEqual(
+      expect.objectContaining({
+        message: 'Unable to load data',
+      }),
+    );
   });
 
   it('gets all active builds', async () => {
@@ -32,14 +37,31 @@ describe('Build API Endpoints', () => {
     });
 
     expect(response.statusCode).toBe(200);
-
-    const body = JSON.parse(response.body);
-    expect(body.items.length).toBeGreaterThan(0);
-
-    expect(body.items[0].displayDate).toBe('Sometime');
-
-    const inactive = body.items.filter((b) => !b.active);
-    expect(inactive).toHaveLength(0);
+    expect(JSON.parse(response.body)).toEqual({
+      items: expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(Number),
+          active: expect.any(Boolean),
+          displayDate: expect.any(String),
+          startedDate: expect.any(String),
+          cpu: expect.any(String),
+          cool: expect.toBeOneOf([expect.any(String), null]),
+          mobo: expect.any(String),
+          ram: expect.any(String),
+          hdd: expect.any(String),
+          ssd: expect.toBeOneOf([expect.any(String), null]),
+          gpu: expect.any(String),
+          image: expect.objectContaining({
+            id: expect.any(Number),
+            path: expect.any(String),
+            thumbnail: expect.toBeOneOf([expect.any(String), null]),
+            title: expect.any(String),
+            pos: expect.any(Number),
+            orient: expect.any(String),
+          }),
+        }),
+      ]),
+    });
   });
 
   it('handles data loading errors when attempting to get a single build', async () => {
@@ -54,6 +76,11 @@ describe('Build API Endpoints', () => {
     });
 
     expect(response.statusCode).toBe(500);
+    expect(JSON.parse(response.body)).toEqual(
+      expect.objectContaining({
+        message: 'Unable to load data',
+      }),
+    );
   });
 
   it('handles an invalid ID', async () => {
@@ -63,15 +90,27 @@ describe('Build API Endpoints', () => {
     });
 
     expect(response.statusCode).toBe(400);
+    expect(JSON.parse(response.body)).toEqual(
+      expect.objectContaining({
+        message: 'params.id should be number',
+      }),
+    );
   });
 
   it('handles an unknown ID', async () => {
+    const id = 12345;
+
     const response = await app.inject({
       method: 'GET',
-      url: '/builds/12345',
+      url: `/builds/${id}`,
     });
 
     expect(response.statusCode).toBe(404);
+    expect(JSON.parse(response.body)).toEqual(
+      expect.objectContaining({
+        message: `Build ${id} not found`,
+      }),
+    );
   });
 
   it('gets a single build by ID', async () => {
@@ -81,5 +120,28 @@ describe('Build API Endpoints', () => {
     });
 
     expect(response.statusCode).toBe(200);
+    expect(JSON.parse(response.body)).toEqual(
+      expect.objectContaining({
+        id: expect.any(Number),
+        active: expect.any(Boolean),
+        displayDate: expect.any(String),
+        startedDate: expect.any(String),
+        cpu: expect.any(String),
+        cool: expect.toBeOneOf([expect.any(String), null]),
+        mobo: expect.any(String),
+        ram: expect.any(String),
+        hdd: expect.any(String),
+        ssd: expect.toBeOneOf([expect.any(String), null]),
+        gpu: expect.any(String),
+        image: expect.objectContaining({
+          id: expect.any(Number),
+          path: expect.any(String),
+          thumbnail: expect.toBeOneOf([expect.any(String), null]),
+          title: expect.any(String),
+          pos: expect.any(Number),
+          orient: expect.any(String),
+        }),
+      }),
+    );
   });
 });
