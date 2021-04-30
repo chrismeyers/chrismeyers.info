@@ -7,6 +7,7 @@ const fastifyAutoLoad = require('fastify-autoload');
 const fastifySensible = require('fastify-sensible');
 const { fastifyAwilixPlugin } = require('fastify-awilix');
 const S = require('fluent-json-schema');
+const schemas = require('./lib/schema');
 
 module.exports = async (container, opts = {}) => {
   const app = fastify(opts);
@@ -45,6 +46,9 @@ module.exports = async (container, opts = {}) => {
     dir: path.join(__dirname, 'routes'),
     dirNameRoutePrefix: false,
   });
+
+  // Schema
+  app.addSchema(schemas);
 
   return app;
 };
