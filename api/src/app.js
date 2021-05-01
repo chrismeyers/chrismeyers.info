@@ -21,9 +21,8 @@ module.exports = async (container, opts = {}) => {
         'CORS_ALLOWED_ORIGINS',
         S.raw({ type: 'string', separator: ',' }).required(),
       )
-      .prop('PORT', S.string())
-      .prop('ADDR', S.string())
-      .valueOf(),
+      .prop('PORT', S.number().default(8888))
+      .prop('ADDR', S.string().default('127.0.0.1')),
   });
   app.register(fastifyCors, {
     origin: app.config.CORS_ALLOWED_ORIGINS,
