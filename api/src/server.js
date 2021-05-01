@@ -12,8 +12,8 @@ const start = async () => {
       },
     });
 
-    const port = app.config.PORT || 8888;
-    const addr = app.config.ADDR || '127.0.0.1';
+    const port = app.config.PORT;
+    const addr = app.config.ADDR;
 
     await app.listen(port, addr);
 
