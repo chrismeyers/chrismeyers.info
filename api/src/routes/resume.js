@@ -9,10 +9,11 @@ module.exports = async (app) => {
       },
     },
     handler: async (request, reply) => {
-      const parser = createResumeParser(request.diScope.resolve('resumePath'));
+      let parser;
+      const path = request.diScope.resolve('resumePath');
 
       try {
-        await parser.load();
+        parser = await createResumeParser(path);
       } catch (error) {
         return reply.internalServerError('Unable to load resume file');
       }
@@ -32,10 +33,11 @@ module.exports = async (app) => {
       },
     },
     handler: async (request, reply) => {
-      const parser = createResumeParser(request.diScope.resolve('resumePath'));
+      let parser;
+      const path = request.diScope.resolve('resumePath');
 
       try {
-        await parser.load();
+        parser = await createResumeParser(path);
       } catch (error) {
         return reply.internalServerError('Unable to load resume file');
       }
