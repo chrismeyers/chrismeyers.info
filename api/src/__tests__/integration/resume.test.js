@@ -1,5 +1,4 @@
-const path = require('path');
-const { asValue } = require('awilix');
+const { asFunction } = require('awilix');
 const createApp = require('../../app');
 const mockContainer = require('../../__mocks__/mock-container');
 
@@ -15,7 +14,7 @@ describe('Resume API Endpoints', () => {
   it('handles data loading errors when attempting to get full resume', async () => {
     app = await createApp({
       ...mockContainer,
-      resumePath: asValue(path.join(__dirname, 'DOES_NOT_EXIST.tex')),
+      resumeParser: asFunction(() => null),
     });
 
     const response = await app.inject({
@@ -69,7 +68,7 @@ describe('Resume API Endpoints', () => {
   it('handles data loading errors when attempting to get resume summary', async () => {
     app = await createApp({
       ...mockContainer,
-      resumePath: asValue(path.join(__dirname, 'DOES_NOT_EXIST.tex')),
+      resumeParser: asFunction(() => null),
     });
 
     const response = await app.inject({
