@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 
-const createResumeParser = (path) => {
+const createResumeParser = async (path) => {
   const rawSections = {};
 
   const load = async () => {
@@ -201,8 +201,10 @@ const createResumeParser = (path) => {
     };
   };
 
+  // Initialization
+  await load();
+
   return {
-    load,
     parseComplexSection,
     parseListSection,
     getLanguages,
