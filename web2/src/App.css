@@ -2,6 +2,7 @@
 :root {
   --main-theme-color: #5bb75b;
   --warning-color: #d9534f;
+  --light-mode-toggle-bg-color: #bbbbbb;
 
   --font-color: #444444;
   --bg-color: #f7f7f7;

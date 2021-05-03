@@ -40,6 +40,18 @@ footer {
   margin-left: 5px;
 }
 
+.link-image.theme {
+  height: 100%;
+}
+
+.link-image.theme.on {
+  margin-left: 8px;
+}
+
+.link-image.theme.off {
+  margin-left: 6px;
+}
+
 @media screen and (max-width: 969px) {
   footer {
     width: 100%;
