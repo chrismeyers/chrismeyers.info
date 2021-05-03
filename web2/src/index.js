@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Axios from 'axios';
+import SimpleReactLightbox from 'simple-react-lightbox';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SimpleReactLightbox>
+      <App />
+    </SimpleReactLightbox>
   </React.StrictMode>,
   document.getElementById('root'),
 );

@@ -2,6 +2,7 @@ import './css/footer.css';
 import { ReactComponent as GithubLogo } from '../assets/images/icons/github.svg';
 import { ReactComponent as LinkedInLogo } from '../assets/images/icons/linkedin.svg';
 import { ReactComponent as MailLogo } from '../assets/images/icons/mail.svg';
+import { MAILTO_HREF } from '../utils/constants';
 
 const AppFooter = () => {
   return (
@@ -36,7 +37,7 @@ const AppFooter = () => {
 
         <div className="footer-social">
           <a
-            href="mailto:chris@chrismeyers.info?subject=Message%20from%20chrismeyers.info"
+            href={MAILTO_HREF}
             title="Send Message"
             target="_blank"
             rel="noopener noreferrer"

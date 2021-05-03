@@ -6,9 +6,10 @@ module.exports = {
   extends: ['react-app', 'react-app/jest'],
   rules: {
     'no-console': 'warn',
-    'prefer-const': 'error',
+    'prefer-const': 'warn',
     semi: 'warn',
-    quotes: ['error', 'single'],
-    'comma-dangle': ['error', 'always-multiline'],
+    quotes: ['warn', 'single'],
+    'comma-dangle': ['warn', 'always-multiline'],
+    'import/no-anonymous-default-export': 'off',
   },
 };
