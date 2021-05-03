@@ -9,11 +9,8 @@ import AboutPage from './components/AboutPage';
 import ResumePage from './components/ResumePage';
 import ProjectsPage from './components/ProjectsPage';
 import BuildsPage from './components/BuildsPage';
-import useTheme from './hooks/useTheme';
 
 function App() {
-  useTheme();
-
   return (
     <>
       <Router>
