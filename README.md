@@ -38,7 +38,7 @@ $ {api|web}/scripts/run.sh
 
 ## Credit
 + The site uses a few open source tools and frameworks:
-  + [Vue.js](https://vuejs.org/) as a fontend JavaScript framework
+  + [Vue.js](https://vuejs.org/) as a frontend JavaScript framework
     - [vue-router](https://router.vuejs.org/) for SPA routing
     - [v-img](https://github.com/crowdbotics/v-img) to make viewing images a lot more pleasant
     - [vue-js-modal](https://github.com/euvl/vue-js-modal) to raise modals and dialogs
