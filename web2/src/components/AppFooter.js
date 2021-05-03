@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Switch from 'react-switch';
 import './css/footer.css';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
@@ -7,31 +6,15 @@ import { ReactComponent as MailIcon } from '../assets/images/icons/mail.svg';
 import { ReactComponent as SunIcon } from '../assets/images/icons/sun.svg';
 import { ReactComponent as MoonIcon } from '../assets/images/icons/moon.svg';
 import { MAILTO_HREF, THEMES } from '../utils/constants';
+import useTheme from '../hooks/useTheme';
 
 const AppFooter = () => {
-  const [theme, setTheme] = useState(
-    localStorage.getItem('theme') || THEMES.LIGHT,
-  );
-  useEffect(() => {
-    localStorage.setItem('theme', theme);
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const mainThemeColor = getComputedStyle(document.documentElement)
-    .getPropertyValue('--main-theme-color')
-    .trim();
-
-  const lightModeToggleColor = getComputedStyle(document.documentElement)
-    .getPropertyValue('--light-mode-toggle-bg-color')
-    .trim();
-
-  const toggleTheme = () => {
-    if (!theme || theme === THEMES.LIGHT) {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-  };
+  const {
+    theme,
+    mainThemeColor,
+    lightModeToggleColor,
+    toggleTheme,
+  } = useTheme();
 
   return (
     <footer>
