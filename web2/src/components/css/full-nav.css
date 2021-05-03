@@ -1,0 +1,40 @@
+nav {
+  width: 300px;
+}
+
+#full-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100%;
+  border-right: 1px solid var(--border-color);
+}
+
+.header-link {
+  margin-left: 20px;
+}
+
+.side-nav-logo {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 90px;
+}
+
+.side-nav-items {
+  list-style: none;
+  text-align: right;
+  padding-left: 0;
+  padding-right: 10px;
+  padding-top: 20px;
+  margin-top: 0;
+  border-top: 1px solid var(--border-color);
+}
+.side-nav-items > li {
+  height: 70px;
+  font-size: 33px;
+}
+.side-nav-items > li > a:hover {
+  color: var(--main-theme-color);
+}
