@@ -3,6 +3,7 @@ import { THEMES, SYSTEM_THEME_DARK_MEDIA_QUERY } from '../utils/constants';
 
 const useTheme = () => {
   const [theme, setTheme] = useState(localStorage.getItem('theme'));
+
   useEffect(() => {
     if (!theme) {
       if (window.matchMedia) {
@@ -18,22 +19,6 @@ const useTheme = () => {
     localStorage.setItem('theme', theme);
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
-
-  const mainThemeColor = getComputedStyle(document.documentElement)
-    .getPropertyValue('--main-theme-color')
-    .trim();
-
-  const lightModeToggleColor = getComputedStyle(document.documentElement)
-    .getPropertyValue('--light-mode-toggle-bg-color')
-    .trim();
-
-  const toggleTheme = () => {
-    if (theme === THEMES.LIGHT) {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-  };
 
   useEffect(() => {
     const systemThemeChangeFn = (e) => {
@@ -62,6 +47,22 @@ const useTheme = () => {
       }
     };
   }, []);
+
+  const mainThemeColor = getComputedStyle(document.documentElement)
+    .getPropertyValue('--main-theme-color')
+    .trim();
+
+  const lightModeToggleColor = getComputedStyle(document.documentElement)
+    .getPropertyValue('--light-mode-toggle-bg-color')
+    .trim();
+
+  const toggleTheme = () => {
+    if (theme === THEMES.LIGHT) {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
 
   return {
     theme,
