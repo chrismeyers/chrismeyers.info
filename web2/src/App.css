@@ -97,7 +97,7 @@ h2.top {
   color: var(--faded-text-color);
 }
 
-.link-image {
+.link-image > g {
   fill: var(--icon-color);
 }
 
