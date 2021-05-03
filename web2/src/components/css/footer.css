@@ -1,0 +1,48 @@
+footer {
+  font-size: 13px;
+  bottom: 0;
+  height: auto;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--border-color);
+  width: 300px;
+  position: fixed;
+  text-align: center;
+}
+
+.footer-links {
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.footer-years {
+  display: block;
+  text-align: center;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.footer-social {
+  margin: 0px 3px;
+}
+
+.footer-social,
+.footer-bullets,
+.footer-message,
+.footer-theme {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 969px) {
+  footer {
+    width: 100%;
+    position: absolute;
+  }
+}

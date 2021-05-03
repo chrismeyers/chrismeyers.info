@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import AppFullNav from './components/AppFullNav';
+import AppFooter from './components/AppFooter';
 import AboutPage from './components/AboutPage';
 import ResumePage from './components/ResumePage';
 import ProjectsPage from './components/ProjectsPage';
@@ -28,6 +29,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      <AppFooter />
     </>
   );
 }
