@@ -9,13 +9,15 @@ import AboutPage from './components/AboutPage';
 import ResumePage from './components/ResumePage';
 import ProjectsPage from './components/ProjectsPage';
 import BuildsPage from './components/BuildsPage';
+import useTheme from './hooks/useTheme';
 
 function App() {
+  const themeProps = useTheme();
+
   return (
     <>
       <Router>
         <AppFullNav />
-
         <Switch>
           <Route path="/resume">
             <ResumePage />
@@ -31,7 +33,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <AppFooter />
+      <AppFooter themeProps={themeProps} />
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
