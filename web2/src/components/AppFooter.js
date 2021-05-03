@@ -6,16 +6,8 @@ import { ReactComponent as MailIcon } from '../assets/images/icons/mail.svg';
 import { ReactComponent as SunIcon } from '../assets/images/icons/sun.svg';
 import { ReactComponent as MoonIcon } from '../assets/images/icons/moon.svg';
 import { MAILTO_HREF, THEMES } from '../utils/constants';
-import useTheme from '../hooks/useTheme';
 
-const AppFooter = () => {
-  const {
-    theme,
-    mainThemeColor,
-    lightModeToggleColor,
-    toggleTheme,
-  } = useTheme();
-
+const AppFooter = ({ themeProps }) => {
   return (
     <footer>
       <div className="footer-links">
@@ -61,10 +53,10 @@ const AppFooter = () => {
 
         <div className="footer-theme">
           <Switch
-            onChange={toggleTheme}
-            checked={theme === THEMES.DARK}
-            onColor={mainThemeColor}
-            offColor={lightModeToggleColor}
+            onChange={themeProps.toggleTheme}
+            checked={themeProps.theme === THEMES.DARK}
+            onColor={themeProps.mainThemeColor}
+            offColor={themeProps.lightModeToggleColor}
             aria-label="Toggle site theme"
             height={20}
             width={48}
