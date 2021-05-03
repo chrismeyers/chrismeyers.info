@@ -5,14 +5,19 @@ import { ReactComponent as LinkedInIcon } from '../assets/images/icons/linkedin.
 import { ReactComponent as MailIcon } from '../assets/images/icons/mail.svg';
 import { ReactComponent as SunIcon } from '../assets/images/icons/sun.svg';
 import { ReactComponent as MoonIcon } from '../assets/images/icons/moon.svg';
-import { MAILTO_HREF, THEMES } from '../utils/constants';
+import {
+  GITHUB_URL,
+  LINKEDIN_URL,
+  MAILTO_HREF,
+  THEMES,
+} from '../utils/constants';
 
 const AppFooter = ({ themeProps }) => {
   return (
     <footer>
       <div className="footer-links">
         <div className="footer-social">
-          <a href="https://github.com/chrismeyers" className="no-decoration">
+          <a href={GITHUB_URL} className="no-decoration">
             <GithubIcon
               className="link-image large"
               title="GitHub"
@@ -24,10 +29,7 @@ const AppFooter = ({ themeProps }) => {
         <div className="footer-bullets">&bull;</div>
 
         <div className="footer-social">
-          <a
-            href="https://www.linkedin.com/in/chris-meyers"
-            className="no-decoration"
-          >
+          <a href={LINKEDIN_URL} className="no-decoration">
             <LinkedInIcon
               className="link-image large"
               title="LinkedIn"
