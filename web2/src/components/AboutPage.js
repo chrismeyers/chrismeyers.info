@@ -45,7 +45,7 @@ const AboutPage = () => {
             Science
           </li>
           {mostRecentJob && mostRecentJob.employed && (
-            <li>
+            <li data-testid="employment">
               Currently, I am employed as a {mostRecentJob.title} at{' '}
               <a href={mostRecentJob.url} className="fancytxt">
                 {mostRecentJob.company}
@@ -116,23 +116,23 @@ const AboutPage = () => {
         <ul>
           <li>
             Desktop and command-line interface (CLI) applications:
-            <ul>
-              {languages &&
-                languages.desktop &&
-                languages.desktop.map((item, index) => {
+            {languages && languages.desktop && (
+              <ul data-testid="desktop-languages">
+                {languages.desktop.map((item, index) => {
                   return <li key={`desktop-${index}`}>{item}</li>;
                 })}
-            </ul>
+              </ul>
+            )}
           </li>
           <li>
             Websites, web applications, and APIs:
-            <ul>
-              {languages &&
-                languages.web &&
-                languages.web.map((item, index) => {
+            {languages && languages.web && (
+              <ul data-testid="web-languages">
+                {languages.web.map((item, index) => {
                   return <li key={`web-${index}`}>{item}</li>;
                 })}
-            </ul>
+              </ul>
+            )}
           </li>
         </ul>
 
