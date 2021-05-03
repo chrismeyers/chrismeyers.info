@@ -8,11 +8,6 @@ import reportWebVitals from './reportWebVitals';
 
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
-document.documentElement.setAttribute(
-  'data-theme',
-  localStorage.getItem('theme'),
-);
-
 ReactDOM.render(
   <React.StrictMode>
     <SimpleReactLightbox>
