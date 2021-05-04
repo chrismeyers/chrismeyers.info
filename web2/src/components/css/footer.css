@@ -10,6 +10,14 @@ footer {
   text-align: center;
 }
 
+footer.in-menu {
+  bottom: 0;
+  position: fixed;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  cursor: auto;
+}
+
 .footer-links {
   display: block;
   text-align: center;

@@ -4,20 +4,23 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import AppFullNav from './components/AppFullNav';
+import AppMobileNav from './components/AppMobileNav';
 import AppFooter from './components/AppFooter';
 import AboutPage from './components/AboutPage';
 import ResumePage from './components/ResumePage';
 import ProjectsPage from './components/ProjectsPage';
 import BuildsPage from './components/BuildsPage';
 import useTheme from './hooks/useTheme';
+import useScreenResize from './hooks/useScreenResize';
 
 function App() {
   const themeProps = useTheme();
+  const { isMobile } = useScreenResize();
 
   return (
     <>
       <Router>
-        <AppFullNav />
+        {isMobile ? <AppMobileNav themeProps={themeProps} /> : <AppFullNav />}
         <Switch>
           <Route path="/resume">
             <ResumePage />
