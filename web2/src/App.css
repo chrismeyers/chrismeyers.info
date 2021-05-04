@@ -305,6 +305,22 @@ select.select-mod {
   background-color: var(--hamburgers-color);
 }
 
+@media screen and (max-width: 969px) {
+  .content {
+    margin: 60px 0px 90px 0px;
+  }
+
+  .content-text {
+    padding: 10px;
+  }
+
+  .section-header-size {
+    height: 60px;
+    line-height: 60px;
+    font-size: 35px;
+  }
+}
+
 @media print {
   html {
     font-family: 'Open Sans', sans-serif;

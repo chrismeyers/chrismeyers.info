@@ -12,9 +12,9 @@ import {
   THEMES,
 } from '../utils/constants';
 
-const AppFooter = ({ themeProps }) => {
+const AppFooter = ({ themeProps, inMenu = false }) => {
   return (
-    <footer>
+    <footer className={inMenu ? 'in-menu' : ''}>
       <div className="footer-links">
         <div className="footer-social">
           <a href={GITHUB_URL} className="no-decoration">
