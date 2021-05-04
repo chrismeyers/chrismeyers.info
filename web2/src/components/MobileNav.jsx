@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './css/mobile-nav.css';
 import logo from '../assets/images/logos/meyers-logo-green.svg';
-import AppFooter from './AppFooter';
+import Footer from './Footer';
 
-const AppMobileNav = ({ themeProps }) => {
+const MobileNav = ({ themeProps }) => {
   const [menuDisplayed, setMenuDisplayed] = useState(null);
   const location = useLocation();
 
@@ -86,7 +86,7 @@ const AppMobileNav = ({ themeProps }) => {
                 <div className="menu-item">Builds</div>
               </Link>
 
-              <AppFooter themeProps={themeProps} inMenu={true} />
+              <Footer themeProps={themeProps} inMenu={true} />
             </div>
           </div>
         )}
@@ -95,4 +95,4 @@ const AppMobileNav = ({ themeProps }) => {
   );
 };
 
-export default AppMobileNav;
+export default MobileNav;

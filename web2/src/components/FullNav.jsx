@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './css/full-nav.css';
 import logo from '../assets/images/logos/meyers-logo-green.svg';
 
-const AppFullNav = () => {
+const FullNav = () => {
   const location = useLocation();
 
   return (
@@ -65,4 +65,4 @@ const AppFullNav = () => {
   );
 };
 
-export default AppFullNav;
+export default FullNav;
