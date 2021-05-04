@@ -1,0 +1,72 @@
+.remove-bullets {
+  list-style-type: none;
+}
+
+@media screen and (min-width: 912px) {
+  ul {
+    overflow: hidden;
+  }
+  ul.italic-spacer {
+    padding-right: 5px;
+  }
+  ul.more-info {
+    padding-top: 10px;
+  }
+
+  .left-column {
+    width: 70%;
+    float: left;
+  }
+
+  .sub-left-column {
+    list-style-type: none;
+  }
+
+  .right-column {
+    float: right;
+    width: 30%;
+    text-align: right;
+    list-style-type: none;
+  }
+
+  .company,
+  .degree,
+  .location {
+    font-weight: bold;
+  }
+
+  .school,
+  .job-title,
+  .tenure {
+    font-style: italic;
+  }
+
+  .same-company-spacing {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 911px) {
+  .location,
+  .school,
+  .job-title,
+  .tenure {
+    list-style-type: none;
+  }
+
+  .company,
+  .degree,
+  .location {
+    font-weight: bold;
+  }
+
+  .school,
+  .job-title,
+  .tenure {
+    font-style: italic;
+  }
+
+  .job-title.same-company-spacing {
+    margin-top: 15px;
+  }
+}
