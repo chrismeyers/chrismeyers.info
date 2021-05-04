@@ -12,7 +12,7 @@ import {
   THEMES,
 } from '../utils/constants';
 
-const AppFooter = ({ themeProps, inMenu = false }) => {
+const Footer = ({ themeProps, inMenu = false }) => {
   return (
     <footer className={inMenu ? 'in-menu' : ''}>
       <div className="footer-links">
@@ -75,4 +75,4 @@ const AppFooter = ({ themeProps, inMenu = false }) => {
   );
 };
 
-export default AppFooter;
+export default Footer;

@@ -4,9 +4,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { isMobile as isMobileDevice } from 'react-device-detect';
 import './App.css';
-import AppFullNav from './components/AppFullNav';
-import AppMobileNav from './components/AppMobileNav';
-import AppFooter from './components/AppFooter';
+import FullNav from './components/FullNav';
+import MobileNav from './components/MobileNav';
+import Footer from './components/Footer';
 import AboutPage from './components/AboutPage';
 import ResumePage from './components/ResumePage';
 import ProjectsPage from './components/ProjectsPage';
@@ -22,9 +22,9 @@ function App() {
     <>
       <Router>
         {isMobileDevice || isMobileWidth ? (
-          <AppMobileNav themeProps={themeProps} />
+          <MobileNav themeProps={themeProps} />
         ) : (
-          <AppFullNav />
+          <FullNav />
         )}
         <Switch>
           <Route path="/resume">
@@ -41,7 +41,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <AppFooter themeProps={themeProps} />
+      <Footer themeProps={themeProps} />
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
