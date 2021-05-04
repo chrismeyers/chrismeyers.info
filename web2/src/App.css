@@ -13,6 +13,8 @@
   --modal-button-text-color: #ffffff;
   --highlighted-text-bg: #eaeaea;
   --faded-text-color: #909090;
+  --skeleton-color: #e9e9e9;
+  --skelton-highlight-color: #efefef;
 }
 
 [data-theme='dark'] {
@@ -25,6 +27,8 @@
   --modal-button-text-color: #ffffff;
   --highlighted-text-bg: #444444;
   --faded-text-color: #a9a9a9;
+  --skeleton-color: #363636;
+  --skelton-highlight-color: #444444;
 }
 
 #root {

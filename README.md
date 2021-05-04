@@ -44,6 +44,6 @@ $ {api|web}/scripts/run.sh
     - [react-toastify](https://fkhadra.github.io/react-toastify/introduction) to raise toast notifications
     - [react-switch](https://github.com/markusenglund/react-switch) to toggle themes
     - [react-device-detect](https://github.com/duskload/react-device-detect) to determine browser/device capabilities
-    - [react-loading](https://github.com/fakiolinho/react-loading) for loading animations
+    - [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton) for loading animations
   - [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon
   - [Fastify](https://www.fastify.io/) as a backend API framework
