@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { isMobile as isMobileDevice } from 'react-device-detect';
 import './App.css';
 import AppFullNav from './components/AppFullNav';
 import AppMobileNav from './components/AppMobileNav';
@@ -15,12 +16,16 @@ import useScreenResize from './hooks/useScreenResize';
 
 function App() {
   const themeProps = useTheme();
-  const { isMobile } = useScreenResize();
+  const { isMobileWidth } = useScreenResize();
 
   return (
     <>
       <Router>
-        {isMobile ? <AppMobileNav themeProps={themeProps} /> : <AppFullNav />}
+        {isMobileDevice || isMobileWidth ? (
+          <AppMobileNav themeProps={themeProps} />
+        ) : (
+          <AppFullNav />
+        )}
         <Switch>
           <Route path="/resume">
             <ResumePage />
