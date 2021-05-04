@@ -13,21 +13,29 @@ const ResumePage = () => {
   const [skills, setSkills] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchData = async () => {
       try {
         const response = await ResumeApi.get();
-        setExperience(response.data.experience);
-        setEducation(response.data.education);
-        setSkills(response.data.skills);
+        if (isMounted) {
+          setExperience(response.data.experience);
+          setEducation(response.data.education);
+          setSkills(response.data.skills);
+        }
       } catch (error) {
         toast.error(
           <ToastMessage title={error.title} message={error.message} />,
         );
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
     fetchData();
+
+    return () => (isMounted = false);
   }, []);
 
   return (

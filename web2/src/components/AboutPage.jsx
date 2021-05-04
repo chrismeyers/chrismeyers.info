@@ -13,20 +13,28 @@ const AboutPage = () => {
   const { openLightbox } = useLightbox();
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchData = async () => {
       try {
         const response = await ResumeApi.summary();
-        setMostRecentJob(response.data.mostRecentJob);
-        setLanguages(response.data.languages);
+        if (isMounted) {
+          setMostRecentJob(response.data.mostRecentJob);
+          setLanguages(response.data.languages);
+        }
       } catch (error) {
         toast.error(
           <ToastMessage title={error.title} message={error.message} />,
         );
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
     fetchData();
+
+    return () => (isMounted = false);
   }, []);
 
   return (
