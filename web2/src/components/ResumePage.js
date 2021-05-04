@@ -71,10 +71,13 @@ const ResumePage = () => {
                         dangerouslySetInnerHTML={{ __html: secondLine[1] }}
                       ></li>
 
-                      {job.info[j].length > 0 && (
-                        <li className="remove-bullets" key={`job-info-${j}`}>
+                      {job.info && job.info[j].length > 0 && (
+                        <li
+                          className="remove-bullets"
+                          key={`job-info-${i}-${j}`}
+                        >
                           <ul
-                            className="more-info"
+                            className="more-info-wrapper"
                             key={`job-info-wrapper-${i}-${j}`}
                           >
                             {job.info[j].map((info, k) => {
@@ -134,13 +137,13 @@ const ResumePage = () => {
                         dangerouslySetInnerHTML={{ __html: secondLine[1] }}
                       ></li>
 
-                      {school.info[j].length > 0 && (
+                      {school.info && school.info[j].length > 0 && (
                         <li
                           className="remove-bullets"
                           key={`school-info-${i}-${j}`}
                         >
                           <ul
-                            className="more-info"
+                            className="more-info-wrapper"
                             key={`school-info-wrapper-${i}-${j}`}
                           >
                             {school.info[j].map((info, k) => {
@@ -184,8 +187,6 @@ const ResumePage = () => {
                 </li>
               );
             })}
-
-          <template v-for="skill in skills"></template>
         </ul>
 
         <a className="subtle fancytxt" href={RESUME_PDF_URL}>
