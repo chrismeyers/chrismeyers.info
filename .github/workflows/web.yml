@@ -8,7 +8,6 @@ on:
       - 'web/package*.json'
       - 'web/src/**'
       - '!web/src/assets/**'
-      - 'web/tests/**'
   pull_request:
     branches: [ main ]
     paths:
@@ -16,7 +15,6 @@ on:
       - 'web/package*.json'
       - 'web/src/**'
       - '!web/src/assets/**'
-      - 'web/tests/**'
 
 jobs:
   build:
@@ -37,4 +35,4 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm run test:unit
+        run: npm run test:ci

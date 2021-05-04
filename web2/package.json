@@ -6,6 +6,7 @@
     "start": "PORT=8080 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "CI=true react-scripts test --runInBand --ci --coverage",
     "eject": "react-scripts eject"
   },
   "dependencies": {
