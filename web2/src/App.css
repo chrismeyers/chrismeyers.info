@@ -73,6 +73,12 @@ h2.top {
   margin-top: 0px;
 }
 
+.pre {
+  font-family: monospace;
+  white-space: pre;
+  margin: 1em 0px;
+}
+
 .fancytxt {
   color: var(--font-color);
   text-decoration: underline;
