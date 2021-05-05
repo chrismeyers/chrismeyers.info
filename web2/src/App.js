@@ -12,6 +12,7 @@ import AboutPage from './components/AboutPage';
 import ResumePage from './components/ResumePage';
 import ProjectsPage from './components/ProjectsPage';
 import BuildsPage from './components/BuildsPage';
+import NotFoundPage from './components/NotFoundPage';
 import useTheme from './hooks/useTheme';
 import useScreenResize from './hooks/useScreenResize';
 
@@ -25,6 +26,9 @@ function App() {
       <Router>
         {isMobile ? <MobileNav themeProps={themeProps} /> : <FullNav />}
         <Switch>
+          <Route exact path="/">
+            <AboutPage />
+          </Route>
           <Route path="/resume">
             <ResumePage />
           </Route>
@@ -34,8 +38,8 @@ function App() {
           <Route path="/builds">
             <BuildsPage />
           </Route>
-          <Route path="/">
-            <AboutPage />
+          <Route>
+            <NotFoundPage />
           </Route>
         </Switch>
         {isMobile === true ? <></> : <Prompt themeProps={themeProps} />}
