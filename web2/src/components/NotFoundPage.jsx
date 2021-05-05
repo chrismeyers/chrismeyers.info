@@ -9,11 +9,7 @@ const NotFoundPage = () => {
 
       <div className="content-text">
         <p className="center">
-          The path{' '}
-          <span>
-            {' '}
-            <pre className="highlighted">{location.pathname}</pre>{' '}
-          </span>{' '}
+          The path <span className="pre highlighted">{location.pathname}</span>{' '}
           does not exist
         </p>
         <p className="center">
