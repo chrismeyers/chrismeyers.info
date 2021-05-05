@@ -64,11 +64,18 @@ const useTheme = () => {
     }
   };
 
+  const applyTheme = (which) => {
+    if (Object.values(THEMES).includes(which)) {
+      setTheme(which);
+    }
+  };
+
   return {
     theme,
     mainThemeColor,
     lightModeToggleColor,
     toggleTheme,
+    applyTheme,
   };
 };
 
