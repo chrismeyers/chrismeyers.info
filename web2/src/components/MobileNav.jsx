@@ -71,7 +71,9 @@ const MobileNav = ({ themeProps }) => {
               </Link>
               <Link
                 className={`nav-link ${
-                  location.pathname === '/projects' ? 'nav-selected' : ''
+                  location.pathname.startsWith('/projects')
+                    ? 'nav-selected'
+                    : ''
                 }`}
                 to="/projects"
               >
@@ -79,7 +81,7 @@ const MobileNav = ({ themeProps }) => {
               </Link>
               <Link
                 className={`nav-link ${
-                  location.pathname === '/builds' ? 'nav-selected' : ''
+                  location.pathname.startsWith('/builds') ? 'nav-selected' : ''
                 }`}
                 to="/builds"
               >
