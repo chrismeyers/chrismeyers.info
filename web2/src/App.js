@@ -6,6 +6,7 @@ import { isMobile as isMobileDevice } from 'react-device-detect';
 import './App.css';
 import FullNav from './components/FullNav';
 import MobileNav from './components/MobileNav';
+import Prompt from './components/Prompt';
 import Footer from './components/Footer';
 import AboutPage from './components/AboutPage';
 import ResumePage from './components/ResumePage';
@@ -17,15 +18,12 @@ import useScreenResize from './hooks/useScreenResize';
 function App() {
   const themeProps = useTheme();
   const { isMobileWidth } = useScreenResize();
+  const isMobile = (isMobileDevice || isMobileWidth) ?? true;
 
   return (
     <>
       <Router>
-        {isMobileDevice || isMobileWidth ? (
-          <MobileNav themeProps={themeProps} />
-        ) : (
-          <FullNav />
-        )}
+        {isMobile ? <MobileNav themeProps={themeProps} /> : <FullNav />}
         <Switch>
           <Route path="/resume">
             <ResumePage />
@@ -40,6 +38,7 @@ function App() {
             <AboutPage />
           </Route>
         </Switch>
+        {isMobile === true ? <></> : <Prompt themeProps={themeProps} />}
       </Router>
       <Footer themeProps={themeProps} />
       <ToastContainer
