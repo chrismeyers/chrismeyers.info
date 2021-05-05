@@ -1,7 +1,6 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 import nock from 'nock';
 import Axios from 'axios';
 import ProjectsPage from '../../components/ProjectsPage';
@@ -32,12 +31,7 @@ describe('ProjectsPage', () => {
         ],
       });
 
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <ProjectsPage />
-      </Router>,
-    );
+    render(<ProjectsPage />, { wrapper: MemoryRouter });
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
