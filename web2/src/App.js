@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import AboutPage from './components/AboutPage';
 import ResumePage from './components/ResumePage';
 import ProjectsPage from './components/ProjectsPage';
+import ProjectPage from './components/ProjectPage';
 import BuildsPage from './components/BuildsPage';
 import NotFoundPage from './components/NotFoundPage';
 import useTheme from './hooks/useTheme';
@@ -29,11 +30,14 @@ function App() {
           <Route exact path="/">
             <AboutPage />
           </Route>
-          <Route path="/resume">
+          <Route exact path="/resume">
             <ResumePage />
           </Route>
-          <Route path="/projects">
+          <Route exact path="/projects">
             <ProjectsPage />
+          </Route>
+          <Route exact path="/projects/:id">
+            <ProjectPage />
           </Route>
           <Route path="/builds">
             <BuildsPage />
