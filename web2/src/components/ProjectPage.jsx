@@ -130,7 +130,7 @@ const ProjectPage = () => {
                     </dl>
                   </div>
 
-                  {project.images.length > 0 && (
+                  {project.images && project.images.length > 0 && (
                     <div className="project-images">
                       {project.images[0].path.toLowerCase().endsWith('.gif') ? (
                         <SRLWrapper
