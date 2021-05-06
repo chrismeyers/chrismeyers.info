@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
+import { SRLWrapper } from 'simple-react-lightbox';
 import './css/project.css';
 import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-external.svg';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
@@ -42,6 +42,9 @@ const ProjectPage = () => {
 
     return () => (isMounted = false);
   }, [id]);
+
+  const buildDownloadFileName = () =>
+    project.title.toLowerCase().replaceAll(' ', '-');
 
   const restartGIF = () => {
     // Restart the GIF each time it's opened
@@ -130,71 +133,74 @@ const ProjectPage = () => {
                   {project.images.length > 0 && (
                     <div className="project-images">
                       {project.images[0].path.toLowerCase().endsWith('.gif') ? (
-                        <SimpleReactLightbox>
-                          <SRLWrapper
-                            callbacks={{
-                              onLightboxOpened: () => restartGIF(),
-                            }}
-                            options={{
-                              thumbnails: {
-                                showThumbnails: false,
-                              },
-                            }}
-                          >
-                            {project.images.map((image, index) => (
-                              <Fragment key={image.id}>
-                                <>
-                                  <div className="gif-overlay" title="Play GIF">
-                                    <a href={image.path}>
-                                      <img
-                                        src={image.thumbnail}
-                                        className={`project-images-full-img-${image.orient}`}
-                                        alt={image.title}
-                                        title="Click to enlarge"
-                                      />
-                                    </a>
-                                    <PlayIcon
-                                      name="play"
-                                      className="link-image xlarge play-overlay"
-                                      alt="Plays the associated GIF"
-                                      title="Play GIF"
-                                    />
-                                  </div>
-                                </>
-                              </Fragment>
-                            ))}
-                          </SRLWrapper>
-                        </SimpleReactLightbox>
+                        <SRLWrapper
+                          callbacks={{
+                            onLightboxOpened: () => restartGIF(),
+                          }}
+                          options={{
+                            settings: {
+                              downloadedFileName: buildDownloadFileName(),
+                            },
+                            thumbnails: {
+                              showThumbnails: false,
+                            },
+                          }}
+                        >
+                          {project.images.map((image, index) => (
+                            <Fragment key={image.id}>
+                              <div className="gif-overlay" title="Play GIF">
+                                <a href={image.path}>
+                                  <img
+                                    src={image.thumbnail}
+                                    className={`project-images-full-img-${image.orient}`}
+                                    alt={image.title}
+                                    title="Click to enlarge"
+                                  />
+                                </a>
+                                <PlayIcon
+                                  name="play"
+                                  className="link-image xlarge play-overlay"
+                                  alt="Plays the associated GIF"
+                                  title="Play GIF"
+                                />
+                              </div>
+                            </Fragment>
+                          ))}
+                        </SRLWrapper>
                       ) : (
-                        <SimpleReactLightbox>
-                          <SRLWrapper>
-                            {project.images.map((image, index) => (
-                              <Fragment key={image.id}>
-                                {index === 0 ? (
+                        <SRLWrapper
+                          options={{
+                            settings: {
+                              downloadedFileName: buildDownloadFileName(),
+                            },
+                          }}
+                        >
+                          {project.images.map((image, index) => (
+                            <Fragment key={image.id}>
+                              {index === 0 ? (
+                                <a href={image.path}>
+                                  <img
+                                    src={image.path}
+                                    className={`project-images-full-img-${image.orient}`}
+                                    alt={image.title}
+                                    title="Click to enlarge"
+                                  />
+                                </a>
+                              ) : (
+                                <div className="project-images-small">
                                   <a href={image.path}>
                                     <img
                                       src={image.path}
-                                      className={`project-images-full-img-${image.orient}`}
+                                      className={`project-images-small-img-${image.orient}`}
                                       alt={image.title}
                                       title="Click to enlarge"
                                     />
                                   </a>
-                                ) : (
-                                  <div className="project-images-small">
-                                    <a href={image.path}>
-                                      <img
-                                        src={image.path}
-                                        className={`project-images-small-img-${image.orient}`}
-                                        alt={image.title}
-                                        title="Click to enlarge"
-                                      />
-                                    </a>
-                                  </div>
-                                )}
-                              </Fragment>
-                            ))}
-                          </SRLWrapper>
-                        </SimpleReactLightbox>
+                                </div>
+                              )}
+                            </Fragment>
+                          ))}
+                        </SRLWrapper>
                       )}
                     </div>
                   )}
