@@ -15,6 +15,22 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('ProjectPage', () => {
+  it('handles failure to load a project', async () => {
+    nock(process.env.REACT_APP_API_BASE_URL)
+      .defaultReplyHeaders({
+        'access-control-allow-origin': '*',
+      })
+      .get('/projects/1')
+      .once()
+      .reply(404);
+
+    render(<ProjectPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Unable to load project/)).toBeInTheDocument();
+    });
+  });
+
   it('displays project details without images correctly', async () => {
     const id = 1;
     const title = 'Project Name';

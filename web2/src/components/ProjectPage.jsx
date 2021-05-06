@@ -68,8 +68,8 @@ const ProjectPage = () => {
           <>
             {error ? (
               <p className="center">
-                Project <span className="pre highlighted">{id}</span> does not
-                exist
+                Unable to load project{' '}
+                <span className="pre highlighted">{id}</span>
               </p>
             ) : (
               <div className="project" key={project.id}>
