@@ -1,11 +1,13 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { SRLWrapper } from 'simple-react-lightbox';
 import './css/project.css';
 import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-external.svg';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
 import ProjectsAPI from '../utils/api/projects';
+import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
 const ProjectPage = () => {
@@ -27,6 +29,9 @@ const ProjectPage = () => {
         }
       } catch (error) {
         setError(true);
+        toast.error(
+          <ToastMessage title={error.title} message={error.message} />,
+        );
       } finally {
         if (isMounted) {
           setLoading(false);
