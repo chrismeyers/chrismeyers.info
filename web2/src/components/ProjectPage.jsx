@@ -129,42 +129,48 @@ const ProjectPage = () => {
 
                   {project.images.length > 0 && (
                     <div className="project-images">
-                      <SimpleReactLightbox>
-                        <SRLWrapper
-                          callbacks={{
-                            onLightboxOpened: (object) => {
-                              if (object.currentSlide.source.endsWith('.gif')) {
-                                restartGIF();
-                              }
-                            },
-                          }}
-                        >
-                          {project.images.map((image, index) => (
-                            <Fragment key={image.id}>
-                              {index === 0 ? (
-                                image.path.toLowerCase().endsWith('.gif') ? (
-                                  <>
-                                    <div
-                                      className="gif-overlay"
-                                      title="Play GIF"
-                                    >
-                                      <a href={image.path}>
-                                        <img
-                                          src={image.thumbnail}
-                                          className={`project-images-full-img-${image.orient}`}
-                                          alt={image.title}
-                                          title="Click to enlarge"
-                                        />
-                                      </a>
-                                      <PlayIcon
-                                        name="play"
-                                        className="link-image xlarge play-overlay"
-                                        alt="Plays the associated GIF"
-                                        title="Play GIF"
+                      {project.images[0].path.toLowerCase().endsWith('.gif') ? (
+                        <SimpleReactLightbox>
+                          <SRLWrapper
+                            callbacks={{
+                              onLightboxOpened: () => restartGIF(),
+                            }}
+                            options={{
+                              thumbnails: {
+                                showThumbnails: false,
+                              },
+                            }}
+                          >
+                            {project.images.map((image, index) => (
+                              <Fragment key={image.id}>
+                                <>
+                                  <div className="gif-overlay" title="Play GIF">
+                                    <a href={image.path}>
+                                      <img
+                                        src={image.thumbnail}
+                                        className={`project-images-full-img-${image.orient}`}
+                                        alt={image.title}
+                                        title="Click to enlarge"
                                       />
-                                    </div>
-                                  </>
-                                ) : (
+                                    </a>
+                                    <PlayIcon
+                                      name="play"
+                                      className="link-image xlarge play-overlay"
+                                      alt="Plays the associated GIF"
+                                      title="Play GIF"
+                                    />
+                                  </div>
+                                </>
+                              </Fragment>
+                            ))}
+                          </SRLWrapper>
+                        </SimpleReactLightbox>
+                      ) : (
+                        <SimpleReactLightbox>
+                          <SRLWrapper>
+                            {project.images.map((image, index) => (
+                              <Fragment key={image.id}>
+                                {index === 0 ? (
                                   <a href={image.path}>
                                     <img
                                       src={image.path}
@@ -173,23 +179,23 @@ const ProjectPage = () => {
                                       title="Click to enlarge"
                                     />
                                   </a>
-                                )
-                              ) : (
-                                <div className="project-images-small">
-                                  <a href={image.path}>
-                                    <img
-                                      src={image.path}
-                                      className={`project-images-small-img-${image.orient}`}
-                                      alt={image.title}
-                                      title="Click to enlarge"
-                                    />
-                                  </a>
-                                </div>
-                              )}
-                            </Fragment>
-                          ))}
-                        </SRLWrapper>
-                      </SimpleReactLightbox>
+                                ) : (
+                                  <div className="project-images-small">
+                                    <a href={image.path}>
+                                      <img
+                                        src={image.path}
+                                        className={`project-images-small-img-${image.orient}`}
+                                        alt={image.title}
+                                        title="Click to enlarge"
+                                      />
+                                    </a>
+                                  </div>
+                                )}
+                              </Fragment>
+                            ))}
+                          </SRLWrapper>
+                        </SimpleReactLightbox>
+                      )}
                     </div>
                   )}
                 </div>
