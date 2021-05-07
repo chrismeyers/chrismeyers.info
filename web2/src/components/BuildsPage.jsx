@@ -51,7 +51,7 @@ const BuildsPage = () => {
               builds.map((build, index) => (
                 <Fragment key={build.id}>
                   <div className="build" key="build.id">
-                    <h2 className="{ 'first-header': index == 0 }">
+                    <h2 className={index === 0 ? 'first-header' : ''}>
                       <Link
                         className="fancytxt"
                         title={`Click for details of ${build.displayDate}`}
