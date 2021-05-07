@@ -12,6 +12,7 @@ import ResumePage from './components/ResumePage';
 import ProjectsPage from './components/ProjectsPage';
 import ProjectPage from './components/ProjectPage';
 import BuildsPage from './components/BuildsPage';
+import BuildPage from './components/BuildPage';
 import NotFoundPage from './components/NotFoundPage';
 import useTheme from './hooks/useTheme';
 import useScreenResize from './hooks/useScreenResize';
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route exact path="/builds">
             <BuildsPage />
+          </Route>
+          <Route exact path="/builds/:id">
+            <BuildPage />
           </Route>
           <Route>
             <NotFoundPage />
