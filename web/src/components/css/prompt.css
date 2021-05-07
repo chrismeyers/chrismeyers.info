@@ -1,0 +1,67 @@
+.prompt-style {
+  height: 25px;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #00cc00;
+  font-family: 'Courier New', Courier, monospace;
+  border: 0;
+  font-weight: bold;
+}
+
+#prompt-wrapper {
+  bottom: 30px;
+  margin-left: 310px;
+  position: fixed;
+}
+
+#prompt-caret {
+  width: 10px;
+  font-weight: bold;
+  padding-left: 5px;
+  padding-right: 1px;
+}
+#prompt-caret:focus {
+  outline: none;
+}
+
+#prompt {
+  width: 500px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+#prompt:focus {
+  outline: none;
+}
+#prompt::-ms-clear {
+  width: 0px;
+  height: 0px;
+}
+
+#prompt-output-window {
+  width: 535px;
+  padding: 2px;
+  border: 0;
+  resize: none;
+  position: absolute;
+  bottom: 30px;
+  font-size: 12px;
+  height: 150px;
+}
+#prompt-output-window:focus {
+  outline: none;
+}
+
+#prompt-output-window-btn {
+  border: 0;
+  width: 21px;
+  height: 27px;
+  cursor: pointer;
+}
+#prompt-output-window-btn:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 969px) {
+  #prompt-wrapper {
+    display: none;
+  }
+}

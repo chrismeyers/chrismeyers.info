@@ -37,17 +37,14 @@ $ {api|web}/scripts/run.sh
 ```
 
 ## Credit
-+ The site uses a few open source tools and frameworks:
-  + [Vue.js](https://vuejs.org/) as a frontend JavaScript framework
-    - [vue-router](https://router.vuejs.org/) for SPA routing
-    - [v-img](https://github.com/crowdbotics/v-img) to make viewing images a lot more pleasant
-    - [vue-js-modal](https://github.com/euvl/vue-js-modal) to raise modals and dialogs
-    - [vue-progressbar](https://github.com/hilongjw/vue-progressbar) to display of the loading state of a page
-    - [vue-cookie](https://github.com/alfhen/vue-cookie) to handle cookie manipulation
-    - [vuex](https://github.com/vuejs/vuex) for frontend state management
-    - [vuex-persist](https://github.com/championswimmer/vuex-persist) to persist vuex state
-    - [vue-svgicon](https://github.com/MMF-FE/vue-svgicon) to dynamically change the fill color of SVGs
-    - [vue-js-toggle-button](https://github.com/euvl/vue-js-toggle-button) to toggle themes
-    - [vue-click-outside](https://github.com/vue-bulma/click-outside) to automatically close elements
++ The site uses several open source libraries and frameworks, including:
+  + [React](https://reactjs.org) as a frontend JavaScript framework
+    - [react-router](https://reactrouter.com) for SPA routing
+    - [simple-react-lightbox](https://simple-react-lightbox.dev) to make viewing images a lot more pleasant
+    - [react-toastify](https://fkhadra.github.io/react-toastify/introduction) to raise toast notifications
+    - [react-switch](https://github.com/markusenglund/react-switch) to toggle themes
+    - [react-device-detect](https://github.com/duskload/react-device-detect) to determine browser/device capabilities
+    - [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton) for loading animations
+    - [delayed-scroll-restoration-polyfill](https://github.com/janpaul123/delayed-scroll-restoration-polyfill) to restore scroll location on browser back and forward navigation
   - [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon
   - [Fastify](https://www.fastify.io/) as a backend API framework

@@ -6,9 +6,9 @@ export function handleAxiosError(error) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
     return new ResponseError(
-      error.response.statusText,
       error.response.data.error,
-      error.response.status,
+      error.response.data.message,
+      error.response.data.statusCode,
     );
   } else if (error.request) {
     // The request was made but no response was received
