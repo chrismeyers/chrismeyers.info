@@ -1,16 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './css/mobile-nav.css';
 import logo from '../assets/images/logos/meyers-logo-green.svg';
 import Footer from './Footer';
+import useClickOutside from '../hooks/useClickOutside';
+import EventEmitter, { EVENT_MENU_CLOSE } from '../events';
 
 const MobileNav = ({ themeProps }) => {
   const [menuDisplayed, setMenuDisplayed] = useState(null);
   const location = useLocation();
+  const menuRef = useRef(null);
+  const menuIconRef = useRef(null);
+
+  useClickOutside(menuRef, EVENT_MENU_CLOSE, [menuIconRef]);
+
+  useEffect(() => {
+    menuDisplayed
+      ? EventEmitter.subscribe(EVENT_MENU_CLOSE, () => setMenuDisplayed(false))
+      : EventEmitter.unsubscribe(EVENT_MENU_CLOSE);
+  }, [menuDisplayed]);
 
   useEffect(() => {
     menuDisplayed ? setMenuDisplayed(!menuDisplayed) : setMenuDisplayed(false);
   }, [location]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    return () => EventEmitter.unsubscribe(EVENT_MENU_CLOSE);
+  }, []);
 
   return (
     <nav className="mobile">
@@ -26,7 +42,7 @@ const MobileNav = ({ themeProps }) => {
               />
             </Link>
           </div>
-          <div className="menu-icon">
+          <div className="menu-icon" ref={menuIconRef}>
             <div>
               <button
                 style={{ outline: 'none' }}
@@ -48,11 +64,8 @@ const MobileNav = ({ themeProps }) => {
 
         {menuDisplayed && (
           <div>
-            <div
-              onTouchEnd={(e) => e.preventDefault()}
-              className="menu-overlay"
-            ></div>
-            <div className="menu">
+            <div className="menu-overlay"></div>
+            <div className="menu" ref={menuRef}>
               <Link
                 className={`nav-link ${
                   location.pathname === '/' ? 'nav-selected' : ''
