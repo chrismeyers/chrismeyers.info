@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "PORT=8080 react-scripts start",
-    "build": "react-scripts build",
+    "build": "rimraf ./build && react-scripts build",
     "test": "react-scripts test",
     "test:ci": "CI=true react-scripts test --runInBand --ci --coverage",
     "eject": "react-scripts eject"
@@ -29,7 +29,8 @@
     "web-vitals": "^1.1.1"
   },
   "devDependencies": {
-    "nock": "^13.0.11"
+    "nock": "^13.0.11",
+    "rimraf": "^3.0.2"
   },
   "browserslist": {
     "production": [
