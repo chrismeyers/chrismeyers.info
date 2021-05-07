@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './css/builds.css';
 import BuildsAPI from '../utils/api/builds';
+import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -12,6 +13,8 @@ const BuildsPage = () => {
 
   useEffect(() => {
     let isMounted = true;
+
+    document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
 
     const fetchData = async () => {
       try {

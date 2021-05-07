@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import './css/resume.css';
 import ResumeApi from '../utils/api/resume';
-import { RESUME_PDF_URL } from '../utils/constants';
+import { RESUME_PDF_URL, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -14,6 +14,8 @@ const ResumePage = () => {
 
   useEffect(() => {
     let isMounted = true;
+
+    document.title = `Résumé | ${DEFAULT_DOCUMENT_TITLE}`;
 
     const fetchData = async () => {
       try {

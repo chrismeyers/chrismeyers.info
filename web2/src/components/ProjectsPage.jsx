@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './css/projects.css';
 import ProjectsAPI from '../utils/api/projects';
+import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -12,6 +13,8 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     let isMounted = true;
+
+    document.title = `Projects | ${DEFAULT_DOCUMENT_TITLE}`;
 
     const fetchData = async () => {
       try {
