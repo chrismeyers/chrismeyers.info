@@ -51,7 +51,11 @@ const BuildPage = () => {
 
   return (
     <div className="content">
-      <div className="section-header section-header-size">Build Details</div>
+      <div className="section-header section-header-size">
+        <div className={loading ? 'section-header-loading' : ''}>
+          {loading ? <Loading lines={0} header={true} /> : 'Build Details'}
+        </div>
+      </div>
 
       <div className="content-text build">
         {loading ? (

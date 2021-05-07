@@ -167,9 +167,23 @@ h2.top {
 
 /********************* CONTENT *********************/
 .section-header {
-  text-align: center;
   font-family: 'Open Sans', sans-serif;
   border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-header-size {
+  height: 90px;
+  line-height: 90px;
+  font-size: 40px;
+}
+
+.section-header-loading {
+  height: 100%;
+  width: 30%;
+  margin-bottom: 15px;
 }
 
 .content {
@@ -200,14 +214,6 @@ h2.top {
 
 .first-header {
   margin-top: 0px;
-}
-
-.section-header-size {
-  height: 90px;
-  line-height: 90px;
-  font-size: 40px;
-  text-align: center;
-  margin-left: 1px;
 }
 
 .dropdown-mod {

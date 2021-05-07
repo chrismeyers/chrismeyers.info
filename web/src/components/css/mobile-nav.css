@@ -53,3 +53,9 @@ nav.mobile {
   text-align: center;
   vertical-align: middle;
 }
+
+@media screen and (max-width: 969px) {
+  #full-menu {
+    display: none;
+  }
+}

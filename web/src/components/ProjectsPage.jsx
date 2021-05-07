@@ -39,7 +39,11 @@ const ProjectsPage = () => {
 
   return (
     <div className="content">
-      <div className="section-header section-header-size">Projects</div>
+      <div className="section-header section-header-size">
+        <div className={loading ? 'section-header-loading' : ''}>
+          {loading ? <Loading lines={0} header={true} /> : 'Projects'}
+        </div>
+      </div>
 
       <div className="content-text">
         {loading ? (

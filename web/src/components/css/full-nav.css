@@ -38,3 +38,9 @@ nav {
 .side-nav-items > li > a:hover {
   color: var(--main-theme-color);
 }
+
+@media screen and (min-width: 970px) {
+  #mobile-menu {
+    display: none;
+  }
+}

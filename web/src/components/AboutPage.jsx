@@ -41,7 +41,11 @@ const AboutPage = () => {
 
   return (
     <div className="content">
-      <div className="section-header section-header-size">About</div>
+      <div className="section-header section-header-size">
+        <div className={loading ? 'section-header-loading' : ''}>
+          {loading ? <Loading lines={0} header={true} /> : 'About'}
+        </div>
+      </div>
 
       <div className="content-text">
         {loading ? (
