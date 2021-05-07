@@ -31,10 +31,10 @@ describe('BuildsPage', () => {
     render(<BuildsPage />, { wrapper: MemoryRouter });
 
     await waitFor(() => {
-      expect(screen.getByText('Today - Built for Someone')).toBeInTheDocument();
+      expect(screen.getByText(displayDate)).toBeInTheDocument();
     });
 
-    expect(screen.getByText('Today - Built for Someone')).toHaveAttribute(
+    expect(screen.getByText(displayDate)).toHaveAttribute(
       'href',
       `/builds/${id}`,
     );
