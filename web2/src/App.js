@@ -38,7 +38,7 @@ function App() {
           <Route exact path="/projects/:id">
             <ProjectPage />
           </Route>
-          <Route path="/builds">
+          <Route exact path="/builds">
             <BuildsPage />
           </Route>
           <Route>
