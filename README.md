@@ -45,5 +45,6 @@ $ {api|web}/scripts/run.sh
     - [react-switch](https://github.com/markusenglund/react-switch) to toggle themes
     - [react-device-detect](https://github.com/duskload/react-device-detect) to determine browser/device capabilities
     - [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton) for loading animations
+    - [delayed-scroll-restoration-polyfill](https://github.com/janpaul123/delayed-scroll-restoration-polyfill) to restore scroll location on browser back and forward navigation
   - [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon
   - [Fastify](https://www.fastify.io/) as a backend API framework

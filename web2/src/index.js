@@ -1,3 +1,4 @@
+import 'delayed-scroll-restoration-polyfill';
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import Axios from 'axios';
@@ -7,6 +8,10 @@ import reportWebVitals from './reportWebVitals';
 import { GITHUB_URL, LINKEDIN_URL, MAILTO_HREF } from './utils/constants';
 
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+
+if ('scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual';
+}
 
 let element;
 if (isIE) {
