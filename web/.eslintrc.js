@@ -3,26 +3,13 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: ['plugin:vue/essential', 'eslint:recommended'],
+  extends: ['react-app', 'react-app/jest'],
   rules: {
     'no-console': 'warn',
-    'prefer-const': 'error',
-    semi: 'error',
-    quotes: ['error', 'single'],
-    'comma-dangle': ['error', 'always-multiline'],
+    'prefer-const': 'warn',
+    semi: 'warn',
+    quotes: ['warn', 'single'],
+    'comma-dangle': ['warn', 'always-multiline'],
+    'import/no-anonymous-default-export': 'off',
   },
-  parserOptions: {
-    parser: 'babel-eslint',
-  },
-  overrides: [
-    {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
-      env: {
-        jest: true,
-      },
-    },
-  ],
 };
