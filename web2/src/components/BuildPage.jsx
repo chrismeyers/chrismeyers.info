@@ -57,7 +57,7 @@ const BuildPage = () => {
           <>
             {error ? (
               <p className="center">
-                Unable to load project{' '}
+                Unable to load build{' '}
                 <span className="pre highlighted">{id}</span>
               </p>
             ) : (
