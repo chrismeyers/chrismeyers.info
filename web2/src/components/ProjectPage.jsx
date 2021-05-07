@@ -7,6 +7,7 @@ import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
 import ProjectsAPI from '../utils/api/projects';
+import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -24,10 +25,12 @@ const ProjectPage = () => {
       try {
         const response = await ProjectsAPI.getById(id);
         if (isMounted) {
+          document.title = `Project Details | ${response.data.title} | ${DEFAULT_DOCUMENT_TITLE}`;
           setError(false);
           setProject(response.data);
         }
       } catch (error) {
+        document.title = `Project Details | ${id} | ${DEFAULT_DOCUMENT_TITLE}`;
         setError(true);
         toast.error(
           <ToastMessage title={error.title} message={error.message} />,

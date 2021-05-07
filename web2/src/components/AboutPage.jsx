@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { SRLWrapper, useLightbox } from 'simple-react-lightbox';
 import ResumeApi from '../utils/api/resume';
-import { MAILTO_HREF } from '../utils/constants';
+import { MAILTO_HREF, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -14,6 +14,8 @@ const AboutPage = () => {
 
   useEffect(() => {
     let isMounted = true;
+
+    document.title = DEFAULT_DOCUMENT_TITLE;
 
     const fetchData = async () => {
       try {

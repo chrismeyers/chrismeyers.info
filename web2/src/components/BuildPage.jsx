@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { SRLWrapper } from 'simple-react-lightbox';
 import './css/build.css';
 import BuildsAPI from '../utils/api/builds';
+import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -21,10 +22,12 @@ const BuildPage = () => {
       try {
         const response = await BuildsAPI.getById(id);
         if (isMounted) {
+          document.title = `Build Details | ${response.data.displayDate} | ${DEFAULT_DOCUMENT_TITLE}`;
           setError(false);
           setBuild(response.data);
         }
       } catch (error) {
+        document.title = `Build Details | ${id} | ${DEFAULT_DOCUMENT_TITLE}`;
         setError(true);
         toast.error(
           <ToastMessage title={error.title} message={error.message} />,
