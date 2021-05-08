@@ -58,17 +58,16 @@ const ResumePage = () => {
               experience.map((job, i) => (
                 <ul className="italic-spacer" key={`job-${i}`}>
                   <li className="left-column company" key={`job-company-${i}`}>
-                    <a
-                      className="fancytxt"
-                      href={job.url}
-                      dangerouslySetInnerHTML={{ __html: job.firstLine[0] }}
-                    ></a>
+                    <a className="fancytxt" href={job.url}>
+                      {job.firstLine[0]}
+                    </a>
                   </li>
                   <li
                     className="right-column location"
                     key={`job-location-${i}`}
-                    dangerouslySetInnerHTML={{ __html: job.firstLine[1] }}
-                  ></li>
+                  >
+                    {job.firstLine[1]}
+                  </li>
 
                   {job.secondLine.map((secondLine, j) => (
                     <Fragment key={`job-secondLine-${i}-${j}`}>
@@ -79,8 +78,9 @@ const ResumePage = () => {
                             : ''
                         }`}
                         key={`job-title-${i}-${j}`}
-                        dangerouslySetInnerHTML={{ __html: secondLine[0] }}
-                      ></li>
+                      >
+                        {secondLine[0]}
+                      </li>
                       <li
                         className={`right-column tenure ${
                           j > 0 && job.info[j].length > 0
@@ -104,8 +104,9 @@ const ResumePage = () => {
                               <li
                                 className="more-info"
                                 key={`job-info-item-${i}-${j}-${k}`}
-                                dangerouslySetInnerHTML={{ __html: info }}
-                              ></li>
+                              >
+                                {info}
+                              </li>
                             ))}
                           </ul>
                         </li>
@@ -122,16 +123,15 @@ const ResumePage = () => {
             {education &&
               education.map((school, i) => (
                 <ul className="italic-spacer" key={`school-${i}`}>
-                  <li
-                    className="left-column degree"
-                    key={`school-degree-${i}`}
-                    dangerouslySetInnerHTML={{ __html: school.firstLine[0] }}
-                  ></li>
+                  <li className="left-column degree" key={`school-degree-${i}`}>
+                    {school.firstLine[0]}
+                  </li>
                   <li
                     className="right-column location"
                     key={`school-location-${i}`}
-                    dangerouslySetInnerHTML={{ __html: school.firstLine[1] }}
-                  ></li>
+                  >
+                    {school.firstLine[1]}
+                  </li>
                   {school.secondLine.map((secondLine, j) => (
                     <Fragment key={`school-secondLine-${i}-${j}`}>
                       <li
@@ -142,10 +142,9 @@ const ResumePage = () => {
                           className="fancytxt"
                           key={`school-company-link-${i}-${j}`}
                           href={school.url}
-                          dangerouslySetInnerHTML={{
-                            __html: secondLine[0],
-                          }}
-                        ></a>
+                        >
+                          {secondLine[0]}
+                        </a>
                       </li>
                       <li
                         className="right-column tenure"
@@ -166,8 +165,9 @@ const ResumePage = () => {
                               <li
                                 className="more-info"
                                 key={`school-info-item-${i}-${j}-${k}`}
-                                dangerouslySetInnerHTML={{ __html: info }}
-                              ></li>
+                              >
+                                {info}
+                              </li>
                             ))}
                           </ul>
                         </li>
