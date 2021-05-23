@@ -28,7 +28,7 @@ jobs:
         working-directory: ./api
 
     container:
-      image: node:16.0.0
+      image: node:16.2.0
 
     steps:
       - uses: actions/checkout@v2

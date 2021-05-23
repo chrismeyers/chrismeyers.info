@@ -1,7 +1,7 @@
-# chrismeyers.info
-[![Actions Status](https://github.com/chrismeyers/chrismeyers.info/workflows/API/badge.svg)](https://github.com/chrismeyers/chrismeyers.info/actions?query=workflow%3AAPI) [![Actions Status](https://github.com/chrismeyers/chrismeyers.info/workflows/Web/badge.svg)](https://github.com/chrismeyers/chrismeyers.info/actions?query=workflow%3AWeb)
+# chrismeyers-website
+[![Actions Status](https://github.com/chrismeyers/chrismeyers-website/workflows/API/badge.svg)](https://github.com/chrismeyers/chrismeyers-website/actions?query=workflow%3AAPI) [![Actions Status](https://github.com/chrismeyers/chrismeyers-website/workflows/Web/badge.svg)](https://github.com/chrismeyers/chrismeyers-website/actions?query=workflow%3AWeb)
 
-This is the codebase for my personal website currently located at [https://chrismeyers.info](https://chrismeyers.info)
+This is the codebase for my personal website currently located at [https://chrismeyers.net](https://chrismeyers.net)
 
 ## Requirements
 1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodesource](https://github.com/nodesource/distributions))
