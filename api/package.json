@@ -23,7 +23,7 @@
     "jest-extended": "^0.11.5",
     "nodemon": "^2.0.7",
     "pino-pretty": "^4.8.0",
-    "prettier": "^2.3.0"
+    "prettier": "2.3.0"
   },
   "dependencies": {
     "awilix": "^4.3.4",
