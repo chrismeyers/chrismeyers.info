@@ -7,9 +7,6 @@ module.exports = {
   rules: {
     'no-console': 'warn',
     'prefer-const': 'warn',
-    semi: 'warn',
-    quotes: ['warn', 'single'],
-    'comma-dangle': ['warn', 'always-multiline'],
     'import/no-anonymous-default-export': 'off',
   },
 };

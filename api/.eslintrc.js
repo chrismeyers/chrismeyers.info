@@ -1,12 +1,12 @@
 module.exports = {
+  root: true,
   env: {
     node: true,
     jest: true,
   },
-  extends: ['airbnb-base', 'prettier'],
-  plugins: ['prettier'],
+  extends: ['airbnb-base', 'plugin:prettier/recommended'],
   rules: {
-    'prettier/prettier': ['error'],
+    'prefer-const': 'warn',
   },
   parserOptions: {
     ecmaVersion: 2021,
