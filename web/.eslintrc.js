@@ -3,7 +3,7 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: ['react-app', 'react-app/jest'],
+  extends: ['react-app', 'react-app/jest', 'plugin:prettier/recommended'],
   rules: {
     'no-console': 'warn',
     'prefer-const': 'warn',
