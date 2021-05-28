@@ -4,7 +4,7 @@
 This is the codebase for my personal website currently located at [https://chrismeyers.net](https://chrismeyers.net)
 
 ## Requirements
-1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodesource](https://github.com/nodesource/distributions))
+1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodejs.org](https://nodejs.org/en/download))
 
 ## Setup
 1. Copy [bin/git/hooks/pre-commit](bin/git/hooks/pre-commit) to the local `.git/hooks` directory and ensure the script is executable
