@@ -12,9 +12,6 @@
     "lint:fix": "eslint . --fix  --ext .js,.jsx"
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.12.0",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^13.1.9",
     "axios": "^0.21.1",
     "delayed-scroll-restoration-polyfill": "^0.1.1",
     "lodash": "^4.17.21",
@@ -31,6 +28,10 @@
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^13.1.9",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "nock": "^13.0.11",
