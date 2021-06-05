@@ -25,7 +25,7 @@ jobs:
         working-directory: ./api
 
     container:
-      image: node:16.3.0-alpine
+      image: node:16.3.0-slim
 
     steps:
       - uses: actions/checkout@v2
