@@ -21,7 +21,7 @@ jobs:
         working-directory: ./web
 
     container:
-      image: node:16.2.0
+      image: node:16.3.0-alpine
 
     steps:
       - uses: actions/checkout@v2
