@@ -44,7 +44,7 @@
   position: absolute;
   bottom: 30px;
   font-size: 12px;
-  height: 150px;
+  height: 175px;
 }
 #prompt-output-window:focus {
   outline: none;
