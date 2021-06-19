@@ -43,10 +43,10 @@ const Prompt = ({ themeProps }) => {
   }, []);
 
   const showOutputWindow = useCallback(
-    (scrollToTop = true) => {
+    (scrollToBottom = true) => {
       setOutputWindowVisible(true);
       setArrowDirection('down');
-      if (scrollToTop) {
+      if (scrollToBottom) {
         setTimeout(() => scrollOutputWindowToBottom(), 0);
       }
     },
