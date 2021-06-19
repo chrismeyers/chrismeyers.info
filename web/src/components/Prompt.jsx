@@ -168,11 +168,11 @@ const Prompt = ({ themeProps }) => {
   Available commands:
   echo   - prints args to toast notification of optional type
            (options: ${levels})
-           ex: echo --${ECHO_LEVELS[0]} Hello World
+           e.g. echo --${ECHO_LEVELS[0]} Hello World
   cd     - navigates to the given arg
   toggle - toggles the output window
   theme  - sets the theme to the arg (options: ${themes})
-           ex: theme ${Object.values(THEMES)[0]}
+           e.g. theme ${Object.values(THEMES)[0]}
   exit   - closes the command prompt
   help   - prints this message
   `);
