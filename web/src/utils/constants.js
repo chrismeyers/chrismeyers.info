@@ -5,7 +5,7 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/in/chris-meyers';
 export const MAILTO_HREF =
   'mailto:chris@chrismeyers.net?subject=Message%20from%20chrismeyers.net';
 export const RESUME_PDF_URL =
-  'https://github.com/chrismeyers/chrismeyers-website/blob/main/resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.pdf';
+  'https://github.com/chrismeyers/website/blob/main/resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.pdf';
 export const SYSTEM_THEME_DARK_MEDIA_QUERY = '(prefers-color-scheme: dark)';
 export const DEFAULT_DOCUMENT_TITLE =
   'Chris Meyers - Developer, Tech Enthusiast';
